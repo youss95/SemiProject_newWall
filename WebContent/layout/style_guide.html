@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Style Guide</title>
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.d_header{width: 100%;padding: 30px 20px;background-color: #254E7C;color: #fff;}
+		.d_header h1{font-size:30px;color:#fff;font-weight: 700;}
+		.container{padding:0;}
+		h2{padding: 15px 10px;margin: 40px 0;border-bottom: 3px solid #1d1e25;font-size: 24px;font-weight: 700;;}
+		h3{padding-bottom: 20px;font-size: 20px;font-weight: 600;}
+		.dsg_cont{padding: 20px 3%;}
+		.dsg_desc dt{padding: 40px 0 10px;}
+		.dsg_desc dt:first-child{padding-top: 2rem;}
+		.flex_wrap{display: -webkit-flex;display: -ms-flex;display: flex;justify-content: space-between;}
+		.flex_wrap .col{width: 48%;}
+		.hr{margin: 5rem 0;}
+		.hr+h3{margin-top:40px;}
+		.color_box{border-radius: 5px;overflow: hidden;}
+		.color_box>div{padding: 20px;text-align: center;color:#333;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<header class="d_header">
+			<h1>Design Style Guide</h1>
+		</header>
+		<div class="container">
+			<section class="prototype">
+				<article class="dsg_cont">
+					<h2 class="dsg">COLOR CODE</h2>
+					<div class="flex_wrap">
+						<div class="col">
+							<div class="color_box">
+								<div style="background-color:#F7FBFC;">#F7FBFC</div>
+								<div style="background-color:#D6E6F2;">#D6E6F2</div>
+								<div style="background-color:#B9D7EA;">#B9D7EA</div>
+								<div style="background-color:#769FCD;">#769FCD</div>
+								<div style="background-color:#254E7C;color:#fff;">#254E7C</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="color_box">
+								
+								<div style="background-color:#FFF0F0;">#FFF0F0</div>
+								<div style="background-color:#FCDADA;">#FCDADA</div>
+								<div style="background-color:#FFA5A5;">#FFA5A5</div>
+								<div style="background-color:#5C969E;">#5C969E</div>
+								<div style="background-color:#3D7EA6;">#3D7EA6</div>
+							</div>
+						</div>
+					</div>
+					
+					<h2 class="dsg">FORM STYLE</h2>
+					<div class="flex_wrap">
+						<div class="col">
+							<h3 class="dsg">INPUT TEXT</h3>
+							<dl class="dsg_desc">
+								<dt>Default</dt>
+								<dd><input type="text" class="inpform" placeholder="Placeholder"></dd>
+								<dt>Default + Data</dt>
+								<dd><input type="text" class="inpform" value="value"></dd>
+								<dt>Disabled</dt>
+								<dd><input type="text" class="inpform" value="disabled" disabled></dd>
+								<dt>Error</dt>
+								<dd><input type="text" class="inpform error"><span class="t_error">Error Message</span></dd>
+								<dt>textarea</dt>
+								<dd><textarea class="txtareaform" name="" id="" cols="30" rows="4">value</textarea></dd>
+								<dt>Disabled</dt>
+								<dd><textarea class="txtareaform" name="" id="" cols="30" rows="4" disabled>Disabled</textarea></dd>
+							</dl>
+						</div>
+						<div class="col">
+							<h3 class="dsg">SELECT / CHECKBOX / RADIO</h3>
+							<dl class="dsg_desc">
+								<dt>SELECT</dt>
+								<dd>
+									<div class="inp_slct">
+										<select name="" id="">
+											<option value="">선택</option>
+											<option value="">Text0</option>
+											<option value="">Text1</option>
+										</select>
+									</div>
+								</dd>
+								<dt>CHECKBOX</dt>
+								<dd>
+									<div class="chk_group">
+										<label class="inp_chk">
+											<input type="checkbox" id="">
+											<span class="chkmark"></span>
+											Default
+										</label>
+										<label class="inp_chk">
+											<input type="checkbox" id="" checked>
+											<span class="chkmark"></span>
+											Checked
+										</label>
+									</div>
+								</dd>
+								<dt>RADIO</dt>
+								<dd>
+									<div class="rd_group">
+										<div class="inp_rd">
+											<input type="radio" id="rd1" name="rd" >
+											<label for="rd1">Default</label>
+										</div>
+										<div class="inp_rd">
+											<input type="radio" id="rd2" name="rd" checked>
+											<label for="rd2">Checked</label>
+										</div>
+									</div>
+								</dd>
+							</dl>
+							<hr class="hr" />
+							<h3 class="dsg">BUTTON</h3>
+							<dl class="dsg_desc">
+								<dt>BUTTON LINK</dt>
+								<dd>
+									<a href="#" class="t_link">Text Link</a>
+								</dd>
+								<dt>BUTTONS TYPE</dt>
+								<dd>
+									<ul class="btns">
+										<li><a href="#" class="btn_m btn_light">목록</a></li>
+										<li><button class="btn_m btn_default">삭제</button></li>
+										<li><button class="btn_m btn_white">취소</button></li>
+										<li><button class="btn_m btn_primary">등록</button></li>
+										<li><button class="btn_m btn_line">확인</button></li>
+									</ul>
+									<ul style="margin-top:10px">
+										<li>
+											<a href="#" class="btn_s btn_light">작은 버튼</a>
+											<button class="btn_s btn_default btn_fluid">FLUID</button>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</article>
+			</section>
+		</div>
+	</div>
+</body>
+</html>
