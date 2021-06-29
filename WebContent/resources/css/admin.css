@@ -141,3 +141,18 @@ section .contents{padding: 30px;}
 .table th, .table td{padding:1.05rem 0.75rem;font-size:14px;}
 .table tbody td{font-weight:300;}
 .table-hover tbody tr:hover{background-color:rgba(214, 230, 242, 0.3);}
+.table tbody .nodata{height:200px;}
+.table tbody .nodata td{line-height:200px;font-weight:400;color:#666;}
+.table-hover tbody tr.nodata:hover{background-color:transparent;}
+
+
+
+
+
+
+
+
+
+
+
+
