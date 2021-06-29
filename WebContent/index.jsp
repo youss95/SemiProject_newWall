@@ -23,6 +23,7 @@
 							<li><a href="#">입양 후기</a></li>
 						</ul>
 					</li>
+					<li>
 						<a href="#">후원하기</a>
 					</li>
 					<li class="has">
