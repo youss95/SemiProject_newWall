@@ -2,9 +2,9 @@
 
 @font-face {
 	font-family: 'NotoSansCJKkr';
-	src: url('../resources/fonts/notocjk/NotoSansCJKkr-Bold.woff') format('woff'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Bold.ttf') format('ttf'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Bold.otf') format('otf');
+	src: url('../fonts/notocjk/NotoSansCJKkr-Bold.woff') format('woff'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Bold.ttf') format('ttf'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Bold.otf') format('otf');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -12,27 +12,27 @@
 
 @font-face {
 	font-family: 'NotoSansCJKkr';
-	src: url('../resources/fonts/notocjk/NotoSansCJKkr-Medium.woff') format('woff'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Medium.otf') format('opentype'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Medium.ttf') format('truetype');
+	src: url('../fonts/notocjk/NotoSansCJKkr-Medium.woff') format('woff'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Medium.otf') format('opentype'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Medium.ttf') format('truetype');
 	font-weight: 600;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'NotoSansCJKkr';
-	src: url('../resources/fonts/notocjk/NotoSansCJKkr-Regular.woff') format('woff'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Regular.otf') format('opentype'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Regular.ttf') format('truetype');
+	src: url('../fonts/notocjk/NotoSansCJKkr-Regular.woff') format('woff'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Regular.otf') format('opentype'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Regular.ttf') format('truetype');
 	font-weight: 400;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'NotoSansCJKkr';
-	src: url('../resources/fonts/notocjk/NotoSansCJKkr-Light.woff') format('woff'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Light.otf') format('opentype'),
-		 url('../resources/fonts/notocjk/NotoSansCJKkr-Light.ttf') format('truetype');
+	src: url('../fonts/notocjk/NotoSansCJKkr-Light.woff') format('woff'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Light.otf') format('opentype'),
+		 url('../fonts/notocjk/NotoSansCJKkr-Light.ttf') format('truetype');
 	font-weight: 300;
 	font-style: normal;
 }

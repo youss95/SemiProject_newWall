@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -6,9 +9,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>관리자페이지</title>
-	<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../../resources/css/all.min.css">
-	<link rel="stylesheet" href="../../resources/css/admin.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">	
 </head>
 
 <body>
@@ -157,10 +160,10 @@
 			</div>
 		</div>
 	</div>
-	<script src="../../resources/js/jquery-3.6.0.min.js"></script>
-	<script src="../../resources/js/bootstrap.min.js"></script>
-	<script src="../../resources/js/all.min.js"></script>
-	<script src="../../resources/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </body>
 
 </html>
