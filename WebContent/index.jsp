@@ -23,13 +23,7 @@
 							<li><a href="#">입양 후기</a></li>
 						</ul>
 					</li>
-					<li class="has">
 						<a href="#">후원하기</a>
-						<ul class="s_menu clear support">
-							<li><a href="#">1:1 후원</a></li>
-							<li><a href="#">업체 정기 후원</a></li>
-							<li><a href="#">임시보호자 지정 후원</a></li>
-						</ul>
 					</li>
 					<li class="has">
 						<a href="#">도움이필요해요</a>
@@ -60,8 +54,8 @@
 		</header>
 		<div class="container">
 			<div class="contents">
-				<section>
-					start
+				<section class="">
+					<!-- 하이 여기는 서브입니다 -->
 				</section>
 			</div>
 		</div>
