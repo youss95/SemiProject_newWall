@@ -7,8 +7,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>2조 세미 프로젝트</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/layout/css/style.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/layout/css/member.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css">
 </head>
 <body>
 	<div class="wrap">
@@ -64,7 +64,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<script src="${pageContext.request.contextPath}/layout/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/layout/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </body>
 </html>
