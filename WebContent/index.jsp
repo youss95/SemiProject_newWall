@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>2Á¶ ¼¼¹Ì ÇÁ·ÎÁ§Æ®</title>
+	<title>2ì¡° ì„¸ë¯¸ í”„ë¡œì íŠ¸</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/layout/css/style.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/layout/css/member.css">
 </head>
@@ -17,38 +17,37 @@
 			<div class="gnb">
 				<ul class="clear">
 					<li class="has">
-						<a href="#">ÀÔ¾çÇÏ±â</a>
+						<a href="#">ìž…ì–‘í•˜ê¸°</a>
 						<ul class="s_menu clear adopt">
-							<li><a href="#">ÀÔ¾çÇÏ±â</a></li>
-							<li><a href="#">ÀÔ¾ç ÈÄ±â</a></li>
+							<li><a href="#">ìž…ì–‘í•˜ê¸°</a></li>
+							<li><a href="#">ìž…ì–‘ í›„ê¸°</a></li>
 						</ul>
 					</li>
-					<li>
-						<a href="#">ÈÄ¿øÇÏ±â</a>
+						<a href="#">í›„ì›í•˜ê¸°</a>
 					</li>
 					<li class="has">
-						<a href="#">µµ¿òÀÌÇÊ¿äÇØ¿ä</a>
+						<a href="#">ë„ì›€ì´í•„ìš”í•´ìš”</a>
 						<ul class="s_menu clear help">
-							<li><a href="#">ÀÒ¾î¹ö·È¾î¿ä</a></li>
-							<li><a href="#">º¸È£ÁßÀÌ¿¡¿ä</a></li>
+							<li><a href="#">ìžƒì–´ë²„ë ¸ì–´ìš”</a></li>
+							<li><a href="#">ë³´í˜¸ì¤‘ì´ì—ìš”</a></li>
 						</ul>
 					</li>
 					<li class="has">
-						<a href="#">´º½º·¹ÅÍ</a>
+						<a href="#">ë‰´ìŠ¤ë ˆí„°</a>
 						<ul class="s_menu clear news">
-							<li><a href="#">°øÁö»çÇ×</a></li>
-							<li><a href="#">¼Ò½Ä</a></li>
+							<li><a href="#">ê³µì§€ì‚¬í•­</a></li>
+							<li><a href="#">ì†Œì‹</a></li>
 						</ul>
 					</li>
-					<!-- <li><a href="#">ºÀ»çÈ°µ¿</a></li> º¸·ù -->
+					<!-- <li><a href="#">ë´‰ì‚¬í™œë™</a></li> ë³´ë¥˜ -->
 				</ul>
 			</div>
 			<div class="utils">
 				<ul class="clear">
-					<li><a href="#">·Î±×ÀÎ</a></li>
-					<li><a href="#">È¸¿ø°¡ÀÔ</a></li>
-					<!-- <li><a href="#">¸¶ÀÌÆäÀÌÁö</a></li> -->
-					<!-- <li><a href="#">·Î±×¾Æ¿ô</a></li> -->
+					<li><a href="#">ë¡œê·¸ì¸</a></li>
+					<li><a href="#">íšŒì›ê°€ìž…</a></li>
+					<!-- <li><a href="#">ë§ˆì´íŽ˜ì´ì§€</a></li> -->
+					<!-- <li><a href="#">ë¡œê·¸ì•„ì›ƒ</a></li> -->
 				</ul>
 			</div>
 			<div class="s_menu_bg"></div>
@@ -56,7 +55,7 @@
 		<div class="container">
 			<div class="contents">
 				<section class="">
-					<!-- ÇÏÀÌ ¿©±â´Â ¼­ºêÀÔ´Ï´Ù -->
+					<!-- í•˜ì´ ì—¬ê¸°ëŠ” ì„œë¸Œìž…ë‹ˆë‹¤ -->
 				</section>
 			</div>
 		</div>
