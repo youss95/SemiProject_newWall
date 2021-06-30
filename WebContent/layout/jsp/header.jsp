@@ -6,8 +6,8 @@
 			<li class="has">
 				<a href="#">입양하기</a>
 				<ul class="s_menu clear adopt">
-					<li><a href="#">입양하기</a></li>
-					<li><a href="#">입양 후기</a></li>
+					<li><a href="${pageContext.request.contextPath}/adopt/adoptList2.jsp">입양하기</a></li>
+					<li><a href="${pageContext.request.contextPath}/adopt/adoptList3.jsp">입양 후기</a></li>
 				</ul>
 			</li>
 			<li>
