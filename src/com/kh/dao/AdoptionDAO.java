@@ -32,29 +32,7 @@ public class AdoptionDAO {
 		return ds.getConnection();
 	}
 	
-	public List<AdoptionDTO> getAdoptionList() throws Exception{
-		String sql = "select * from adopt_regi";
-		
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
-			List<AdoptionDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				AdoptionDTO dto = new AdoptionDTO();
-				
-				dto.setAdopt_seq(rs.getInt("adopt_seq"));
-				dto.setCode_seq(rs.getNString("code_seq"));
-				dto.setUser_id(rs.getNString("user_id"));
-				dto.setReg_date(rs.getDate("reg_date"));
-				dto.setAn_name(rs.getNString("an_name"));
-				
-				list.add(dto);
-			}
-			return list;
-		}
-	}
+
 	
 	
 	
