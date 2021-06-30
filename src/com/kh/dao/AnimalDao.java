@@ -1,7 +1,11 @@
 package com.kh.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.config.Db;
 import com.kh.dto.LostAnimalDto;
@@ -38,6 +42,33 @@ public class AnimalDao {
 		}
 		
 		
+	}
+	
+	public List<LostAnimalDto> showMap() throws Exception{
+		List<LostAnimalDto> list = new ArrayList<>();
+		String sql ="select * from lost_animal";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					LostAnimalDto dto;
+					int lostNo = rs.getInt("lost_no");
+					String lostName = rs.getString("lost_name");
+					int lostAge = rs.getInt("lost_age");
+					String lostKind = rs.getString("lost_kind");
+					String lostCategory = rs.getString("lost_category");
+					String lostDate = rs.getString("lost_date");
+					String lostAddr = rs.getString("lost_addr");
+					String fileRealName = rs.getString("lost_fileRealName");
+					String lostContent = rs.getString("lost_content");
+					String lostGender = rs.getString("lost_gender");
+					Date createDate = rs.getDate("lost_createDate");
+					dto = new LostAnimalDto(lostNo,lostName,lostAge,lostKind,lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+					list.add(dto);
+				}
+				con.close();
+				return list;
+			}
+		}
 	}
 	
 }

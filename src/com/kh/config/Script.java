@@ -23,23 +23,7 @@ public class Script {
 		}
 	}
 	
-	public static void writeSuccess(HttpServletResponse response, String msg) {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-
-		
-		try {
-			PrintWriter out = response.getWriter();
-
-			out.print("<script>");
-			out.print("alert('" + msg + "');");
-			out.print("window.location.href='animal/lostAnimalMap.jsp';"); 
-			out.print("</script>");
-			out.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	
 }

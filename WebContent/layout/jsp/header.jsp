@@ -15,10 +15,10 @@
 						<a href="#">후원하기</a>
 					</li>
 					<li class="has">
-						<a href="#">도움이필요해요</a>
+						<a href="#">실종/보호</a>
 						<ul class="s_menu clear help">
-							<li><a href="#">잃어버렸어요</a></li>
-							<li><a href="#">보호중이에요</a></li>
+							<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종 Map</a></li>
+							<li><a href="#">임시보호</a></li>
 						</ul>
 					</li>
 					<li class="has">

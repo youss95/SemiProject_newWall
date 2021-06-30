@@ -6,7 +6,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,7 +90,7 @@ public class AnimalsController extends HttpServlet {
 
 						out.print("<script>");
 						out.print("alert('성공');");
-						out.print("window.location.href='animal/lostAnimalMap.jsp';"); 
+						out.print("window.location.href='lostAnimalMap.lost';"); 
 						out.print("</script>");
 						out.flush();
 					}else {
@@ -96,6 +98,14 @@ public class AnimalsController extends HttpServlet {
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
+				}
+			} else if(url.equals("/lostAnimalMap.lost")) {
+				List<LostAnimalDto> list = dao.showMap();
+				System.out.println(list.toString());
+				if(list != null) {
+					request.setAttribute("mapList", list);
+					RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalMap.jsp");
+					dis.forward(request, response);
 				}
 			}
 			

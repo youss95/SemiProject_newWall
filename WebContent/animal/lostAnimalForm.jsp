@@ -68,8 +68,7 @@
 					<!-- <span id="centerAddr"></span> -->
 
 
-					<input type="text" class="inpform" placeholder="지도에 주소로 검색..."
-						id="resultAdd">
+					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
 				</div>
 
 				<button type="button" id="searchBtn">
@@ -83,8 +82,8 @@
 				   <div class="upload-img">
                         <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview" />
                    </div>
-			<input type="hidden" name="addResult" id="hiddenInput">
-			<input type="submit" class="btn btn-primary" value="완료">		
+			<input type="hidden" name="addResult" id="hiddenInput">	
+			<button type="submit" class="btn_m btn_primary">등록</button>	
 			</form>
 				</section>
 			</div>

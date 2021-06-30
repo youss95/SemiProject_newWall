@@ -73,7 +73,6 @@ public class LostAnimalDto {
 	public void setFileRealName(String fileRealName) {
 		this.fileRealName = fileRealName;
 	}
-	
 	public String getLostContent() {
 		return lostContent;
 	}
@@ -87,8 +86,8 @@ public class LostAnimalDto {
 		this.lostGender = lostGender;
 	}
 	public LostAnimalDto(int lostNo, String lostName, int lostAge, String lostKind, String lostCategory,
-			String lostDate, Date createDate, String lostAddr, String fileRealName, String lostWriter,
-			String lostContent, String lostGender) {
+			String lostDate, Date createDate, String lostAddr, String fileRealName, String lostContent,
+			String lostGender) {
 		super();
 		this.lostNo = lostNo;
 		this.lostName = lostName;
@@ -99,20 +98,20 @@ public class LostAnimalDto {
 		this.createDate = createDate;
 		this.lostAddr = lostAddr;
 		this.fileRealName = fileRealName;
-		
 		this.lostContent = lostContent;
 		this.lostGender = lostGender;
 	}
 	public LostAnimalDto() {
-	
+		super();
 	}
 	@Override
 	public String toString() {
 		return "LostAnimalDto [lostNo=" + lostNo + ", lostName=" + lostName + ", lostAge=" + lostAge + ", lostKind="
 				+ lostKind + ", lostCategory=" + lostCategory + ", lostDate=" + lostDate + ", createDate=" + createDate
-				+ ", lostAddr=" + lostAddr + ", fileRealName=" + fileRealName + ", lostWriter=" 
-				+ ", lostContent=" + lostContent + ", lostGender=" + lostGender + "]";
+				+ ", lostAddr=" + lostAddr + ", fileRealName=" + fileRealName + ", lostContent=" + lostContent
+				+ ", lostGender=" + lostGender + "]";
 	}
+	
 	
 	
 	
