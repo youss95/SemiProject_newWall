@@ -27,7 +27,7 @@
 	</div>
 	<div class="utils">
 		<ul class="clear">
-			<li><a href="#">로그인</a></li>
+			<li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
 			<li><a href="#">회원가입</a></li>
 			<!-- <li><a href="#">마이페이지</a></li> -->
 			<!-- <li><a href="#">로그아웃</a></li> -->
