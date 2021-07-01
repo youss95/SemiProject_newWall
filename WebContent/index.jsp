@@ -26,6 +26,7 @@
 </head>
 <body>
 	<div class="wrap">
+<<<<<<< HEAD
 		<header class="header">
 			<h1 class="logo">
 				<a href="#">LOGO IMG</a>
@@ -61,6 +62,9 @@
 			</div>
 			<div class="s_menu_bg"></div>
 		</header>
+=======
+		<%@ include file="layout/jsp/header.jsp" %>
+>>>>>>> 3260558b5dd0f427cd65e636270e5fdb51d41a40
 		<div class="container">
 			<div class="contents">
 				<section class="">

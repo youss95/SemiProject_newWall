@@ -18,7 +18,7 @@ public class AdminDAO {
 
 	private static AdminDAO instance;
 
-	public synchronized static AdminDAO getInstance() { // 싱글톤 패턴
+	public synchronized static AdminDAO getInstance() {
 		if(instance == null) {
 			instance = new AdminDAO();
 		}
@@ -56,9 +56,24 @@ public class AdminDAO {
 			return list;
 		}
 	}
+	
+	
+	public String getAnimalCode() throws Exception{
+		String sql = "select 'AM'|| LPAD(code_seq.nextval,5,0) from dual";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getString(1);
+
+		}
+	}
 
 	public int animalInfoReg(AnimalDTO adto) throws Exception{
-		String sql = "insert into animals values('AM' ||  LPAD(anfile_seq.nextval, 5, 0), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		String sql = "insert into animal values('AM'|| LPAD(animal_photos.nextval, 5, 0), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 
 		try(
 				Connection con = this.getConnection();

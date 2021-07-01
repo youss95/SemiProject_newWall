@@ -17,6 +17,7 @@
 #map{
 margin-top:100px;
 }
+
     </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/lostAnimalMap.css">
@@ -44,11 +45,16 @@ margin-top:100px;
 				
 
 					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
+					<a href="" class="btn_m btn_light">목록</a>
+					
+					<a href="#" class="btn_m btn_light">임시보호</a>
+					<a href="${pageContext.request.contextPath}/animal/lostAnimalForm.jsp" class="btn_m btn_light">글쓰기</a>
 				</div>
 
 				<button type="button" id="searchBtn">
 					<i class="fas fa-search"></i>
 				</button>
+				
 			</div>
 				
 				
@@ -99,7 +105,7 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
  // 마커를 지도에 표시합니다. 
  marker.setMap(map); 
  // 인포윈도우를 생성합니다 
- var infowindow = new kakao.maps.InfoWindow({ content: '<div style="width:150px;height:300px;text-align:center;padding:6px 0;">' + addr[1] + '<br><br>' + addr[2] +'<br><br>'+addr[3] +'</div>', removable : true });
+ var infowindow = new kakao.maps.InfoWindow({ content: '<div class="add" style="width:150px;height:300px;text-align:center;padding:6px 0;">' + addr[1] + '<br><br> 이름: ' + addr[2] +'<br><br> 나이: '+addr[3] +'</div>', removable : true });
   // 마커에 클릭이벤트를 등록합니다
    kakao.maps.event.addListener(marker, 'click', function() { 
       // 마커 위에 인포윈도우를 표시합니다 

@@ -31,8 +31,8 @@ public class FileDAO {
 		return ds.getConnection();
 	}
 
-	public int fileUpload(AnimalFilesDTO fdto) throws Exception {
-		String sql = "insert into animal_files values(files_seq.nextval, ?, ?, sysdate, ?)";
+	public int animalImgUpload(AnimalFilesDTO fdto) throws Exception {
+		String sql = "insert into animal_photos values(photo_seq.nextval, ?, ?, sysdate, ?)";
 		try (
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -48,10 +48,8 @@ public class FileDAO {
 		}
 	}
 
-
-
-	public  AnimalFilesDTO getFile(String parent) throws Exception{
-		String sql = "select * from animal_files where code_seq = ?";
+	public  AnimalFilesDTO getAnimalImgs(String parent) throws Exception{
+		String sql = "select * from animal_photos where code_seq = ?";
 		try (
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -65,7 +63,7 @@ public class FileDAO {
 				if(rs.next()) {
 					AnimalFilesDTO dto = new AnimalFilesDTO();
 
-					dto.setAnfile_seq(rs.getInt("anfile_seq"));
+					dto.setAnfile_seq(rs.getInt("photo_seq"));
 					dto.setOri_name(rs.getNString("ori_name"));
 					dto.setSys_name(rs.getNString("sys_name"));
 					dto.setReg_date(rs.getDate("reg_date"));
@@ -80,7 +78,7 @@ public class FileDAO {
 
 
 	public  List<AnimalFilesDTO> selectAll(String parent) throws Exception{
-		String sql = "select * from animal_files where code_seq = ?";
+		String sql = "select * from animal_photos where code_seq = ?";
 		try (
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -92,7 +90,7 @@ public class FileDAO {
 					){
 				List<AnimalFilesDTO> list = new ArrayList<AnimalFilesDTO>();
 				while(rs.next()) {
-					int seq = rs.getInt("anfile_seq");
+					int seq = rs.getInt("photo_seq");
 					String oriName = rs.getNString("ori_name");
 					String sysName = rs.getNString("sys_name");
 					Date reg_date = rs.getDate("reg_date");

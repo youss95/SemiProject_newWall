@@ -8,14 +8,14 @@
 		<ul class="clear">
 			<li class="has"><a href="#">입양하기</a>
 				<ul class="s_menu clear adopt">
-					<li><a href="#">입양하기</a></li>
+					<li><a href="${pageContext.request.contextPath}/animalList.apt">입양하기</a></li>
 					<li><a href="#">입양 후기</a></li>
 				</ul></li>
 			<li><a href="#">후원하기</a></li>
 			<li class="has"><a href="#">실종/보호</a>
 				<ul class="s_menu clear help">
 					<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종 Map</a></li>
-					<li><a href="#">임시보호</a></li>
+					<li><a href="">임시보호</a></li>
 				</ul></li>
 			<li class="has"><a href="#">뉴스레터</a>
 				<ul class="s_menu clear news">
