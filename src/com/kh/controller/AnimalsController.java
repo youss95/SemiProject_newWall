@@ -107,6 +107,27 @@ public class AnimalsController extends HttpServlet {
 					RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalMap.jsp");
 					dis.forward(request, response);
 				}
+			} else if(url.equals("/protectBoard.lost")) {
+				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
+				System.out.println(directory);
+				int maxSize = 1024*1024*100;
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String encoding = "UTF-8";
+				try {
+					MultipartRequest multi =
+							new MultipartRequest(request, directory, maxSize, encoding,
+									new DefaultFileRenamePolicy());
+					String protectName = multi.getParameter("protectName");
+					String protectKind = multi.getParameter("protectKind");
+					String protectGender = multi.getParameter("protectGender");
+					String protectAddr = multi.getParameter("protectAddResult");
+					String protectFindDate = multi.getParameter("protectFindDate");
+					String protectContent = multi.getParameter("protectContent");
+					String protectImage1 = multi.getParameter("protectImage1");
+					String protectImage2 = multi.getParameter("protectImage2");
+				}catch(Exception e) {
+					
+				}
 			}
 			
 			
