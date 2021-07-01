@@ -102,7 +102,7 @@
 									<option >N</option>
 								</select>
 							</div>
-							<input type="file" name="anPhoto01" id="anFile01">
+							<input type="file" name="anPhoto" id="anPhoto">
 							<input type="hidden" name="anPhoto01_name" id="fileName01" onchange="chageLangSelect()">
 							<input type="file" name="anPhoto02">
 							<input type="hidden" name="anPhoto02_name" id="fileName02">

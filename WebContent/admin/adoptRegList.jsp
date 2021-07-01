@@ -92,7 +92,7 @@
 	<script>
 		$(function(){
 			$.ajax({
-				url: "${pageContext.request.contextPath}/adoptionList.adm",
+				url: "${pageContext.request.contextPath}/adoptRegList.adm",
 				type: "get",
 				dataType: "json"
 			}).done(function(resp){
