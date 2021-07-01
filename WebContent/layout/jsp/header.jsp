@@ -8,7 +8,7 @@
 		<ul class="clear">
 			<li class="has"><a href="#">입양하기</a>
 				<ul class="s_menu clear adopt">
-					<li><a href="#">입양하기</a></li>
+					<li><a href="${pageContext.request.contextPath}/animalList.apt">입양하기</a></li>
 					<li><a href="#">입양 후기</a></li>
 				</ul></li>
 			<li><a href="#">후원하기</a></li>

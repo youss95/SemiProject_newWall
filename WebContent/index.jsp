@@ -24,7 +24,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#">후원하기</a>
+						<a href="sponsor/sponsorInfo.jsp">후원하기</a>
 					</li>
 					<li class="has">
 						<a href="#">도움이필요해요</a>

@@ -99,25 +99,44 @@
 					<div class="flex_box">
 						<input type="text" class="inpform" placeholder="Placeholder">
 						<button class="btn_m btn_default">취소</button>
-						</li>
-						<li><button class="btn_m btn_white">등록</button>
+						<button class="btn_m btn_white">등록</button>
 					</div>
 				</div>
 				
 				
 				<div class="animal_list">
+				<c:forEach var="i" items="${list}">
 					<div class="item">
-						<img src="" alt="">
-						<div class="txt">
-							<p>진숙</p>
-							<ul class="info">
-								<li>고양이(코숏)</li>
-								<li>암컷(중성화 X)</li>
-								<li>8살 / 2.8kg / 삼색</li>
-							</ul>
+							<img src="" alt="">
+							<div class="txt">
+								<p>${i.code_seq} / ${i.an_name} / ${i.an_category} / ${an_gender}</p>
+								<!-- <ul class="info">
+									<li>고양이(코숏)</li>
+									<li>암컷(중성화 X)</li>
+									<li>8살 / 2.8kg / 삼색</li>
+								</ul> -->
+							</div>
 						</div>
-					</div>
-					<div class="item">
+				</c:forEach>
+				
+				<%-- ${list}
+					<c:forEach var="i" items="${list}">
+					${list}
+						<div class="item">
+							<img src="" alt="">
+							<div class="txt">
+								<p>${i.code_seq} / ${i.an_name} / ${i.an_category} / ${an_gender}</p>
+								<!-- <ul class="info">
+									<li>고양이(코숏)</li>
+									<li>암컷(중성화 X)</li>
+									<li>8살 / 2.8kg / 삼색</li>
+								</ul> -->
+							</div>
+						</div>
+					</c:forEach> --%>
+				
+					
+				<!-- 	<div class="item">
 						<img src="" alt="">
 						<div class="txt">
 							<p>러쉬</p>
@@ -149,10 +168,17 @@
 								<li>3살 / 5.3kg / 브라운</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</section>
 		</div>
 	</div>
 </div>
 <jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+<script>
+	$(function(){
+		$.ajax({
+			url: "${pageContext.request.contextPath}/animalList.apt"
+		})
+	})
+</script>
