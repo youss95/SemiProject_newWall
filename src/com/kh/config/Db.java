@@ -11,7 +11,7 @@ public class Db {
 		try {
 			Context initctx = new InitialContext();
 			Context envctx = (Context) initctx.lookup("java:comp/env");
-			DataSource ds = (DataSource) envctx.lookup("jdbc/pool");
+			DataSource ds = (DataSource) envctx.lookup("jdbc/oracle");
 			Connection con = ds.getConnection();
 			System.out.println("DB 연결성공");
 			return con;
