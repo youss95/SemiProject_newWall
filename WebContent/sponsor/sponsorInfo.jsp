@@ -112,9 +112,7 @@
 	/* margin-top: 100px; */
 }
 
-.footer {
-	float: left;
-}
+
 </style>
 
 </head>
@@ -172,7 +170,8 @@
 										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
 										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
 											노력을 함께 해주세요</h3>
-									</div> <img src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
+									</div> 
+									<img src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
 									alt="">
 
 
