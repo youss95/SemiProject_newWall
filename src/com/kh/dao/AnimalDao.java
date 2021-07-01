@@ -36,6 +36,7 @@ public class AnimalDao {
 			pstmt.setString(8, dto.getLostContent());
 			pstmt.setString(9, dto.getLostGender());
 			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
 			con.commit();
 			con.close();
 			return result;
