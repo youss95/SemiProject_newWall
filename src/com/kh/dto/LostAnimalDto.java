@@ -5,7 +5,7 @@ import java.sql.Date;
 
 
 
-public class LostAnimalDto {
+public class LostAnimalDTO {
 
 	private int lostNo;
 	private String lostName;
@@ -85,7 +85,7 @@ public class LostAnimalDto {
 	public void setLostGender(String lostGender) {
 		this.lostGender = lostGender;
 	}
-	public LostAnimalDto(int lostNo, String lostName, int lostAge, String lostKind, String lostCategory,
+	public LostAnimalDTO(int lostNo, String lostName, int lostAge, String lostKind, String lostCategory,
 			String lostDate, Date createDate, String lostAddr, String fileRealName, String lostContent,
 			String lostGender) {
 		super();
@@ -101,7 +101,7 @@ public class LostAnimalDto {
 		this.lostContent = lostContent;
 		this.lostGender = lostGender;
 	}
-	public LostAnimalDto() {
+	public LostAnimalDTO() {
 		super();
 	}
 	@Override

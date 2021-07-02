@@ -2,7 +2,7 @@ package com.kh.dto;
 
 import java.sql.Date;
 
-public class ProtectionDto {
+public class ProtectionDTO {
 
 	private int protectNo;
 	//private int user_no; 로그인 완성되면 적용
@@ -83,7 +83,7 @@ public class ProtectionDto {
 	public void setProtectCreateDate(Date protectCreateDate) {
 		this.protectCreateDate = protectCreateDate;
 	}
-	public ProtectionDto(int protectNo, String protectName, String protectKind, String protectFindDate,
+	public ProtectionDTO(int protectNo, String protectName, String protectKind, String protectFindDate,
 			String protectFindAddr, String protectContent, String protectGender, String protectFileRealName1,
 			String protectFileRealName2, int protectViewCount, Date protectCreateDate) {
 		super();
@@ -102,7 +102,7 @@ public class ProtectionDto {
 	
 	
 	
-	public ProtectionDto(String protectName, String protectKind, String protectFindDate, String protectFindAddr,
+	public ProtectionDTO(String protectName, String protectKind, String protectFindDate, String protectFindAddr,
 			String protectContent, String protectGender, String protectFileRealName1, String protectFileRealName2) {
 		super();
 		this.protectName = protectName;
@@ -114,7 +114,7 @@ public class ProtectionDto {
 		this.protectFileRealName1 = protectFileRealName1;
 		this.protectFileRealName2 = protectFileRealName2;
 	}
-	public ProtectionDto() {
+	public ProtectionDTO() {
 		super();
 	}
 	@Override

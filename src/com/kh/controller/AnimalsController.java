@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.config.Script;
-import com.kh.dao.AnimalDao;
-import com.kh.dto.LostAnimalDto;
-import com.kh.dto.ProtectBoardDto;
-import com.kh.dto.ProtectionDto;
+import com.kh.dao.AnimalDAO;
+import com.kh.dto.LostAnimalDTO;
+import com.kh.dto.ProtectBoardDTO;
+import com.kh.dto.ProtectionDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -39,7 +39,7 @@ public class AnimalsController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doAll(request,response);
 	}
-	AnimalDao dao = AnimalDao.getInstance();
+	AnimalDAO dao = AnimalDAO.getInstance();
 	protected void doAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String requestURI = request.getRequestURI();
@@ -72,7 +72,7 @@ public class AnimalsController extends HttpServlet {
 					String str = (String)files.nextElement();
 					String lostFileRealName = multi.getFilesystemName(str); //실제에 서버에 업로드가된 네임
 					
-					LostAnimalDto dto = new LostAnimalDto();
+					LostAnimalDTO dto = new LostAnimalDTO();
 					dto.setLostName(lostName);
 					dto.setLostAge(lostAge);
 					dto.setLostKind(lostKind);
@@ -102,7 +102,7 @@ public class AnimalsController extends HttpServlet {
 				}
 			} else if(url.equals("/lostAnimalMap.lost")) {
 				
-				List<LostAnimalDto> list = dao.showMap();
+				List<LostAnimalDTO> list = dao.showMap();
 				System.out.println(list.toString());
 				if(list != null) {
 					request.setAttribute("mapList", list);
@@ -139,8 +139,8 @@ public class AnimalsController extends HttpServlet {
 					String protectImage2 = multi.getFilesystemName(str2);
 					
 					
-					  ProtectionDto dto = new
-					  ProtectionDto(protectName,protectKind,protectFindDate,protectAddr,
+					  ProtectionDTO dto = new
+					  ProtectionDTO(protectName,protectKind,protectFindDate,protectAddr,
 					  protectContent, protectGender,protectImage1,protectImage2);
 					 
 					System.out.println(dto.toString());
@@ -159,7 +159,7 @@ public class AnimalsController extends HttpServlet {
 				}
 			} else if(url.equals("/protectList.lost")) {
 			
-				List<ProtectBoardDto> list = dao.getList();
+				List<ProtectBoardDTO> list = dao.getList();
 				System.out.println(list.toString());
 				if(list!=null) {
 					request.setAttribute("protectList", list);

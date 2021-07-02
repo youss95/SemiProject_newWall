@@ -2,7 +2,7 @@ package com.kh.dto;
 
 import java.sql.Date;
 
-public class ProtectBoardDto {
+public class ProtectBoardDTO {
 //이름 성별 사진 발견날짜 주소 품종 
 	private int protectNo;
 	private String protectName;
@@ -60,7 +60,7 @@ public class ProtectBoardDto {
 	public void setProtectCreateDate(Date protectCreateDate) {
 		this.protectCreateDate = protectCreateDate;
 	}
-	public ProtectBoardDto(int protectNo, String protectName, String protectGender, String protectFileRealName1,
+	public ProtectBoardDTO(int protectNo, String protectName, String protectGender, String protectFileRealName1,
 			String protectFileRealName2, String protectAddr, String protectKind, Date protectCreateDate) {
 		super();
 		this.protectNo = protectNo;
@@ -72,7 +72,7 @@ public class ProtectBoardDto {
 		this.protectKind = protectKind;
 		this.protectCreateDate = protectCreateDate;
 	}
-	public ProtectBoardDto() {
+	public ProtectBoardDTO() {
 		super();
 	}
 	@Override
