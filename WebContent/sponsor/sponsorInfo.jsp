@@ -37,6 +37,15 @@
 	background-color: #D6E6F2;
 	height: 100px;
 	line-height: 50px;
+	padding-left:1%;
+}
+
+.sp_if .sp_company .com_img2 {
+	 display: none;
+}
+
+.sp_if .sp_company img {
+	opacity: 0.9;
 }
 
 .sp_if .sp_info02_con {
@@ -111,8 +120,6 @@
 
 	/* margin-top: 100px; */
 }
-
-
 </style>
 
 </head>
@@ -163,16 +170,17 @@
 							<h2 class="sp_subtitle">믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</h2>
 						</div>
 						<div class="sp_body">
-							<div class="sp_company">
+							<div class="sp_company"  id="sp_company">
 								<a href="#">
 									<div class="sp_company_bg">
 										<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
-										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
+										<h2 class="sp_company_title"> 비영리 단체 NEW-WAL에게 후원</h2>
+										<h3 class="sp_company_sub"> 동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
 											노력을 함께 해주세요</h3>
-									</div> 
-									<img src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
-									alt="">
+									</div> <img class="com_img1"
+									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
+									alt=""> <img class="com_img2"
+									src="../resources/images/sp_img/sp_company02_1900_700.png" alt="">
 
 
 								</a>
@@ -262,6 +270,22 @@
 			
 			 
 		 })
+		  // $("#sp_company").hover(function () {
+
+            //     $('.sp_if .sp_company .com_img2').attr('display', 'none')
+            //     $('.sp_if .sp_company .com_img1').attr('display', 'block')
+            // })
+            $('#sp_company').mouseover(function () {
+                $('.sp_if .sp_company .com_img2').show();
+                $(".sp_if .sp_company .com_img1").hide()
+                $('#sp_company .sp_company_bg').css('background-color', '#B9D7EA');
+                //서서히 변하는거 찾아보기
+            })
+            $('#sp_company').mouseout(function () {
+                $('.sp_if .sp_company .com_img1').show();
+                $(".sp_if .sp_company .com_img2").hide()
+                $('#sp_company .sp_company_bg').css('background-color', '#D6E6F2');
+            })
 		 
 	})
 	</script>

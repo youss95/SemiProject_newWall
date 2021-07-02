@@ -505,7 +505,7 @@
                                             </h3>
                                             <!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" name="sp_ybi_y">
+                                                <input type="number" class="inpform bi_y" ="sp_ybi_y">
                                             </div>
                                             년
                                             <div class="inp_slct bi">
@@ -582,20 +582,18 @@
                                     <div class="sp_address">
                                         <div>
                                             <h3 class="ad_h3">우편번호</h3>
-                                            <input type="text" id="postcode" class="inpform sp_address_inp sp_address_inp1"
-                                                placeholder="우편번호">
-                                            <button class="btn_m btn_default" id="search"
+                                            <input type="text" id="sp_postcode" name="sp_postcode" class="inpform sp_address_inp sp_address_inp1"
+                                                >
+                                            <button class="btn_m btn_default" id="sp_search"
                                                 class="inpform sp_address_inp" type="button">우편번호 찾기</button>
                                         </div>
                                         <div>
                                             <h3 class="ad_h3">도로명 주소</h3>
-                                            <input type="text" id="address1" class="inpform sp_address_inp sp_address_inp2"
-                                                placeholder="도로명주소">
+                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2">
                                         </div>
                                         <div>
                                             <h3>상세 주소</h3>
-                                            <input type="text" id="address2" class="inpform sp_address_inp sp_address_inp2"
-                                                placeholder="상세주소">
+                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2">
                                         </div>
                                     </div>
 
@@ -638,6 +636,7 @@
                                         </div>
                                     </div>
                                     <div class="terms">
+                                    <h3>개인정보 제3자 제공 약관 (선택)</h3>
                                         <textarea class="txtareaform" name="" id="" cols="30" rows="4" disabled>
                                             개인정보 제3자 제공•이용에 대한 동의를 거부할 권리가 있습니다.
                                             그러나 동의를 거부할 경우 기부금 결제 등에 제한을 받을 수 있습니다.
@@ -788,14 +787,14 @@
              $('#inp_pay').focus();
          })
          
-          document.getElementById("search").onclick = function () {
+          document.getElementById("sp_search").onclick = function () {
                 new daum.Postcode({
                     oncomplete: function (data) {
                         let roadAddr = data.roadAddress; // 도로명 주소 변수
 
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('postcode').value = data.zonecode;
-                        document.getElementById("address1").value = roadAddr;
+                        document.getElementById('sp_postcode').value = data.zonecode;
+                        document.getElementById("sp_address1").value = roadAddr;
 
                         // 이벤트 처리함수들은 callback function 또는 callback pattern이라고 한다.
                         // 개발자가 직접적으로 부르는것이 아니라 개발자가 어떠한 조건일때, function을 실행해라라고 코드를 짜면
