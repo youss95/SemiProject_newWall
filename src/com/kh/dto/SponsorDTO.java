@@ -30,6 +30,8 @@ public class SponsorDTO {
 	
 	public SponsorDTO() {}
 	
+	
+	
 	public SponsorDTO(int sponsor_seq, int sponsor_amount, String sponsor_division, String sponsor_agecheck,
 			String sponsor_name, String sponsor_contact, String sponsor_birth, String sponsor_yname,
 			String sponsor_ybirth, String sponsor_email, String sponsor_postcode, String sponsor_address1,
