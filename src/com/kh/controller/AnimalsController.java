@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.config.Script;
 import com.kh.dao.AnimalDao;
 import com.kh.dto.LostAnimalDto;
+import com.kh.dto.ProtectionDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -111,23 +112,52 @@ public class AnimalsController extends HttpServlet {
 				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
 				System.out.println(directory);
 				int maxSize = 1024*1024*100;
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				
 				String encoding = "UTF-8";
 				try {
 					MultipartRequest multi =
 							new MultipartRequest(request, directory, maxSize, encoding,
 									new DefaultFileRenamePolicy());
+					
+				
 					String protectName = multi.getParameter("protectName");
 					String protectKind = multi.getParameter("protectKind");
 					String protectGender = multi.getParameter("protectGender");
-					String protectAddr = multi.getParameter("protectAddResult");
+					String protectAddr = multi.getParameter("addResult");
 					String protectFindDate = multi.getParameter("protectFindDate");
 					String protectContent = multi.getParameter("protectContent");
-					String protectImage1 = multi.getParameter("protectImage1");
-					String protectImage2 = multi.getParameter("protectImage2");
-				}catch(Exception e) {
 					
+					
+					
+					Enumeration files = multi.getFileNames();
+					String str = (String)files.nextElement();
+					String protectImage1 = multi.getFilesystemName(str);
+					
+					
+					String str2 = (String)files.nextElement();
+					String protectImage2 = multi.getFilesystemName(str2);
+					
+					
+					  ProtectionDto dto = new
+					  ProtectionDto(protectName,protectKind,protectFindDate,protectAddr,
+					  protectContent, protectGender,protectImage1,protectImage2);
+					 
+					System.out.println(dto.toString());
+					int result = dao.protectWrite(dto);
+					
+					  if(result >0) { response.setCharacterEncoding("UTF-8");
+					  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
+					  response.getWriter();
+					  
+					  out.print("<script>"); out.print("alert('성공');");
+					  out.print("window.location.href='protectList.lost';");
+					  out.print("</script>"); out.flush(); }
+					 
+				}catch(Exception e) {
+					e.printStackTrace();
 				}
+			} else if(url.equals("protectList.lost")) {
+				System.out.println("ㅇㅇ");
 			}
 			
 			

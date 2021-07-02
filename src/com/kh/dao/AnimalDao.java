@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.kh.config.Db;
 import com.kh.dto.LostAnimalDto;
+import com.kh.dto.ProtectionDto;
 
 public class AnimalDao {
 //싱글톤 
@@ -69,6 +70,26 @@ public class AnimalDao {
 				con.close();
 				return list;
 			}
+		}
+	}
+	
+	public int protectWrite(ProtectionDto dto) throws Exception {
+		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate)";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, dto.getProtectName());
+			pstmt.setString(2, dto.getProtectKind());
+			pstmt.setString(3, dto.getProtectFindDate());
+			pstmt.setString(4, dto.getProtectFindAddr());
+			pstmt.setString(5, dto.getProtectContent());
+			pstmt.setString(6, dto.getProtectGender());
+			pstmt.setString(7, dto.getProtectFileRealName1());
+			pstmt.setString(8, dto.getProtectFileRealName2());
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+			
 		}
 	}
 	

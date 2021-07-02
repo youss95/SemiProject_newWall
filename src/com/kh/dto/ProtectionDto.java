@@ -99,8 +99,31 @@ public class ProtectionDto {
 		this.protectViewCount = protectViewCount;
 		this.protectCreateDate = protectCreateDate;
 	}
+	
+	
+	
+	public ProtectionDto(String protectName, String protectKind, String protectFindDate, String protectFindAddr,
+			String protectContent, String protectGender, String protectFileRealName1, String protectFileRealName2) {
+		super();
+		this.protectName = protectName;
+		this.protectKind = protectKind;
+		this.protectFindDate = protectFindDate;
+		this.protectFindAddr = protectFindAddr;
+		this.protectContent = protectContent;
+		this.protectGender = protectGender;
+		this.protectFileRealName1 = protectFileRealName1;
+		this.protectFileRealName2 = protectFileRealName2;
+	}
 	public ProtectionDto() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "ProtectionDto [protectNo=" + protectNo + ", protectName=" + protectName + ", protectKind=" + protectKind
+				+ ", protectFindDate=" + protectFindDate + ", protectFindAddr=" + protectFindAddr + ", protectContent="
+				+ protectContent + ", protectGender=" + protectGender + ", protectFileRealName1=" + protectFileRealName1
+				+ ", protectFileRealName2=" + protectFileRealName2 + ", protectViewCount=" + protectViewCount
+				+ ", protectCreateDate=" + protectCreateDate + "]";
 	}
 	
 	

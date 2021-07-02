@@ -82,7 +82,7 @@
                    </div>
                   
                    
-			<input type="hidden" name="protectAddResult" id="hiddenInput">	
+			<input type="hidden" name="addResult" id="hiddenInput">	
 			
 			<button id="btn" type="submit" class="btn_m btn_primary">등록</button>	
 			
