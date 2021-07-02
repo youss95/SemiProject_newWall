@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.config.Script;
 import com.kh.dao.AnimalDao;
 import com.kh.dto.LostAnimalDto;
+import com.kh.dto.ProtectBoardDto;
 import com.kh.dto.ProtectionDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -44,8 +45,7 @@ public class AnimalsController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
-		System.out.println(requestURI);
-		System.out.println(ctxPath);
+		
 		System.out.println(url);
 		try {
 			
@@ -101,6 +101,7 @@ public class AnimalsController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else if(url.equals("/lostAnimalMap.lost")) {
+				
 				List<LostAnimalDto> list = dao.showMap();
 				System.out.println(list.toString());
 				if(list != null) {
@@ -156,8 +157,15 @@ public class AnimalsController extends HttpServlet {
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-			} else if(url.equals("protectList.lost")) {
-				System.out.println("ㅇㅇ");
+			} else if(url.equals("/protectList.lost")) {
+			
+				List<ProtectBoardDto> list = dao.getList();
+				System.out.println(list.toString());
+				if(list!=null) {
+					request.setAttribute("protectList", list);
+					RequestDispatcher dis = request.getRequestDispatcher("animal/protectionBoard.jsp");
+					dis.forward(request, response);
+				}
 			}
 			
 			

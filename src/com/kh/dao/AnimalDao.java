@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.kh.config.Db;
 import com.kh.dto.LostAnimalDto;
+import com.kh.dto.ProtectBoardDto;
 import com.kh.dto.ProtectionDto;
 
 public class AnimalDao {
@@ -90,6 +91,30 @@ public class AnimalDao {
 			con.close();
 			return result;
 			
+		}
+	}
+	
+	public List<ProtectBoardDto> getList() throws Exception {
+		List<ProtectBoardDto> list = new ArrayList<>();
+		String sql = "select * from protect_animal";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					ProtectBoardDto dto;
+					int protectNo = rs.getInt("protect_no");
+					String protectName = rs.getString("protect_name");
+					String protectGender = rs.getString("protect_gender");
+					String protectFileRealName1 = rs.getString("protect_fileRealName1");
+					String protectFileRealName2 = rs.getString("protect_fileRealName2");
+					String protectAddr = rs.getString("protect_findAddr");
+					String protectKind = rs.getString("protect_kind");
+					Date protectCreateDate = rs.getDate("protect_createDate");
+					dto = new ProtectBoardDto(protectNo, protectName,protectGender,protectFileRealName1,protectFileRealName2,protectAddr,protectKind,protectCreateDate);
+					list.add(dto);
+				}
+				con.close();
+				return list;
+			}
 		}
 	}
 	
