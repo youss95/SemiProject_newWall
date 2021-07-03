@@ -17,12 +17,13 @@ public class AnimalDTO {
     private String an_photo;
     private String an_contents;
     private Date an_reg_date;
+    private String an_neutering;
     
     public AnimalDTO() {}
 
 	public AnimalDTO(String code_seq, String an_name, String an_category, String an_gender, String an_kind, int an_age,
 			int an_weight, String an_character, Date an_date, String an_status, String an_photo, String an_contents,
-			Date an_reg_date) {
+			Date an_reg_date, String an_neutering) {
 		super();
 		this.code_seq = code_seq;
 		this.an_name = an_name;
@@ -37,6 +38,7 @@ public class AnimalDTO {
 		this.an_photo = an_photo;
 		this.an_contents = an_contents;
 		this.an_reg_date = an_reg_date;
+		this.an_neutering = an_neutering;
 	}
 
 	public String getCode_seq() {
@@ -142,7 +144,14 @@ public class AnimalDTO {
 	public void setAn_reg_date(Date an_reg_date) {
 		this.an_reg_date = an_reg_date;
 	}
-    
-   
+
+	public String getAn_neutering() {
+		return an_neutering;
+	}
+
+	public void setAn_neutering(String an_neutering) {
+		this.an_neutering = an_neutering;
+	}
+
 
 }
