@@ -15,7 +15,7 @@ public class Script {
 
 			out.print("<script>");
 			out.print("alert('" + msg + "');");
-			out.print("history.back();"); //history는 윈도우가 들고있는 객체
+			out.print("history.back();"); 
 			out.print("</script>");
 			out.flush();
 		} catch (Exception e) {
