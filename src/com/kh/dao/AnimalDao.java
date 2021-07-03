@@ -8,22 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.config.Db;
-import com.kh.dto.LostAnimalDto;
+import com.kh.dto.LostAnimalDTO;
+import com.kh.dto.ProtectBoardDTO;
+import com.kh.dto.ProtectionDTO;
 
-public class AnimalDao {
+public class AnimalDAO {
 //싱글톤 
-	private static AnimalDao instance;
+	private static AnimalDAO instance;
 	
-	public synchronized static  AnimalDao getInstance() { //하나의 스레드만 허용
+	public synchronized static  AnimalDAO getInstance() { //하나의 스레드만 허용
 		if(instance == null) {
-			instance = new AnimalDao();
+			instance = new AnimalDAO();
 		}
 		return instance;
 	}
 	
-	private AnimalDao(){}
+	private AnimalDAO(){}
 	
-	public int LostAnimalFormWrite(LostAnimalDto dto) throws Exception {
+	public int LostAnimalFormWrite(LostAnimalDTO dto) throws Exception {
 		String sql ="insert into lost_animal values(lostAnimal_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate)";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql); ){
 			pstmt.setString(1,dto.getLostName());
@@ -45,13 +47,13 @@ public class AnimalDao {
 		
 	}
 	
-	public List<LostAnimalDto> showMap() throws Exception{
-		List<LostAnimalDto> list = new ArrayList<>();
+	public List<LostAnimalDTO> showMap() throws Exception{
+		List<LostAnimalDTO> list = new ArrayList<>();
 		String sql ="select * from lost_animal";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
-					LostAnimalDto dto;
+					LostAnimalDTO dto;
 					int lostNo = rs.getInt("lost_no");
 					String lostName = rs.getString("lost_name");
 					int lostAge = rs.getInt("lost_age");
@@ -63,7 +65,51 @@ public class AnimalDao {
 					String lostContent = rs.getString("lost_content");
 					String lostGender = rs.getString("lost_gender");
 					Date createDate = rs.getDate("lost_createDate");
-					dto = new LostAnimalDto(lostNo,lostName,lostAge,lostKind,lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+					dto = new LostAnimalDTO(lostNo,lostName,lostAge,lostKind,lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+					list.add(dto);
+				}
+				con.close();
+				return list;
+			}
+		}
+	}
+	
+	public int protectWrite(ProtectionDTO dto) throws Exception {
+		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate)";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, dto.getProtectName());
+			pstmt.setString(2, dto.getProtectKind());
+			pstmt.setString(3, dto.getProtectFindDate());
+			pstmt.setString(4, dto.getProtectFindAddr());
+			pstmt.setString(5, dto.getProtectContent());
+			pstmt.setString(6, dto.getProtectGender());
+			pstmt.setString(7, dto.getProtectFileRealName1());
+			pstmt.setString(8, dto.getProtectFileRealName2());
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+			
+		}
+	}
+	
+	public List<ProtectBoardDTO> getList() throws Exception {
+		List<ProtectBoardDTO> list = new ArrayList<>();
+		String sql = "select * from protect_animal";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					ProtectBoardDTO dto;
+					int protectNo = rs.getInt("protect_no");
+					String protectName = rs.getString("protect_name");
+					String protectGender = rs.getString("protect_gender");
+					String protectFileRealName1 = rs.getString("protect_fileRealName1");
+					String protectFileRealName2 = rs.getString("protect_fileRealName2");
+					String protectAddr = rs.getString("protect_findAddr");
+					String protectKind = rs.getString("protect_kind");
+					Date protectCreateDate = rs.getDate("protect_createDate");
+					dto = new ProtectBoardDTO(protectNo, protectName,protectGender,protectFileRealName1,protectFileRealName2,protectAddr,protectKind,protectCreateDate);
 					list.add(dto);
 				}
 				con.close();
