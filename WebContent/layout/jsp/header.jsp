@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <header class="header">
 	<h1 class="logo">
-		<a href="#">LOGO IMG</a>
+		<a href="index.jsp">LOGO IMG</a>
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
 			<li class="has"><a href="#">입양하기</a>
 				<ul class="s_menu clear adopt">
-					<li><a href="${pageContext.request.contextPath}/animalList.apt">입양하기</a></li>
+					<li><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양하기</a></li>
 					<li><a href="#">입양 후기</a></li>
 				</ul></li>
 			<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원하기</a></li>

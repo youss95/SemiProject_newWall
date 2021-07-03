@@ -3,8 +3,6 @@ package com.kh.dto;
 import java.sql.Date;
 
 
-
-
 public class LostAnimalDTO {
 
 	private int lostNo;
@@ -16,7 +14,6 @@ public class LostAnimalDTO {
 	private Date createDate;
 	private String lostAddr;
 	private String fileRealName;
-	
 	private String lostContent;
 	private String lostGender;
 	public int getLostNo() {
