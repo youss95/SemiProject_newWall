@@ -47,6 +47,8 @@ public class AnimalDAO {
 		
 	}
 	
+	
+	
 	public List<LostAnimalDTO> showMap() throws Exception{
 		List<LostAnimalDTO> list = new ArrayList<>();
 		String sql ="select * from lost_animal";

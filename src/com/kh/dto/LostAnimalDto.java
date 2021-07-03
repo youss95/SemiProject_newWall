@@ -16,7 +16,6 @@ public class LostAnimalDTO {
 	private Date createDate;
 	private String lostAddr;
 	private String fileRealName;
-	
 	private String lostContent;
 	private String lostGender;
 	public int getLostNo() {
