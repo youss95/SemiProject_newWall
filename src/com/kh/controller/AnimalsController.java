@@ -20,6 +20,7 @@ import com.kh.config.Script;
 import com.kh.dao.AnimalDAO;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
+import com.kh.dto.ProtectDetailDTO;
 import com.kh.dto.ProtectionDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -192,6 +193,18 @@ public class AnimalsController extends HttpServlet {
 				
 				response.getWriter().append(result);
 				System.out.println(list.toString());
+			}else if(url.equals("/protectDetail.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				int result = dao.getViewCount(protectNo);
+				if(result>0) {
+					ProtectDetailDTO dto = dao.getDetail(protectNo);
+					System.out.println("dto:" + dto.toString());
+					request.setAttribute("protectDetail", dto);
+					RequestDispatcher dis = request.getRequestDispatcher("animal/protectDetail.jsp");
+					dis.forward(request, response);
+				}else {
+					Script.back(response, "조회수 실패");
+				}
 			}
 			
 			

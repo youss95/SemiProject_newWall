@@ -11,6 +11,7 @@ import java.util.List;
 import com.kh.config.Db;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
+import com.kh.dto.ProtectDetailDTO;
 import com.kh.dto.ProtectionDTO;
 
 public class AnimalDAO {
@@ -119,6 +120,46 @@ public class AnimalDAO {
 				}
 				con.close();
 				return list;
+			}
+		}
+	}
+	//조회수 증가
+	public int getViewCount(int protectNo) throws Exception{
+		String sql ="update protect_animal set protect_viewCount = protect_viewCount + 1 where protect_no=?";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, protectNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
+	//상세글 보기
+	public ProtectDetailDTO getDetail(int protectNo) throws Exception{
+		String sql = "select protect_no,protect_name,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,\r\n"
+				+ "(select trunc(sysdate-to_date((select protect_findDate from protect_animal where protect_no=5 ),'yyyy/mm/dd'))from dual) protectDate\r\n"
+				+ "from protect_animal where protect_no=?";
+		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, protectNo);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					ProtectDetailDTO dto;
+					int protect_no = rs.getInt("protect_no");
+					String protectName = rs.getString("protect_name");
+					String protectContent = rs.getString("protect_content");
+					String protectGender = rs.getString("protect_gender");
+					String protectFileRealName1 = rs.getString("protect_fileRealName1");
+					String protectFileRealName2 = rs.getString("protect_fileRealName2");
+					int viewCount = rs.getInt("protect_viewCount");
+					Date protectCreateDate = rs.getDate("protect_createDate");
+					int protectDate = rs.getInt("protectDate");
+					dto = new ProtectDetailDTO(protect_no,protectName,protectContent,protectGender,protectFileRealName1,protectFileRealName2,viewCount,protectCreateDate,protectDate);
+					con.close();
+					return dto;
+				}
+				return null;
 			}
 		}
 	}

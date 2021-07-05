@@ -11,33 +11,32 @@ let page=1;
 			type:"get",
 			dataType:"json"		
 		}).done(function(resp){	
-			console.log('resp:',resp[0].protectFileRealName1)
+			console.log('resp:', resp)
+	resp.map((res)=>{
+		
 	
 		
 		let item = `
-		<div class="row">
-   <div class="row">
+		
+  
    
         <div class="card shadow-soft">
-            <img src="/NewWall/upload/lostAnimal/${resp[0].protectFileRealName1}">
+            <img src="/NewWall/upload/lostAnimal/${res.protectFileRealName1}">
             <div class="card-body">
-                <h4>${resp[0].protectName}</h4>
+                <h4>${res.protectName}</h4>
                 <p class="fontC">
                     고양이<br>
                     암컷<br>
                     8/2/색
                 </p>
+ <a href="/NewWall/protectDetail.lost?protectNo=${res.protectNo}" class="btn_m btn_light">상세</a>
                         </div>
         </div>
        
         
-      
-    </div> 
-        
-      
-    </div> 
 		`
 		loading.append(item);
+		})
 		}).fail(error=>{
 			console.log(error)
 			alert('fail')

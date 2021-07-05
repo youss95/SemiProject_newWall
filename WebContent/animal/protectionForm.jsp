@@ -17,7 +17,7 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/protectBoard.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/protectBoard.lost?page=1" method="post" enctype="multipart/form-data">
 				<div id="mainTitle">임시보호</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
