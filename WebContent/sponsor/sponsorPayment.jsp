@@ -23,12 +23,6 @@
 	box-sizing: border-box;
 }
 
-.sp_pay_section .pay_top {
-	width: 100%;
-	height: 50px;
-	/* background-color: rgb(96, 124, 69); */
-}
-
 .sp_pay_section .sp_pay_con {
 	width: 500px;
 	/* height: 1000px; */
@@ -68,9 +62,10 @@
 }
 
 .sp_pay_section .sp_pay_con .sp_pay_btncon button {
-	width: 50%;
+	width: 40%;
 	height: 50px;
 	font-size: 20px;
+    margin: 2%;
 }
 
 .sp_pay_section .sp_pay_con .sp_pay_title {
@@ -84,8 +79,8 @@
 </head>
 <body>
 	<div class="wrap">
-		<header class="header">
-			<h1 class="logo">
+	<!--	<header class="header">
+ 			<h1 class="logo">
 				<a href="#">LOGO IMG</a>
 			</h1>
 			<div class="gnb">
@@ -106,37 +101,24 @@
 							<li><a href="#">공지사항</a></li>
 							<li><a href="#">소식</a></li>
 						</ul></li>
-					<!-- <li><a href="#">봉사활동</a></li> 보류 -->
+					<li><a href="#">봉사활동</a></li> 보류
 				</ul>
 			</div>
 			<div class="utils">
 				<ul class="clear">
 					<li><a href="#">로그인</a></li>
 					<li><a href="#">회원가입</a></li>
-					<!-- <li><a href="#">마이페이지</a></li> -->
-					<!-- <li><a href="#">로그아웃</a></li> -->
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">로그아웃</a></li>
 				</ul>
 			</div>
-			<div class="s_menu_bg"></div>
-		</header>
+			<div class="s_menu_bg"></div> 
+		</header>-->
 		<div class="container">
 			<div class="contents">
 				<section class="sp_pay_section">
 					<!-- 하이 여기는 서브입니다 -->
-					sponsor_amount:${sponsor.sponsor_amount} <br>
-					sponsor_agecheck:${sponsor.sponsor_agecheck} <br>
-					sponsor_name:${sponsor.sponsor_name} <br>
-					sponsor_contact:${sponsor.sponsor_contact} <br>
-					sponsor_birth:${sponsor.sponsor_birth} <br>
-					sponsor_yname:${sponsor.sponsor_yname} <br>
-					sponsor_ybirth:${sponsor.sponsor_ybirth} <br>
-					sponsor_email:${sponsor.sponsor_email} <br>
-					sponsor_terms01:${sponsor.sponsor_terms01} <br>
-					sponsor_terms02:${sponsor.sponsor_terms02} <br>
-					sponsor_mb_id:${sponsor.sponsor_mb_id} <br>
-
-
-					<div class="pay_top"></div>
+				
 					<div class="sp_pay_con">
 						<div class="sp_pay_incon">
 							<h2 class="sp_pay_title">입력 정보 확인</h2>
@@ -199,7 +181,7 @@
 						<div class="sp_pay_incon">
 							<h3 class="sp_pay_cal">후원 분야</h3>
 							<input type="text" class="inpform sp_inp_ck"
-								value="${sponsor.sponsor_division}" disabled>
+								value="${sponsor.sponsor_choice}" disabled>
 						</div>
 						<div class="sp_pay_incon">
 							<h3 class="sp_pay_cal">개인정보 수집 약관 동의 여부(확인후 뺄것)</h3>
@@ -217,19 +199,11 @@
 								value="${sponsor.sponsor_mb_id}" disabled>
 						</div>
 						<div class="sp_pay_incon sp_pay_btncon">
-							<button class="btn_m btn_primary">결제하기</button>
+							<button type="button" class="btn_m btn_light">뒤로가기</button>
+                            <button type="button" id="check_module" class="btn_m btn_default">결제하기</button>
 						</div>
 
-
 					</div>
-
-
-
-
-
-
-
-					<button id="check_module" type="button">입력정보 확인 후 결제하기</button>
 
 					<script>
 						$("#check_module")
@@ -276,11 +250,11 @@
 																//결제창에서 보여질 이름
 																amount : '${sponsor.sponsor_amount}',
 																//가격 
-																buyer_email : 'iamport@siot.do',
+																buyer_email : '${sponsor.sponsor_email}',
 																buyer_name : '${sponsor.sponsor_name}',
 																buyer_tel : '${sponsor.sponsor_contact}',
-																buyer_addr : '서울특별시 강남구 삼성동',
-																buyer_postcode : '123-456',
+																buyer_addr : '${sponsor.sponsor_address1}+${sponsor.sponsor_address1}',
+																buyer_postcode : '${sponsor.sponsor_postcode}',
 																// m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 																m_redirect_url : 'https://www.yourdomain.com/payments/complete'
 															/*  
@@ -302,6 +276,8 @@
 																			+ rsp.paid_amount;
 																	msg += '카드 승인번호 : '
 																			+ rsp.apply_num;
+																	
+																	location.href = "${pageContext.request.contextPath}/PaymentComplete.sp?apply_num="+rsp.apply_num;
 																} else {
 																	var msg = '결제에 실패하였습니다.';
 																	msg += '에러내용 : '
