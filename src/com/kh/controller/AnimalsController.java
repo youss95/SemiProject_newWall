@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.config.Script;
 import com.kh.dao.AnimalDAO;
 import com.kh.dto.LostAnimalDTO;
@@ -45,7 +46,8 @@ public class AnimalsController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
-		
+		System.out.println(requestURI);
+		System.out.println(ctxPath);
 		System.out.println(url);
 		try {
 			
@@ -158,14 +160,38 @@ public class AnimalsController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else if(url.equals("/protectList.lost")) {
-			
-				List<ProtectBoardDTO> list = dao.getList();
+				//Gson g = new Gson();
+				int page = Integer.parseInt(request.getParameter("page"));
+				System.out.println(page);
+				List<ProtectBoardDTO> list = dao.getList(page);
+				//String result = g.toJson(list);
+				//System.out.println("result" + result);
+				//response.setContentType("text/html; charset=UTF-8");
+				
+				//response.getWriter().append(result);
 				System.out.println(list.toString());
-				if(list!=null) {
+				
 					request.setAttribute("protectList", list);
-					RequestDispatcher dis = request.getRequestDispatcher("animal/protectionBoard.jsp");
-					dis.forward(request, response);
-				}
+					
+					
+					
+					 RequestDispatcher dis =
+					 request.getRequestDispatcher("animal/protectionBoard.jsp");
+					 dis.forward(request, response);
+					 
+					 
+				
+			}else if(url.equals("/proList.lost")) {
+				Gson g = new Gson();
+				int page = Integer.parseInt(request.getParameter("page"));
+				System.out.println(page);
+				List<ProtectBoardDTO> list = dao.getList(page);
+				String result = g.toJson(list);
+				System.out.println("result" + result);
+				response.setContentType("text/html; charset=UTF-8");
+				
+				response.getWriter().append(result);
+				System.out.println(list.toString());
 			}
 			
 			

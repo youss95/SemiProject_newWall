@@ -22,7 +22,7 @@
 				<section class="protectBoard">
 				
 				 <div class="cont">
-    <div class="row">
+     <div class="row">
     <c:forEach var="p" items="${protectList}">
         <div class="card shadow-soft">
             <img src="${pageContext.request.contextPath}/upload/lostAnimal/${p.protectFileRealName1}">
@@ -38,8 +38,12 @@
         </c:forEach>
         
       
+    </div> 
+    <div id="loading">
+    
     </div>
 </div>
+<a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light">글쓰기</a>
 				</section>
 			</div>
 		</div>
@@ -48,8 +52,9 @@
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>
 </body>
 </html>
