@@ -78,6 +78,34 @@ public class AnimalDAO {
 		}
 	}
 	
+	//맵 통계
+	public int todayCount() throws Exception{
+		String sql = "select count(*) todayCount from lost_animal where trunc(to_date(lost_date,'yy/mm/dd')) = trunc(sysdate)";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					int result = rs.getInt("todayCount");
+					return result;
+				}
+			}
+			
+		}
+		return -1;
+	}
+	//총 통계
+	public int totalCount() throws Exception{
+		String sql = "select count(*) totalCount from lost_animal";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					int result = rs.getInt("totalCount");
+					return result;
+				}
+			}
+		}
+		return -1;
+	}
+	
 	public int protectWrite(ProtectionDTO dto) throws Exception {
 		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate)";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){

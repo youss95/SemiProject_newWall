@@ -10,11 +10,12 @@
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectDetail.css">
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -53,7 +54,7 @@
 			<!--댓글  -->
 		
 				<div class="">
-					<div class="replytitle">comment</div>
+					<div class="replytitle">댓글</div>
 					<div class="panel-body">
 	<textarea id="content" id="reply__write__form" class="txtareaform" placeholder="write a comment..." rows="2"></textarea>
 							<br>
@@ -63,17 +64,17 @@
       
       
      <div class="clearfix"></div>
-						<hr />
+						<hr>
 						<!-- 댓글 리스트 시작-->
-						
+					
 						
 								<ul id="reply__list" class="media-list"> 
 						
 								<!-- 댓글 아이템 -->
 								<li id="reply-" class="media">
 									<div class="media-body">
-										<strong class="text-primary"></strong>
-										<p class="commentArea"></p>
+										<strong class="text-primary">작성자</strong>
+										<p class="commentArea">댓글내용</p>
 										<input type="hidden" value=""/>
 										<div class="chang"></div>
 									</div>
@@ -82,8 +83,23 @@
 											<a   href="${pageContext.request.contextPath}/commentDelete.board?comment_no=${reply.comment_no}&board_no=${detail.board_no}" class="btn_m btn_default">삭제</a>
 									
 									</div>
+											<hr>
 								</li>
-								<hr>
+								<li id="reply-" class="media">
+									<div class="media-body">
+										<strong class="text-primary">작성자</strong>
+										<p class="commentArea">댓글내용</p>
+										<input type="hidden" value=""/>
+										<div class="chang"></div>
+									</div>
+									 <div class="m-2">
+										<!-- 로그인 하였을때 보이기 -->
+											<a   href="${pageContext.request.contextPath}/commentDelete.board?comment_no=${reply.comment_no}&board_no=${detail.board_no}" class="btn_m btn_default">삭제</a>
+									
+									</div>
+											<hr>
+								</li>
+						
 							
 						
 					

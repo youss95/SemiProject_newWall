@@ -1,7 +1,11 @@
 @charset "utf-8";
 
 .lostSection{height:800px;}
-
+#countTitle{font-size:26px; font-weight:500;padding-bottom:25px;}
+#countss{float:right; padding:15px;}
+.mari{background-color:black; color:white; padding:1px 15px 1px 15px;}
+#rightMari{float:right;}
+.counts{padding:15px;}
 #mainTitle{font-size:40px;color:#254E7C}
 .animalInfo{text-align:center;background-color:#B9D7EA;font-weight:600;font-size:35px;border-radius:8px;}
 #lostName input{width:400px;}

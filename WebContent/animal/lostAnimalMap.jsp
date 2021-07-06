@@ -31,10 +31,12 @@ margin-top:100px;
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
+				<div id="countTitle">NewWal's 유기동물 통계</div>
 				<div id="lost">
-				<div>실종된 동물</div>
-				<div>마리</div>
-				
+				<div class="counts" style="display:inline-block;">Today</div><div id="countss" style="display:inline-block;">Total</div>
+				<br>
+				<div style="display:inline-block;"><span class="mari">${counts.todayCount}</span>&nbsp;마리</div>
+				<div id="rightMari" style="display:inline-block;"><span class="mari" >${counts.totalCount}</span>&nbsp;마리</div>
 				</div>
 				<div class="map_wrap">
 				<div id="map"
