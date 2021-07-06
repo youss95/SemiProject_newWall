@@ -20,8 +20,8 @@
 
 
 
-</head>
-<body>
+
+</head><body>
 	<%@ include file="../layout/jsp/header.jsp"%>
 	<ol>
 		<li>회원가입 약관</li>
@@ -29,13 +29,12 @@
 		<li>가입완료</li>
 	</ol>
 
-	<table border="1" align="center" id="agreeTerms">
+	<table border="1" align="center" id="agreeTerms" class="wrapper">
 		<th>회원 가입 약관</th>
 		<th>개인정보의 수집 이용목적 및 항목</th>
 		<tr>
 			<td class="text1">
-				<div class="contents"
-					style="max-height: 600px; max-width: 800px; overflow-y: auto;">
+				<div class="contents">
 					회원 가입 약관 제1장 총칙 <br> 제1조 (목적) <br> 이 약관은 NEW-WAL(이하 “회사”라
 					함)가 운영하는 www.NEW-WAL.com 을 통해서 제공하는 관련 서비스 및 기타 서비스 (이하 “서비스”라 함)를
 					이용하는 자간의 권리, 의무를 확정하고 이를 이행함으로써 상호 발전을 도모하는 것을 그 목적으로 합니다. <br>
@@ -133,8 +132,7 @@
 			</td>
 
 			<td class="text2">
-				<div class="contents"
-					style="max-height: 600px; max-width: 800px; overflow-y: auto;">
+				<div class="contents">
 					개인정보의 수집 이용목적 및 항목 가. NEW-WAL(이하 회사)가 개인정보를 수집하는 목적은 이용자의 신분과 서비스
 					이용사항을 확인하여 <br> 최적화되고 맞춤화된 서비스를 제공하기 위함입니다. 회사는 최초 회원가입 시 서비스
 					제공 을 원활하게 하기 위해 <br> 필요한 최소한의 정보만을 수집하고 있으며 회사가 제공하는 서비스 이용에
@@ -171,8 +169,8 @@
 			<tr>
 				<td colspan="2">
 					<div class="btn_confirm" style="text-align: center;">
-						<a><input type="button" class="btn_submit btn_m btn_default" type="button"
-							value="회원가입">
+						<a><input type="button" class="btn_submit btn_m btn_default"
+							type="button" value="회원가입">
 					</div>
 				</td>
 			</tr>

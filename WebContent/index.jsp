@@ -82,6 +82,5 @@
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 	
->>>>>>> 1ddafbb3f31e0457f0ada98e9c48052d7affe1c7
 </body>
 </html>

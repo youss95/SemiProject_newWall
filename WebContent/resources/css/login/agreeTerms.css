@@ -1,10 +1,23 @@
 @charset "UTF-8";
 
-#agreeTerms .contents{box-sizing: border-box;}
-#agreeTerms .contents{
-	position: relative; 
-    overflow: auto;
-    width: 500px;
-    height: 900spx;
-    border: 1px solid black;
-  } 
+#agreeTerms .contents {
+	box-sizing: border-box;
+}
+
+#agreeTerms .contents {
+	max-height: 600px;
+	max-width: 800px;
+	overflow-y: auto;
+	width: 500px;
+	height: 900spx;
+	border: 1px solid black;
+}
+
+#agreeTerms {
+	display: flex;
+	position: relative;
+	height: 150px;
+	justify-content: center;
+	align-content: center;
+	min-height: 100vh;
+}
