@@ -313,7 +313,6 @@ public class AdoptionDAO {
 		}else if(currentPage < 1) {
 			currentPage = 1;
 		}
-		System.out.println(pageTotalCount + ": total");
 
 		int startNavi = (currentPage-1) / naviCountPerPage * naviCountPerPage + 1; // 네비 시작페이지 구하기
 		int endNavi = startNavi + naviCountPerPage - 1; // 네비 마지막 페이지 구하기
@@ -335,8 +334,6 @@ public class AdoptionDAO {
 
 		}
 		if(needNext) {pageNavi.add(">");}
-		System.out.println("startNavi : "+startNavi);
-		System.out.println("endNavi : "+endNavi);
 
 		return pageNavi;
 	}

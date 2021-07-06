@@ -34,14 +34,10 @@ public class AdoptController extends HttpServlet {
 				System.out.println("입양 동물 리스트");
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
-				System.out.println("cpage : " + cpage);
 				String category = request.getParameter("category");
 				String gender = request.getParameter("gender");
-				System.out.println("gender : " + gender);
 				String weight = request.getParameter("weight");
-				System.out.println("weight : "+ weight);
 				String age = request.getParameter("age");
-				System.out.println("age : "+ age);
 				String character = request.getParameter("character");
 				String name = request.getParameter("an_name");
 				int endNum = cpage * PageConfig.ADOPT_RECORD_COUNT_PER_PAGE;
@@ -51,12 +47,9 @@ public class AdoptController extends HttpServlet {
 				List<AnimalDTO> list;
 				List<String> pageNavi = adoptdao.getPageNavi(cpage, filter);
 				AnimalDTO dto;
-				if(category == null || category.contentEquals("")) {
+				if(category == null || category.contentEquals("")) { //검색조건없이 초기로드
 					list = adoptdao.getPageList(startNum, endNum);
-				
-					System.out.println("검색조건없이 초기로드");
 				}else{ // 검색 값이 있을 경우
-					System.out.println("검색 하고나서");
 					dto = new AnimalDTO(name, category, gender, age, weight, character);
 					list = adoptdao.getPageList(startNum, endNum, dto);
 				}

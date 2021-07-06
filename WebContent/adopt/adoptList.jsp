@@ -114,7 +114,7 @@
 								<input type="text" class="inpform an_name" name="an_name"
 									placeholder="이름을 입력해 주세요." value="${an_name}">
 								<button class="btn_m btn_default">검색</button>
-								<input type="reset" class="btn_m btn_white" value="취소">
+								<input type="reset" class="btn_m btn_white" value="초기화">
 								<input type="hidden" value="1" name="cpage"> <input
 									type="hidden" value="1" name="cpage">
 							</div>
@@ -138,8 +138,9 @@
 											<div class="txt">
 												<p class="name">${i.an_name}</p>
 												<ul class="info">
-													<li>${i.an_category}/${i.an_gender}</li>
-													<li>${i.an_age}살/${i.an_weight}kg</li>
+													<li>${i.an_category} / ${i.an_kind}</li>
+													<li>${i.an_gender} / 중성화 (${i.an_neutering})</li>
+													<li>${i.an_weight}kg / ${i.an_age}살 / ${i.an_character}</li>
 												</ul>
 											</div>
 										</a>
