@@ -94,28 +94,4 @@ public class MemberDTO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 		return sdf.format(this.birthday);
 	}
-	
-	/**
-	 * @author STJ
-	 * @param SQL Date 타입으로 변경하고픈 문자열 날짜 ( 형식은 yyyy/MM/dd )
-	 * @return 변환된 SQL Date 
-	 */
-	public Date stringToDate(String strDate) throws Exception{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		return new java.sql.Date(sdf.parse(strDate).getTime());
-	}
-	
-	/**
-	 * @author STJ
-	 * @param strDate : SQL Date 타입으로 변경하고픈 문자열 날짜 
-	 * @param form : 분석하고 싶은 날짜 데이터의 형식
-	 * @return 변환된 SQL Date 
-	 */
-	public Date stringToDate(String strDate, String form) throws Exception{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		return new java.sql.Date(sdf.parse(strDate).getTime());
-	}
-	
-	
-	
 }

@@ -25,9 +25,21 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	private MemberDAO() {}
+	
+	public boolean isLoginOk(String id, String pw) throws Exception {
+		String sql = "select * from member where user_id=? and user_password=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			pstat.setNString(2, pw);
+			try(ResultSet rs = pstat.executeQuery()){
+				return rs.next();
+			}
+		}
+	}
 
 	public MemberDTO selectMemberById(String pid) throws Exception{
-		String sql = "select * from member where id = ?";
+		String sql = "select * from member where user_id = ?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, pid);
@@ -49,7 +61,7 @@ public class MemberDAO {
 	}
 	
 	public int delete(String id) throws Exception{
-		String sql = "delete from member where id = ?";
+		String sql = "delete from member where user_id = ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, id);
@@ -80,7 +92,7 @@ public class MemberDAO {
 	}
 	
 	public int modify(MemberDTO dto) throws Exception{
-		String sql = "update member set user_password=?, email = ?, name = ?, birthday = ?, contact = ?, status = ?, postcode = ?, address1 = ?, address2 = ?";
+		String sql = "update member set user_password=?, email = ?, name = ?, birthday = ?, contact = ?, status = ?, postcode = ?, address1 = ?, address2 = ? where user_id=?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, dto.getUser_password());
