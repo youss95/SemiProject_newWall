@@ -138,7 +138,7 @@ public class AnimalDAO {
 	
 	//상세글 보기
 	public ProtectDetailDTO getDetail(int protectNo) throws Exception{
-		String sql = "select protect_no,protect_name,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,\r\n"
+		String sql = "select protect_no,protect_name,protect_kind,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,\r\n"
 				+ "(select trunc(sysdate-to_date((select protect_findDate from protect_animal where protect_no=5 ),'yyyy/mm/dd'))from dual) protectDate\r\n"
 				+ "from protect_animal where protect_no=?";
 		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -148,6 +148,7 @@ public class AnimalDAO {
 					ProtectDetailDTO dto;
 					int protect_no = rs.getInt("protect_no");
 					String protectName = rs.getString("protect_name");
+					String protectKind = rs.getString("protect_kind");
 					String protectContent = rs.getString("protect_content");
 					String protectGender = rs.getString("protect_gender");
 					String protectFileRealName1 = rs.getString("protect_fileRealName1");
@@ -155,7 +156,7 @@ public class AnimalDAO {
 					int viewCount = rs.getInt("protect_viewCount");
 					Date protectCreateDate = rs.getDate("protect_createDate");
 					int protectDate = rs.getInt("protectDate");
-					dto = new ProtectDetailDTO(protect_no,protectName,protectContent,protectGender,protectFileRealName1,protectFileRealName2,viewCount,protectCreateDate,protectDate);
+					dto = new ProtectDetailDTO(protect_no,protectName,protectKind,protectContent,protectGender,protectFileRealName1,protectFileRealName2,viewCount,protectCreateDate,protectDate);
 					con.close();
 					return dto;
 				}

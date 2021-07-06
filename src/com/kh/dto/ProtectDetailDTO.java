@@ -5,6 +5,7 @@ import java.sql.Date;
 public class ProtectDetailDTO {
 	private int protectNo;
 	private String protectName;
+	private String protectKind;
 	private String protectContent;
 	private String protectGender;
 	private String protectFileRealName1;
@@ -12,29 +13,6 @@ public class ProtectDetailDTO {
 	private int protectViewCount;
 	private Date createDate;
 	private int protectDate;  //보호 하고 있는 일수
-	
-	
-	
-	
-	public ProtectDetailDTO() {
-	
-	}
-	
-	public ProtectDetailDTO(int protectNo, String protectName, String protectContent, String protectGender,
-			String protectFileRealName1, String protectFileRealName2, int protectViewCount, Date createDate,
-			int protectDate) {
-		super();
-		this.protectNo = protectNo;
-		this.protectName = protectName;
-		this.protectContent = protectContent;
-		this.protectGender = protectGender;
-		this.protectFileRealName1 = protectFileRealName1;
-		this.protectFileRealName2 = protectFileRealName2;
-		this.protectViewCount = protectViewCount;
-		this.createDate = createDate;
-		this.protectDate = protectDate;
-	}
-	
 	public int getProtectNo() {
 		return protectNo;
 	}
@@ -46,6 +24,12 @@ public class ProtectDetailDTO {
 	}
 	public void setProtectName(String protectName) {
 		this.protectName = protectName;
+	}
+	public String getProtectKind() {
+		return protectKind;
+	}
+	public void setProtectKind(String protectKind) {
+		this.protectKind = protectKind;
 	}
 	public String getProtectContent() {
 		return protectContent;
@@ -89,14 +73,36 @@ public class ProtectDetailDTO {
 	public void setProtectDate(int protectDate) {
 		this.protectDate = protectDate;
 	}
-
+	public ProtectDetailDTO(int protectNo, String protectName, String protectKind, String protectContent,
+			String protectGender, String protectFileRealName1, String protectFileRealName2, int protectViewCount,
+			Date createDate, int protectDate) {
+		super();
+		this.protectNo = protectNo;
+		this.protectName = protectName;
+		this.protectKind = protectKind;
+		this.protectContent = protectContent;
+		this.protectGender = protectGender;
+		this.protectFileRealName1 = protectFileRealName1;
+		this.protectFileRealName2 = protectFileRealName2;
+		this.protectViewCount = protectViewCount;
+		this.createDate = createDate;
+		this.protectDate = protectDate;
+	}
+	public ProtectDetailDTO() {
+		super();
+	}
 	@Override
 	public String toString() {
-		return "ProtectDetailDTO [protectNo=" + protectNo + ", protectName=" + protectName + ", protectContent="
-				+ protectContent + ", protectGender=" + protectGender + ", protectFileRealName1=" + protectFileRealName1
-				+ ", protectFileRealName2=" + protectFileRealName2 + ", protectViewCount=" + protectViewCount
-				+ ", createDate=" + createDate + ", protectDate=" + protectDate + "]";
+		return "ProtectDetailDTO [protectNo=" + protectNo + ", protectName=" + protectName + ", protectKind="
+				+ protectKind + ", protectContent=" + protectContent + ", protectGender=" + protectGender
+				+ ", protectFileRealName1=" + protectFileRealName1 + ", protectFileRealName2=" + protectFileRealName2
+				+ ", protectViewCount=" + protectViewCount + ", createDate=" + createDate + ", protectDate="
+				+ protectDate + "]";
 	}
+	
+	
+	
+	
 	
 	
 	
