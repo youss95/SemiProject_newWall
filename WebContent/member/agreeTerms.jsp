@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/signUpAgree.css">
+	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 
@@ -19,9 +19,17 @@
 <title>AgreeTerms</title>
 
 
-</head><body>
+
+</head>
+<body>
 	<%@ include file="../layout/jsp/header.jsp"%>
-	<table border="1" align="center">
+	<ol>
+		<li>회원가입 약관</li>
+		<li>정보입력</li>
+		<li>가입완료</li>
+	</ol>
+
+	<table border="1" align="center" id="agreeTerms">
 		<th>회원 가입 약관</th>
 		<th>개인정보의 수집 이용목적 및 항목</th>
 		<tr>
@@ -163,7 +171,7 @@
 			<tr>
 				<td colspan="2">
 					<div class="btn_confirm" style="text-align: center;">
-						<a><input type="button" class="btn_submit" type="button"
+						<a><input type="button" class="btn_submit btn_m btn_default" type="button"
 							value="회원가입">
 					</div>
 				</td>

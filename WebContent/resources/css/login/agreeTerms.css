@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-.agreeTerms *{box-sizing: border-box;}
-.agreeTerms .contents {
+#agreeTerms .contents{box-sizing: border-box;}
+#agreeTerms .contents{
+	position: relative; 
     overflow: auto;
     width: 500px;
     height: 900spx;
     border: 1px solid black;
-  }
+  } 
