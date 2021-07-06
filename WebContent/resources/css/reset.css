@@ -106,7 +106,7 @@ table{border-collapse:collapse;border-spacing:0}
 button,input,select,textarea{margin:0;padding:0;outline:0!important;text-transform:none;line-height:normal;-webkit-appearance:none;border:0;border-radius:0;-webkit-border-radius:0;border:1px solid #D6E6F2;font-size:14px;color:#333}
 button:disabled,input:disabled,select:disabled,textarea:disabled{cursor:default}
 button::-moz-focus-inner,input::-moz-focus-inner,textarea::-moz-focus-inner{border:0;padding:0}
-button,input[type=button],input[type=file],input[type=reset],input[type=submit]{-webkit-appearance:button;-moz-appearance:button;border-radius:0;vertical-align:middle;border:0;background-color:transparent;cursor:pointer;overflow:visible}
+button,input[type=button],input[type=file],input[type=reset],input[type=submit]{-webkit-appearance:button;-moz-appearance:button;vertical-align:middle;cursor:pointer;overflow:visible}
 button,input[type=button],input[type=checkbox],input[type=password],input[type=number],input[type=email],input[type=search],input[type=tel],input[type=text],select,textarea{border-radius:5px;-webkit-border-radius:5px;-webkit-appearance:none}
 input:disabled{background-color:#D6E6F2;border:1px solid #D6E6F2}
 input[type=number]::-webkit-inner-spin-button,

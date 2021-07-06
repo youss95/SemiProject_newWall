@@ -99,7 +99,7 @@ input:disabled{height: 40px;padding: 0 10px;}
 .inp_slct:after{position: absolute;top: 17px;right: 15px;display: block;width: 12px;height: 6px;background: url('../images/icons/ic_arw_down.png');z-index:11;content: '';background-size:cover;}
 .inp_slct:before{display: block;position: absolute;top: 1px;right: 1px;width: 40px;height: calc(100% - 2px);border-radius:0 3px 3px 0;background-color: #fff;z-index:5;content:'';} 
 .inp_slct label{display: none;}
-.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:15px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: transparent;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
+.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:14px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: #fff;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
 .inp_slct select::-ms-expand {display:none;}
 .inp_slct select option:checked{color: #1d1e25;}
 /* .inp_slct + .inp_slct{margin-left: 17px;} */
@@ -145,6 +145,17 @@ section .contents{padding: 30px;}
 .table tbody .nodata td{line-height:200px;font-weight:400;color:#666;}
 .table-hover tbody tr.nodata:hover{background-color:transparent;}
 
+/* 관리자 동물 정보 등록 폼 */
+.reg_info .form_tbl{width: 100%;}
+.reg_info .form_tbl tr{border-top:1px solid #D6E6F2;}
+.reg_info .form_tbl tr:last-child{border-bottom:1px solid #D6E6F2;}
+.reg_info .form_tbl th, .form_tbl td{padding: 15px;vertical-align: top;}
+.reg_info .form_tbl th{padding-top:27px;width:180px;background-color:#D6E6F2;border-bottom:1px solid #adc5d8;}
+.reg_info .form_tbl th .s_txt{display:block;margin-top:10px;font-size:13px;font-weight:300;color:#666;}
+.reg_info .form_tbl .file_upload input{display: block;margin-bottom:20px;}
+.reg_info .form_tbl .file_upload input:last-child{margin-bottom:0;}
+.reg_info .form_tbl +.btn_wrap{margin-top:20px;text-align: right;}
+.reg_info .inpform, .reg_info .inp_slct{width: 300px;}
 
 
 
