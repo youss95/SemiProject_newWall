@@ -7,10 +7,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <style>
@@ -246,47 +258,10 @@
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <header class="header">
-            <h1 class="logo">
-                <a href="#">LOGO IMG</a>
-            </h1>
-            <div class="gnb">
-                <ul class="clear">
-                    <li class="has"><a href="#">입양하기</a>
-                        <ul class="s_menu clear adopt">
-                            <li><a href="#">입양하기</a></li>
-                            <li><a href="#">입양 후기</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">후원하기</a></li>
-                    <li class="has"><a href="#">도움이필요해요</a>
-                        <ul class="s_menu clear help">
-                            <li><a href="#">잃어버렸어요</a></li>
-                            <li><a href="#">보호중이에요</a></li>
-                        </ul>
-                    </li>
-                    <li class="has"><a href="#">뉴스레터</a>
-                        <ul class="s_menu clear news">
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">소식</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li><a href="#">봉사활동</a></li> 보류 -->
-                </ul>
-            </div>
-            <div class="utils">
-                <ul class="clear">
-                    <li><a href="#">로그인</a></li>
-                    <li><a href="#">회원가입</a></li>
-                    <!-- <li><a href="#">마이페이지</a></li> -->
-                    <!-- <li><a href="#">로그아웃</a></li> -->
-                </ul>
-            </div>
-            <div class="s_menu_bg"></div>
-        </header>
-        <div class="container">
-            <div class="contents">
+   <div class="wrap">
+		<%@ include file="../../layout/jsp/header.jsp" %>
+		<div class="container">
+			<div class="contents">
                 <section class="sp_com_input">
                     <!-- 하이 여기는 서브입니다 -->
                     <div class="spp_con">
@@ -582,20 +557,18 @@
                                     <div class="sp_address">
                                         <div>
                                             <h3 class="ad_h3">우편번호</h3>
-                                            <input type="text" id="postcode" class="inpform sp_address_inp sp_address_inp1"
-                                                placeholder="우편번호">
-                                            <button class="btn_m btn_default" id="search"
+                                            <input type="text" id="sp_postcode" name="sp_postcode" class="inpform sp_address_inp sp_address_inp1"
+                                                >
+                                            <button class="btn_m btn_default" id="sp_search"
                                                 class="inpform sp_address_inp" type="button">우편번호 찾기</button>
                                         </div>
                                         <div>
                                             <h3 class="ad_h3">도로명 주소</h3>
-                                            <input type="text" id="address1" class="inpform sp_address_inp sp_address_inp2"
-                                                placeholder="도로명주소">
+                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2">
                                         </div>
                                         <div>
                                             <h3>상세 주소</h3>
-                                            <input type="text" id="address2" class="inpform sp_address_inp sp_address_inp2"
-                                                placeholder="상세주소">
+                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2">
                                         </div>
                                     </div>
 
@@ -638,6 +611,7 @@
                                         </div>
                                     </div>
                                     <div class="terms">
+                                    <h3>개인정보 제3자 제공 약관 (선택)</h3>
                                         <textarea class="txtareaform" name="" id="" cols="30" rows="4" disabled>
                                             개인정보 제3자 제공•이용에 대한 동의를 거부할 권리가 있습니다.
                                             그러나 동의를 거부할 경우 기부금 결제 등에 제한을 받을 수 있습니다.
@@ -695,12 +669,45 @@
                     </div>
 
                     <!-- 끝 -->
-                </section>
+               </section>
 			</div>
 		</div>
 		<footer class="footer">
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
+	</div>
+	<div class="modal fade" id="loginModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
+						id="popup-img">
+				</div>
+				<div class="modal-header login-title"></div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="user-id" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_id"
+								placeholder="Your ID">
+						</div>
+						<div class="form-group">
+							<label for="user-password" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_pw"
+								placeholder="Password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn_m btn_default"
+						data-dismiss="modal" style="width: 125%">로그인</button>
+					<button type="button" class="btn_m btn_white" data-dismiss="modal"
+						style="width: 125%">회원가입</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
@@ -788,14 +795,14 @@
              $('#inp_pay').focus();
          })
          
-          document.getElementById("search").onclick = function () {
+          document.getElementById("sp_search").onclick = function () {
                 new daum.Postcode({
                     oncomplete: function (data) {
                         let roadAddr = data.roadAddress; // 도로명 주소 변수
 
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                        document.getElementById('postcode').value = data.zonecode;
-                        document.getElementById("address1").value = roadAddr;
+                        document.getElementById('sp_postcode').value = data.zonecode;
+                        document.getElementById("sp_address1").value = roadAddr;
 
                         // 이벤트 처리함수들은 callback function 또는 callback pattern이라고 한다.
                         // 개발자가 직접적으로 부르는것이 아니라 개발자가 어떠한 조건일때, function을 실행해라라고 코드를 짜면
