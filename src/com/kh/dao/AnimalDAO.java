@@ -97,10 +97,12 @@ public class AnimalDAO {
 		}
 	}
 	
-	public List<ProtectBoardDTO> getList() throws Exception {
+	public List<ProtectBoardDTO> getList(int page) throws Exception {
 		List<ProtectBoardDTO> list = new ArrayList<>();
-		String sql = "select * from protect_animal";
+		String sql = "select x.* from(select rownum as rnum, A.* from (select * from protect_animal order by protect_no desc) A  where rownum <=?) x where x.rnum >=?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, page*4);
+			pstmt.setInt(2, (page-1)*4+1);
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
 					ProtectBoardDTO dto;
