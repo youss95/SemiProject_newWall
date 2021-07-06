@@ -17,8 +17,6 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -47,12 +45,13 @@
 						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
 						id="popup-img">
 				</div>
-				<div class="modal-header" id="modal-logo"
-					style="padding-bottom: 20px;">
+				<div class="modal-header" id="modal-logo">
 					<img
-						src="${pageContext.request.contextPath}/resources/images/login_logo5.png"
+						src="${pageContext.request.contextPath}/resources/images/login_logo6.png"
 						id="popup-logo">
-					<div class="modal-header login-title"></div>
+						</div>
+						
+					<!-- <div class="modal-header login-title"></div> -->
 					<div class="modal-body">
 						<form>
 							<div class="form-group">
@@ -69,7 +68,8 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn_m btn_default"
-							data-dismiss="modal" style="width: 125%">로그인</button>
+							data-dismiss="modal" style="width: 125%; margin-bottom: 16px;">로그인</button>
+							
 						<button type="button" class="" data-dismiss="modal" id="idPwHov"
 							style="width: 125%; text-decoration: underline;">아이디/비밀번호
 							찾기</button>

@@ -11,8 +11,6 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
 
 <head>
 <meta charset="UTF-8">
