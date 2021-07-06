@@ -18,15 +18,16 @@
 <%@ include file="../layout/jsp/header.jsp" %>
 <div class="container">
 			<div class="contents">
-			<img src="../resources/images/img05.jpeg"/>
+			<img src="${pageContext.request.contextPath}/resources/images/img05.jpeg"/>
 				<section class="protectBoard">
 				
 				 <div class="cont">
-    <div class="row">
+     <div class="row">
+    <c:forEach var="p" items="${protectList}">
         <div class="card shadow-soft">
-            <img src="../resources/images/img01.jpeg">
+            <img src="${pageContext.request.contextPath}/upload/lostAnimal/${p.protectFileRealName1}">
             <div class="card-body">
-                <h4>동물이름</h4>
+                <h4>${p.protectName }</h4>
                 <p class="fontC">
                     고양이<br>
                     암컷<br>
@@ -34,21 +35,15 @@
                 </p>
                         </div>
         </div>
-        <div class="card shadow-soft">
-            <img src="../resources/images/img02.jpeg">
-            <div class="card-body">
-                동물이름
-            </div>
-        </div>
-        <div class="card shadow-soft">
-            <img src="../resources/images/img02.jpeg">
-            <div class="card-body">
-                동물이름
-            </div>
-        </div>
+        </c:forEach>
+        
       
+    </div> 
+    <div id="loading">
+    
     </div>
 </div>
+<a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light">글쓰기</a>
 				</section>
 			</div>
 		</div>
@@ -57,8 +52,9 @@
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
+	
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>
 </body>
 </html>

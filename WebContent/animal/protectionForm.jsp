@@ -17,20 +17,20 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/lostAnimal.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/protectBoard.lost" method="post" enctype="multipart/form-data">
 				<div id="mainTitle">임시보호</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
-				<input type="text" name="lostName" class="inpform" >
+				<input type="text" name="protectName" class="inpform" >
 				
 				</div>
 				<div id="animalDetail">
 				
-				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin">
+				<span class="kindAndDate">품종:</span><input type="text" name="protectKind" class="inpform toMargin">
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct">
-										<select name="lostGender" id="lostGender">
+										<select name="protectGender" id="lostGender">
 											<option value="">선택</option>
 											<option value="F">암컷</option>
 											<option value="M">숫컷</option>
@@ -41,10 +41,10 @@
 				
 				<div class="animalInfo">기본 정보</div>
 				<div id="lostDateId">
-				<span id="lostDates">발견 날짜:</span><input type="date" id="lostDate" name="lostDate" class="inpform toMargin" min="2021-01-01"></div>
+				<span id="lostDates">발견 날짜:</span><input type="date" id="lostDate" name="protectFindDate" class="inpform toMargin" min="2021-01-01"></div>
 				<div id="contentArea">	
 				<div id="content">내용</div>
-				<textarea class="txtareaform" name="lostContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)"></textarea>
+				<textarea class="txtareaform" name="protectContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)"></textarea>
 				</div>
 				
 				
@@ -72,11 +72,11 @@
 			<div class="uploadImage">
 			
 			<div class="box">     
-			이미지: <input type="file" name="animalImage1" onChange="imageChoose(this)">	
+			이미지: <input type="file" name="protectImage1" onChange="imageChoose(this)">	
                         <img src="${pageContext.request.contextPath}/resources/images/img02.jpeg" alt="" id="imageUploadPreview" />               
                    </div>			
 				 <div class="box"> 
-				 이미지: <input type="file" name="animalImage2" onChange="imageChoose2(this)">	           
+				 이미지: <input type="file" name="protectImage2" onChange="imageChoose2(this)">	           
                         <img src="${pageContext.request.contextPath}/resources/images/img01.jpeg" alt="" id="imageUploadPreview2" />          
                    </div>             	
                    </div>
