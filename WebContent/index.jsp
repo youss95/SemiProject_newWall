@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@ include file="layout/jsp/header.jsp" %>
+		<%@ include file="layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">
 				<section class="">
@@ -47,32 +47,39 @@
 						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
 						id="popup-img">
 				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
+				<div class="modal-header" id="modal-logo"
+					style="padding-bottom: 20px;">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/login_logo5.png"
+						id="popup-logo">
+					<div class="modal-header login-title"></div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="user-id" class="col-form-label"></label> <input
+									type="text" class="form-control" id="user_id"
+									placeholder="Your ID">
+							</div>
+							<div class="form-group">
+								<label for="user-password" class="col-form-label"></label> <input
+									type="text" class="form-control" id="user_pw"
+									placeholder="Password">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn_m btn_default"
+							data-dismiss="modal" style="width: 125%">로그인</button>
+						<button type="button" class="" data-dismiss="modal" id="idPwHov"
+							style="width: 125%; text-decoration: underline;">아이디/비밀번호
+							찾기</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+		<script
+			src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </body>
 </html>

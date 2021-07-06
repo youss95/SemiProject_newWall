@@ -151,4 +151,7 @@ input:disabled{height: 40px;padding: 0 10px;}
 #loginModal .login-title {background-color: #FFFFFF;}
 #loginModal .modal-body {background-color: #FFFFFF;}
 #loginModal .modal-footer {background-color: #FFFFFF;}
-#popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal #modal-logo {background-color: #FFFFFF !important;}
+#loginModal #idPwHov:hover{text-decoration: underline;}
+#popup-img {position: relative; top: 73px; left: 70px;}
+#popup-logo {position: relative; top: 20px; left: 92px;}
