@@ -10,7 +10,9 @@ public class AnimalDTO {
 	private String an_gender;
 	private String an_kind;
     private int an_age;
+    private String an_age_range;
     private int an_weight;
+    private String an_weight_range;    
     private String an_character;
     private Date an_date;
     private String an_status;
@@ -20,6 +22,16 @@ public class AnimalDTO {
     private String an_neutering;
     
     public AnimalDTO() {}
+    
+    public AnimalDTO(String an_name, String an_category, String an_gender, String an_age_range, String an_weight_range, String an_character) {
+		super();
+		this.an_name = an_name;
+		this.an_category = an_category;
+		this.an_gender = an_gender;
+		this.an_age_range = an_age_range;
+		this.an_weight_range = an_weight_range;
+		this.an_character = an_character;
+	}
 
 	public AnimalDTO(String code_seq, String an_name, String an_category, String an_gender, String an_kind, int an_age,
 			int an_weight, String an_character, Date an_date, String an_status, String an_photo, String an_contents,
@@ -151,6 +163,22 @@ public class AnimalDTO {
 
 	public void setAn_neutering(String an_neutering) {
 		this.an_neutering = an_neutering;
+	}
+	
+	public String getAn_age_range() {
+		return an_age_range;
+	}
+
+	public void setAn_age_range(String an_age_range) {
+		this.an_age_range = an_age_range;
+	}
+
+	public String getAn_weight_range() {
+		return an_weight_range;
+	}
+
+	public void setAn_weight_range(String an_weight_range) {
+		this.an_weight_range = an_weight_range;
 	}
 
 

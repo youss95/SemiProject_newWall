@@ -43,7 +43,7 @@ public class FileDAO {
 			pstat.setString(3, fdto.getCode_seq());
 
 			int result = pstat.executeUpdate();
-			con.commit();
+//			con.commit();
 			return result;
 		}
 	}

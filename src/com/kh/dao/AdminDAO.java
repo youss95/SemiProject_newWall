@@ -73,25 +73,27 @@ public class AdminDAO {
 	}
 
 	public int animalInfoReg(AnimalDTO adto) throws Exception{
-		String sql = "insert into animal values('AM'|| LPAD(animal_photos.nextval, 5, 0), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		String sql = "insert into animal values(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, sysdate, ?)";
 
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, adto.getAn_name());
-			pstat.setString(2, adto.getAn_category());
-			pstat.setString(3, adto.getAn_gender());
-			pstat.setString(4, adto.getAn_kind());
-			pstat.setInt(5, adto.getAn_age());
-			pstat.setInt(6, adto.getAn_weight());
-			pstat.setString(7, adto.getAn_character());
-			pstat.setDate(8, adto.getAn_date());
-			pstat.setString(9, adto.getAn_status());
-			pstat.setString(10, adto.getAn_contents());
+			pstat.setString(1, adto.getCode_seq());
+			pstat.setString(2, adto.getAn_name());
+			pstat.setString(3, adto.getAn_category());
+			pstat.setString(4, adto.getAn_gender());
+			pstat.setString(5, adto.getAn_kind());
+			pstat.setInt(6, adto.getAn_age());
+			pstat.setInt(7, adto.getAn_weight());
+			pstat.setString(8, adto.getAn_character());
+			pstat.setDate(9, adto.getAn_date());
+			pstat.setString(10, adto.getAn_status());
+			pstat.setString(11, adto.getAn_photo());
+			pstat.setString(12, adto.getAn_contents());
+			pstat.setString(13, adto.getAn_neutering());
 			
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}

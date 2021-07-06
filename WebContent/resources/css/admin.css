@@ -99,7 +99,7 @@ input:disabled{height: 40px;padding: 0 10px;}
 .inp_slct:after{position: absolute;top: 17px;right: 15px;display: block;width: 12px;height: 6px;background: url('../images/icons/ic_arw_down.png');z-index:11;content: '';background-size:cover;}
 .inp_slct:before{display: block;position: absolute;top: 1px;right: 1px;width: 40px;height: calc(100% - 2px);border-radius:0 3px 3px 0;background-color: #fff;z-index:5;content:'';} 
 .inp_slct label{display: none;}
-.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:15px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: transparent;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
+.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:14px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: #fff;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
 .inp_slct select::-ms-expand {display:none;}
 .inp_slct select option:checked{color: #1d1e25;}
 /* .inp_slct + .inp_slct{margin-left: 17px;} */
@@ -132,7 +132,7 @@ nav{position:fixed;left:0;top:0;width:260px;height:100vh;z-index:999;}
 section .title_area{position:relative;border-bottom: 1px solid #f1f1f1;padding:20px 25px;}
 section .title_area:before{display:block;width:3px;height:100%;position:absolute;top:0;left:0;background-color:#1dc4e9;content:'';}
 section .title_area h2{font-size:16px;font-weight: 600;}
-section .contents{padding: 30px;}
+section .contents{padding: 30px 30px 60px 30px;}
 .footer{position:absolute;bottom:0;left:0;width: 100%;border-top:1px solid #f2f2f2;padding-left: 260px;padding: 30px;z-index:-1;}
 .footer p{font-size:12px;color:#666;}
 
@@ -145,11 +145,20 @@ section .contents{padding: 30px;}
 .table tbody .nodata td{line-height:200px;font-weight:400;color:#666;}
 .table-hover tbody tr.nodata:hover{background-color:transparent;}
 
-
-
-
-
-
+/* 관리자 동물 정보 등록 폼 */
+.reg_info .form_tbl{width: 100%;}
+/* .reg_info .form_tbl tr{border-top:1px solid #D6E6F2;} */
+/* .reg_info .form_tbl tr:last-child{border-bottom:1px solid #D6E6F2;} */
+.reg_info .form_tbl dl{margin:30px 0;}
+.reg_info .form_tbl dl dt{display:inline-block;width:160px;font-size:16px;font-weight:400;color:#254E7C;margin-top:12px;vertical-align:top;}
+.reg_info .form_tbl dl dt:before{display: block;content: '';width: 5px;height: 5px;float: left;margin-top: 6px;margin-right: 15px;background-color: #FFA5A5;}   
+.reg_info .form_tbl dl dd{display:inline-block;width:calc(100% - 200px);vertical-align:top;}
+.reg_info .form_tbl dl dt .s_txt{position:absolute;display:block;margin-top:10px;font-size:11px;font-weight:300;color:#666;}
+.reg_info .form_tbl .file_upload input{display: block;margin-bottom:20px;}
+.reg_info .form_tbl .file_upload input:last-child{margin-bottom:0;}
+.reg_info .form_tbl .btn_wrap{margin-top:20px;text-align: right;}
+.reg_info .form_tbl .rd_group{height:40px;padding-top: 13px;}
+.reg_info .inpform, .reg_info .inp_slct{width: 300px;}
 
 
 
