@@ -154,5 +154,5 @@ input:disabled{height: 40px;padding: 0 10px;}
 #loginModal .modal-footer {background-color: #FFFFFF; padding-bottom: 25px; padding-left: 40px; padding-right: 40px;}
 #loginModal #modal-logo {background-color: #FFFFFF !important; padding-bottom: 30px}
 #loginModal #idPwHov:hover{text-decoration: underline;}
-#popup-img {position: relative; top: 78px; left: 70px;}
-#popup-logo {position: relative; top: 30px; left: 133px;}
+#loginModal #popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal #popup-logo {position: relative; top: 30px; left: 133px;}
