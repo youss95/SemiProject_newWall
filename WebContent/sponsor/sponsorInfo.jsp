@@ -6,12 +6,23 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sponsorInfo</title>
+<title>2조 세미 프로젝트</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -37,6 +48,15 @@
 	background-color: #D6E6F2;
 	height: 100px;
 	line-height: 50px;
+	padding-left: 1%;
+}
+
+.sp_if .sp_company .com_img2 {
+	display: none;
+}
+
+.sp_if .sp_company img {
+	opacity: 0.9;
 }
 
 .sp_if .sp_info02_con {
@@ -112,47 +132,34 @@
 	/* margin-top: 100px; */
 }
 
+.sp_if .sp_one_one {
+	width: 50%;
+	padding-right: 0.5%;
+	padding-top: 1%;
+	float: left;
+}
+
+.sp_if .sp_guardi {
+	width: 50%;
+	padding-left: 0.5%;
+	padding-top: 1%;
+	float: left;
+}
+
+
+.sp_if .sp_one_one:hover .sp_company_bg{
+	background-color:#B9D7EA;
+}
+.sp_if .sp_guardi:hover .sp_company_bg{
+	background-color:#B9D7EA;
+}
 
 </style>
 
 </head>
 <body>
 	<div class="wrap">
-		<header class="header">
-			<h1 class="logo">
-				<a href="#">LOGO IMG</a>
-			</h1>
-			<div class="gnb">
-				<ul class="clear">
-					<li class="has"><a href="#">입양하기</a>
-						<ul class="s_menu clear adopt">
-							<li><a href="#">입양하기</a></li>
-							<li><a href="#">입양 후기</a></li>
-						</ul></li>
-					<li><a href="#">후원하기</a></li>
-					<li class="has"><a href="#">도움이필요해요</a>
-						<ul class="s_menu clear help">
-							<li><a href="#">잃어버렸어요</a></li>
-							<li><a href="#">보호중이에요</a></li>
-						</ul></li>
-					<li class="has"><a href="#">뉴스레터</a>
-						<ul class="s_menu clear news">
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">소식</a></li>
-						</ul></li>
-					<!-- <li><a href="#">봉사활동</a></li> 보류 -->
-				</ul>
-			</div>
-			<div class="utils">
-				<ul class="clear">
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
-					<!-- <li><a href="#">마이페이지</a></li> -->
-					<!-- <li><a href="#">로그아웃</a></li> -->
-				</ul>
-			</div>
-			<div class="s_menu_bg"></div>
-		</header>
+		<%@ include file="../../layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">
 				<section class="sp_if">
@@ -163,37 +170,38 @@
 							<h2 class="sp_subtitle">믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</h2>
 						</div>
 						<div class="sp_body">
-							<div class="sp_company">
-								<a href="#">
+							<div class="sp_company" id="sp_company">
 									<div class="sp_company_bg">
 										<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
 										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
 										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
 											노력을 함께 해주세요</h3>
-									</div> 
-									<img src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
+									</div> <img class="com_img1"
+									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
+									alt=""> <img class="com_img2"
+									src="../resources/images/sp_img/sp_company02_1900_700.png"
 									alt="">
-
-
-								</a>
-
 							</div>
-							<!-- <div class="sp_direct">
-								<a href="#">
-									<div class="sp_direct_bg">
-										<h2 class="sp_direct_title">비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_direct_sub" >동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-									</div>
-									<img src="" alt="">
-								</a>
-								<div class="sp_direct_bg">
-									<h2 class="sp_direct_title">비영리 단체 NEW-WAL에게 후원</h2>
-									<h3 class="sp_direct_sub" >동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+							<div>
+								<div class="sp_one_one">
+										<div class="sp_company_bg sp_one_one_bg_m">
+											<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
+												유기 동물 후원</h2>
+											<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
+												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										</div> <img class="com_img1"
+										src="../resources/images/sp_img/sp_company_03_950_700.jpg" alt="">
 								</div>
-								<img src="" alt="">
-							</a>
-
-							</div> -->
+								<div class="sp_guardi">
+										<div class="sp_company_bg sp_guardi_bg_m">
+											<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자
+												선택 후원</h2>
+											<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
+												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										</div> <img class="com_img1"
+										src="../resources/images/sp_img/sp_company_04_950_700.jpg" alt="">
+								</div>
+							</div>
 							<div class="sp_info00_con">
 								<div class="sp_info00_pic">
 									<img class="sp_info00_pic1"
@@ -235,14 +243,9 @@
 									<h3>기부금영수증 발급</h3>
 									<h4>국세청 연말정산 간소화 서비스에서 기부금영수증을 발급받을 수 있습니다.</h4>
 								</div>
-
 							</div>
-
-
 						</div>
-
 					</div>
-
 					<!-- 끝 -->
 				</section>
 			</div>
@@ -251,17 +254,70 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
+	<div class="modal fade" id="loginModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
+						id="popup-img">
+				</div>
+				<div class="modal-header login-title"></div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="user-id" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_id"
+								placeholder="Your ID">
+						</div>
+						<div class="form-group">
+							<label for="user-password" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_pw"
+								placeholder="Password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn_m btn_default"
+						data-dismiss="modal" style="width: 125%">로그인</button>
+					<button type="button" class="btn_m btn_white" data-dismiss="modal"
+						style="width: 125%">회원가입</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 	<script>
 	$(function(){
 		 $(".sp_company").on("click",function(){
-			// alert("aa");
 			 location.href="${pageContext.request.contextPath}/comInput.sp";
-			
-			 
 		 })
+		 $(".sp_one_one").on("click",function(){
+			 location.href="${pageContext.request.contextPath}/oneOnOne.sp";
+		 })
+		 $(".sp_guardi").on("click",function(){
+			 location.href="${pageContext.request.contextPath}/guardian.sp";
+		 })
+		  // $("#sp_company").hover(function () {
+
+            //     $('.sp_if .sp_company .com_img2').attr('display', 'none')
+            //     $('.sp_if .sp_company .com_img1').attr('display', 'block')
+            // })
+            $('#sp_company').mouseover(function () {
+                $('.sp_if .sp_company .com_img2').show();
+                $(".sp_if .sp_company .com_img1").hide()
+                $('#sp_company .sp_company_bg').css('background-color', '#B9D7EA');
+                //서서히 변하는거 찾아보기
+            })
+            $('#sp_company').mouseout(function () {
+                $('.sp_if .sp_company .com_img1').show();
+                $(".sp_if .sp_company .com_img2").hide()
+                $('#sp_company .sp_company_bg').css('background-color', '#D6E6F2');
+            })
+            //이거 위처럼  간단하게  나중에 바꾸기 **css로
 		 
 	})
 	</script>

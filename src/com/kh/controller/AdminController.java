@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -19,9 +18,11 @@ import com.google.gson.Gson;
 import com.kh.config.FileConfig;
 import com.kh.dao.AdminDAO;
 import com.kh.dao.FileDAO;
+import com.kh.dao.SponsorDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -135,6 +136,14 @@ public class AdminController extends HttpServlet {
 				
 				response.sendRedirect("admin/animalInfoReg.jsp");
 
+			}else if(url.contentEquals("/adSponsorList.adm")) {
+				System.out.println("스폰서 후원");
+				SponsorDAO sdao =SponsorDAO.getInstance(); 
+				List<SponsorDTO> slist = sdao.selectAll();
+				
+				request.setAttribute("slist", slist);
+			    request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				
 			}
 
 		}catch(Exception e) {
