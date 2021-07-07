@@ -16,17 +16,17 @@
 <body>
 	<%@ include file="../layout/jsp/header.jsp"%>
 
-	<form method="GET" name="inputForm" id="signUpForm">
+	<form method="GET" name="inputForm" id="signUpForm" action="${pageContext.request.contextPath}/signupProc.mem">
 		<div>
 			<table>
 				<tr>
 					<td><label for="id" required>아이디 </td>
-					<td><input type="text" name="id" id="id" class="inpform" maxlength=16; required/>
+					<td><input type="text" name="id" id="id" class="inpform" maxlength=16 required/>
 						<input type="button" id="check" value="중복확인" class="btn_s btn_light"></td>
 				</tr>
 				<tr>
 					<td><label for="pwd">비밀번호 </td>
-					<td><input type="password" name="pwd" id="pwd" class="inpform" maxlength=16; required/>
+					<td><input type="password" name="pwd" id="pwd" class="inpform" maxlength=16 required/>
 						<!-- *영문 대소문자/숫자/특수문자를 혼용하여 2종류10~16자 또는 3종 8~16자 --></td>
 				</tr>
 				<tr>
@@ -56,7 +56,7 @@
 					<td>생년월일</td>
 					<td><span class="box"> <input type="text" id="yy"
 							class="int inpform" maxlength="4" placeholder="년(4자)">
-					</span> <span class="box" > <select id="mm" class="inpform">>
+					</span> <span class="box" > <select id="mm" class="inpform">
 								<option>월</option>
 								<option value="01">1</option>
 								<option value="02">2</option>
