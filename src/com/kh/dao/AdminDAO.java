@@ -49,7 +49,7 @@ public class AdminDAO {
 				dto.setCode_seq(rs.getNString("code_seq"));
 				dto.setUser_id(rs.getNString("user_id"));
 				dto.setReg_date(rs.getDate("reg_date"));
-				dto.setAn_name(rs.getNString("an_name"));
+				dto.setP_name(rs.getNString("p_name"));
 
 				list.add(dto);
 			}
@@ -97,6 +97,7 @@ public class AdminDAO {
 			return result;
 		}
 	}
+
 	
 
 }
