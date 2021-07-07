@@ -19,7 +19,6 @@
 		<div class="container">
 			<div class="contents">
 				<section class="signUpForm">
-				<h2>회원가입</h2>
 					<form method="post" name="inputForm" id="signUpForm"
 						action="${pageContext.request.contextPath}/signupProc.mem">
 						<div>
@@ -27,7 +26,7 @@
 								<tr>
 									<td><label for="user_id" required>아이디</td>
 									<td><input type="text" name="user_id" id="id"
-										class="inpform" maxlength=16><input type="button"
+										class="inpform" maxlength=16> <input type="button"
 										id="check" value="중복확인" class="btn_s btn_light"></td>
 								</tr>
 								<tr>
