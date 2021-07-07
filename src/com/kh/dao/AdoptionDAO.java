@@ -402,7 +402,27 @@ public class AdoptionDAO {
 			}
 		}
 	}
+	
+	
+	public String getAnimalName(String code_seq) throws Exception{
+		String sql = "select an_name from animal where code_seq = ?";
+		
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
 
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getNString("an_name");
+			}
+		}
+		
+	}
+	
 
 
 }
