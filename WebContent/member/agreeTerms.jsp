@@ -11,28 +11,19 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
-
 <head>
 <meta charset="UTF-8">
-<title>AgreeTerms</title>
-
-
-
-
-</head><body>
+<title>회원가입 약관동의</title>
+</head>
+<body>
 	<%@ include file="../layout/jsp/header.jsp"%>
-	<ol>
-		<li>회원가입 약관</li>
-		<li>정보입력</li>
-		<li>가입완료</li>
-	</ol>
 
-	<table border="1" align="center" id="agreeTerms" class="wrapper">
+	<table border="1" align="center" id="agreeTerms">
 		<th>회원 가입 약관</th>
-		<th>개인정보의 수집 이용목적 및 항목</th>
+		<th style="padding-left: 50px;">개인정보의 수집 이용목적 및 항목</th>
 		<tr>
-			<td class="text1">
-				<div class="contents">
+			<td>
+				<div class="contents cont1">
 					회원 가입 약관 제1장 총칙 <br> 제1조 (목적) <br> 이 약관은 NEW-WAL(이하 “회사”라
 					함)가 운영하는 www.NEW-WAL.com 을 통해서 제공하는 관련 서비스 및 기타 서비스 (이하 “서비스”라 함)를
 					이용하는 자간의 권리, 의무를 확정하고 이를 이행함으로써 상호 발전을 도모하는 것을 그 목적으로 합니다. <br>
@@ -126,11 +117,11 @@
 					하기 위하여 고객센터를 운영 합니다. <br> 2. 회사는 고객센터를 통하여 회원으로부터 제기되는 불만사항 및
 					의견이 정당하다고 판단되는 경우 이를 신속하게 처리하며, 3일 이내에 그 진행경과를 알리고 10일 이내에 조사결과와
 					처리방안을 통보합니다.<br> 3. 고객센터의 분쟁 조정시 회원은 신의칙에 따라 성실히 응하여야 합니다.
-				</div>
 			</td>
+			</div>
 
-			<td class="text2">
-				<div class="contents">
+			<td>
+				<div class="contents text2">
 					개인정보의 수집 이용목적 및 항목 가. NEW-WAL(이하 회사)가 개인정보를 수집하는 목적은 이용자의 신분과 서비스
 					이용사항을 확인하여 <br> 최적화되고 맞춤화된 서비스를 제공하기 위함입니다. 회사는 최초 회원가입 시 서비스
 					제공 을 원활하게 하기 위해 <br> 필요한 최소한의 정보만을 수집하고 있으며 회사가 제공하는 서비스 이용에
@@ -160,13 +151,13 @@
 			</td>
 		</tr>
 		<form>
-			<th colspan="1">약관 동의 <input type="checkbox" name="agree1"
-				value="1" id="agree11"></th>
-			<th colspan="2">약관 동의 <input type="checkbox" name="agree2"
-				value="2" id="agree22"></th>
+			<th colspan="1" style="padding-top: 20px" >약관 동의 <input
+				type="checkbox" name="agree1" value="1" id="agree11"></th>
+			<th colspan="2" style="padding-left: 60px;">약관 동의 <input
+				type="checkbox" name="agree2" value="2" id="agree22"></th>
 			<tr>
 				<td colspan="2">
-					<div class="btn_confirm" style="text-align: center;">
+					<div class="btn_confirm">
 						<a><input type="button" class="btn_submit btn_m btn_default"
 							type="button" value="회원가입">
 					</div>
