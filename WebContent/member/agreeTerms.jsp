@@ -151,7 +151,7 @@
 			</td>
 		</tr>
 		<form action="${pageContext.request.contextPath}/signup.mem">
-			<th colspan="1" style="padding-top: 20px" >약관 동의 <input
+			<th colspan="1" style="padding-top: 20px">약관 동의 <input
 				type="checkbox" name="agree1" value="1" id="agree11"></th>
 			<th colspan="2" style="padding-left: 60px;">약관 동의 <input
 				type="checkbox" name="agree2" value="2" id="agree22"></th>
