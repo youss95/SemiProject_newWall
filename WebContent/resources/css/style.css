@@ -31,6 +31,7 @@ em.t_red{font-weight: 700 !important;}
 .t_link{color: #715E99 !important;}
 .t_link:hover{text-decoration: underline;}
 .desc_txt{display:inline-block;margin-left:15px;font-size:14px;color:#888dac;line-height:21px;vertical-align: middle;}
+.nodata{font-size:16px;padding:180px 0;border-top:1px solid #ddd;border-bottom:1px solid #ddd;text-align:center;color:#666;}
 
 /* 색상별 버튼 */
 /* btn */
@@ -95,11 +96,11 @@ input:disabled{height: 40px;padding: 0 10px;}
 .chk_group .inp_chk + .inp_chk{margin-left: 20px;}
 .chk_group .chk_info{display:inline-block;margin-left:5px;color:#888dac;line-height:1.2;vertical-align:top;}
 
-.inp_slct{display: inline-block;position: relative;width: 100%;min-width: 200px;z-index:0;vertical-align: middle;}
+.inp_slct{display: inline-block;position: relative;width: 100%;min-width: 200px;z-index:0;vertical-align: middle;background-color:#fff;}
 .inp_slct:after{position: absolute;top: 17px;right: 15px;display: block;width: 12px;height: 6px;background: url('../images/icons/ic_arw_down.png');z-index:11;content: '';background-size:cover;}
 .inp_slct:before{display: block;position: absolute;top: 1px;right: 1px;width: 40px;height: calc(100% - 2px);border-radius:0 3px 3px 0;background-color: #fff;z-index:5;content:'';} 
 .inp_slct label{display: none;}
-.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:15px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: transparent;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
+.inp_slct select{position: relative;width:100%; height:40px; padding:0 48px 0 15px; line-height:40px; font-size:14px;color:#1d1e25;text-align: left;-webkit-appearance:none;-moz-appearance:none;-webkit-appearance:none;z-index:5;background-color: #fff;border:1px solid #769FCD;transition:border-color 0.3s ease-out;border-radius:4px;}
 .inp_slct select::-ms-expand {display:none;}
 .inp_slct select option:checked{color: #1d1e25;}
 .inp_slct + .inp_slct{margin-left: 17px;}

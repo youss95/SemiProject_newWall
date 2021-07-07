@@ -76,8 +76,7 @@ public class AdminController extends HttpServlet {
 				String result = g.toJson(list);
 				response.getWriter().append(result);
 
-			}else if(url.contentEquals("/animalInfoReg.adm")) {
-				System.out.println("동물 정보 등록 컨트롤러.");
+			}else if(url.contentEquals("/animalInfoReg.adm")) { System.out.println("동물 정보 등록 컨트롤러.");
 
 				String filesPath = request.getServletContext().getRealPath("anfiles");
 
@@ -104,21 +103,26 @@ public class AdminController extends HttpServlet {
 				int anWeight = Integer.parseInt(multi.getParameter("anWeight"));
 				String anCharacter = multi.getParameter("anCharacter");
 				Date anDate = transformDate(multi.getParameter("anDate"));
-				String anStatus = multi.getParameter("anStatus");
-				String anPhoto = multi.getParameter("anPhoto");
+				String anPhoto = multi.getFilesystemName("anPhoto1");
 				String anContnets = multi.getParameter("anContnets");
+				String anNeutering = multi.getParameter("anNeutering");
+				
+				System.out.println("anPhoto : "+ anPhoto);
 
 				String code_seq = admindao.getAnimalCode();
-//				AnimalDTO adto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, anStatus, anContnets, null);
+				AnimalDTO adto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, "N", anPhoto, anContnets, null, anNeutering);
 
-//				int result = admindao.animalInfoReg(adto);
+				int result = admindao.animalInfoReg(adto);
 
 				Set<String> fileNames = multi.getFileNameSet(); 
 				for(String fileName : fileNames) {
 
 					System.out.println("파라미터 이름 : " + fileName);
 					String oriName = multi.getOriginalFileName(fileName);
+//					oriName = new String(oriName.getBytes("utf-8"), "iso-8859-1");
+					
 					String sysName = multi.getFilesystemName(fileName);
+//					sysName = new String(oriName.getBytes("utf-8"), "iso-8859-1");
 
 					System.out.println("file Name : " + fileName);
 					System.out.println("oriName : " + oriName);
@@ -128,7 +132,7 @@ public class AdminController extends HttpServlet {
 
 					fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
 				}
-
+				
 				response.sendRedirect("admin/animalInfoReg.jsp");
 
 			}else if(url.contentEquals("/adSponsorList.adm")) {
