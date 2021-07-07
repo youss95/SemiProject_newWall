@@ -93,7 +93,7 @@
 							<tr>
 								    <td>${si.sponsor_seq}</td>
 									<td>${si.sponsor_amount}</td>
-									<td>${si.sponsor_choice}</td>
+									<td class="open_modal">${si.sponsor_choice}</td>
 									<td>${si.sponsor_agecheck}</td>
 									<td>${si.sponsor_name}</td>
 									<td>${si.sponsor_contact}</td>
@@ -119,12 +119,50 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 	<script>
 		
+	</script>
+	<script>
+	$(function(){
+		$('.open_modal').on('click', function(){
+			 alert();
+			 $("#exampleModal").modal("show");
+		})
+	})
+	
 	</script>
 </body>
 

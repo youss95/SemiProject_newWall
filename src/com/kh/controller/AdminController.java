@@ -20,6 +20,7 @@ import com.kh.dao.AdminDAO;
 import com.kh.dao.FileDAO;
 import com.kh.dao.SponsorDAO;
 import com.kh.dto.AdoptionDTO;
+import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
