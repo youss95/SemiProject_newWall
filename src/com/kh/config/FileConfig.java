@@ -1,7 +1,5 @@
-package com.kh.config;
+package kh.mvc.config;
 
 public class FileConfig {
-
-	public static int uploadMaxSize = 1024 * 1024 * 10; // 10mb
-
+	public static int uploadmaxSize = 1024 * 1024 * 100; //100mb
 }
