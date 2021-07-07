@@ -138,9 +138,9 @@
 											<div class="txt">
 												<p class="name">${i.an_name}</p>
 												<ul class="info">
-													<li>${i.an_category} / ${i.an_kind}</li>
-													<li>${i.an_gender} / 중성화 (${i.an_neutering})</li>
-													<li>${i.an_weight}kg / ${i.an_age}살 / ${i.an_character}</li>
+													<li>${i.an_category}/ ${i.an_kind}</li>
+													<li>${i.an_gender}/ 중성화 (${i.an_neutering})</li>
+													<li>${i.an_weight}kg/ ${i.an_age}살 / ${i.an_character}</li>
 												</ul>
 											</div>
 										</a>
@@ -195,3 +195,5 @@
 
 		});
 	</script>
+</body>
+</html>

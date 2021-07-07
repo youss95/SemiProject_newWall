@@ -1,6 +1,7 @@
 package com.kh.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,12 +24,8 @@ public class AdoptController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
-		
-		System.out.println("requestURI" + requestURI);
-		System.out.println("ctxPath" + ctxPath);
 		AdoptionDAO adoptdao = AdoptionDAO.getInstance();
-		FileDAO fdao = FileDAO.getInstance();
-		
+
 		try {
 			if(url.contentEquals("/adoptList.apt")) {
 				System.out.println("입양 동물 리스트");
@@ -56,7 +53,6 @@ public class AdoptController extends HttpServlet {
 				
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
-				System.out.println("pageNavi : "+ pageNavi);
 				request.setAttribute("h_category", category);
 				request.setAttribute("h_gender", gender);
 				request.setAttribute("h_weight", weight);
@@ -72,11 +68,53 @@ public class AdoptController extends HttpServlet {
 				
 				AnimalDTO info = adoptdao.getAnimalInfo(code_seq);
 				List<AnimalFilesDTO> files = adoptdao.getAnimalFiles(code_seq);
-				System.out.println("파일갯수" + files.size());
 				
 				request.setAttribute("info", info);
 				request.setAttribute("files", files);
 				request.getRequestDispatcher("adopt/adoptDetail.jsp").forward(request, response);
+				
+			}else if(url.contentEquals("/adoptRegForm.apt")) { 
+				System.out.println("입양신청");		
+				String code_seq = request.getParameter("code_seq");
+				String p_name = adoptdao.getAnimalName(code_seq);
+				
+				request.setAttribute("p_name", p_name);
+				request.getRequestDispatcher("adopt/adoptRegForm.jsp").forward(request, response);	
+				
+			}else if(url.contentEquals("/adoptReg.apt")) {
+				System.out.println("입양신청버튼 클릭");
+				
+				int adopt_seq = Integer.parseInt(request.getParameter("adopt_seq"));
+				String code_seq = request.getParameter("code_seq");
+//				Date reg_date = request.getParameter("reg_date"); //sysdate
+				String user_id = request.getParameter("user_id");
+				String p_name = request.getParameter("p_name");
+				String p_phone01 = request.getParameter("p_phone01");
+				String p_phone02 = request.getParameter("p_phone02");
+				String p_email = request.getParameter("p_email");
+				String p_gender = request.getParameter("p_gender");
+				String p_age = request.getParameter("p_age");
+				String p_address = request.getParameter("p_address");
+				String p_mstatus = request.getParameter("p_mstatus");
+				String p_arg = request.getParameter("p_arg");
+				String q01_aname = request.getParameter("q01_aname");
+				String q02_alternative = request.getParameter("q02_alternative");
+				String q03_time_to_worry = request.getParameter("q03_time_to_worry");
+				String q04_reason = request.getParameter("q04_reason");
+				String q05_family_member = request.getParameter("q05_family_member");
+				String q06_family_arg = request.getParameter("q06_family_arg");
+				String q07_pet = request.getParameter("q07_pet");
+				String q08_experience = request.getParameter("q08_experience");
+				String q09_housing_type = request.getParameter("q09_housing_type");
+				String q10_host_consent = request.getParameter("q10_host_consent");
+				String q11_impossible_situation = request.getParameter("q11_impossible_situation");
+				String q12_lodging_problem = request.getParameter("q12_lodging_problem");
+				String q13_payment_arg = request.getParameter("q13_payment_arg");
+				String q14_neutered_arg = request.getParameter("q14_neutered_arg");
+				String q15_visit_agr = request.getParameter("q15_visit_agr");
+				String q16_adopt_arg = request.getParameter("q16_adopt_arg");
+
+				
 				
 			}
 		}catch(Exception e) {
