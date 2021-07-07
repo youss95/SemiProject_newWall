@@ -1,24 +1,32 @@
 @charset "UTF-8";
 
-form div {
+.signUpForm form div {
 	margin-top: 120px
 }
 
-td{
+.signUpForm td{
 	font-size: large;
 }
 
-input {
+.sinUpForm input {
   width:150px;
   height:30px;
 }
 
-type{
+.stgnUpForm type{
 	width: 10px;
 }
 
-.inpform{
+.signUpForm .inpform{
 	width: 30%;
 }
 
-.signUpForm td{}
+.signUpForm table{
+	border-spacing:20px;
+	border-collapse: separate;
+}
+
+.signUpForm #join{
+	position: relative;
+	float: right;
+}
