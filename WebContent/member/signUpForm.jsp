@@ -56,8 +56,8 @@
 					<td>생년월일</td>
 					<td><span class="box"> <input type="text" id="yy"
 							class="int inpform" maxlength="4" placeholder="년(4자)">
-					</span> <span class="box" > <select id="mm" class="btn_s btn_light">
-								<option >월</option>
+					</span> <span class="box" > <select id="mm" class="inpform">>
+								<option>월</option>
 								<option value="01">1</option>
 								<option value="02">2</option>
 								<option value="03">3</option>
@@ -76,8 +76,8 @@
 					</span></td>
 				</tr>
 				<tr>
-					<td><label for="phone">연락처</td>
-					<td><select id="phone" name="" id="">
+					<td><label for="phone" >연락처</td>
+					<td><select id="phone" class="inpform">
 							<option value="">선택</option>
 							<option value="010">010</option>
 							<option value="011">011</option>
