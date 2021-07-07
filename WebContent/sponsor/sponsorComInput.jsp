@@ -275,8 +275,19 @@
 
                             <form action="${pageContext.request.contextPath}/PaymentCheck.sp" method="post"
                                 id="joinForm">
+                                <div class="spp_category3 spp_category">
+                                    <h2 class="spp_category1_title">01. 후원 분야 선택</h2>
+                                    <!-- 수평선 -->
+                                    <div class="inp_slct ca">
+                                        <select name="sp_category" id="">
+                                            <option value="company_동물권 교육 및 연구">동물권 교육 및 연구</option>
+                                            <option value="company_정책사업">정책사업</option>
+                                            <option value="company_동물복지사업">동물복지사업</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="spp_category1 spp_category">
-                                    <h2 class="spp_category1_title">01.기부금액</h2>
+                                    <h2 class="spp_category1_title">02.기부금액</h2>
                                     <!-- 수평선 -->
                                     <ul>
                                         <li><button type="button" id="btn_pay5" class="btn_m btn_light btn_pay_set"
@@ -299,7 +310,7 @@
                                     </ul>
                                 </div>
                                 <div class="spp_category2 spp_category">
-                                    <h2 class="spp_category1_title">02. 기부자 정보</h2>
+                                    <h2 class="spp_category1_title">03. 기부자 정보</h2>
                                     <!-- 수평선 -->
                                     <h3>만 14세 미만입니까?</h3>
                                     <div class="rd_group age14 selectBox">
@@ -575,17 +586,7 @@
                                 </div>
 
 
-                                <div class="spp_category3 spp_category">
-                                    <h2 class="spp_category1_title">03. 후원 분야 선택</h2>
-                                    <!-- 수평선 -->
-                                    <div class="inp_slct ca">
-                                        <select name="sp_category" id="">
-                                            <option value="company_동물권 교육 및 연구">동물권 교육 및 연구</option>
-                                            <option value="company_정책사업">정책사업</option>
-                                            <option value="company_동물복지사업">동물복지사업</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="spp_category4 spp_category">
                                     <h2 class="spp_category1_title">04. 약관 동의</h2>
                                     <!-- 수평선 -->

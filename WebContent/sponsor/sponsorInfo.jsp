@@ -48,11 +48,11 @@
 	background-color: #D6E6F2;
 	height: 100px;
 	line-height: 50px;
-	padding-left:1%;
+	padding-left: 1%;
 }
 
 .sp_if .sp_company .com_img2 {
-	 display: none;
+	display: none;
 }
 
 .sp_if .sp_company img {
@@ -131,12 +131,35 @@
 
 	/* margin-top: 100px; */
 }
+
+.sp_if .sp_one_one {
+	width: 50%;
+	padding-right: 0.5%;
+	padding-top: 1%;
+	float: left;
+}
+
+.sp_if .sp_guardi {
+	width: 50%;
+	padding-left: 0.5%;
+	padding-top: 1%;
+	float: left;
+}
+
+
+.sp_if .sp_one_one:hover .sp_company_bg{
+	background-color:#B9D7EA;
+}
+.sp_if .sp_guardi:hover .sp_company_bg{
+	background-color:#B9D7EA;
+}
+
 </style>
 
 </head>
 <body>
-<div class="wrap">
-		<%@ include file="../../layout/jsp/header.jsp" %>
+	<div class="wrap">
+		<%@ include file="../../layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">
 				<section class="sp_if">
@@ -147,38 +170,38 @@
 							<h2 class="sp_subtitle">믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</h2>
 						</div>
 						<div class="sp_body">
-							<div class="sp_company"  id="sp_company">
-								<a href="#">
+							<div class="sp_company" id="sp_company">
 									<div class="sp_company_bg">
 										<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
-										<h2 class="sp_company_title"> 비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_company_sub"> 동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
+										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
+										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
 											노력을 함께 해주세요</h3>
 									</div> <img class="com_img1"
 									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
 									alt=""> <img class="com_img2"
-									src="../resources/images/sp_img/sp_company02_1900_700.png" alt="">
-
-
-								</a>
-
+									src="../resources/images/sp_img/sp_company02_1900_700.png"
+									alt="">
 							</div>
-							<!-- <div class="sp_direct">
-								<a href="#">
-									<div class="sp_direct_bg">
-										<h2 class="sp_direct_title">비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_direct_sub" >동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-									</div>
-									<img src="" alt="">
-								</a>
-								<div class="sp_direct_bg">
-									<h2 class="sp_direct_title">비영리 단체 NEW-WAL에게 후원</h2>
-									<h3 class="sp_direct_sub" >동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+							<div>
+								<div class="sp_one_one">
+										<div class="sp_company_bg sp_one_one_bg_m">
+											<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
+												유기 동물 후원</h2>
+											<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
+												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										</div> <img class="com_img1"
+										src="../resources/images/sp_img/sp_company_03_950_700.jpg" alt="">
 								</div>
-								<img src="" alt="">
-							</a>
-
-							</div> -->
+								<div class="sp_guardi">
+										<div class="sp_company_bg sp_guardi_bg_m">
+											<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자
+												선택 후원</h2>
+											<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
+												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										</div> <img class="com_img1"
+										src="../resources/images/sp_img/sp_company_04_950_700.jpg" alt="">
+								</div>
+							</div>
 							<div class="sp_info00_con">
 								<div class="sp_info00_pic">
 									<img class="sp_info00_pic1"
@@ -220,17 +243,11 @@
 									<h3>기부금영수증 발급</h3>
 									<h4>국세청 연말정산 간소화 서비스에서 기부금영수증을 발급받을 수 있습니다.</h4>
 								</div>
-
 							</div>
-
-
 						</div>
-
 					</div>
-
 					<!-- 끝 -->
 				</section>
-		
 			</div>
 		</div>
 		<footer class="footer">
@@ -276,10 +293,13 @@
 	<script>
 	$(function(){
 		 $(".sp_company").on("click",function(){
-			// alert("aa");
 			 location.href="${pageContext.request.contextPath}/comInput.sp";
-			
-			 
+		 })
+		 $(".sp_one_one").on("click",function(){
+			 location.href="${pageContext.request.contextPath}/oneOnOne.sp";
+		 })
+		 $(".sp_guardi").on("click",function(){
+			 location.href="${pageContext.request.contextPath}/guardian.sp";
 		 })
 		  // $("#sp_company").hover(function () {
 
@@ -297,6 +317,7 @@
                 $(".sp_if .sp_company .com_img2").hide()
                 $('#sp_company .sp_company_bg').css('background-color', '#D6E6F2');
             })
+            //이거 위처럼  간단하게  나중에 바꾸기 **css로
 		 
 	})
 	</script>

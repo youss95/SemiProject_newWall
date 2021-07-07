@@ -124,6 +124,11 @@
 							<h2 class="sp_pay_title">입력 정보 확인</h2>
 						</div>
 						<div class="sp_pay_incon">
+							<h3 class="sp_pay_cal">후원 분야</h3>
+							<input type="text" class="inpform sp_inp_ck"
+								value="${sponsor.sponsor_choice}" disabled>
+						</div>
+						<div class="sp_pay_incon">
 							<h3 class="sp_pay_cal">기부금액</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_amount}" disabled>
@@ -178,11 +183,7 @@
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_address2}" disabled>
 						</div>
-						<div class="sp_pay_incon">
-							<h3 class="sp_pay_cal">후원 분야</h3>
-							<input type="text" class="inpform sp_inp_ck"
-								value="${sponsor.sponsor_choice}" disabled>
-						</div>
+						
 						<div class="sp_pay_incon">
 							<h3 class="sp_pay_cal">개인정보 수집 약관 동의 여부(확인후 뺄것)</h3>
 							<input type="text" class="inpform sp_inp_ck"
@@ -199,7 +200,7 @@
 								value="${sponsor.sponsor_mb_id}" disabled>
 						</div>
 						<div class="sp_pay_incon sp_pay_btncon">
-							<button type="button" class="btn_m btn_light">뒤로가기</button>
+							<button type="button" class="btn_m btn_light btn_back">뒤로가기</button>
                             <button type="button" id="check_module" class="btn_m btn_default">결제하기</button>
 						</div>
 
@@ -286,6 +287,9 @@
 																alert(msg);
 															});
 										});
+						$(".btn_back").on("click", function() {
+							location.href = "${pageContext.request.contextPath}/comInput.sp";
+						});
 					</script>
 					<!-- 하이 여기는 서브입니다 -->
 				</section>

@@ -96,7 +96,7 @@ public class SponsorController extends HttpServlet {
 				String sp_address1 = request.getParameter("sp_address1");//
 				String sp_address2 = request.getParameter("sp_address2");//
 				System.out.println("주소 : "+sp_postcode+":"+sp_address1+":"+sp_address2);
-				
+
 				String sp_terms01 = request.getParameter("sp_terms01");
 				String sp_terms02 = request.getParameter("sp_terms02");
 				System.out.println("sp_terms0 : "+sp_terms01+"sp_terms02 : "+sp_terms02);
@@ -106,7 +106,7 @@ public class SponsorController extends HttpServlet {
 				System.out.println("sp_idcheck : "+sp_idcheck+"sp_mb_id : "+sp_mb_id);
 
 				if(sp_agecheck.contentEquals("N")) {
-								//성인
+					//성인
 					if(sp_idcheck.contentEquals("N")) {
 						SponsorDTO dto = new  SponsorDTO(0, sp_amount, sp_category, sp_agecheck,
 								sp_name_01, sp_phone01, sp_birth_01, null,
@@ -153,28 +153,22 @@ public class SponsorController extends HttpServlet {
 					}
 				}
 			}else if(cmd.contains("/PaymentComplete.sp")) {
-					System.out.println("결제완료");
-					String apply_num = request.getParameter("apply_num");
-					SponsorDTO dto =  (SponsorDTO)request.getSession().getAttribute("sponsor");
-					dao.sp_inp(dto,apply_num);
-					response.sendRedirect("sponsor/sponsorInfo.jsp");
-				}
+				System.out.println("결제완료");
+				String apply_num = request.getParameter("apply_num");
+				SponsorDTO dto =  (SponsorDTO)request.getSession().getAttribute("sponsor");
+				dao.sp_inp(dto,apply_num);
+				response.sendRedirect("sponsor/sponsorInfo.jsp");
+			}else if(cmd.contains("/oneOnOne.sp")) {
+				System.out.println("일대일 페이지로");
 
+			}else if(cmd.contains("/guardian.sp")) {
+				System.out.println("임보자 페이지로");
 
+			}else if (cmd.contains("/directInput.sp")) {
+				System.out.println("다이렉트 시 입력창");
+				response.sendRedirect("sponsor/sponsorDirectInput.jsp");
+			}
 
-				//SponsorDTO dto = new SponsorDTO(sp_amount, sp_agecheck,sp_name_02, sp_phone_02, sp_birth_02, sp_yname, sp_ybirth, sp_email, sp_terms01, sp_terms02, sp_mb_id);
-
-				//dao.sp_inp(dto);
-
-				
-
-
-				//여기서 이제 값넘겨서 페이먼트 체크에서 띄우고 그값으로 결제 성공하면 마무리 
-
-				//request.setAttribute("result", result);
-				//request.getRequestDispatcher("sponsor/sp_paymentCheck.jsp").forward(request, response);
-				
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 			//			response.sendRedirect("error.jsp");
