@@ -20,6 +20,19 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
+<script>
+ $(function(){
+	$("#hiddenCon").on("click",function(){
+		
+		
+	}) 
+ 
+ 
+ })
+
+</script>
+
+
 </head>
 <body>
 	<div class="wrap">
@@ -128,14 +141,14 @@
 							<c:forEach var="i" items="${nocmtlist}">
 								<div class="reply">
 									<div class="ntrp_writer">${i.ntrp_writer}</div>
-									<div class="ntrp_contents">${i.ntrp_contents}</div>
+									<div class="ntrp_contents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" value="${i.ntrp_contents}"></div>
 									<div class="ntrp_reg_date">${i.ntrp_reg_date}</div>
 									<%-- <c:if test="${i.writer == login.id }"> --%>
 									<button class="btn_s btn_default delReply" type="button">삭제</button>
 									<button class="btn_s btn_primary modiReply">수정</button>
 									<%-- </c:if> --%>
-									<input type="hidden" value="${i.ntrp_seq}"> <input
-										type="hidden" value="${i.ntrp_parent}">
+									<input type="hidden" name="ntrp_seq" value="${i.ntrp_seq}"> 
+									<input type="hidden" name="ntrp_parent" value="${i.ntrp_parent}">
 								</div>
 							</c:forEach>
 						</div>
@@ -156,8 +169,7 @@
 	$(".delReply").on("click",function(){
         if(confirm("정말 삭제하시겠습니까?")){    
            $("#replyFrm").attr("action", "${pageContext.request.contextPath}/nodelete.nocmt");
-           $(this).next().attr("name","ntrp_seq");
-           $(this).next().attr("name","ntrp_parent");
+          
            $("#replyFrm").submit();
         }
 })

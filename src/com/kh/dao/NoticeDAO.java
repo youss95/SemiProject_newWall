@@ -13,8 +13,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import kh.mvc.config.BoardConfig;
-import kh.mvc.dto.NoticeDTO;
+import com.kh.config.BoardConfig;
+import com.kh.dto.NoticeDTO;
 
 public class NoticeDAO {
 	private static NoticeDAO instance;
@@ -180,6 +180,22 @@ public class NoticeDAO {
 				return rs.getInt(1);
 			}
 		}
+	}
+	
+	public int view(int seq) throws Exception{
+		String sql = "update notice_board set notice_view = notice_view+1 where notice_seq = ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);				
+				){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	
+	
+	
+	
 	}
 	
 	public NoticeDTO detail(int seq) throws Exception {
