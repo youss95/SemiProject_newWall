@@ -18,7 +18,12 @@
 <body>
 	<%@ include file="../layout/jsp/header.jsp"%>
 
-	<table border="1" align="center" id="agreeTerms">
+
+<div class="container">
+			<div class="contents">
+				<section class="">
+					<!-- 하이 여기는 서브입니다 -->
+					<table border="1" align="center" id="agreeTerms">
 		<th>회원 가입 약관</th>
 		<th style="padding-left: 50px;">개인정보의 수집 이용목적 및 항목</th>
 		<tr>
@@ -151,7 +156,7 @@
 			</td>
 		</tr>
 		<form action="${pageContext.request.contextPath}/signup.mem">
-			<th colspan="1" style="padding-top: 20px" >약관 동의 <input
+			<th colspan="1" style="padding-top: 20px">약관 동의 <input
 				type="checkbox" name="agree1" value="1" id="agree11"></th>
 			<th colspan="2" style="padding-left: 60px;">약관 동의 <input
 				type="checkbox" name="agree2" value="2" id="agree22"></th>
@@ -165,5 +170,10 @@
 			</tr>
 		</form>
 	</table>
+</section>
+<footer class="footer">
+			<p>Copyright &copy; Kh semi project by group 2</p>
+		</footer>
+	
 </body>
 </html>
