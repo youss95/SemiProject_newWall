@@ -18,15 +18,3 @@ function addReply(result){
 }
 
 
-function deleteReply(replyNo){
-	
-	$.ajax({
-		type : "post",
-		url : "${pageContext.request.contextPath}/protectReplyDelete.lost&replyNo="+replyNo,
-		dataType : "json"
-	}).done(function(result){ 
-	
-			$("#reply-"+id).remove();
-		
-	})
-}

@@ -13,8 +13,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import kh.mvc.config.BoardConfig;
-import kh.mvc.dto.NewsDTO;
+import com.kh.config.BoardConfig;
+import com.kh.dto.NewsDTO;
 
 public class NewsDAO {
 	private static NewsDAO instance;

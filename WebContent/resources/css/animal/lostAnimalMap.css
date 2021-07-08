@@ -51,7 +51,10 @@
   transform:translate(-50%);
    }
    
-   
+   .ooh{
+   width:300px;
+   height:200px;
+   }
    
    .upload-img img{
    width:300px;

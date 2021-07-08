@@ -20,7 +20,7 @@
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
-	<div class="container">
+	 <div class="container">
 		<div class="contents">
 			<section class="protectDetail">
 				<div class="protectRow">
@@ -95,7 +95,7 @@
 									</div>
 									 <div class="m-2">
 										<c:if test="${sessionScope.loginInfo.user_id == replyList.protectWriter }">
-											<i onclick="deleteReply(${replyList.replyNo})" class="fas fa-trash-alt"></i>
+											<i onclick="deleteReply(${replyList.replyNo})" class="fas fa-trash-alt" style="cursor:pointer"></i>
 										</c:if>
 									</div>
 								</li>
@@ -121,6 +121,7 @@
 	<script>
 	let btnEvent = document.querySelector('#btnSub')
 	let btnEvent2 = document.querySelector('#btnWrite')
+	let textWrite = document.querySelector('#content')
 	//댓글 보이기, 숨기기
 		btnEvent.addEventListener('click',function(){
 		let target = document.querySelector('#reply__list');
@@ -149,8 +150,27 @@
 		$('#content').val('');		
 	});
 		})
-		
-		
+		//로그인 체크
+		textWrite.onfocus = function(){
+		<c:if test="${sessionScope.loginInfo==null}">
+	
+	
+		</c:if>
+
+	}
+	//댓글 삭제
+	function deleteReply(id){
+	
+		$.ajax({
+			type :"post",
+			url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
+			dataType : "json"
+		}).done(function(resp){ 
+			
+			
+			$("#reply-"+id).remove();
+		})
+	}
 	</script>
 	
 </body>

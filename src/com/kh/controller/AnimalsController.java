@@ -234,14 +234,28 @@ public class AnimalsController extends HttpServlet {
 				dto = dao.findById(boardNo);
 				String data = g.toJson(dto);
 				if(result==1) {
-					Script.responseData(response, data);
+					response.getWriter().append(data);
 				
 				}
 				
+					//댓글 삭제
+			}else if(url.equals("/replyDel.lost")) {
 				
-				 
+				int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+				System.out.println("몇번"+replyNo);
+				int result = dao.replyDel(replyNo);
+				System.out.println(result);
+				if(result==1) {
+					response.getWriter().append(result+"");
+				}		
+				//로스트 맵 목록
+			}else if(url.equals("/lostMapList.lost")) {
+				List<LostAnimalDTO> list = dao.mapList();
+				System.out.println("맵"+list.toString());
+				request.setAttribute("mapList", list);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");
+				dis.forward(request, response);
 				
-					
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.mvc.dao.NoCommentsDAO;
-import kh.mvc.dto.NoCommentsDTO;
+import com.kh.dao.NoCommentsDAO;
+import com.kh.dto.NoCommentsDTO;
 
 @WebServlet("*.nocmt")
 public class NoCommentsController extends HttpServlet {
@@ -58,9 +58,9 @@ public class NoCommentsController extends HttpServlet {
 				
 			}else if(url.contentEquals("/nodelete.nocmt")){
 				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
-				System.out.println(seq);
+				
 				int parent = Integer.parseInt(request.getParameter("ntrp_parent"));
-				System.out.println(parent);
+				
 				int result = dao.delete(seq);
 				
 				request.getRequestDispatcher("noticeView.notice?notice_seq="+parent).forward(request, response);

@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.config.BoardConfig;
+
+import com.kh.dao.FileDAO;
 import com.kh.dao.NewsDAO;
+import com.kh.dto.FileDTO;
+
 import com.kh.dto.NewsDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -45,7 +49,7 @@ public class NewsController extends HttpServlet {
 		try {
 			NewsDAO dao = NewsDAO.getInstance();
 			NewsDTO dto = new NewsDTO();
-			FilesDAO fdao = FilesDAO.getInstance();
+			FileDAO fdao = FileDAO.getInstance();
 			
 			if(url.contentEquals("/newsBoard.news")) {
 				//뉴스 리스트
@@ -102,7 +106,7 @@ public class NewsController extends HttpServlet {
 					String sysName = multi.getFilesystemName(fileName);
 					
 					if(oriName != null) {
-						fdao.insert(new FilesDTO(0,oriName, sysName, null, seq));
+						fdao.insert(new FileDTO(0,oriName, sysName, null, seq));
 					}
 				}
 				

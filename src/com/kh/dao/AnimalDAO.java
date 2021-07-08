@@ -251,5 +251,44 @@ public class AnimalDAO {
 		return null;
 	}
 	
+	public int replyDel(int replyNo) throws Exception {
+		String sql = "delete from protect_replys where protect_replyno=?";
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, replyNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	//맵 리스트
+	public List<LostAnimalDTO> mapList() throws Exception	{
+		List<LostAnimalDTO> list = new ArrayList<>();
+		String sql = "select * from lost_animal";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					LostAnimalDTO dto;
+					int lostNo = rs.getInt("lost_no");
+					String lostName = rs.getString("lost_name");
+					int lostAge = rs.getInt("lost_age");
+					String lostKind = rs.getString("lost_kind");
+					String lostCategory = rs.getString("lost_category");
+					String lostDate = rs.getString("lost_date");
+					Date createDate = rs.getDate("lost_createDate");
+					String lostAddr = rs.getString("lost_addr");
+					String fileRealName = rs.getString("lost_fileRealName");
+					String lostContent = rs.getString("lost_content");
+					String lostGender = rs.getString("lost_gender");
+					dto = new LostAnimalDTO(lostNo,lostName,lostAge,lostKind,
+							lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+					list.add(dto);
+				}
+				con.close();
+				return list;
+			}
+		}
+	}
 }
 
