@@ -218,9 +218,10 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
-.sp_com_input .spp_category3 .directname{
+
+.sp_com_input .spp_category3 .directname {
 	width: 300px;
-	 text-align: center;
+	text-align: center;
 }
 
 /* 약관 */
@@ -281,10 +282,10 @@
 							<form action="${pageContext.request.contextPath}/PaymentCheck.sp"
 								method="post" id="joinForm">
 								<div class="spp_category3 spp_category">
-									<h2 class="spp_category1_title">01. 선택한 후원 대상 확인 </h2>
+									<h2 class="spp_category1_title">01. 선택한 후원 대상 확인</h2>
 									<!-- 수평선 -->
-										<input type="text" name="sp_category"  class="inpform directname"  value="${p_name}"
-											disabled>
+									<input type="text" name="sp_category"
+										class="inpform directname" value="${p_name}" disabled>
 								</div>
 								<div class="spp_category1 spp_category">
 									<h2 class="spp_category1_title">02.기부금액</h2>
@@ -683,42 +684,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<div class="modal fade" id="loginModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
-						id="popup-img">
-				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 	<script>
 		$(function() {
 			//14세 미만 이상여부

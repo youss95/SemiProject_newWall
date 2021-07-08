@@ -171,12 +171,13 @@
 						</div>
 						<div class="sp_body">
 							<div class="sp_company" id="sp_company">
-									<div class="sp_company_bg">
-										<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
-										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
-											노력을 함께 해주세요</h3>
-									</div> <img class="com_img1"
+								<div class="sp_company_bg">
+									<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
+									<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
+									<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
+										노력을 함께 해주세요</h3>
+								</div>
+								<img class="com_img1"
 									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
 									alt=""> <img class="com_img2"
 									src="../resources/images/sp_img/sp_company02_1900_700.png"
@@ -184,22 +185,26 @@
 							</div>
 							<div>
 								<div class="sp_one_one">
-										<div class="sp_company_bg sp_one_one_bg_m">
-											<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
-												유기 동물 후원</h2>
-											<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
-												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-										</div> <img class="com_img1"
-										src="../resources/images/sp_img/sp_company_03_950_700.jpg" alt="">
+									<div class="sp_company_bg sp_one_one_bg_m">
+										<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
+											유기 동물 후원</h2>
+										<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
+											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+									</div>
+									<img class="com_img1"
+										src="../resources/images/sp_img/sp_company_03_950_700.jpg"
+										alt="">
 								</div>
 								<div class="sp_guardi">
-										<div class="sp_company_bg sp_guardi_bg_m">
-											<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자
-												선택 후원</h2>
-											<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
-												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-										</div> <img class="com_img1"
-										src="../resources/images/sp_img/sp_company_04_950_700.jpg" alt="">
+									<div class="sp_company_bg sp_guardi_bg_m">
+										<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자 선택
+											후원</h2>
+										<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
+											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+									</div>
+									<img class="com_img1"
+										src="../resources/images/sp_img/sp_company_04_950_700.jpg"
+										alt="">
 								</div>
 							</div>
 							<div class="sp_info00_con">
@@ -254,42 +259,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<div class="modal fade" id="loginModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
-						id="popup-img">
-				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 	<script>
 	$(function(){
 		 $(".sp_company").on("click",function(){
