@@ -26,7 +26,7 @@
 						</div>
 						<div class="form-group">
 							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
+								type="password" class="form-control" id="user_pw"
 								name="user_password" placeholder="Password">
 						</div>
 

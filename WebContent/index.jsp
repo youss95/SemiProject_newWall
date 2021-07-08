@@ -37,7 +37,5 @@
 		</footer>
 	</div>
 	<%@ include file="layout/jsp/modal.jsp"%>
-
-
 </body>
 </html>
