@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.config.PageConfig;
 import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
+import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
 
@@ -78,15 +79,14 @@ public class AdoptController extends HttpServlet {
 				String code_seq = request.getParameter("code_seq");
 				String p_name = adoptdao.getAnimalName(code_seq);
 				
-				request.setAttribute("p_name", p_name);
+				request.setAttribute("pet_name", p_name);
+				request.setAttribute("code_seq", code_seq);
 				request.getRequestDispatcher("adopt/adoptRegForm.jsp").forward(request, response);	
 				
 			}else if(url.contentEquals("/adoptReg.apt")) {
 				System.out.println("입양신청버튼 클릭");
 				
-				int adopt_seq = Integer.parseInt(request.getParameter("adopt_seq"));
 				String code_seq = request.getParameter("code_seq");
-//				Date reg_date = request.getParameter("reg_date"); //sysdate
 				String user_id = request.getParameter("user_id");
 				String p_name = request.getParameter("p_name");
 				String p_phone01 = request.getParameter("p_phone01");
@@ -97,24 +97,29 @@ public class AdoptController extends HttpServlet {
 				String p_address = request.getParameter("p_address");
 				String p_mstatus = request.getParameter("p_mstatus");
 				String p_arg = request.getParameter("p_arg");
-				String q01_aname = request.getParameter("q01_aname");
-				String q02_alternative = request.getParameter("q02_alternative");
-				String q03_time_to_worry = request.getParameter("q03_time_to_worry");
-				String q04_reason = request.getParameter("q04_reason");
-				String q05_family_member = request.getParameter("q05_family_member");
-				String q06_family_arg = request.getParameter("q06_family_arg");
-				String q07_pet = request.getParameter("q07_pet");
-				String q08_experience = request.getParameter("q08_experience");
-				String q09_housing_type = request.getParameter("q09_housing_type");
-				String q10_host_consent = request.getParameter("q10_host_consent");
-				String q11_impossible_situation = request.getParameter("q11_impossible_situation");
-				String q12_lodging_problem = request.getParameter("q12_lodging_problem");
-				String q13_payment_arg = request.getParameter("q13_payment_arg");
-				String q14_neutered_arg = request.getParameter("q14_neutered_arg");
-				String q15_visit_agr = request.getParameter("q15_visit_agr");
-				String q16_adopt_arg = request.getParameter("q16_adopt_arg");
-
+				String q01_aname = request.getParameter("pet_name");
+				String q02_alternative = request.getParameter("alternative");
+				String q03_time_to_worry = request.getParameter("time_to_worry");
+				String q04_reason = request.getParameter("reason");
+				String q05_family_member = request.getParameter("family_member");
+				String q06_family_arg = request.getParameter("family_arg");
+				String q07_pet = request.getParameter("pet");
+				String q08_experience = request.getParameter("experience");
+				String q09_housing_type = request.getParameter("housing_type");
+				String q10_host_consent = request.getParameter("host_consent");
+				String q11_impossible_situation = request.getParameter("impossible_situation");
+				String q12_lodging_problem = request.getParameter("lodging_problem");
+				String q13_payment_arg = request.getParameter("payment_arg");
+				String q14_neutered_arg = request.getParameter("neutered_arg");
+				String q15_visit_agr = request.getParameter("visit_agr");
+				String q16_adopt_arg = request.getParameter("adopt_arg");
 				
+				AdoptionDTO dto = new AdoptionDTO(0, code_seq, null, user_id, p_name, p_phone01, p_phone02, p_email, p_gender, p_age, p_address, p_mstatus, p_arg, q01_aname, q02_alternative, q03_time_to_worry, q04_reason, q05_family_member, q06_family_arg, q07_pet, q08_experience, q09_housing_type, q10_host_consent, q11_impossible_situation, q12_lodging_problem, q13_payment_arg, q14_neutered_arg, q15_visit_agr, q16_adopt_arg);
+				
+				int result = adoptdao.insertRegForm(dto);
+				
+				request.setAttribute("code_seq", code_seq);
+				request.getRequestDispatcher("/adoptDetail.apt").forward(request, response);	
 				
 			}
 		}catch(Exception e) {
