@@ -13,6 +13,12 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">	
 </head>
+<style>
+.spadmin .detail{
+display: none;
+}
+
+</style>
 
 <body>
 	<div class="wrap">
@@ -60,7 +66,7 @@
 
 		<div class="main">
 			<div class="container">
-				<section class="shadow-sm rounded">
+				<section class="shadow-sm rounded spadmin">
 					<div class="title_area">
 						<h2>후원 내역 리스트</h2>
 					</div>
@@ -71,42 +77,42 @@
 									<th>순서</th>
 									<th>후원금액</th>
 									<th>후원대상선택</th>
-									<th>14세미만여부</th>
+									<th class="detail">14세미만여부</th>
 									<th>이름</th>
 									<th>연락처</th>
-									<th>생년월일</th>
+									<th class="detail">생년월일</th>
 									<th>청소년 후원자 이름</th>
-									<th>청소년 후원자 생년월일</th>
-									<th>이메일</th>
-									<th>우편번호</th>
-									<th>도로명 주소</th>
-									<th>상세주소</th>
-									<th>결제승인번호</th>
-									<th>약관1동의 여부</th>
-									<th>약관2동의 여부</th>
+									<th class="detail">청소년 후원자 생년월일</th>
+									<th class="detail">이메일</th>
+									<th class="detail">우편번호</th>
+									<th class="detail">도로명 주소</th>
+									<th class="detail">상세주소</th>
+									<th class="detail">결제승인번호</th>
+									<th class="detail">약관1동의 여부</th>
+									<th class="detail">약관2동의 여부</th>
 									<th>회원 시 ID</th>
 									<th>후원 일자</th>
 								</tr>
 							</thead>
 							<c:forEach var="si" items="${slist}">
 							<tbody>
-							<tr>
+							<tr class="open_modal">
 								    <td>${si.sponsor_seq}</td>
 									<td>${si.sponsor_amount}</td>
-									<td class="open_modal">${si.sponsor_choice}</td>
-									<td>${si.sponsor_agecheck}</td>
+									<td>${si.sponsor_choice}</td>
+									<td class="detail">${si.sponsor_agecheck}</td>
 									<td>${si.sponsor_name}</td>
 									<td>${si.sponsor_contact}</td>
-									<td>${si.sponsor_birth}</td>
+									<td class="detail">${si.sponsor_birth}</td>
 									<td>${si.sponsor_yname}</td>
-									<td>${si.sponsor_ybirth}</td>
-									<td>${si.sponsor_email}</td>
-									<td>${si.sponsor_postcode}</td>
-									<td>${si.sponsor_address1}</td>
-									<td>${si.sponsor_address2}</td>
-									<td>${si.sponsor_apply_num}</td>
-									<td>${si.sponsor_terms01}</td>
-									<td>${si.sponsor_terms02}</td>
+									<td class="detail">${si.sponsor_ybirth}</td>
+									<td class="detail">${si.sponsor_email}</td>
+									<td class="detail">${si.sponsor_postcode}</td>
+									<td class="detail">${si.sponsor_address1}</td>
+									<td class="detail">${si.sponsor_address2}</td>
+									<td class="detail">${si.sponsor_apply_num}</td>
+									<td class="detail">${si.sponsor_terms01}</td>
+									<td class="detail">${si.sponsor_terms02}</td>
 									<td>${si.sponsor_mb_id}</td>
 									<td>${si.sponsor_date}</td>
 							</tr>
@@ -139,8 +145,7 @@
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">확인 완료</button>
       </div>
     </div>
   </div>
@@ -158,7 +163,7 @@
 	<script>
 	$(function(){
 		$('.open_modal').on('click', function(){
-			 alert();
+			 //alert();
 			 $("#exampleModal").modal("show");
 		})
 	})

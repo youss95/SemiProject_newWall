@@ -218,9 +218,10 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
-.sp_com_input .spp_category3 .directname{
+
+.sp_com_input .spp_category3 .directname {
 	width: 300px;
-	 text-align: center;
+	text-align: center;
 }
 
 /* 약관 */
@@ -284,7 +285,7 @@
 									<h2 class="spp_category1_title">01. 선택한 후원 대상 확인</h2>
 									<!-- 수평선 -->
 									<input type="text" name="sp_category"
-										class="inpform directname" value="선택대상 이름 나오게" disabled>
+										class="inpform directname" value="${p_name}" disabled>
 								</div>
 								<div class="spp_category1 spp_category">
 									<h2 class="spp_category1_title">02.기부금액</h2>
