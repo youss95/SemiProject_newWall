@@ -1,4 +1,4 @@
-package kh.mvc.dao;
+package com.kh.dao;
 
 import java.sql.Connection;
 import java.sql.Date;

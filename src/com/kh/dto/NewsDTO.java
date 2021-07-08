@@ -1,4 +1,4 @@
-package kh.mvc.dto;
+package com.kh.dto;
 
 import java.sql.Date;
 

@@ -1,4 +1,4 @@
-package kh.mvc.controller;
+package com.kh.controller;
 
 import java.io.IOException;
 import java.util.List;
