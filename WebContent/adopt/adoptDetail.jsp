@@ -53,7 +53,7 @@
 						</dl>
 						<div class="btn_wrap">
 							<a href="${pageContext.request.contextPath}/adoptRegForm.apt?code_seq=${info.code_seq}" class="btn_m btn_primary">입양하기</a>
-							<button type="button" class="btn_m btn_line">후원하기</button>
+							<a href="${pageContext.request.contextPath}/directInput.sp?code_seq=${info.code_seq}" class="btn_m btn_line">후원하기</a>
 						</div>
 					</div>
 				</div>

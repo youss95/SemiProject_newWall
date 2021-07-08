@@ -13,12 +13,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+<<<<<<< HEAD
+
+=======
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+>>>>>>> bf574a993280d7089cba055cc9cb717348da3fdd
 </head>
 
 <body>
