@@ -91,7 +91,7 @@ public class AdminController extends HttpServlet {
 				System.out.println("filesPath : " + filesPath);
 				System.out.println("directory : " + directory);
 
-				MultipartRequest multi = new MultipartRequest(request, directory, FileConfig.uploadMaxSize, "utf8", new DefaultFileRenamePolicy());
+				MultipartRequest multi = new MultipartRequest(request, directory, FileConfig.uploadmaxSize, "utf8", new DefaultFileRenamePolicy());
 
 				/*
 				Enumeration files = multi.getFileNames();
