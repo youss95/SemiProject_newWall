@@ -27,33 +27,33 @@
 						<div>
 							<table>
 								<tr>
-									<td><label for="user_id" required>아이디</td>
+									<td><label for="user_id">아이디</label></td>
 									<td><input type="text" name="user_id" id="id"
 										class="inpform" maxlength=16> <input type="button"
 										id="check" value="중복확인" class="btn_s btn_light"></td>
 								</tr>
 								<tr>
-									<td><label for="password"">비밀번호</td>
+									<td><label for="password">비밀번호</label></td>
 									<td><input type="password" name="user_password" id="pwd"
 										class="inpform" maxlength=16> <!-- *영문 대소문자/숫자/특수문자를 혼용하여 2종류10~16자 또는 3종 8~16자 --></td>
 								</tr>
 								<tr>
-									<td><label for="pwdCheck">비밀번호 확인</td>
+									<td><label for="pwdCheck">비밀번호 확인</label></td>
 									<td><input type="password" name="pwdCheck" id="pwdCheck"
 										class="inpform" maxlength=16></td>
 								</tr>
 								<tr>
-									<td><label for="email">이메일</td>
+									<td><label for="email">이메일</label></td>
 									<td><input type="text" name="email" id="email"
-										class="inpform" maxlength=16> @ <select id="email2"
-										class="inpform">
+										class="inpform" maxlength=16> @ <select id="email2" class="inpform">
 											<option value="1">gmail.com</option>
 											<option value="2">naver.com</option>
 											<option value="3">daum.net</option>
-											<option vlaue="4">nate.com</option></td>
+											<option value="4">nate.com</option></select>
+											</td>
 								</tr>
 								<tr>
-									<td><label for="name">이름</td>
+									<td><label for="name">이름</label></td>
 									<td><input type="text" name="name" id="name"
 										class="inpform" maxlength=20></td>
 								</tr>
@@ -85,7 +85,7 @@
 									</span></td>
 								</tr>
 								<tr>
-									<td><label for="phone">연락처</td>
+									<td><label for="phone">연락처</label></td>
 									<td><select id="phone" class="inpform">
 											<option value="">선택</option>
 											<option value="010">010</option>
@@ -103,7 +103,7 @@
 										<input type="radio" name="status" value="No" checked>No</td>
 								</tr>
 								<tr>
-									<td><label for="postcode">우편번호</td>
+									<td><label for="postcode">우편번호</label></td>
 									<td><input type="text" name="postcode" id="postcode"
 										class="inpform"> - <input type="text" name="postcode"
 										id="postcode" class="inpform"> <input
@@ -111,12 +111,12 @@
 										class="btn_s btn_light"></td>
 								</tr>
 								<tr>
-									<td><label for="home">주소</td>
+									<td><label for="home">주소</label></td>
 									<td><input type="text" name="address1" id="address1"
 										 class="inpform"></td>
 								</tr>
 								<tr>
-									<td><label for="homeAddress">상세주소 </td>
+									<td><label for="homeAddress">상세주소</label></td>
 									<td><input type="text" name="address2" id="address2"
 										class="inpform" maxlength=20></td>
 								</tr>

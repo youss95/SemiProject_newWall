@@ -77,7 +77,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
