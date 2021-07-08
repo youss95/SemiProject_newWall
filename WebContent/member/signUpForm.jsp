@@ -19,6 +19,9 @@
 		<div class="container">
 			<div class="contents">
 				<section class="signUpForm">
+				<div class="title">
+				<h2>회원가입</h2>
+				</div>
 					<form method="post" name="inputForm" id="signUpForm"
 						action="${pageContext.request.contextPath}/signupProc.mem">
 						<div>
@@ -42,7 +45,7 @@
 								<tr>
 									<td><label for="email">이메일</td>
 									<td><input type="text" name="email" id="email"
-										class="inpform" maxlength=16>@ <select id="email2"
+										class="inpform" maxlength=16> @ <select id="email2"
 										class="inpform">
 											<option value="1">gmail.com</option>
 											<option value="2">naver.com</option>
@@ -125,8 +128,10 @@
 				</section>
 			</div>
 		</div>
-
 	</div>
+	<footer class="footer">
+				<p>Copyright &copy; Kh semi project by group 2</p>
+			</footer>
 
 </body>
 </html>
