@@ -283,7 +283,7 @@
 								<div class="spp_category3 spp_category">
 									<h2 class="spp_category1_title">01. 선택한 후원 대상 확인 </h2>
 									<!-- 수평선 -->
-										<input type="text" name="sp_category" class="inpform directname" value="선택대상 이름 나오게"
+										<input type="text" name="sp_category"  class="inpform directname"  value="${p_name}"
 											disabled>
 								</div>
 								<div class="spp_category1 spp_category">
