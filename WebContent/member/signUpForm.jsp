@@ -22,7 +22,7 @@
 				<div class="title">
 				<h2>회원가입</h2>
 				</div>
-					<form method="post" name="inputForm" id="signUpForm"
+					<form method="post" name="inputForm" id="signupForm"
 						action="${pageContext.request.contextPath}/signupProc.mem">
 						<div>
 							<table>
@@ -120,7 +120,7 @@
 										class="inpform" maxlength=20></td>
 								</tr>
 							</table>
-							<input type="button" id="join" value="회원가입"
+							<input type="submit" id="join" value="회원가입"
 								class="btn_m btn_default">
 						</div>
 					</form>

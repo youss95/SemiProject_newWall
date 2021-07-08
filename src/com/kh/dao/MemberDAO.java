@@ -66,7 +66,6 @@ public class MemberDAO {
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, id);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -86,7 +85,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress1());
 			pstat.setNString(10, dto.getAddress2());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -106,7 +104,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress2());
 			pstat.setNString(10, dto.getUser_id());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}

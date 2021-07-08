@@ -30,6 +30,7 @@
 			<!-- <li><a href="#">봉사활동</a></li> 보류 -->
 		</ul>
 	</div>
+	
 	<div class="utils">
 		<ul class="clear">
 			<c:choose>
