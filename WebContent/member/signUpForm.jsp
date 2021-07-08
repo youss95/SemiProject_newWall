@@ -45,7 +45,7 @@
 								<tr>
 									<td><label for="email">이메일</label></td>
 									<td><input type="text" name="email" id="email"
-										class="inpform" maxlength=16> @ <select id="email2" class="inpform">
+										class="inpform" maxlength=16> @ <select name="email2" class="inpform">
 											<option value="1">gmail.com</option>
 											<option value="2">naver.com</option>
 											<option value="3">daum.net</option>
@@ -86,21 +86,20 @@
 								</tr>
 								<tr>
 									<td><label for="phone">연락처</label></td>
-									<td><select id="phone" class="inpform">
+									<td><select id="phone" class="inpform" name="contact1">
 											<option value="">선택</option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="019">019</option>
 									</select> - <input type="text" name="phone" id="phone" class="inpform"
-										name="contact1" maxlength=4> - <input type="text"
-										name="phone" id="phone" class="inpform"
-										name="contact2" maxlength=4></td>
+										name="contact2" maxlength=4> - <input type="text"
+										name="contact3" id="phone" class="inpform" maxlength=4></td>
 								</tr>
 								<tr>
 								<tr>
 									<td>입양 신청 상태</td>
-									<td><input type="radio" name="status" value="Yes">Yes &nbsp;&nbsp;&nbsp;
-										<input type="radio" name="status" value="No" checked>No</td>
+									<td><input type="radio" name="status" value="Y">Yes &nbsp;&nbsp;&nbsp;
+										<input type="radio" name="status" value="N" checked>No</td>
 								</tr>
 								<tr>
 									<td><label for="postcode">우편번호</label></td>

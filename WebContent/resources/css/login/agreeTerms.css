@@ -1,26 +1,27 @@
 @charset "UTF-8";
 
-.agreeTerms .contents{box-sizing: border-box;}
-.agreeTerms .contents{max-height: 600px; max-width: 700px; overflow-y: auto; width: 500px; height: 900spx; border: 1px solid black;}
-.agreeTerms body{position: absolute;height: 100%;width: 100%;}
+.agreeTerms .contents{box-sizing: border-box; }
+.agreeTerms .contents{max-height: 600px; max-width: 700px; overflow-y: auto;}
+
+
+.agreeTerms body{position: absolute;height: 100%; width: 100%;}
 
 .agreeTerms .contents .check{position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 
 .agreeTerms .text2{margin-left: 50px;}
 .agreeTerms th{padding-bottom: 20px;}
-
-.agreeTerms .btn_confirm{text-align: center;}
+.agreeTerms .btn_confirm{text-align: center; margin-top: 50px;}
 .agreeTerms .login input{width: 200px;}
-
 .agreeTerms .notice{padding:40px;background-color:#fff0f0d0;}
 .agreeTerms .notice p{font-weight:600;font-size:14px;margin-bottom:10px;}
 .agreeTerms .notice ul{margin-left:20px;}
 .agreeTerms .notice ul li{font-size:14px;font-weight:300;line-height:1.4;list-style: disc;}
 
-/* <th style="padding-left: 50px;">개인정보의 수집 이용목적 및 항목</th> */
-
 .agreeTerms .terms .box{padding:20px;background-color:#F7FBFC;border:1px solid #D6E6F2;height: 550px;overflow-y:scroll;}
+.agreeTerms .terms {width: 420px;}
 .agreeTerms .terms .box+p{margin:5px 0 10px;font-weight:300;font-size:13px;}
 .agreeTerms .terms ol{margin-left:20px;}
 .agreeTerms .terms ol li{font-size:14px;line-height:1.6;list-style: decimal;}
+.agreeTerms form{flex-direction:column;display:flex;align-items:center;}
+.agreeTerms th, .agreeTerms td{padding:10px;}
 

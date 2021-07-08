@@ -70,9 +70,9 @@
 						<button type="button" class="btn_m btn_default"
 							data-dismiss="modal" style="width: 125%; margin-bottom: 16px;">로그인</button>
 							
-						<button type="button" class="" data-dismiss="modal" id="idPwHov"
+						<a href="${pageContext.request.contextPath}/findAccount.mem"><button type="button" class="" data-dismiss="modal" id="idPwHov"
 							style="width: 125%; text-decoration: underline;">아이디/비밀번호
-							찾기</button>
+							찾기</button></a>
 					</div>
 				</div>
 			</div>
