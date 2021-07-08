@@ -5,7 +5,7 @@
 .search_area .flex_box{display:flex;}
 .search_area .flex_box dl{flex:1;margin:5px;}
 .search_area .flex_box>input,
-.search_area .flex_box>button{margin:5px;}
+.search_area .flex_box>button{margin:5px;word-break:keep-all;}
 .flex_box dl dt{margin-bottom:10px;}
 .flex_box dl dt strong{display:block;font-size:20px;font-weight:600;margin-bottom:10px;}
 .flex_box dl dt span{font-size:12px;font-weight:300;}

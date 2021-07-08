@@ -280,7 +280,6 @@ public class AdoptionDAO {
 					+ " and (" + an_age + " between " + start_age + " and "+ end_age + ")"
 					+ " and " + an_character + " like '%" + dto.getAn_character() + "%'"
 					+ " and "+ an_name + " like '%" + dto.getAn_name() + "%'";
-			System.out.println(sql);
 		}
 		try(
 				Connection con = this.getConnection();
@@ -293,6 +292,19 @@ public class AdoptionDAO {
 
 	}
 
+	private int getRecordCount() throws Exception{
+
+		String sql = "select count(*) from animal";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getInt(1);
+		}
+
+	}
 
 	public List<String> getPageNavi(int currentPage, AnimalDTO dto) throws Exception{ // 페이지 카운트
 		int recordTotalCount = this.getRecordCount(dto); // 전체 레코드개수 (원래는 커넥션으로 카운트해서 가져옴)
@@ -337,6 +349,52 @@ public class AdoptionDAO {
 
 		return pageNavi;
 	}
+	
+	
+	public List<String> getPageNavi(int currentPage) throws Exception{ // 페이지 카운트
+		int recordTotalCount = this.getRecordCount(); // 전체 레코드개수 (원래는 커넥션으로 카운트해서 가져옴)
+		int recordCountPerPage = PageConfig.ADOPT_RECORD_COUNT_PER_PAGE; // 한 페이지 당 보여줄 게시글의 개수
+		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; // 내 위치 페이지를 기준으로 시작으로부터 끝까지의 페이지가 총 몇개인지.
+
+		int pageTotalCount = 0; // 총 페이지
+
+		if((recordTotalCount % recordCountPerPage) > 0) { // 페이지 갯수가 일의자리가 있는 경우
+			pageTotalCount =recordTotalCount / recordCountPerPage + 1; 
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage; // 0 으로 떨어지는 페이지 일 경우
+		}
+
+		//방어코드 (현재 위치 페이지가 총 페이지보다 넘치거나 -1 이 될 경우)
+		if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}else if(currentPage < 1) {
+			currentPage = 1;
+		}
+
+		int startNavi = (currentPage-1) / naviCountPerPage * naviCountPerPage + 1; // 네비 시작페이지 구하기
+		int endNavi = startNavi + naviCountPerPage - 1; // 네비 마지막 페이지 구하기
+
+		if(endNavi > pageTotalCount) {endNavi = pageTotalCount;} // 방어코드 (엔드네비가 토탈보다 큰 에러일 시)
+
+		boolean needPrev = true; // < : 이전페이지
+		boolean needNext = true; // > : 다음페이지
+
+		if(startNavi == 1) {needPrev = false;} // <, > 페이지 버튼 달아주기 1
+		if(endNavi == pageTotalCount) {needNext = false;}
+
+
+		List<String> pageNavi = new ArrayList<String>(); // <, > 페이지 버튼 달아주기 2
+		if(needPrev) {pageNavi.add("<");}
+		for(int i = startNavi; i<= endNavi; i++) {			
+			pageNavi.add(String.valueOf(i));
+			System.out.println("String.valueOf(i)" + String.valueOf(i));
+
+		}
+		if(needNext) {pageNavi.add(">");}
+
+		return pageNavi;
+	}
+	
 
 
 	public AnimalDTO getAnimalInfo(String code_seq) throws Exception{
@@ -422,6 +480,47 @@ public class AdoptionDAO {
 		}
 		
 	}
+	
+	public int insertRegForm(AdoptionDTO dto) throws Exception{
+		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, dto.getCode_seq());
+			pstat.setString(2, dto.getUser_id());
+			pstat.setString(3, dto.getP_name());
+			pstat.setString(4, dto.getP_phone01());
+			pstat.setString(5, dto.getP_phone02());
+			pstat.setString(6, dto.getP_email());
+			pstat.setString(7, dto.getP_gender());
+			pstat.setString(8, dto.getP_age());
+			pstat.setString(9, dto.getP_address());
+			pstat.setString(10, dto.getP_mstatus());
+			pstat.setString(11, dto.getP_arg());
+			pstat.setString(12, dto.getQ01_aname());
+			pstat.setString(13, dto.getQ02_alternative());
+			pstat.setString(14, dto.getQ03_time_to_worry());
+			pstat.setString(15, dto.getQ04_reason());
+			pstat.setString(16, dto.getQ05_family_member());
+			pstat.setString(17, dto.getQ06_family_arg());
+			pstat.setString(18, dto.getQ07_pet());
+			pstat.setString(19, dto.getQ08_experience());
+			pstat.setString(20, dto.getQ09_housing_type());
+			pstat.setString(21, dto.getQ10_host_consent());
+			pstat.setString(22, dto.getQ11_impossible_situation());
+			pstat.setString(23, dto.getQ12_lodging_problem());
+			pstat.setString(24, dto.getQ13_payment_arg());
+			pstat.setString(25, dto.getQ14_neutered_arg());
+			pstat.setString(26, dto.getQ15_visit_agr());
+			pstat.setString(27, dto.getQ16_adopt_arg());
+			
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
 	
 
 

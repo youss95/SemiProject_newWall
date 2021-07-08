@@ -38,13 +38,14 @@ public class AdoptionDTO {
 	public AdoptionDTO() {}
 	
 	// adoption list
-	public AdoptionDTO(String user_id, Date reg_date, String code_seq, int adopt_seq, String p_name) {
+	public AdoptionDTO(String user_id, String p_name, Date reg_date, String code_seq, int adopt_seq, String q01_aname) {
 		super();
 		this.user_id = user_id;
+		this.p_name = p_name;
 		this.reg_date = reg_date;
 		this.code_seq = code_seq;
 		this.adopt_seq = adopt_seq;
-		this.p_name = p_name;
+		this.q01_aname = q01_aname;
 	}
 
 	public AdoptionDTO(int adopt_seq, String code_seq, Date reg_date, String user_id, String p_name, String p_phone01,

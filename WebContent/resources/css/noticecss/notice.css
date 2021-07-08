@@ -1,0 +1,29 @@
+@charset "utf-8";
+#wrap {
+    width: 100%;
+	margin:auto;
+}
+#wrap table{
+    width: 100%;
+    border-collapse: collapse;
+    line-height: 24px;
+}
+#wrap table td,th {
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+}
+#wrap th {
+	background: #FCDADA;
+}
+#wrap a{
+    text-decoration: none;
+    color: black;
+}
+#wrap a:hover{
+    text-decoration: underline;
+}
+
+#wrap p{font-size: 3.0rem; text-align:center; }

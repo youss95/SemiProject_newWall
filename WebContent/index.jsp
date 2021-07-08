@@ -17,8 +17,6 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -26,7 +24,7 @@
 </head>
 <body>
 	<div class="wrap">
-		<%@ include file="layout/jsp/header.jsp" %>
+		<%@ include file="layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">
 				<section class="">
@@ -47,26 +45,35 @@
 						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
 						id="popup-img">
 				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
+				<div class="modal-header" id="modal-logo">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/login_logo6.png"
+						id="popup-logo">
 						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
+						
+					<!-- <div class="modal-header login-title"></div> -->
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="user-id" class="col-form-label"></label> <input
+									type="text" class="form-control" id="user_id"
+									placeholder="Your ID">
+							</div>
+							<div class="form-group">
+								<label for="user-password" class="col-form-label"></label> <input
+									type="text" class="form-control" id="user_pw"
+									placeholder="Password">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn_m btn_default"
+							data-dismiss="modal" style="width: 125%; margin-bottom: 16px;">로그인</button>
+							
+						<button type="button" class="" data-dismiss="modal" id="idPwHov"
+							style="width: 125%; text-decoration: underline;">아이디/비밀번호
+							찾기</button>
+					</div>
 				</div>
 			</div>
 		</div>

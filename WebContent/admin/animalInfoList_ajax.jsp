@@ -21,10 +21,10 @@
 			<div class="container">
 				<section class="shadow-sm rounded">
 					<div class="title_area">
-						<h2>입양 신청 리스트</h2>
+						<h2>동물 정보 리스트</h2>
 					</div>
-					<div class="contents">
-						<table class="table table-hover text-center adoption_list">
+					<div class="contents animal_list">
+						<table class="table table-hover text-center">
 							<thead>
 								<tr>
 									<th>순서</th>
@@ -38,6 +38,9 @@
 								
 							</tbody>
 						</table>
+						<div class="btn_wrap">
+							<a href="animalInfoReg.jsp" class="btn_m btn_default">동물 정보 등록</a>
+						</div>
 					</div>
 				</section>
 				
@@ -55,7 +58,7 @@
 				type: "get",
 				dataType: "json"
 			}).done(function(resp){
-				let tbody = $('.adoption_list tbody');
+				let tbody = $('.animal_list table tbody');
 				console.log(resp);
 				
 				if(resp.length == 0){

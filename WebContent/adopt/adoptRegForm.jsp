@@ -82,11 +82,11 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="p_mstatus01" name="p_mstatus">
+										<input type="radio" id="p_mstatus01" name="p_mstatus" value="미혼">
 										<label for="p_mstatus01">미혼</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="p_mstatus02" name="p_mstatus">
+										<input type="radio" id="p_mstatus02" name="p_mstatus" value="기혼">
 										<label for="p_mstatus02">기혼</label>
 									</div>
 								</div>
@@ -106,7 +106,7 @@
 									<p>뉴월은 법률에서 정하는 경우를 제외하고는 귀하의 동의 없어 개인정보을 제3자에게 제공하지 않습니다.</p>
 									<div class="chk_group">
 										<label class="inp_chk">
-											<input type="checkbox" id="p_arg" name="p_arg">
+											<input type="checkbox" id="p_arg" name="p_arg" value="Y">
 											<span class="chkmark"></span>
 											개인정보 이용에 동의합니다.
 										</label>
@@ -119,11 +119,11 @@
 					<div class="adoption_qa">
 						<dl>
 							<dt>1. 입양을 희망하는 아이를 적어주세요.</dt>
-							<dd><input type="text" class="inpform" name="p_name" id="p_name" placeholder="내용을 입력해주세요." value="${p_name}"></dd>
+							<dd><input type="text" class="inpform" name="pet_name" id="pet_name" placeholder="내용을 입력해주세요." value="${pet_name}"></dd>
 						</dl>
 						<dl>
 							<dt>2. 입양하기를 희망하는 아이가 없을 경우 앞으로 입양하고자 하는 아이에 대하여 간단히 설명하여 주시기 바랍니다.</dt>
-							<dd><textarea class="txtareaform" name="alternative" id="p_name" cols="30" rows="5" placeholder="내용을 입력해주세요."></textarea></dd>
+							<dd><textarea class="txtareaform" name="alternative" id="alternative" cols="30" rows="5" placeholder="내용을 입력해주세요."></textarea></dd>
 						</dl>
 						<dl>
 							<dt>3. 입양을 결정하시기 까지 얼마나 오랜 시간을 고민하셨나요?</dt>
@@ -142,15 +142,15 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="family_arg01" name="family_arg">
+										<input type="radio" id="family_arg01" name="family_arg" value="동의">
 										<label for="family_arg01">동의</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="family_arg02" name="family_arg">
+										<input type="radio" id="family_arg02" name="family_arg" value="일부동의">
 										<label for="family_arg02">일부동의</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="family_arg03" name="family_arg">
+										<input type="radio" id="family_arg03" name="family_arg" value="반대">
 										<label for="family_arg03">반대</label>
 									</div>
 								</div>
@@ -171,15 +171,15 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="housing_type01" name="housing_type">
+										<input type="radio" id="housing_type01" name="housing_type" value="단독주택">
 										<label for="housing_type01">단독주택</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="housing_type02" name="housing_type">
+										<input type="radio" id="housing_type02" name="housing_type" value="공동주택">
 										<label for="housing_type02">공동주택</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="housing_type03" name="housing_type">
+										<input type="radio" id="housing_type03" name="housing_type" value="아파트">
 										<label for="housing_type03">아파트</label>
 									</div>
 								</div>
@@ -206,11 +206,11 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="payment_arg01" name="payment_arg">
+										<input type="radio" id="payment_arg01" name="payment_arg" value="Y" checked>
 										<label for="payment_arg01">네</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="payment_arg02" name="payment_arg">
+										<input type="radio" id="payment_arg02" name="payment_arg" value="N">
 										<label for="payment_arg02">아니요</label>
 									</div>
 								</div>
@@ -221,11 +221,11 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="neutered_arg01" name="neutered_arg">
+										<input type="radio" id="neutered_arg01" name="neutered_arg" value="Y" checked>
 										<label for="neutered_arg01">네</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="neutered_arg02" name="neutered_arg">
+										<input type="radio" id="neutered_arg02" name="neutered_arg" value="N">
 										<label for="neutered_arg02">아니요</label>
 									</div>
 								</div>
@@ -236,11 +236,11 @@
 							<dd>
 								<div class="rd_group">
 									<div class="inp_rd">
-										<input type="radio" id="visit_agr01" name="visit_agr">
+										<input type="radio" id="visit_agr01" name="visit_agr" value="Y" checked>
 										<label for="visit_agr01">네</label>
 									</div>
 									<div class="inp_rd">
-										<input type="radio" id="visit_agr02" name="visit_agr">
+										<input type="radio" id="visit_agr02" name="visit_agr" value="N">
 										<label for="visit_agr02">아니요</label>
 									</div>
 								</div>
@@ -286,7 +286,7 @@
 										따를 것을 서약합니다.</p>
 									<div class="chk_group">
 										<label class="inp_chk">
-											<input type="checkbox" id="adopt_arg" name="adopt_arg">
+											<input type="checkbox" id="adopt_arg" name="adopt_arg" value="Y">
 											<span class="chkmark"></span>위의 유의사항을 확인하였으며, 이에 동의합니다.
 										</label>
 									</div>
@@ -295,6 +295,8 @@
 						</dl>
 					</div>
 					<div class="btn_wrap">
+						<input type="hidden" name="user_id" value="">
+						<input type="hidden" name="code_seq" value="${code_seq}">
 						<button type="button" class="btn_m btn_primary" id="btn_adoptRegi">입양 신청하기</button>
 					</div>
 				</form>
@@ -321,16 +323,13 @@
 			let phoneRegex = /010?\d{3,4}?\d{4}$/;
 			let phone_val01 = $("#p_phone01").val();
 			let phone_val02 = $("#p_phone02").val();
-			alert(phoneRegex.test(phone_val01));
  			if(!phoneRegex.test(phone_val01)){
 				alert("올바른 연락처 양식이 아닙니다 :(");
 				return false;
 			} 
-			alert("phone_val02 : " + phone_val02);
 			if(phone_val02 != "" && !phoneRegex.test(phone_val02)){
 				alert("올바른 대체 연락처 양식이 아닙니다 :(");
 				return false;
-				
 			} 
 			
 			if($("#p_email").val() == ""){
@@ -349,15 +348,29 @@
 			let p_arg_chk = $("input:checkbox[name=p_arg]").is(':checked');
 			let family_arg_chk = $("input:radio[name=family_arg]").is(':checked');
 			let housing_type_chk = $("input:radio[name=housing_type]").is(':checked');
-			let payment_arg_chk = $("input:radio[name=payment_arg]").is(':checked');
-			let neutered_arg_chk = $("input:radio[name=neutered_arg]").is(':checked');
-			let visit_agr_chk = $("input:radio[name=visit_agr]").is(':checked');
 			let adopt_arg_chk = $("input:checkbox[name=adopt_arg]").is(':checked');
 
  			if(!gender_chk){
 				alert("성별을 선택해주세요!");
 				return false;
 			}
+ 			
+ 			let age = $("#p_age").val();
+ 			let ageRegex = /^[0-9]/;
+ 			if($("#p_age").val() == ""){
+				alert("나이를 입력해주세요!");
+				return false;
+			}
+ 			if(!ageRegex.test(age)){
+				alert("나이는 숫자만 입력 가능합니다!");
+				return false;
+  			}
+ 			
+ 			if($("#p_address").val() == ""){
+				alert("집주소를 입력해주세요!");
+				return false;
+  			}
+  		
  			if(!mstatus_chk){
 				alert("결혼여부 항목을 선택해주세요!");
 				return false;
@@ -365,43 +378,30 @@
  			if(!p_arg_chk){
 				alert("개인정보 수집 및 이용 항목을 동의해주세요!");
 				return false;
-			} 
+			}
  			if(!family_arg_chk){
-				alert("입양 질문 6번을 확인해주세요.");
+				alert("입양질문 6번 가족동의 여부를 확인해주세요.");
 				return false;
 			} 
  			if(!housing_type_chk){
-				alert("입양 질문 9번을 확인해주세요.");
+				alert("입양질문 9번 주거형태를 확인해주세요.");
+				return false;
+			}
+ 			if($("#pet_name").val() == "" || $("#alternative").val() == "" || $("#time_to_worry").val() == "" ||
+ 					$("#reason").val() == "" || $("#family_member").val() == "" || $("#pet").val() == "" || 
+ 					$("#experience").val() == "" || $("#housing_type").val() == "" || 
+ 					$("#host_consent").val() == "" || $("#impossible_situation").val() == "" || $("#lodging_problem").val() == "" ){
+ 				alert("입양 질문을 전부 기입했는지 확인해주세요.");
 				return false;
 			} 
- 			if(!payment_arg_chk){
-				alert("입양 질문 13번을 확인해주세요.");
-				return false;
-			} 
- 			if(!neutered_arg_chk){
-				alert("입양 질문 14번을 확인해주세요.");
-				return false;
-			} 
- 			if(!visit_agr_chk){
-				alert("입양 질문 15번을 확인해주세요.");
-				return false;
-			} 
+ 			
  			if(!adopt_arg_chk){
 				alert("입양 동의 유희사항을 확인해주세요.");
 				return false;
 			} 
-			// 내일 할 것 ! 인풋, 텍스트박스 널 체크해서 서브밋 해주기
-		
 			$("#adoptReg").submit();
 			
 		}) 
-		/*
-		이소라
-		01012341234
-		sora0119@naver.com
-		29
-		서울시 중랑구 망우로
-		*/
 	});
 	
 </script>
