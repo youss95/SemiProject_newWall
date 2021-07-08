@@ -2,16 +2,16 @@ package com.kh.dto;
 
 import java.sql.Date;
 
-public class FilesDTO {
+public class FileDTO {
 	private int seq;
 	private String oriName;
 	private String sysName;
 	private Date reg_date;
 	private int parent;
 	
-	public FilesDTO() {}
+	public FileDTO() {}
 
-	public FilesDTO(int seq, String oriName, String sysName, Date reg_date, int parent) {
+	public FileDTO(int seq, String oriName, String sysName, Date reg_date, int parent) {
 		this.seq = seq;
 		this.oriName = oriName;
 		this.sysName = sysName;
