@@ -11,7 +11,14 @@
 <title>뉴월 관리자 페이지</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 
 <body>
@@ -151,8 +158,8 @@
 									구조 내용
 								</dt>
 								<dd>
-									<textarea name="anContnets" class="txtareaform"
-											placeholder="구조 내용을 입력해주세요."></textarea>
+									<!-- <textarea name="anContnets" class="txtareaform" placeholder="구조 내용을 입력해주세요."></textarea> -->
+									  <textarea id="summernote" name="anContnets"></textarea>
 								</dd>
 							</dl>
 							<div class="btn_wrap">
@@ -165,10 +172,15 @@
 			</div>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	<script>
+		$(function(){
+			  $('#summernote').summernote({
+				  height: 500,
+				  minHeight: 500,
+				  maxHeight: 500,  
+			  });
+		})
+	</script>
 </body>
 
 </html>
