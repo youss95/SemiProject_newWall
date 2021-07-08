@@ -40,17 +40,7 @@ public class MemberDAO {
 		}
 	}
 	
-	public boolean isLoginOks(String id, String pw) throws Exception {
-		String sql = "select * from temp_member where user_id=? and user_password=?";
-		try(Connection con = this.getConnection();
-			PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setNString(1, id);
-			pstat.setNString(2, pw);
-			try(ResultSet rs = pstat.executeQuery()){
-				return rs.next();
-			}
-		}
-	}
+	
 
 	public MemberDTO selectMemberById(String pid) throws Exception{
 		String sql = "select * from member where user_id = ?";
@@ -73,23 +63,7 @@ public class MemberDAO {
 			}
 		}
 	}
-	//임시
-	public tempMemberDTO login(String pid) throws Exception{
-		
-		String sql = "select * from temp_member where user_id = ?";
-		try(Connection con = Db.getCon();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setNString(1, pid);
-			try(ResultSet rs = pstat.executeQuery()){
-				rs.next();
-				int user_seq = rs.getInt("user_seq");
-				String id = rs.getNString("user_id");
-				String pw = rs.getNString("user_password");
-				return new tempMemberDTO(user_seq,id,pw);
-				
-			}
-		}
-	}
+	
 	
 	public int delete(String id) throws Exception{
 		String sql = "delete from member where user_id = ?";

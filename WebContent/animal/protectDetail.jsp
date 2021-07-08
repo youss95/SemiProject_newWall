@@ -95,7 +95,7 @@
 									</div>
 									 <div class="m-2">
 										<c:if test="${sessionScope.loginInfo.user_id == replyList.protectWriter }">
-											<i class="fas fa-trash-alt"></i>
+											<i onclick="deleteReply(${replyList.replyNo})" class="fas fa-trash-alt"></i>
 										</c:if>
 									</div>
 								</li>

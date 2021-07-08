@@ -5,7 +5,7 @@
 .search_area .flex_box{display:flex;}
 .search_area .flex_box dl{flex:1;margin:5px;}
 .search_area .flex_box>input,
-.search_area .flex_box>button{margin:5px;}
+.search_area .flex_box>button{margin:5px;word-break:keep-all;}
 .flex_box dl dt{margin-bottom:10px;}
 .flex_box dl dt strong{display:block;font-size:20px;font-weight:600;margin-bottom:10px;}
 .flex_box dl dt span{font-size:12px;font-weight:300;}
@@ -43,11 +43,31 @@
 .info_box .move_list{position:absolute;top:0;font-size: 12px;font-weight: 300;}
 .info_box .move_list:hover{text-decoration:underline;}
 .animal_info .btn_wrap{margin-top:30px;}
-.animal_info .btn_wrap .btn_m{width:calc(50% - 25px);height:50px;font-size:16px;}
+.animal_info .btn_wrap .btn_m{width:calc(50% - 25px);height:50px;font-size:16px;line-height:23px;}
+.animal_info .btn_wrap .btn_m:hover{color:#fff;}
 .animal_info .btn_wrap .btn_m+.btn_m{margin-left:10px;}
 .animal_history{width:100%;margin-top:80px;padding:40px;background-color:#f2f2f28a;}
 .animal_history .cont{background-color:#fff;position:relative;box-shadow:0 3px 10px rgba(0,0%,0%,5%);}
 .animal_history .cont:before{width:4px;height:60px;background-color:#ffa5a5;position:absolute;left:0;top:0;content:'';}
 .animal_history .cont>h2{height:60px;padding:0 30px;font-size:20px;line-height:60px;font-weight:600;}
 .animal_history .cont>div{padding:50px;}
+
+.adoptRegForm .banner {width: 100%;height: 400px;opacity:.8;}
+.adoptRegForm .title{text-align: center;margin:40px auto 60px}
+.adoptRegForm .title h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin-bottom:15px;}
+.adoptRegForm .title h2:after{display:block;width:100%;height:8px;background-color:#FFA5A5;position: relative;top: -6px;z-index: -1;opacity: .8;content:'';}
+.adoptRegForm .title p{font-size:13px;font-weight:300;}
+.adoptRegForm .title p em{font-weight:600;}
+.adoptRegForm .notice{padding:40px;background-color:#fff0f0d0;}
+.adoptRegForm .notice p{font-weight:600;font-size:14px;margin-bottom:10px;}
+.adoptRegForm .notice ul{margin-left:20px;}
+.adoptRegForm .notice ul li{font-size:14px;font-weight:300;line-height:1.4;list-style: disc;}
+.adoptRegForm h3{font-weight:600;font-size: 20px;margin-bottom: 20px;border-bottom: 2px solid #769FCD;margin:40px 0 20px;padding-bottom:15px;}
+.adoptRegForm dl dt{margin-bottom:10px;font-weight:600;}
+.adoptRegForm dl dd{margin-bottom:30px;}
+.adoptRegForm .terms .box{padding:20px;background-color:#F7FBFC;border:1px solid #D6E6F2}
+.adoptRegForm .terms .box+p{margin:5px 0 10px;font-weight:300;font-size:13px;}
+.adoptRegForm .terms ol{margin-left:20px;}
+.adoptRegForm .terms ol li{font-size:14px;line-height:1.6;list-style: decimal;}
+.adoptRegForm .btn_wrap{text-align: right;}
 

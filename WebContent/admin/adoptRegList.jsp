@@ -16,48 +16,7 @@
 
 <body>
 	<div class="wrap">
-		<nav>
-			<div class="lnb">
-				<h1><a href="#">LOGO</a></h1>
-				<ul class="slide_menu">
-					<li class="depth1">
-						<a href="#">회원관리<i class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">회원 명단 보기</a></li>
-							<li class="depth2"><a href="#">회원관리</a></li>
-						</ul>
-					</li>
-					<li class="depth1">
-						<a href="#">게시판 관리<i class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">회원작성 글</a></li>
-							<li class="depth2"><a href="#">뉴스</a></li>
-							<li class="depth2"><a href="#">공지사항</a></li>
-						</ul>
-					</li>
-					<li class="depth1">
-						<a href="#">입양<i class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">입양 신청 리스트</a></li>
-							<li class="depth2"><a href="#">입양 신청 상태 관리</a></li>
-						</ul>
-					</li>
-					<li class="depth1">
-						<a href="#">후원<i class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">후원금 관리</a></li>
-						</ul>
-					</li>
-					<li class="depth1">
-						<a href="#">동물 정보<i class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">동물 정보 관리</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
-
+		<jsp:include page="../layout/jsp/adminHeader.jsp"></jsp:include>
 		<div class="main">
 			<div class="container">
 				<section class="shadow-sm rounded">
@@ -69,9 +28,9 @@
 							<thead>
 								<tr>
 									<th>순서</th>
-									<th>신청코드</th>
-									<th>동물이름</th>
+									<th>신청코드(동물코드)</th>
 									<th>신청자</th>
+									<th>회원</th>
 									<th>신청일자</th>
 								</tr>
 							</thead>
@@ -97,6 +56,7 @@
 				dataType: "json"
 			}).done(function(resp){
 				let tbody = $('.adoption_list tbody');
+				console.log(resp);
 				
 				if(resp.length == 0){
 					tbody.append("<tr class=nodata><td colspan=5>신청자 내역이 존재하지 않습니다.");
@@ -104,9 +64,11 @@
 					for(let i=0; i<resp.length; i++){
 					 	let tr = $("<tr>");
 						tr.append("<td>" + resp[i].adopt_seq);
-						tr.append("<td>" + resp[i].code_seq);
-						tr.append("<td>" + resp[i].an_name);
-						tr.append("<td>" + resp[i].user_id);
+						tr.append("<td class='t_link'>" + resp[i].code_seq + "(" + resp[i].q01_aname + ")");
+						tr.append("<td>" + resp[i].p_name);
+						let user_id = resp[i].user_id;
+						if(user_id == null){user_id = "비회원";}
+						tr.append("<td>" + user_id);
 						tr.append("<td>" + resp[i].reg_date);
 						tbody.append(tr);
 					} 

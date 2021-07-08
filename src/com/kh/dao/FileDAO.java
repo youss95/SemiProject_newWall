@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import com.kh.dto.AnimalFilesDTO;
 
+import kh.mvc.dto.FilesDTO;
+
 public class FileDAO {
 	private static FileDAO instance;
 
@@ -104,6 +106,60 @@ public class FileDAO {
 
 	}
 	
+	public String getSysName(int seq) throws Exception {
+		String sql = "select sysname from files where seq = ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				return rs.getString("sysname");
+			}
+		}
+	}
+	
+	public int insert(FilesDTO dto) throws Exception{
+		String sql = "insert into files values(files_seq.nextval,?,?,sysdate,?)";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			
+				pstat.setString(1, dto.getOriName());
+				pstat.setString(2, dto.getSysName());
+				pstat.setInt(3, dto.getParent());
+				int result = pstat.executeUpdate();
+				con.commit();
+				return result;
+		}
+	}
+	
+	public List<FilesDTO> selectBySeq(int fparent) throws Exception {
+		String sql = "select * from files where parent = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);				
+				){
+			pstat.setInt(1, fparent);
+			try(ResultSet rs = pstat.executeQuery()
+					){
+				List<FilesDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("seq");
+					String oriName = rs.getString("oriName");
+					String sysName = rs.getString("sysName");
+					Date reg_date = rs.getDate("reg_date");
+					int parent = rs.getInt("parent");
+					list.add(new FilesDTO(seq,oriName,sysName,reg_date,parent));
+					
+				}
+				return list;
+			}
+			
+		}
+		
+	}
 	
 	public int delete(int seq) throws Exception{
 		String sql = "delete from files where seq = ?";

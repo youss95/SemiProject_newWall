@@ -4,195 +4,320 @@ import java.sql.Date;
 
 public class AdoptionDTO {
 
-	private String adopt_qa01;
-	private String adopt_qa02;
-	private String adopt_qa03;
-	private String adopt_qa04;
-	private String adopt_qa05;
-	private String adopt_qa06;
-	private String adopt_qa07;
-	private String adopt_qa08;
-	private String adopt_qa09;
-	private String adopt_qa10;
-	private String adopt_qa11;
-	private String adopt_qa12;
-	private String adopt_qa13;
-	private String adopt_qa14;
-	private String adopt_qa15;
-	private String adopt_qa16;
-	private String user_id;
-	private Date reg_date;
-	private String code_seq;
 	private int adopt_seq;
-	private String an_name;
+	private String code_seq;
+	private Date reg_date;
+	private String user_id;
+	private String p_name;
+	private String p_phone01;
+	private String p_phone02;
+	private String p_email;
+	private String p_gender;
+	private String p_age;
+	private String p_address;
+	private String p_mstatus;
+	private String p_arg;
+	private String q01_aname;
+	private String q02_alternative;
+	private String q03_time_to_worry;
+	private String q04_reason;
+	private String q05_family_member;
+	private String q06_family_arg;
+	private String q07_pet;
+	private String q08_experience;
+	private String q09_housing_type;
+	private String q10_host_consent;
+	private String q11_impossible_situation;
+	private String q12_lodging_problem;
+	private String q13_payment_arg;
+	private String q14_neutered_arg;
+	private String q15_visit_agr;
+	private String q16_adopt_arg;
+
 	
 	public AdoptionDTO() {}
 	
-	// adopt_regi
-	public AdoptionDTO(String user_id, Date reg_date, String code_seq, int adopt_seq, String an_name) {
+	// adoption list
+	public AdoptionDTO(String user_id, String p_name, Date reg_date, String code_seq, int adopt_seq, String q01_aname) {
 		super();
 		this.user_id = user_id;
+		this.p_name = p_name;
 		this.reg_date = reg_date;
 		this.code_seq = code_seq;
 		this.adopt_seq = adopt_seq;
-		this.an_name = an_name;
+		this.q01_aname = q01_aname;
 	}
 
-	// adoption
-	public AdoptionDTO(String adopt_qa01, String adopt_qa02, String adopt_qa03, String adopt_qa04, String adopt_qa05,
-			String adopt_qa06, String adopt_qa07, String adopt_qa08, String adopt_qa09, String adopt_qa10,
-			String adopt_qa11, String adopt_qa12, String adopt_qa13, String adopt_qa14, String adopt_qa15,
-			String adopt_qa16, String user_id, Date reg_date, String code_seq) {
+	public AdoptionDTO(int adopt_seq, String code_seq, Date reg_date, String user_id, String p_name, String p_phone01,
+			String p_phone02, String p_email, String p_gender, String p_age, String p_address, String p_mstatus,
+			String p_arg, String q01_aname, String q02_alternative, String q03_time_to_worry, String q04_reason,
+			String q05_family_member, String q06_family_arg, String q07_pet, String q08_experience,
+			String q09_housing_type, String q10_host_consent, String q11_impossible_situation,
+			String q12_lodging_problem, String q13_payment_arg, String q14_neutered_arg, String q15_visit_agr,
+			String q16_adopt_arg) {
 		super();
-		this.adopt_qa01 = adopt_qa01;
-		this.adopt_qa02 = adopt_qa02;
-		this.adopt_qa03 = adopt_qa03;
-		this.adopt_qa04 = adopt_qa04;
-		this.adopt_qa05 = adopt_qa05;
-		this.adopt_qa06 = adopt_qa06;
-		this.adopt_qa07 = adopt_qa07;
-		this.adopt_qa08 = adopt_qa08;
-		this.adopt_qa09 = adopt_qa09;
-		this.adopt_qa10 = adopt_qa10;
-		this.adopt_qa11 = adopt_qa11;
-		this.adopt_qa12 = adopt_qa12;
-		this.adopt_qa13 = adopt_qa13;
-		this.adopt_qa14 = adopt_qa14;
-		this.adopt_qa15 = adopt_qa15;
-		this.adopt_qa16 = adopt_qa16;
-		this.user_id = user_id;
-		this.reg_date = reg_date;
+		this.adopt_seq = adopt_seq;
 		this.code_seq = code_seq;
-	}
-	
-	public String getAdopt_qa01() {
-		return adopt_qa01;
-	}
-	public void setAdopt_qa01(String adopt_qa01) {
-		this.adopt_qa01 = adopt_qa01;
-	}
-	public String getAdopt_qa02() {
-		return adopt_qa02;
-	}
-	public void setAdopt_qa02(String adopt_qa02) {
-		this.adopt_qa02 = adopt_qa02;
-	}
-	public String getAdopt_qa03() {
-		return adopt_qa03;
-	}
-	public void setAdopt_qa03(String adopt_qa03) {
-		this.adopt_qa03 = adopt_qa03;
-	}
-	public String getAdopt_qa04() {
-		return adopt_qa04;
-	}
-	public void setAdopt_qa04(String adopt_qa04) {
-		this.adopt_qa04 = adopt_qa04;
-	}
-	public String getAdopt_qa05() {
-		return adopt_qa05;
-	}
-	public void setAdopt_qa05(String adopt_qa05) {
-		this.adopt_qa05 = adopt_qa05;
-	}
-	public String getAdopt_qa06() {
-		return adopt_qa06;
-	}
-	public void setAdopt_qa06(String adopt_qa06) {
-		this.adopt_qa06 = adopt_qa06;
-	}
-	public String getAdopt_qa07() {
-		return adopt_qa07;
-	}
-	public void setAdopt_qa07(String adopt_qa07) {
-		this.adopt_qa07 = adopt_qa07;
-	}
-	public String getAdopt_qa08() {
-		return adopt_qa08;
-	}
-	public void setAdopt_qa08(String adopt_qa08) {
-		this.adopt_qa08 = adopt_qa08;
-	}
-	public String getAdopt_qa09() {
-		return adopt_qa09;
-	}
-	public void setAdopt_qa09(String adopt_qa09) {
-		this.adopt_qa09 = adopt_qa09;
-	}
-	public String getAdopt_qa10() {
-		return adopt_qa10;
-	}
-	public void setAdopt_qa10(String adopt_qa10) {
-		this.adopt_qa10 = adopt_qa10;
-	}
-	public String getAdopt_qa11() {
-		return adopt_qa11;
-	}
-	public void setAdopt_qa11(String adopt_qa11) {
-		this.adopt_qa11 = adopt_qa11;
-	}
-	public String getAdopt_qa12() {
-		return adopt_qa12;
-	}
-	public void setAdopt_qa12(String adopt_qa12) {
-		this.adopt_qa12 = adopt_qa12;
-	}
-	public String getAdopt_qa13() {
-		return adopt_qa13;
-	}
-	public void setAdopt_qa13(String adopt_qa13) {
-		this.adopt_qa13 = adopt_qa13;
-	}
-	public String getAdopt_qa14() {
-		return adopt_qa14;
-	}
-	public void setAdopt_qa14(String adopt_qa14) {
-		this.adopt_qa14 = adopt_qa14;
-	}
-	public String getAdopt_qa15() {
-		return adopt_qa15;
-	}
-	public void setAdopt_qa15(String adopt_qa15) {
-		this.adopt_qa15 = adopt_qa15;
-	}
-	public String getAdopt_qa16() {
-		return adopt_qa16;
-	}
-	public void setAdopt_qa16(String adopt_qa16) {
-		this.adopt_qa16 = adopt_qa16;
-	}
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-	public Date getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
+		this.user_id = user_id;
+		this.p_name = p_name;
+		this.p_phone01 = p_phone01;
+		this.p_phone02 = p_phone02;
+		this.p_email = p_email;
+		this.p_gender = p_gender;
+		this.p_age = p_age;
+		this.p_address = p_address;
+		this.p_mstatus = p_mstatus;
+		this.p_arg = p_arg;
+		this.q01_aname = q01_aname;
+		this.q02_alternative = q02_alternative;
+		this.q03_time_to_worry = q03_time_to_worry;
+		this.q04_reason = q04_reason;
+		this.q05_family_member = q05_family_member;
+		this.q06_family_arg = q06_family_arg;
+		this.q07_pet = q07_pet;
+		this.q08_experience = q08_experience;
+		this.q09_housing_type = q09_housing_type;
+		this.q10_host_consent = q10_host_consent;
+		this.q11_impossible_situation = q11_impossible_situation;
+		this.q12_lodging_problem = q12_lodging_problem;
+		this.q13_payment_arg = q13_payment_arg;
+		this.q14_neutered_arg = q14_neutered_arg;
+		this.q15_visit_agr = q15_visit_agr;
+		this.q16_adopt_arg = q16_adopt_arg;
 	}
-	public String getCode_seq() {
-		return code_seq;
-	}
-	public void setCode_seq(String code_seq) {
-		this.code_seq = code_seq;
-	}
+
 	public int getAdopt_seq() {
 		return adopt_seq;
 	}
+
 	public void setAdopt_seq(int adopt_seq) {
 		this.adopt_seq = adopt_seq;
 	}
-	public String getAn_name() {
-		return an_name;
+
+	public String getCode_seq() {
+		return code_seq;
 	}
-	public void setAn_name(String an_name) {
-		this.an_name = an_name;
+
+	public void setCode_seq(String code_seq) {
+		this.code_seq = code_seq;
 	}
-	
-	
-	
+
+	public Date getReg_date() {
+		return reg_date;
+	}
+
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public String getP_phone01() {
+		return p_phone01;
+	}
+
+	public void setP_phone01(String p_phone01) {
+		this.p_phone01 = p_phone01;
+	}
+
+	public String getP_phone02() {
+		return p_phone02;
+	}
+
+	public void setP_phone02(String p_phone02) {
+		this.p_phone02 = p_phone02;
+	}
+
+	public String getP_email() {
+		return p_email;
+	}
+
+	public void setP_email(String p_email) {
+		this.p_email = p_email;
+	}
+
+	public String getP_gender() {
+		return p_gender;
+	}
+
+	public void setP_gender(String p_gender) {
+		this.p_gender = p_gender;
+	}
+
+	public String getP_age() {
+		return p_age;
+	}
+
+	public void setP_age(String p_age) {
+		this.p_age = p_age;
+	}
+
+	public String getP_address() {
+		return p_address;
+	}
+
+	public void setP_address(String p_address) {
+		this.p_address = p_address;
+	}
+
+	public String getP_mstatus() {
+		return p_mstatus;
+	}
+
+	public void setP_mstatus(String p_mstatus) {
+		this.p_mstatus = p_mstatus;
+	}
+
+	public String getP_arg() {
+		return p_arg;
+	}
+
+	public void setP_arg(String p_arg) {
+		this.p_arg = p_arg;
+	}
+
+	public String getQ01_aname() {
+		return q01_aname;
+	}
+
+	public void setQ01_aname(String q01_aname) {
+		this.q01_aname = q01_aname;
+	}
+
+	public String getQ02_alternative() {
+		return q02_alternative;
+	}
+
+	public void setQ02_alternative(String q02__alternative) {
+		this.q02_alternative = q02__alternative;
+	}
+
+	public String getQ03_time_to_worry() {
+		return q03_time_to_worry;
+	}
+
+	public void setQ03_time_to_worry(String q03_time_to_worry) {
+		this.q03_time_to_worry = q03_time_to_worry;
+	}
+
+	public String getQ04_reason() {
+		return q04_reason;
+	}
+
+	public void setQ04_reason(String q04_reason) {
+		this.q04_reason = q04_reason;
+	}
+
+	public String getQ05_family_member() {
+		return q05_family_member;
+	}
+
+	public void setQ05_family_member(String q05_family_member) {
+		this.q05_family_member = q05_family_member;
+	}
+
+	public String getQ06_family_arg() {
+		return q06_family_arg;
+	}
+
+	public void setQ06_family_arg(String q06_family_arg) {
+		this.q06_family_arg = q06_family_arg;
+	}
+
+	public String getQ07_pet() {
+		return q07_pet;
+	}
+
+	public void setQ07_pet(String q07_pet) {
+		this.q07_pet = q07_pet;
+	}
+
+	public String getQ08_experience() {
+		return q08_experience;
+	}
+
+	public void setQ08_experience(String q08_experience) {
+		this.q08_experience = q08_experience;
+	}
+
+	public String getQ09_housing_type() {
+		return q09_housing_type;
+	}
+
+	public void setQ09_housing_type(String q09_housing_type) {
+		this.q09_housing_type = q09_housing_type;
+	}
+
+	public String getQ10_host_consent() {
+		return q10_host_consent;
+	}
+
+	public void setQ10_host_consent(String q10_host_consent) {
+		this.q10_host_consent = q10_host_consent;
+	}
+
+	public String getQ11_impossible_situation() {
+		return q11_impossible_situation;
+	}
+
+	public void setQ11_impossible_situation(String q11_impossible_situation) {
+		this.q11_impossible_situation = q11_impossible_situation;
+	}
+
+	public String getQ12_lodging_problem() {
+		return q12_lodging_problem;
+	}
+
+	public void setQ12_lodging_problem(String q12_lodging_problem) {
+		this.q12_lodging_problem = q12_lodging_problem;
+	}
+
+	public String getQ13_payment_arg() {
+		return q13_payment_arg;
+	}
+
+	public void setQ13_payment_arg(String q13_payment_arg) {
+		this.q13_payment_arg = q13_payment_arg;
+	}
+
+	public String getQ14_neutered_arg() {
+		return q14_neutered_arg;
+	}
+
+	public void setQ14_neutered_arg(String q14_neutered_arg) {
+		this.q14_neutered_arg = q14_neutered_arg;
+	}
+
+	public String getQ15_visit_agr() {
+		return q15_visit_agr;
+	}
+
+	public void setQ15_visit_agr(String q15_visit_agr) {
+		this.q15_visit_agr = q15_visit_agr;
+	}
+
+	public String getQ16_adopt_arg() {
+		return q16_adopt_arg;
+	}
+
+	public void setQ16_adopt_arg(String q16_adopt_arg) {
+		this.q16_adopt_arg = q16_adopt_arg;
+	}
+
 	
 }

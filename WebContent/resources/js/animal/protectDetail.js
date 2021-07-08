@@ -22,13 +22,11 @@ function deleteReply(replyNo){
 	
 	$.ajax({
 		type : "post",
-		url : "${pageContext.request.contextPath}/comment.lost&replyNo="+replyNo,
+		url : "${pageContext.request.contextPath}/protectReplyDelete.lost&replyNo="+replyNo,
 		dataType : "json"
-	}).done(function(result) { 
+	}).done(function(result){ 
 	
 			$("#reply-"+id).remove();
 		
-	}).fail({
-		
-	});
+	})
 }

@@ -86,8 +86,8 @@ audio,video{display:inline-block;zoom:1;max-width:100%}
 audio:not([controls]){display:none;height:0}
 [hidden]{display:none}
 body{font-size:15px}
-a:focus{outline:thin dotted}
-a:active,a:hover{outline:0}
+a:focus{outline:0;}
+a:active,a:hover{outline:0;}
 em,b{font-family:'NotoSansCJKkr'}
 img{border:0;max-width:100%;vertical-align:middle;-ms-interpolation-mode:bicubic;}
 hr{display:none}

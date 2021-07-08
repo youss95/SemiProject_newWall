@@ -30,11 +30,11 @@
 				<ul>
 					<li class="depth2"><a href="#">후원금 관리</a></li>
 				</ul></li>
-			<li class="depth1"><a href="#">동물 정보 관리<i
-					class="fas fa-chevron-right"></i></a>
+			<li class="depth1"><a href="#">동물 정보<i class="fas fa-chevron-right"></i></a>
 				<ul>
-					<li class="depth2"><a href="${pageContext.request.contextPath}/admin/animalInfoReg.jsp">동물 정보 등록</a></li>
-				</ul></li>
+					<li class="depth2"><a href="${pageContext.request.contextPath}/animalInfoList.adm?cpage=1">동물 정보 리스트</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 </nav>

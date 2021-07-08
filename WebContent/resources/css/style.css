@@ -59,35 +59,23 @@ button[disabled],.btn_file input[type="file"],.btn_file label[disabled]{ backgro
 /* input */
 .inpform {width: 100%;height: 40px; padding: 0 10px;box-sizing: border-box; border: 1px solid #769FCD; color: #333;border-radius: 5px;}
 .inpform.error{border-color: #D74F4F;}
-.inpform::-webkit-input-placeholder{color: #769FCD;}
-.inpform::-moz-placeholder{color: #769FCD;}
-.inpform:-moz-placeholder{color: #769FCD;}
-.inpform:-ms-input-placeholder{color: #769FCD;}
-.inpform:-o-placeholder{color: #769FCD;}
 .inpform:focus,.inp_slct select:focus{border-color: #254E7C;}
 input:disabled,textarea:disabled {background-color: #D6E6F2;border: 1px solid #D6E6F2;color: #769FCD;}
 input:disabled{height: 40px;padding: 0 10px;}
-
 .txtareaform{width: 100%;padding: 10px;border: 1px solid #769FCD;resize:none;border-radius: 5px;line-height: 1.5;}
-.txtareaform:focus{border-color: #254E7C;}
-.txtareaform::-webkit-input-placeholder,
-.txtareaform::-moz-placeholder,
-.txtareaform:-moz-placeholder,
-.txtareaform:-ms-input-placeholder,
-.txtareaform:-o-placeholder { color: #769FCD; }
 
 .radio_box{margin-bottom: 10px;display: -webkit-flex;display: -ms-flex;display: flex;}
 .inp_rd{float: none;display: inline-block;margin-left: 10px;vertical-align: middle;}
 .inp_rd:first-child{margin-left: 0;}
 .inp_rd input[type="radio"]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
-.inp_rd input[type="radio"] + label{display:inline-block;position:relative;padding-left: 20px;text-indent:5px;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select: none;color: #1d1e25;vertical-align:top;}
+.inp_rd input[type="radio"] + label{display:inline-block;position:relative;padding-left: 20px;font-size:14px;text-indent:5px;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select: none;color: #1d1e25;vertical-align:top;}
 .inp_rd input[type="radio"] + label:before{content:'';position:absolute;left:0;top:0;width:18px;height:18px;text-align:center;background: #fff;border:1px solid #254E7C;border-radius:100%;box-sizing:border-box;}
 .inp_rd input[type="radio"]:checked + label:before{background:#fff;border-color: #5862a2;}
 .inp_rd input[type="radio"]:checked + label:after{position: absolute;top: 4px;left: 4px;width: 10px;height: 10px;background-color: #254E7C;border-radius: 50%;content: '';}
 .rd_group{display: -webkit-flex;display: -ms-flex;display: flex;}
 .rd_group .inp_rd + .inp_rd{margin-left: 20px;}
 
-.inp_chk{display:inline-block;height:18px;position:relative;padding-left:20px;cursor:pointer;line-height:18px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align: top;text-indent:5px;}
+.inp_chk{display:inline-block;height:18px;position:relative;padding-left:20px;cursor:pointer;font-size:14px;line-height:18px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align: top;text-indent:5px;}
 .inp_chk input{position:absolute;opacity:0;cursor:pointer;}
 .inp_chk input:checked ~ .chkmark{border-color: #254E7C;background-color: #254E7C;}
 .inp_chk input:checked ~ .chkmark:after{content:'';position: absolute;left:4px;top:0;width:6px;height:9px;border:solid #fff;border-width:0 2px 2px 0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);}
@@ -150,6 +138,10 @@ input:disabled{height: 40px;padding: 0 10px;}
 #loginModal div[class*=modal] {border: none;}
 #loginModal .modal-content {background-color: #00000000;}
 #loginModal .login-title {background-color: #FFFFFF;}
-#loginModal .modal-body {background-color: #FFFFFF;}
-#loginModal .modal-footer {background-color: #FFFFFF;}
-#popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal .modal-body {background-color: #FFFFFF; padding-top: 10px; padding-left: 45px; padding-right: 45px;}
+#loginModal .modal-footer {background-color: #FFFFFF; padding-bottom: 25px; padding-left: 40px; padding-right: 40px;}
+#loginModal #modal-logo {background-color: #FFFFFF !important; padding-bottom: 30px}
+#loginModal #idPwHov:hover{text-decoration: underline;}
+#loginModal #idPwHov{background-color: #FFFFFF; border:none;}
+#loginModal #popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal #popup-logo {position: relative; top: 30px; left: 133px;}

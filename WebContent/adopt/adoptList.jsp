@@ -36,8 +36,7 @@
 												<option value="고양이">고양이</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_category" name="h_category"
-											value="${h_category}">
+										<input type="hidden" class="h_category" name="h_category" value="${h_category}">
 									</dd>
 								</dl>
 								<dl>
@@ -111,12 +110,10 @@
 								</dl>
 							</div>
 							<div class="flex_box">
-								<input type="text" class="inpform an_name" name="an_name"
-									placeholder="이름을 입력해 주세요." value="${an_name}">
+								<input type="text" class="inpform an_name" name="an_name" placeholder="이름을 입력해 주세요." value="${an_name}">
 								<button class="btn_m btn_default">검색</button>
 								<input type="reset" class="btn_m btn_white" value="초기화">
-								<input type="hidden" value="1" name="cpage"> <input
-									type="hidden" value="1" name="cpage">
+								<input type="hidden" value="1" name="cpage" id="cpage">
 							</div>
 						</form>
 					</div>
@@ -138,9 +135,9 @@
 											<div class="txt">
 												<p class="name">${i.an_name}</p>
 												<ul class="info">
-													<li>${i.an_category} / ${i.an_kind}</li>
-													<li>${i.an_gender} / 중성화 (${i.an_neutering})</li>
-													<li>${i.an_weight}kg / ${i.an_age}살 / ${i.an_character}</li>
+													<li>${i.an_category}/ ${i.an_kind}</li>
+													<li>${i.an_gender}/ 중성화 (${i.an_neutering})</li>
+													<li>${i.an_weight}kg/ ${i.an_age}살 / ${i.an_character}</li>
 												</ul>
 											</div>
 										</a>
@@ -181,17 +178,17 @@
 			let weight = $(".h_weight").val();
 			let age = $(".h_age").val();
 			let character = $(".h_character").val();
-
-			$('.category option[value=' + category + ']').prop('selected',
-					'selected').change();
-			$('.gender option[value=' + gender + ']').prop('selected',
-					'selected').change();
-			$('.weight option[value=' + weight + ']').prop('selected',
-					'selected').change();
-			$('.age option[value=' + age + ']').prop('selected', 'selected')
-					.change();
-			$('.character option[value=' + character + ']').prop('selected',
-					'selected').change();
+			let an_name = $(".an_name").val();
+		
+			if(!(category=="" && gender=="" && weight=="" && age=="" && character=="" && an_name=="")){
+				$('.category option[value=' + category + ']').prop('selected','selected').change();
+				$('.gender option[value=' + gender + ']').prop('selected','selected').change();
+				$('.weight option[value=' + weight + ']').prop('selected','selected').change();
+				$('.age option[value=' + age + ']').prop('selected', 'selected').change();
+				$('.character option[value=' + character + ']').prop('selected','selected').change();
+			}
 
 		});
 	</script>
+</body>
+</html>

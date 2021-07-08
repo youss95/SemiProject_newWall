@@ -77,8 +77,8 @@ public class MemberController extends HttpServlet {
 				String user_id = request.getParameter("user_id");
 				String user_password = request.getParameter("user_password");
 				System.out.println(user_id);
-				if(dao.isLoginOks(user_id, user_password)) {
-					tempMemberDTO dto = dao.login(user_id);
+				if(dao.isLoginOk(user_id, user_password)) {
+					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
 					System.out.println(dto);
 				}

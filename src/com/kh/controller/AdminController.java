@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -17,11 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.config.FileConfig;
+import com.kh.config.PageConfig;
 import com.kh.dao.AdminDAO;
+import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
+import com.kh.dao.SponsorDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -64,6 +67,7 @@ public class AdminController extends HttpServlet {
 		String url = requestURI.substring(ctxPath.length());
 
 		AdminDAO admindao = AdminDAO.getInstance();
+		AdoptionDAO adoptdao = AdoptionDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
 
 		try {
@@ -135,7 +139,30 @@ public class AdminController extends HttpServlet {
 				
 				response.sendRedirect("admin/animalInfoReg.jsp");
 
+			}else if(url.contentEquals("/animalInfoList.adm")) { 
+				System.out.println("동물 정보 리스트");
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int endNum = cpage * PageConfig.ADOPT_RECORD_COUNT_PER_PAGE;
+				int startNum = endNum - (PageConfig.ADOPT_RECORD_COUNT_PER_PAGE - 1);
+				
+				List<AnimalDTO> list;
+				List<String> pageNavi = adoptdao.getPageNavi(cpage);
+				
+				list = adoptdao.getPageList(startNum, endNum);
+				request.setAttribute("list", list);
+				request.setAttribute("navi", pageNavi);
+				request.getRequestDispatcher("admin/animalInfoList.jsp").forward(request, response);
+			}else if(url.contentEquals("/adSponsorList.adm")) {
+				System.out.println("스폰서 후원");
+				SponsorDAO sdao =SponsorDAO.getInstance(); 
+				List<SponsorDTO> slist = sdao.selectAll();
+				
+				request.setAttribute("slist", slist);
+			    request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				
 			}
+
 
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -34,7 +34,7 @@ public class AdminDAO {
 	}
 
 	public List<AdoptionDTO> getAdoptionList() throws Exception{
-		String sql = "select * from adopt_regi";
+		String sql = "select * from adoption";
 
 		try(
 				Connection con = this.getConnection();
@@ -45,11 +45,12 @@ public class AdminDAO {
 			while(rs.next()) {
 				AdoptionDTO dto = new AdoptionDTO();
 
-				dto.setAdopt_seq(rs.getInt("adopt_seq"));
-				dto.setCode_seq(rs.getNString("code_seq"));
-				dto.setUser_id(rs.getNString("user_id"));
+				dto.setP_name(rs.getNString("p_name"));
 				dto.setReg_date(rs.getDate("reg_date"));
-				dto.setAn_name(rs.getNString("an_name"));
+				dto.setCode_seq(rs.getNString("code_seq"));
+				dto.setAdopt_seq(rs.getInt("adopt_seq"));
+				dto.setQ01_aname(rs.getNString("q01_aname"));
+				dto.setUser_id(rs.getNString("user_id"));
 
 				list.add(dto);
 			}
@@ -97,6 +98,7 @@ public class AdminDAO {
 			return result;
 		}
 	}
+
 	
 
 }
