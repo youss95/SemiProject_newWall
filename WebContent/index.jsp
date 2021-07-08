@@ -49,25 +49,26 @@
 				</div>
 				<div class="modal-header login-title"></div>
 				<div class="modal-body">
-					<form>
+					<form action="${pageContext.request.contextPath}/loginProc.mem" method="get">
 						<div class="form-group">
 							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
+								type="text" class="form-control" id="user_id" name="user_id"
 								placeholder="Your ID">
 						</div>
 						<div class="form-group">
 							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
+								type="text" class="form-control" id="user_pw" name="user_password"
 								placeholder="Password">
 						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
+						<div class="modal-footer">
+					<button type="submit" class="btn_m btn_default"
 						data-dismiss="modal" style="width: 125%">로그인</button>
 					<button type="button" class="btn_m btn_white" data-dismiss="modal"
 						style="width: 125%">회원가입</button>
 				</div>
+					</form>
+				</div>
+				
 			</div>
 		</div>
 	</div>

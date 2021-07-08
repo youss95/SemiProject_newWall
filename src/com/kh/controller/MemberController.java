@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.dao.MemberDAO;
 import com.kh.dto.MemberDTO;
+import com.kh.dto.tempMemberDTO;
 import com.kh.utils.DateUtils;
 
 
@@ -75,10 +76,11 @@ public class MemberController extends HttpServlet {
 				//----------------------------------------------------------------------------------------- 로그인 요청 처리
 				String user_id = request.getParameter("user_id");
 				String user_password = request.getParameter("user_password");
-				
-				if(dao.isLoginOk(user_id, user_password)) {
-					MemberDTO dto = dao.selectMemberById(user_id);
+				System.out.println(user_id);
+				if(dao.isLoginOks(user_id, user_password)) {
+					tempMemberDTO dto = dao.login(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
+					System.out.println(dto);
 				}
 				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/logoutProc.mem")){

@@ -12,6 +12,7 @@ import com.kh.config.Db;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
 import com.kh.dto.ProtectDetailDTO;
+import com.kh.dto.ProtectReplyDTO;
 import com.kh.dto.ProtectionDTO;
 
 public class AnimalDAO {
@@ -193,4 +194,62 @@ public class AnimalDAO {
 		}
 	}
 	
+	//댓글쓰기
+	public int addReply(ProtectReplyDTO dto) throws Exception	{
+		String sql = "insert into protect_replys values (protect_replyno.nextval,?,?,?,sysdate)";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1,dto.getReplyCon());
+			pstmt.setString(2, dto.getProtectWriter());
+			pstmt.setInt(3, dto.getBoardNo());
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
+	public List<ProtectReplyDTO> getReplyList(int boardNo) throws Exception{
+		List<ProtectReplyDTO> list = new ArrayList<ProtectReplyDTO>();
+		String sql = "select * from protect_replys where protect_boardno=? order by protect_replyno desc";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, boardNo);
+		try(ResultSet rs = pstmt.executeQuery()){
+			while(rs.next()) {
+				ProtectReplyDTO dto;
+				int replyNo = rs.getInt("protect_replyno");
+				String replyCon = rs.getString("protect_replycon");
+				String protectWriter = rs.getString("protect_writer");
+				Date createDate = rs.getDate("protect_replcreateDate");
+				dto = new ProtectReplyDTO(replyNo,replyCon,protectWriter,boardNo,createDate);
+				list.add(dto);
+				
+			}
+			con.close();
+			return list;
+		}
+		}
+	}
+
+	public ProtectReplyDTO findById(int boardNo) throws Exception{
+		String sql = "select * from protect_replys where protect_boardno=? order by protect_replyno desc";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, boardNo);
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					ProtectReplyDTO dto;
+					int replyNo = rs.getInt(1);
+					String replyCon = rs.getString(2);
+					String protectWriter = rs.getString(3);
+					int boardno = rs.getInt(4);
+					Date createDate = rs.getDate(5);
+					dto = new ProtectReplyDTO(replyNo,replyCon,protectWriter,boardNo,createDate);
+					return dto;
+				}
+			}
+		}
+		return null;
+	}
+	
 }
+

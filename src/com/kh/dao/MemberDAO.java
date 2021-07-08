@@ -9,7 +9,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.kh.config.Db;
 import com.kh.dto.MemberDTO;
+import com.kh.dto.tempMemberDTO;
 
 public class MemberDAO {
 	private static MemberDAO instance;
@@ -28,6 +30,18 @@ public class MemberDAO {
 	
 	public boolean isLoginOk(String id, String pw) throws Exception {
 		String sql = "select * from member where user_id=? and user_password=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			pstat.setNString(2, pw);
+			try(ResultSet rs = pstat.executeQuery()){
+				return rs.next();
+			}
+		}
+	}
+	
+	public boolean isLoginOks(String id, String pw) throws Exception {
+		String sql = "select * from temp_member where user_id=? and user_password=?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, id);
@@ -56,6 +70,23 @@ public class MemberDAO {
 				String address1 = rs.getNString("address1");
 				String address2 = rs.getNString("address2");
 				return new MemberDTO(id,pw,email,name,birthDay,contact,status,postcode,address1,address2);
+			}
+		}
+	}
+	//임시
+	public tempMemberDTO login(String pid) throws Exception{
+		
+		String sql = "select * from temp_member where user_id = ?";
+		try(Connection con = Db.getCon();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, pid);
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				int user_seq = rs.getInt("user_seq");
+				String id = rs.getNString("user_id");
+				String pw = rs.getNString("user_password");
+				return new tempMemberDTO(user_seq,id,pw);
+				
 			}
 		}
 	}

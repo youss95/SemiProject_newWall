@@ -13,13 +13,9 @@ let page=1;
 		}).done(function(resp){	
 			console.log('resp:', resp)
 	resp.map((res)=>{
-		
-	
-		
+
 		let item = `
-		
-  
-   
+
         <div class="card shadow-soft">
             <img src="/NewWall/upload/lostAnimal/${res.protectFileRealName1}">
             <div class="card-body">

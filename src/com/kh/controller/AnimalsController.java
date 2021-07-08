@@ -22,6 +22,7 @@ import com.kh.dto.AnimalMapCountDTO;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
 import com.kh.dto.ProtectDetailDTO;
+import com.kh.dto.ProtectReplyDTO;
 import com.kh.dto.ProtectionDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -204,18 +205,44 @@ public class AnimalsController extends HttpServlet {
 			}else if(url.equals("/protectDetail.lost")) {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
 				int result = dao.getViewCount(protectNo);
+				List<ProtectReplyDTO> list = dao.getReplyList(protectNo);
 				if(result>0) {
 					ProtectDetailDTO dto = dao.getDetail(protectNo);
 					System.out.println("dto:" + dto.toString());
+					request.setAttribute("replyList", list);
 					request.setAttribute("protectDetail", dto);
 					RequestDispatcher dis = request.getRequestDispatcher("animal/protectDetail.jsp");
 					dis.forward(request, response);
 				}else {
 					Script.back(response, "조회수 실패");
 				}
+			}else if(url.equals("/comment.lost")) {
+				Gson g = new Gson();
+				String protectWriter = request.getParameter("protectWriter");
+				
+				
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+				String replyCon = request.getParameter("replyCon");
+				
+				ProtectReplyDTO dto = new ProtectReplyDTO();
+				dto.setProtectWriter(protectWriter);
+				dto.setBoardNo(boardNo);
+				dto.setReplyCon(replyCon);
+				System.out.println(dto.toString());
+			
+				int result = dao.addReply(dto);
+				dto = dao.findById(boardNo);
+				String data = g.toJson(dto);
+				if(result==1) {
+					Script.responseData(response, data);
+				
+				}
+				
+				
+				 
+				
+					
 			}
-			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

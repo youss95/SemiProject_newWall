@@ -15,3 +15,5 @@ img{width:500px; height:100%;}
 .clearfix{padding:10px;}
 .media-body{margin-top:10px;}
 .media{margin-top:10px;border-top:1px solid black;}
+#reply__list{display:block;}
+.newText{margin-left:10px; color:#8c98a4;}

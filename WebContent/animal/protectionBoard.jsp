@@ -29,7 +29,7 @@
             <div class="card-body">
                 <h4>${p.protectName }</h4>
                 <p class="fontC">
-                    고양이<br>
+                    고양이${sessionScope.loginInfo.user_id }<br>
                     암컷<br>
                     8/2/색
                 </p>
