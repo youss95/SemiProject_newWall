@@ -11,12 +11,9 @@
 #map{
 margin-top:100px;
 }
-    </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+</style>
+<%@ include file="../layout/jsp/commonModal.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/lostAnimalMap.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 
@@ -60,11 +57,22 @@ margin-top:100px;
 <footer class="footer">
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
+	<%@ include file="../layout/jsp/modal.jsp"%>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
-	<script> 
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 function writeAdd(){
 
 }

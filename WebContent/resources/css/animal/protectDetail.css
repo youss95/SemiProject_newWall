@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 
-img{width:500px; height:100%;}
+.protectDetail img{width:500px; height:100%;}
 .protectInfo{width:550px; height:550px;float:left;padding:15px;}
 #animalName{font-size:30px; color:#254E7C; border-bottom:1px solid #769FCD; width:100%;margin-bottom:25px;padding:10px;}
 #status{float:right;color:#8c98a4;}

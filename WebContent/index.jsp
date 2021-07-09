@@ -22,8 +22,7 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 </head>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
 <body>
 	<div class="wrap">
 		<%@ include file="layout/jsp/header.jsp"%>
@@ -43,6 +42,7 @@
 	
 
 	<%@ include file="layout/jsp/modal.jsp"%>
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </body>
 </html>

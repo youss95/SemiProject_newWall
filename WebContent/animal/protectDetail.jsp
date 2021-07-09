@@ -10,13 +10,7 @@
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectDetail.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+ <%@ include file="../layout/jsp/commonModal.jsp" %>
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
@@ -114,14 +108,15 @@
 	<footer class="footer">
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
+<%@ include file="../layout/jsp/modal.jsp"%>
 
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/protectDetail.js"></script>
-	
 	<script>
 	let btnEvent = document.querySelector('#btnSub')
 	let btnEvent2 = document.querySelector('#btnWrite')
 	let textWrite = document.querySelector('#content')
+	let loginBtn = document.querySelector('#loginLogin')
 	//댓글 보이기, 숨기기
 		btnEvent.addEventListener('click',function(){
 		let target = document.querySelector('#reply__list');
@@ -133,7 +128,7 @@
 		})
 		//댓글추가
 		btnEvent2.addEventListener('click',function(){
-		alert('dd')
+		
 		
 	 	let data={
 				"protectWriter":"${sessionScope.loginInfo.user_id}", 
@@ -146,6 +141,7 @@
 		data:data,
 		dataType:"json"		
 	}).done(function(result){
+		alert()
 		addReply(result)
 		$('#content').val('');		
 	});
@@ -154,7 +150,9 @@
 		textWrite.onfocus = function(){
 		<c:if test="${sessionScope.loginInfo==null}">
 	
-	
+		
+	loginBtn.click();
+		
 		</c:if>
 
 	}
