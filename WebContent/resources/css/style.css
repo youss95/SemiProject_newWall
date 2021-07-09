@@ -140,6 +140,10 @@ input:disabled{height: 40px;padding: 0 10px;}
 #loginModal div[class*=modal] {border: none;}
 #loginModal .modal-content {background-color: #00000000;}
 #loginModal .login-title {background-color: #FFFFFF;}
-#loginModal .modal-body {background-color: #FFFFFF;}
-#loginModal .modal-footer {background-color: #FFFFFF;}
-#popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal .modal-body {background-color: #FFFFFF; padding-top: 10px; padding-left: 45px; padding-right: 45px;}
+#loginModal .modal-footer {background-color: #FFFFFF; padding-bottom: 25px; padding-left: 40px; padding-right: 40px;}
+#loginModal #modal-logo {background-color: #FFFFFF !important; padding-bottom: 30px}
+#loginModal #idPwHov:hover{text-decoration: underline;}
+#loginModal #idPwHov{background-color: #FFFFFF; border:none; width: 100%; text-decoration: underline; padding-right: 140px;}
+#loginModal #popup-img {position: relative; top: 78px; left: 70px;}
+#loginModal #popup-logo {position: relative; top: 30px; left: 133px;}

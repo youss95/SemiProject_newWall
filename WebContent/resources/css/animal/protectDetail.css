@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+
+.protectDetail img{width:500px; height:100%;}
+.protectInfo{width:550px; height:550px;float:left;padding:15px;}
+#animalName{font-size:30px; color:#254E7C; border-bottom:1px solid #769FCD; width:100%;margin-bottom:25px;padding:10px;}
+#status{float:right;color:#8c98a4;}
+.list-info{border-bottom:1px solid #769FCD;margin-bottom:10px;}
+.list-info div{margin-bottom:20px;}
+.info-detail{margin-left:150px;}
+.info-date{margin-left:100px;}
+#textContent{height:250px;overflow-y:auto;}
+.replytitle{font-weight:600;font-size:25px; padding:15px;margin-top:40px;}
+#btnSub{float:right;}
+.clearfix{padding:10px;}
+.media-body{margin-top:10px;}
+.media{margin-top:10px;border-top:1px solid black;}
+#reply__list{display:block;}
+.newText{margin-left:10px; color:#8c98a4;}

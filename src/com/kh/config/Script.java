@@ -23,6 +23,21 @@ public class Script {
 		}
 	}
 	
+	public static void responseData(HttpServletResponse response, String jsonData) {
+		PrintWriter out;
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		try {
+			out = response.getWriter();
+			out.print(jsonData);
+			out.flush();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		}
+	
 	
 	
 	

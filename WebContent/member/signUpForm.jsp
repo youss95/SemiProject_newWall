@@ -19,38 +19,41 @@
 		<div class="container">
 			<div class="contents">
 				<section class="signUpForm">
-					<form method="post" name="inputForm" id="signUpForm"
+				<div class="title">
+				<h2>회원가입</h2>
+				</div>
+					<form method="post" name="inputForm" id="signupForm"
 						action="${pageContext.request.contextPath}/signupProc.mem">
 						<div>
 							<table>
 								<tr>
-									<td><label for="user_id" required>아이디</td>
+									<td><label for="user_id">아이디</label></td>
 									<td><input type="text" name="user_id" id="id"
 										class="inpform" maxlength=16> <input type="button"
 										id="check" value="중복확인" class="btn_s btn_light"></td>
 								</tr>
 								<tr>
-									<td><label for="password"">비밀번호</td>
+									<td><label for="password">비밀번호</label></td>
 									<td><input type="password" name="user_password" id="pwd"
 										class="inpform" maxlength=16> <!-- *영문 대소문자/숫자/특수문자를 혼용하여 2종류10~16자 또는 3종 8~16자 --></td>
 								</tr>
 								<tr>
-									<td><label for="pwdCheck">비밀번호 확인</td>
+									<td><label for="pwdCheck">비밀번호 확인</label></td>
 									<td><input type="password" name="pwdCheck" id="pwdCheck"
 										class="inpform" maxlength=16></td>
 								</tr>
 								<tr>
-									<td><label for="email">이메일</td>
+									<td><label for="email">이메일</label></td>
 									<td><input type="text" name="email" id="email"
-										class="inpform" maxlength=16>@ <select id="email2"
-										class="inpform">
+										class="inpform" maxlength=16> @ <select name="email2" class="inpform">
 											<option value="1">gmail.com</option>
 											<option value="2">naver.com</option>
 											<option value="3">daum.net</option>
-											<option vlaue="4">nate.com</option></td>
+											<option value="4">nate.com</option></select>
+											</td>
 								</tr>
 								<tr>
-									<td><label for="name">이름</td>
+									<td><label for="name">이름</label></td>
 									<td><input type="text" name="name" id="name"
 										class="inpform" maxlength=20></td>
 								</tr>
@@ -82,25 +85,24 @@
 									</span></td>
 								</tr>
 								<tr>
-									<td><label for="phone">연락처</td>
-									<td><select id="phone" class="inpform">
+									<td><label for="phone">연락처</label></td>
+									<td><select id="phone" class="inpform" name="contact1">
 											<option value="">선택</option>
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="019">019</option>
 									</select> - <input type="text" name="phone" id="phone" class="inpform"
-										name="contact1" maxlength=4> - <input type="text"
-										name="phone" id="phone" class="inpform"
-										name="contact2" maxlength=4></td>
+										name="contact2" maxlength=4> - <input type="text"
+										name="contact3" id="phone" class="inpform" maxlength=4></td>
 								</tr>
 								<tr>
 								<tr>
 									<td>입양 신청 상태</td>
-									<td><input type="radio" name="status" value="Yes">Yes &nbsp;&nbsp;&nbsp;
-										<input type="radio" name="status" value="No" checked>No</td>
+									<td><input type="radio" name="status" value="Y">Yes &nbsp;&nbsp;&nbsp;
+										<input type="radio" name="status" value="N" checked>No</td>
 								</tr>
 								<tr>
-									<td><label for="postcode">우편번호</td>
+									<td><label for="postcode">우편번호</label></td>
 									<td><input type="text" name="postcode" id="postcode"
 										class="inpform"> - <input type="text" name="postcode"
 										id="postcode" class="inpform"> <input
@@ -108,25 +110,27 @@
 										class="btn_s btn_light"></td>
 								</tr>
 								<tr>
-									<td><label for="home">주소</td>
+									<td><label for="home">주소</label></td>
 									<td><input type="text" name="address1" id="address1"
 										 class="inpform"></td>
 								</tr>
 								<tr>
-									<td><label for="homeAddress">상세주소 </td>
+									<td><label for="homeAddress">상세주소</label></td>
 									<td><input type="text" name="address2" id="address2"
 										class="inpform" maxlength=20></td>
 								</tr>
 							</table>
-							<input type="button" id="join" value="회원가입"
+							<input type="submit" id="join" value="회원가입"
 								class="btn_m btn_default">
 						</div>
 					</form>
 				</section>
 			</div>
 		</div>
-
 	</div>
+	<footer class="footer">
+				<p>Copyright &copy; Kh semi project by group 2</p>
+			</footer>
 
 </body>
 </html>

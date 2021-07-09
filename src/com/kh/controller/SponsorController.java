@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.dao.AdoptionDAO;
 import com.kh.dao.SponsorDAO;
 import com.kh.dto.SponsorDTO;
 
@@ -28,6 +29,7 @@ public class SponsorController extends HttpServlet {
 
 		try {
 			SponsorDAO dao = SponsorDAO.getInstance();
+			AdoptionDAO adoptdao = AdoptionDAO.getInstance();
 
 			if(cmd.contentEquals("/sponsor.sp")) {
 				System.out.println("후원 인포에서 클릭");
@@ -43,7 +45,7 @@ public class SponsorController extends HttpServlet {
 				System.out.println("결제입력정보 담고 보이는 창으로 전환");
 				int sp_amount = Integer.parseInt(request.getParameter("sp_amount")) ;//
 				System.out.println("sp_amount"+sp_amount);
-				String sp_category = request.getParameter("sp_category");//
+				String sp_category = request.getParameter("sp_category");//분야이거 강아지 이름이뜨는데 결제족으로 넘어가지를 않음 확인***
 				System.out.println("sp_category : "+sp_category);
 				String sp_agecheck = request.getParameter("sp_agecheck");//sp_agecheck
 				System.out.println("sp_agecheck"+sp_agecheck);
@@ -160,14 +162,28 @@ public class SponsorController extends HttpServlet {
 				response.sendRedirect("sponsor/sponsorInfo.jsp");
 			}else if(cmd.contains("/oneOnOne.sp")) {
 				System.out.println("일대일 페이지로");
+				
 
 			}else if(cmd.contains("/guardian.sp")) {
 				System.out.println("임보자 페이지로");
 
 			}else if (cmd.contains("/directInput.sp")) {
-				System.out.println("다이렉트 시 입력창");
-				response.sendRedirect("sponsor/sponsorDirectInput.jsp");
+				System.out.println("일단 일대일다이렉트 시 입력창");
+				String code_seq = request.getParameter("code_seq");
+				String p_name = adoptdao.getAnimalName(code_seq);
+				
+				request.setAttribute("p_name", p_name);
+				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}
+//			else if (cmd.contains("/testtest.sp")) {
+//				System.out.println("testtest");
+//				String test_seq = request.getParameter("sponsor_seq");
+//				System.out.println(test_seq);
+//				//String p_name = adoptdao.getAnimalName(code_seq);
+//				
+//				request.setAttribute("test_seq", test_seq);
+//				request.getRequestDispatcher("adSponsorList.adm").forward(request, response);	
+//			}
 
 		}catch(Exception e) {
 			e.printStackTrace();

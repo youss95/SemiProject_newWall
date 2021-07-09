@@ -29,7 +29,7 @@
 			<li class="depth1"><a href="#">후원<i
 					class="fas fa-chevron-right"></i></a>
 				<ul>
-					<li class="depth2"><a href="#">후원금 관리</a></li>
+					<li class="depth2"><a href="${pageContext.request.contextPath}/adSponsorList.adm">후원금 관리</a></li>
 				</ul></li>
 			<li class="depth1"><a href="#">동물 정보<i class="fas fa-chevron-right"></i></a>
 				<ul>

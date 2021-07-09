@@ -9,7 +9,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 import com.kh.dto.MemberDTO;
+
 
 public class MemberDAO {
 	private static MemberDAO instance;
@@ -37,6 +39,8 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	
 
 	public MemberDTO selectMemberById(String pid) throws Exception{
 		String sql = "select * from member where user_id = ?";
@@ -60,13 +64,13 @@ public class MemberDAO {
 		}
 	}
 	
+	
 	public int delete(String id) throws Exception{
 		String sql = "delete from member where user_id = ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, id);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -86,7 +90,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress1());
 			pstat.setNString(10, dto.getAddress2());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -106,7 +109,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress2());
 			pstat.setNString(10, dto.getUser_id());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}

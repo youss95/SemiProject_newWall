@@ -9,24 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월 관리자 페이지</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/admin.css">
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
-<!-- <script src="lang/summernote-ko-KR.js"></script> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 

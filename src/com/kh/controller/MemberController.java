@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.dao.MemberDAO;
 import com.kh.dto.MemberDTO;
+
 import com.kh.utils.DateUtils;
+import com.kh.utils.EncryptUtils;
 
 
 @WebServlet("*.mem")
@@ -33,17 +35,26 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("member/agreeTerms.jsp");
 			}else if(url.contentEquals("/signup.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 페이지로
-				response.sendRedirect("member/signup.jsp");
-			}else if(url.contentEquals("/singupProc.mem")) { 
+				response.sendRedirect("member/signUpForm.jsp");
+			}else if(url.contentEquals("/signupProc.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 요청 처리
 				String user_id = request.getParameter("user_id");
-				String user_password = request.getParameter("user_password");
-				String email = request.getParameter("email");
+				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
+				String email = request.getParameter("email") + request.getParameter("email2");
+				
 				String name = request.getParameter("name");
 				
-				Date birthDay = DateUtils.stringToDate(request.getParameter("birthday"), "yyyyMMdd");
+				String yy = request.getParameter("birthday_yy");
+				String MM = request.getParameter("birthday_mm");
+				String dd = request.getParameter("birthday_dd");
 				
-				String contact = request.getParameter("contact");
+				Date birthDay = DateUtils.stringToDate(yy+MM+dd, "yyyyMMdd");
+				
+				String contact1 = request.getParameter("contact1");
+				String contact2 = request.getParameter("contact2");
+				String contact3 = request.getParameter("contact3");
+				
+				String contact = contact1+contact2+contact3;
 				char status = request.getParameter("status").charAt(0);
 				String postCode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
@@ -61,7 +72,7 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("member/myPage.jsp");
 			}else if(url.contentEquals("/modifyProc.mem")) {
 				//----------------------------------------------------------------------------------------- 회원 정보 수정 처리
-				
+
 			}else if(url.contentEquals("/memberOut.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원탈퇴 페이지로
 				response.sendRedirect("member/memberOut.jsp");
@@ -74,17 +85,21 @@ public class MemberController extends HttpServlet {
 			}else if(url.contentEquals("/loginProc.mem")) {
 				//----------------------------------------------------------------------------------------- 로그인 요청 처리
 				String user_id = request.getParameter("user_id");
-				String user_password = request.getParameter("user_password");
-				
+
+				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
+
 				if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
+					System.out.println(dto);
 				}
 				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/logoutProc.mem")){
 				//----------------------------------------------------------------------------------------- 로그아웃 요청 처리
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");
+			}else if(url.contentEquals("/findAccount.mem")){
+				response.sendRedirect("member/findAccount.jsp");
 			}
 			
 		}catch(Exception e) {
