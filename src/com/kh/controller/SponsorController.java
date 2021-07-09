@@ -175,6 +175,15 @@ public class SponsorController extends HttpServlet {
 				request.setAttribute("p_name", p_name);
 				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}
+//			else if (cmd.contains("/testtest.sp")) {
+//				System.out.println("testtest");
+//				String test_seq = request.getParameter("sponsor_seq");
+//				System.out.println(test_seq);
+//				//String p_name = adoptdao.getAnimalName(code_seq);
+//				
+//				request.setAttribute("test_seq", test_seq);
+//				request.getRequestDispatcher("adSponsorList.adm").forward(request, response);	
+//			}
 
 		}catch(Exception e) {
 			e.printStackTrace();
