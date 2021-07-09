@@ -92,6 +92,9 @@
             margin: 1%;
             float: left;
         }
+        .sp_com_input .spp_category1 .btn_pay_set {
+           word-break:keep-all;
+        }
 
         .sp_com_input .spp_category1 span {
             margin-top: 20px;
@@ -554,11 +557,7 @@
                                             </div>
                                             일
                                         </div>
-
-
-
                                     </div>
-
                                 </div>
                                 <div class="spp_category2_1 spp_category">
                                     <h2 class="spp_category1_title"></h2>
@@ -586,11 +585,7 @@
                                             <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2" required>
                                         </div>
                                     </div>
-
                                 </div>
-
-
-                                
                                 <div class="spp_category4 spp_category">
                                     <h2 class="spp_category1_title">04. 약관 동의</h2>
                                     <!-- 수평선 -->
@@ -610,8 +605,7 @@
                                             </div>
                                             <div class="inp_rd">
                                                 <input type="radio" id="sp_terms01_2" name="sp_terms01" value="N">
-                                                <label for="sp_terms01_2">동의하지
-                                                    않습니다</label>
+                                                <label for="sp_terms01_2">동의하지  않습니다</label>
                                             </div>
                                         </div>
                                     </div>
@@ -640,7 +634,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="spp_category5 spp_category">
                                     <h2 class="spp_category1_title">05. 회원 여부 확인</h2>
                                     <h3>저희 사이트의 회원 이십니까?</h3>
@@ -653,26 +646,18 @@
                                             <input type="radio" id="id_ck_rd2" class="sp_mb_ck" name="sp_idcheck" value="N" checked>
                                             <label for="id_ck_rd2">아니요</label>
                                         </div>
-
                                     </div>
                                     <div class="sp_id_ck" id="sp_id_ck">
                                         <h3>ID</h3>
                                         <input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
                                     </div>
                                 </div>
-
-
                                 <div class="spp_category6 spp_category">
                                     <button class="btn_m btn_line">다음단계</button>
                                 </div>
                             </form>
-
                         </div>
-
-
-
                     </div>
-
                     <!-- 끝 -->
                </section>
 			</div>
