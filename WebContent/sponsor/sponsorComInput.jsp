@@ -297,6 +297,7 @@
 										<li><button type="button" id="btn_pay10"
 												class="btn_m btn_light btn_pay_set" value="10000">1만원</button></li>
 										<li><button type="button" id="btn_pay20"
+<<<<<<< HEAD
 												class="btn_m btn_light btn_pay_set" value="20000">2만원</button></li>
 										<li><button type="button" id="btn_pay30"
 												class="btn_m btn_light btn_pay_set" value="30000">3만원</button></li>
@@ -309,6 +310,19 @@
 										<li><input type="number" id="inp_pay" name="sp_amount"
 											class="inpform inp_pay" placeholder="숫자만 입력" required>
 											<span>원</span></li>
+=======
+												class="btn_m btn_light btn_pay_set">2만원</button></li>
+										<li><button type="button" id="btn_pay30"
+												class="btn_m btn_light btn_pay_set">3만원</button></li>
+										<li><button type="button" id="btn_pay50"
+												class="btn_m btn_light btn_pay_set">5만원</button></li>
+										<li><button type="button" id="btn_pay100"
+												class="btn_m btn_light btn_pay_set">10만원</button></li>
+										<li><button type="button" id="btn_pay"
+												class="btn_m btn_default btn_input btn_pay_set">직접입력</button></li>
+										<li><input type="number" id="inp_pay" name="sp_amount"
+											class="inpform inp_pay" placeholder="숫자만 입력"> <span>원</span></li>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 									</ul>
 								</div>
 								<div class="spp_category2 spp_category">
@@ -317,6 +331,7 @@
 									<h3>만 14세 미만입니까?</h3>
 									<div class="rd_group age14 selectBox">
 										<div class="inp_rd">
+<<<<<<< HEAD
 											<input type="radio" class="sp_age14_ck" id="age_ck_rd1"
 												name="sp_agecheck" value="Y"> <label
 												for="age_ck_rd1">예</label>
@@ -325,11 +340,20 @@
 											<input type="radio" class="sp_age14_ck" id="age_ck_rd2"
 												name="sp_agecheck" value="N" checked> <label
 												for="age_ck_rd2">아니요</label>
+=======
+											<input type="radio" id="age_ck_rd1" name="sp_agecheck"
+												value="Y"> <label for="age_ck_rd1">예</label>
+										</div>
+										<div class="inp_rd">
+											<input type="radio" id="age_ck_rd2" name="sp_agecheck"
+												value="N" checked> <label for="age_ck_rd2">아니요</label>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 									</div>
 									<div class="a14up" id="a14up">
 										<div class="name">
 											<h3>이름</h3>
+<<<<<<< HEAD
 											<input type="text" class="inpform na" id="sp_name_01"
 												name="sp_name_01" required>
 										</div>
@@ -340,11 +364,21 @@
 												class="inpform ph" id="sp_ph2_01" name="sp_ph2_01" required>-<input
 												type="number" class="inpform ph" id="sp_ph3_01"
 												name="sp_ph3_01" required>
+=======
+											<input type="text" class="inpform na" name="sp_name_01">
+										</div>
+										<div class="phone">
+											<h3>휴대폰 번호</h3>
+											<input type="number" class="inpform ph" name="sp_ph1_01">-<input
+												type="number" class="inpform ph" name="sp_ph2_01">-<input
+												type="number" class="inpform ph" name="sp_ph3_01">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 										<div class="birth">
 											<h3>생년월일</h3>
 											<!-- 사이즈 만지기?? 이거 안됨  -->
 											<div class="">
+<<<<<<< HEAD
 												<input type="number" class="inpform bi_y" id="sp_bi_y_01"
 													name="sp_bi_y_01" required>
 											</div>
@@ -352,6 +386,14 @@
 											<div class="inp_slct bi">
 												<select name="sp_bi_m_01" id="sp_bi_m_01" required>
 													<option value="">선택</option>
+=======
+												<input type="number" class="inpform bi_y" name="sp_bi_y_01">
+											</div>
+											년
+											<div class="inp_slct bi">
+												<select name="sp_bi_m_01" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -368,8 +410,13 @@
 											</div>
 											월
 											<div class="inp_slct bi">
+<<<<<<< HEAD
 												<select name="sp_bi_d_01" id="sp_bi_d_01" required>
 													<option value="">선택</option>
+=======
+												<select name="sp_bi_d_01" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -412,18 +459,28 @@
 											<h3>
 												이름<br>(법정대리인)
 											</h3>
+<<<<<<< HEAD
 											<input type="text" class="inpform na" id="sp_name_02"
 												name="sp_name_02">
+=======
+											<input type="text" class="inpform na" name="sp_name_02">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 										<div class="phone">
 											<h3>
 												휴대폰 번호<br>(법정대리인)
 											</h3>
+<<<<<<< HEAD
 											<input type="number" class="inpform ph" id="sp_ph1_02"
 												name="sp_ph1_02">-<input type="number"
 												class="inpform ph" id="sp_ph2_02" name="sp_ph2_02">-<input
 												type="number" class="inpform ph" id="sp_ph3_02"
 												name="sp_ph3_02">
+=======
+											<input type="number" class="inpform ph" name="sp_ph1_02">-<input
+												type="number" class="inpform ph" name="sp_ph2_02">-<input
+												type="number" class="inpform ph" name="sp_ph3_02">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 										<div class="birth">
 											<h3>
@@ -431,6 +488,7 @@
 											</h3>
 											<!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
 											<div class="">
+<<<<<<< HEAD
 												<input type="number" class="inpform bi_y" id="sp_bi_y_02"
 													name="sp_bi_y_02">
 											</div>
@@ -438,6 +496,14 @@
 											<div class="inp_slct bi">
 												<select name="sp_bi_m_02" id="sp_bi_m_02">
 													<option value="">선택</option>
+=======
+												<input type="number" class="inpform bi_y" name="sp_bi_y_02">
+											</div>
+											년
+											<div class="inp_slct bi">
+												<select name="sp_bi_m_02" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -454,8 +520,13 @@
 											</div>
 											월
 											<div class="inp_slct bi">
+<<<<<<< HEAD
 												<select name="sp_bi_d_02" id="sp_bi_d_02">
 													<option value="">선택</option>
+=======
+												<select name="sp_bi_d_02" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -495,8 +566,12 @@
 											<h3>
 												기부자명<br>(본인)
 											</h3>
+<<<<<<< HEAD
 											<input type="text" class="inpform na" id="sp_yname"
 												name="sp_yname">
+=======
+											<input type="text" class="inpform na" name="sp_yname">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 										<div class="birth">
 											<h3>
@@ -504,6 +579,7 @@
 											</h3>
 											<!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
 											<div class="">
+<<<<<<< HEAD
 												<input type="number" class="inpform bi_y" id="sp_ybi_y"
 													name="sp_ybi_y">
 											</div>
@@ -511,6 +587,14 @@
 											<div class="inp_slct bi">
 												<select name="sp_ybi_m" id="sp_ybi_m">
 													<option value="">선택</option>
+=======
+												<input type="number" class="inpform bi_y" name="sp_ybi_y">
+											</div>
+											년
+											<div class="inp_slct bi">
+												<select name="sp_ybi_m" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -527,8 +611,13 @@
 											</div>
 											월
 											<div class="inp_slct bi">
+<<<<<<< HEAD
 												<select name="sp_ybi_d" id="sp_ybi_d">
 													<option value="">선택</option>
+=======
+												<select name="sp_ybi_d" id="">
+													<option value=null>선택</option>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 													<option value="01">1</option>
 													<option value="02">2</option>
 													<option value="03">3</option>
@@ -576,14 +665,22 @@
 									<div class="sp_email">
 										<h3>이메일</h3>
 										<input type="text" class="inpform sp_email_inp"
+<<<<<<< HEAD
 											placeholder="example123@email.com" name="sp_email" required>
+=======
+											placeholder="example123@email.com" name="sp_email">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 									</div>
 
 									<div class="sp_address">
 										<div>
 											<h3 class="ad_h3">우편번호</h3>
 											<input type="text" id="sp_postcode" name="sp_postcode"
+<<<<<<< HEAD
 												class="inpform sp_address_inp sp_address_inp1" required>
+=======
+												class="inpform sp_address_inp sp_address_inp1">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 											<button class="btn_m btn_default" id="sp_search"
 												class="inpform sp_address_inp" type="button">우편번호
 												찾기</button>
@@ -591,12 +688,20 @@
 										<div>
 											<h3 class="ad_h3">도로명 주소</h3>
 											<input type="text" id="sp_address1" name="sp_address1"
+<<<<<<< HEAD
 												class="inpform sp_address_inp sp_address_inp2" required>
+=======
+												class="inpform sp_address_inp sp_address_inp2">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 										<div>
 											<h3>상세 주소</h3>
 											<input type="text" id="sp_address2" name="sp_address2"
+<<<<<<< HEAD
 												class="inpform sp_address_inp sp_address_inp2" required>
+=======
+												class="inpform sp_address_inp sp_address_inp2">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 									</div>
 
@@ -661,6 +766,7 @@
 									<h3>저희 사이트의 회원 이십니까?</h3>
 									<div class="rd_group">
 										<div class="inp_rd">
+<<<<<<< HEAD
 											<input type="radio" id="id_ck_rd1" class="sp_mb_ck"
 												name="sp_idcheck" value="Y"> <label for="id_ck_rd1">예</label>
 										</div>
@@ -668,13 +774,26 @@
 											<input type="radio" id="id_ck_rd2" class="sp_mb_ck"
 												name="sp_idcheck" value="N" checked> <label
 												for="id_ck_rd2">아니요</label>
+=======
+											<input type="radio" id="id_ck_rd1" name="sp_idcheck"
+												value="Y"> <label for="id_ck_rd1">예</label>
+										</div>
+										<div class="inp_rd">
+											<input type="radio" id="id_ck_rd2" name="sp_idcheck"
+												value="N" checked> <label for="id_ck_rd2">아니요</label>
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 										</div>
 
 									</div>
 									<div class="sp_id_ck" id="sp_id_ck">
 										<h3>ID</h3>
+<<<<<<< HEAD
 										<input type="text" id="sp_id_ck_inp"
 											class="inpform sp_id_ck_inp" name="sp_mb_id">
+=======
+										<input type="text" class="inpform sp_id_ck_inp"
+											name="sp_mb_id">
+>>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 									</div>
 								</div>
 
@@ -698,42 +817,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<div class="modal fade" id="loginModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
-						id="popup-img">
-				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 	<script>
 		$(function() {
 			//14세 미만 이상여부

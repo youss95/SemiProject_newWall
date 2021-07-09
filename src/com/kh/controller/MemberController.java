@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.dao.MemberDAO;
 import com.kh.dto.MemberDTO;
+
 import com.kh.utils.DateUtils;
+import com.kh.utils.EncryptUtils;
 
 
 @WebServlet("*.mem")
@@ -34,10 +36,10 @@ public class MemberController extends HttpServlet {
 			}else if(url.contentEquals("/signup.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 페이지로
 				response.sendRedirect("member/signUpForm.jsp");
-			}else if(url.contentEquals("/singupProc.mem")) { 
+			}else if(url.contentEquals("/signupProc.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 요청 처리
 				String user_id = request.getParameter("user_id");
-				String user_password = request.getParameter("user_password");
+				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
 				String email = request.getParameter("email") + request.getParameter("email2");
 				
 				String name = request.getParameter("name");
@@ -83,11 +85,13 @@ public class MemberController extends HttpServlet {
 			}else if(url.contentEquals("/loginProc.mem")) {
 				//----------------------------------------------------------------------------------------- 로그인 요청 처리
 				String user_id = request.getParameter("user_id");
-				String user_password = request.getParameter("user_password");
-				
+
+				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
+
 				if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
+					System.out.println(dto);
 				}
 				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/logoutProc.mem")){
