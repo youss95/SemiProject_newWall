@@ -9,6 +9,9 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectionBoard.css">
 <%@ include file="../layout/jsp/commonModal.jsp" %>
+<style>
+#boardDetailprotect{margin-top:10px;}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -26,11 +29,19 @@
             <div class="card-body">
                 <h4>${p.protectName }</h4>
                 <p class="fontC">
-                    고양이${sessionScope.loginInfo.user_id }<br>
-                    암컷<br>
-                    8/2/색
+                    구조장소:${p.protectAddr}<br>
+                    성별: 
+                     <c:if test="${p.protectGender == 'F' }">
+    암컷
+    </c:if>
+     <c:if test="${p.protectGender == 'M' }">
+   수컷
+    </c:if><br>
+                작성자:${p.protectWriter}
                 </p>
-                <a href="/NewWall/protectDetail.lost?protectNo=${p.protectNo}" class="btn_m btn_light">상세</a>
+                <div id="boardDetailprotect">
+               <a  href="/NewWall/protectDetail.lost?protectNo=${p.protectNo}" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+               </div>
                         </div>
         </div>
         </c:forEach>

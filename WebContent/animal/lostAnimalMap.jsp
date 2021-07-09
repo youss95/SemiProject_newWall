@@ -37,9 +37,9 @@ margin-top:100px;
 				
 
 					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
-					<a href="${pageContext.request.contextPath}/lostMapList.lost" class="btn_m btn_light">목록</a>
+					<a href="${pageContext.request.contextPath}/lostMapList.lost?page=1" class="btn_m btn_light">목록</a>
 					
-					<a href="#" class="btn_m btn_light">임시보호</a>
+					<a href="${pageContext.request.contextPath}/protectList.lost?page=1" class="btn_m btn_light">임시보호</a>
 					<a href="${pageContext.request.contextPath}/animal/lostAnimalForm.jsp" class="btn_m btn_light">글쓰기</a>
 				</div>
 
@@ -62,17 +62,7 @@ margin-top:100px;
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
-	<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	
 	<script>
 function writeAdd(){
 

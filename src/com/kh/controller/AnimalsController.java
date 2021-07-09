@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.kh.config.PageConfig;
 import com.kh.config.Script;
 import com.kh.dao.AnimalDAO;
 import com.kh.dto.AnimalMapCountDTO;
@@ -253,7 +254,10 @@ public class AnimalsController extends HttpServlet {
 				}		
 				//로스트 맵 목록
 			}else if(url.equals("/lostMapList.lost")) {
-				List<LostAnimalDTO> list = dao.mapList();
+				int page = Integer.parseInt(request.getParameter("page"));
+				int endNum = page*PageConfig.LOST_RECORD_COUNT_PER_PAGE;
+				int startNum = endNum - (PageConfig.LOST_RECORD_COUNT_PER_PAGE-1);
+				List<LostAnimalDTO> list = dao.mapList(startNum,endNum);
 				System.out.println("맵"+list.toString());
 				request.setAttribute("mapList", list);
 				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");

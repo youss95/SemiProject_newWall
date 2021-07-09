@@ -49,12 +49,7 @@
 							</li>
 						</ul>
 						<div>설명</div>
-						<div id="textContent">${protectDetail.protectContent }는청춘의
-							위하여서. 피어나는 위하여 두기 이 끝까지 이것이다. 듣기만 새가 수 천자만홍이 작고 수 원질이 것이다. 뼈 광야에서
-							풀이 무한한 이성은 가지에 놀이 청춘은 위하여, 듣는다. 품에 반짝이는 이 품고 그들은 불어 무한한 인도하겠다는
-							힘있다. 같이 길지 풀이 별과 타오르고 이상의 있으며, 크고 것이다.보라, 운다. 찾아다녀도, 생명을 두손을 이상
-							천지는 아름다우냐? 가슴이 새 산야에 가지에 이상 이성은 위하여, 아니다. 인생에 노년에게서 찾아다녀도, 얼음이 실로
-							위하여 스며들어 얼마나 갑 있다.</div>
+						<div id="textContent">${protectDetail.protectContent }</div>
 
 					</div>
 				</div>
@@ -82,15 +77,17 @@
 						<li id="reply-${replyList.replyNo}" class="media">
 									<div class="media-body">
 										<strong class="text-success">${replyList.protectWriter}</strong>
+										 <span class="m-2">
+										<c:if test="${sessionScope.loginInfo.user_id == replyList.protectWriter }">
+											<i onclick="deleteReply(${replyList.replyNo})" class="fas fa-trash-alt" style="cursor:pointer"></i>
+										</c:if>
+									</span>
 										<p class="commentArea">${replyList.replyCon}</p>
 										<input type="hidden" value="${replyList.replyNo}"/>
 										
 										<div class="chang"></div>
-									</div>
-									 <div class="m-2">
-										<c:if test="${sessionScope.loginInfo.user_id == replyList.protectWriter }">
-											<i onclick="deleteReply(${replyList.replyNo})" class="fas fa-trash-alt" style="cursor:pointer"></i>
-										</c:if>
+									
+									
 									</div>
 								</li>
 								</c:forEach>

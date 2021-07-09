@@ -145,7 +145,8 @@ public class AnimalDAO {
 					String protectAddr = rs.getString("protect_findAddr");
 					String protectKind = rs.getString("protect_kind");
 					Date protectCreateDate = rs.getDate("protect_createDate");
-					dto = new ProtectBoardDTO(protectNo, protectName,protectGender,protectFileRealName1,protectFileRealName2,protectAddr,protectKind,protectCreateDate);
+					String protectWriter = rs.getString("protect_writer");
+					dto = new ProtectBoardDTO(protectNo, protectName,protectGender,protectFileRealName1,protectFileRealName2,protectAddr,protectKind,protectCreateDate,protectWriter);
 					list.add(dto);
 				}
 				con.close();
@@ -265,10 +266,12 @@ public class AnimalDAO {
 		}
 	}
 	//맵 리스트
-	public List<LostAnimalDTO> mapList() throws Exception	{
+	public List<LostAnimalDTO> mapList(int startNum, int endNum) throws Exception	{
 		List<LostAnimalDTO> list = new ArrayList<>();
-		String sql = "select * from lost_animal";
+		String sql = "select * from (select row_number() over(order by lost_no desc) rnum,lost_no,lost_name,lost_age,lost_kind,lost_category,lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content, lost_gender from lost_animal) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
 					LostAnimalDTO dto;

@@ -12,6 +12,7 @@ public class ProtectBoardDTO {
 	private String protectAddr;
 	private String protectKind;
 	private Date protectCreateDate;
+	private String protectWriter;
 	public int getProtectNo() {
 		return protectNo;
 	}
@@ -60,8 +61,15 @@ public class ProtectBoardDTO {
 	public void setProtectCreateDate(Date protectCreateDate) {
 		this.protectCreateDate = protectCreateDate;
 	}
+	public String getProtectWriter() {
+		return protectWriter;
+	}
+	public void setProtectWriter(String protectWriter) {
+		this.protectWriter = protectWriter;
+	}
 	public ProtectBoardDTO(int protectNo, String protectName, String protectGender, String protectFileRealName1,
-			String protectFileRealName2, String protectAddr, String protectKind, Date protectCreateDate) {
+			String protectFileRealName2, String protectAddr, String protectKind, Date protectCreateDate,
+			String protectWriter) {
 		super();
 		this.protectNo = protectNo;
 		this.protectName = protectName;
@@ -71,16 +79,17 @@ public class ProtectBoardDTO {
 		this.protectAddr = protectAddr;
 		this.protectKind = protectKind;
 		this.protectCreateDate = protectCreateDate;
+		this.protectWriter = protectWriter;
 	}
 	public ProtectBoardDTO() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "ProtectBoardDto [protectNo=" + protectNo + ", protectName=" + protectName + ", protectGender="
+		return "ProtectBoardDTO [protectNo=" + protectNo + ", protectName=" + protectName + ", protectGender="
 				+ protectGender + ", protectFileRealName1=" + protectFileRealName1 + ", protectFileRealName2="
 				+ protectFileRealName2 + ", protectAddr=" + protectAddr + ", protectKind=" + protectKind
-				+ ", protectCreateDate=" + protectCreateDate + "]";
+				+ ", protectCreateDate=" + protectCreateDate + ", protectWriter=" + protectWriter + "]";
 	}
 	
 	
