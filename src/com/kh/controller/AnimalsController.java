@@ -255,12 +255,16 @@ public class AnimalsController extends HttpServlet {
 				//로스트 맵 목록
 			}else if(url.equals("/lostMapList.lost")) {
 				int page = Integer.parseInt(request.getParameter("page"));
-				int endNum = page*PageConfig.LOST_RECORD_COUNT_PER_PAGE;
-				int startNum = endNum - (PageConfig.LOST_RECORD_COUNT_PER_PAGE-1);
-				List<LostAnimalDTO> list = dao.mapList(startNum,endNum);
-				List<String> pageNavi = dao.mapPageNavi(page);
+			
+				List<LostAnimalDTO> list = dao.mapList(page);
+				int boardCount = dao.getAllCount();
+				int lastPage = (int)Math.ceil(boardCount/4.0);
+				double currentPercent = (double)(page-1)/(lastPage-1)*100;
+				System.out.println(currentPercent);
 				System.out.println("맵"+list.toString());
+				request.setAttribute("lastPage", lastPage);
 				request.setAttribute("mapList", list);
+				request.setAttribute("currentPercent", currentPercent);
 				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");
 				dis.forward(request, response);
 				
