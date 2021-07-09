@@ -39,7 +39,7 @@
 					<li><a href="${pageContext.request.contextPath}/logoutProc.mem">로그아웃</a>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+					<li><a id="loginLogin" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
 					<li><a href="${pageContext.request.contextPath}/terms.mem">회원가입</a></li>
 				</c:otherwise>
 			</c:choose>

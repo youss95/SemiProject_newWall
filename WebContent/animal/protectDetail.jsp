@@ -116,6 +116,7 @@
 	let btnEvent = document.querySelector('#btnSub')
 	let btnEvent2 = document.querySelector('#btnWrite')
 	let textWrite = document.querySelector('#content')
+	let loginBtn = document.querySelector('#loginLogin')
 	//댓글 보이기, 숨기기
 		btnEvent.addEventListener('click',function(){
 		let target = document.querySelector('#reply__list');
@@ -127,7 +128,7 @@
 		})
 		//댓글추가
 		btnEvent2.addEventListener('click',function(){
-		alert('dd')
+		
 		
 	 	let data={
 				"protectWriter":"${sessionScope.loginInfo.user_id}", 
@@ -140,6 +141,7 @@
 		data:data,
 		dataType:"json"		
 	}).done(function(result){
+		alert()
 		addReply(result)
 		$('#content').val('');		
 	});
@@ -148,7 +150,9 @@
 		textWrite.onfocus = function(){
 		<c:if test="${sessionScope.loginInfo==null}">
 	
-	
+		
+	loginBtn.click();
+		
 		</c:if>
 
 	}
