@@ -8,5 +8,6 @@ import javax.sql.DataSource;
 
 public class PageConfig {
 	public static int ADOPT_RECORD_COUNT_PER_PAGE = 12;
+	public static int ANIMAL_RECORD_COUNT_PER_PAGE = 10;
 	public static int ADOPT_NAVI_COUNT_PER_PAGE = 10;
 }
