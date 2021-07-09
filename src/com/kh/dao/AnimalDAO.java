@@ -107,8 +107,8 @@ public class AnimalDAO {
 		return -1;
 	}
 	
-	public int protectWrite(ProtectionDTO dto) throws Exception {
-		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate)";
+	public int protectWrite(ProtectionDTO dto,String protectWriter) throws Exception {
+		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate,?)";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setString(1, dto.getProtectName());
 			pstmt.setString(2, dto.getProtectKind());
@@ -118,6 +118,7 @@ public class AnimalDAO {
 			pstmt.setString(6, dto.getProtectGender());
 			pstmt.setString(7, dto.getProtectFileRealName1());
 			pstmt.setString(8, dto.getProtectFileRealName2());
+			pstmt.setString(9, protectWriter);
 			int result = pstmt.executeUpdate();
 			con.setAutoCommit(false);
 			con.commit();
@@ -167,7 +168,7 @@ public class AnimalDAO {
 	
 	//상세글 보기
 	public ProtectDetailDTO getDetail(int protectNo) throws Exception{
-		String sql = "select protect_no,protect_name,protect_kind,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,\r\n"
+		String sql = "select protect_no,protect_name,protect_kind,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,protect_writer,\r\n"
 				+ "(select trunc(sysdate-to_date((select protect_findDate from protect_animal where protect_no=5 ),'yyyy/mm/dd'))from dual) protectDate\r\n"
 				+ "from protect_animal where protect_no=?";
 		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -185,7 +186,8 @@ public class AnimalDAO {
 					int viewCount = rs.getInt("protect_viewCount");
 					Date protectCreateDate = rs.getDate("protect_createDate");
 					int protectDate = rs.getInt("protectDate");
-					dto = new ProtectDetailDTO(protect_no,protectName,protectKind,protectContent,protectGender,protectFileRealName1,protectFileRealName2,viewCount,protectCreateDate,protectDate);
+					String protectWriter = rs.getString("protect_writer");
+					dto = new ProtectDetailDTO(protect_no,protectName,protectKind,protectContent,protectGender,protectFileRealName1,protectFileRealName2,viewCount,protectCreateDate,protectDate,protectWriter);
 					con.close();
 					return dto;
 				}

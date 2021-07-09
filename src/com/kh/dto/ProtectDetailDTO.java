@@ -13,6 +13,7 @@ public class ProtectDetailDTO {
 	private int protectViewCount;
 	private Date createDate;
 	private int protectDate;  //보호 하고 있는 일수
+	private String protectWriter;
 	public int getProtectNo() {
 		return protectNo;
 	}
@@ -73,9 +74,15 @@ public class ProtectDetailDTO {
 	public void setProtectDate(int protectDate) {
 		this.protectDate = protectDate;
 	}
+	public String getProtectWriter() {
+		return protectWriter;
+	}
+	public void setProtectWriter(String protectWriter) {
+		this.protectWriter = protectWriter;
+	}
 	public ProtectDetailDTO(int protectNo, String protectName, String protectKind, String protectContent,
 			String protectGender, String protectFileRealName1, String protectFileRealName2, int protectViewCount,
-			Date createDate, int protectDate) {
+			Date createDate, int protectDate, String protectWriter) {
 		super();
 		this.protectNo = protectNo;
 		this.protectName = protectName;
@@ -87,6 +94,7 @@ public class ProtectDetailDTO {
 		this.protectViewCount = protectViewCount;
 		this.createDate = createDate;
 		this.protectDate = protectDate;
+		this.protectWriter = protectWriter;
 	}
 	public ProtectDetailDTO() {
 		super();
@@ -97,7 +105,7 @@ public class ProtectDetailDTO {
 				+ protectKind + ", protectContent=" + protectContent + ", protectGender=" + protectGender
 				+ ", protectFileRealName1=" + protectFileRealName1 + ", protectFileRealName2=" + protectFileRealName2
 				+ ", protectViewCount=" + protectViewCount + ", createDate=" + createDate + ", protectDate="
-				+ protectDate + "]";
+				+ protectDate + ", protectWriter=" + protectWriter + "]";
 	}
 	
 	

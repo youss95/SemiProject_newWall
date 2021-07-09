@@ -81,7 +81,7 @@
                   
                    
 			<input type="hidden" name="addResult" id="hiddenInput">	
-			
+			<input type="hidden" name="protectWriter" value="${sessionScope.loginInfo.user_id}"> 
 			<button id="btn" type="submit" class="btn_m btn_primary">등록</button>	
 			
 			</form>

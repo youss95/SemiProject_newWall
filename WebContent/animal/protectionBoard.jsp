@@ -30,6 +30,7 @@
                     암컷<br>
                     8/2/색
                 </p>
+                <a href="/NewWall/protectDetail.lost?protectNo=${p.protectNo}" class="btn_m btn_light">상세</a>
                         </div>
         </div>
         </c:forEach>

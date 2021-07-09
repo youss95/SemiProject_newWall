@@ -43,7 +43,7 @@
 									임시보호 기간<span class="info-date">${protectDetail.protectDate}일째</span>
 								</div>
 								<div class="animal-kind">
-									작성자<span class="info-detail">${protectDetail.protectKind}
+									작성자<span class="info-detail">${protectDetail.protectWriter}
 									</span>
 								</div>
 							</li>
@@ -66,7 +66,7 @@
 						<textarea id="content" id="reply__write__form" class="txtareaform"
 							placeholder="write a comment..." rows="2"></textarea>
 						<br>
-						<button id="btnSub" class="btn_m btn_primary">댓글보이기</button>
+						<button id="btnSub" class="btn_m btn_primary">댓글숨기기</button>
 						<button id="btnWrite" class="btn_m btn_primary">댓글쓰기</button>
 
 
@@ -122,7 +122,7 @@
 		let target = document.querySelector('#reply__list');
 		let targetHtml = btnEvent.innerText;
 		console.log(targetHtml)
-			btnEvent.innerText= (target.style.display == 'none') ? '댓글보이기' : '댓글숨기기';
+			btnEvent.innerText= (target.style.display == 'none') ? '댓글숨기기' : '댓글보이기';
 		target.style.display= (target.style.display == 'none') ? 'block' : 'none';
 		console.log(target.style.display)
 		})
@@ -141,7 +141,7 @@
 		data:data,
 		dataType:"json"		
 	}).done(function(result){
-		alert()
+		alert("댓글 작성 완료!")
 		addReply(result)
 		$('#content').val('');		
 	});
@@ -150,7 +150,6 @@
 		textWrite.onfocus = function(){
 		<c:if test="${sessionScope.loginInfo==null}">
 	
-		
 	loginBtn.click();
 		
 		</c:if>
