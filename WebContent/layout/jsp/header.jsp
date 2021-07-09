@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="header">
 	<h1 class="logo">
-		<a href="index.jsp">LOGO IMG</a>
+		<a href="index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
@@ -24,8 +24,8 @@
 				</ul></li>
 			<li class="has"><a href="#">뉴스레터</a>
 				<ul class="s_menu clear news">
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">소식</a></li>
+					<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
+					<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">소식</a></li>
 				</ul></li>
 			<!-- <li><a href="#">봉사활동</a></li> 보류 -->
 		</ul>

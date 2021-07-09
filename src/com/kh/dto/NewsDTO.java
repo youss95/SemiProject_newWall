@@ -5,23 +5,31 @@ import java.sql.Date;
 public class NewsDTO {
 	private int news_seq;
 	private String news_title;
+	private String news_sub_contents;
 	private String news_contents;
 	private String news_writer;
 	private Date news_reg_date;
 	private int news_view;
 	
 	public NewsDTO() {}
-
-	public NewsDTO(int news_seq, String news_title, String news_contents, String news_writer, Date news_reg_date,
-			int news_view) {
+		
+	public NewsDTO(int news_seq, String news_title, String news_sub_contents, String news_contents, String news_writer,
+			Date news_reg_date, int news_view) {
 		this.news_seq = news_seq;
 		this.news_title = news_title;
+		this.news_sub_contents = news_sub_contents;
 		this.news_contents = news_contents;
 		this.news_writer = news_writer;
 		this.news_reg_date = news_reg_date;
 		this.news_view = news_view;
 	}
-	
+
+	public String getNews_sub_contents() {
+		return news_sub_contents;
+	}
+	public void setNews_sub_contents(String news_sub_contents) {
+		this.news_sub_contents = news_sub_contents;
+	}
 	public int getNews_seq() {
 		return news_seq;
 	}
