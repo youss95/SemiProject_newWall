@@ -246,6 +246,8 @@ public class AdminController extends HttpServlet {
 
 				request.setAttribute("slist", slist);
 				request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				
+				
 
 			}
 

@@ -77,6 +77,14 @@ text-align: left;
 						<h2>후원 내역 리스트</h2>
 					</div>
 					<div class="contents">
+					<div class="inp_slct">
+										<select name="sp_qqqqq" id="sp_qqqqq">
+											<option value="">전체</option>
+											<option value="company_">업체 후원</option>
+											<option value="aa">일대일 후원</option>
+											<option value="bb">임보자 후원</option>
+										</select>
+									</div>
 						<table class="table table-hover text-center adoption_list">
 							<thead>
 								<tr>
