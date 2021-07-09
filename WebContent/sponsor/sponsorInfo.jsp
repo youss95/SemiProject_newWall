@@ -23,6 +23,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -54,24 +57,28 @@
 .sp_if .sp_company .com_img2 {
 	display: none;
 }
+
 .sp_if .sp_company:hover .com_img2 {
 	display: block;
-	transition-duration:1s;
+	transition-duration: 1s;
 }
+
 .sp_if .sp_company:hover .com_img1 {
 	display: none;
-	transition-duration:1s;
+	transition-duration: 1s;
 	/* 바꾸긴했는데 천천히는 안먹음 */
 }
+
 .sp_if .sp_company:hover .sp_company_bg {
-	background-color:#B9D7EA;
+	background-color: #B9D7EA;
 }
 
 .sp_if .sp_company img {
 	opacity: 0.9;
 }
+
 .sp_if .sp_company {
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .sp_if .sp_info02_con {
@@ -152,9 +159,10 @@
 	padding-right: 0.5%;
 	padding-top: 1%;
 	float: left;
-	cursor:pointer;
+	cursor: pointer;
 }
-.sp_if .sp_one_one .sp_img_con{
+
+.sp_if .sp_one_one .sp_img_con {
 	overflow: hidden;
 }
 
@@ -163,28 +171,30 @@
 	padding-left: 0.5%;
 	padding-top: 1%;
 	float: left;
-	cursor:pointer;
+	cursor: pointer;
 }
-.sp_if .sp_guardi .sp_img_con{
+
+.sp_if .sp_guardi .sp_img_con {
 	overflow: hidden;
 }
 
-
-.sp_if .sp_one_one:hover .sp_company_bg{
-	background-color:#B9D7EA;
-}
-.sp_if .sp_one_one:hover .com_img1{
-	transform:scale(1.1);
-	transition-duration:1s;
-}
-.sp_if .sp_guardi:hover .sp_company_bg{
-	background-color:#B9D7EA;
-}
-.sp_if .sp_guardi:hover .com_img1{
-	transform:scale(1.1);
-	transition-duration:1s;
+.sp_if .sp_one_one:hover .sp_company_bg {
+	background-color: #B9D7EA;
 }
 
+.sp_if .sp_one_one:hover .com_img1 {
+	transform: scale(1.1);
+	transition-duration: 1s;
+}
+
+.sp_if .sp_guardi:hover .sp_company_bg {
+	background-color: #B9D7EA;
+}
+
+.sp_if .sp_guardi:hover .com_img1 {
+	transform: scale(1.1);
+	transition-duration: 1s;
+}
 </style>
 
 </head>
@@ -201,15 +211,7 @@
 							<h2 class="sp_subtitle">믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</h2>
 						</div>
 						<div class="sp_body">
-<<<<<<< HEAD
-							<div  class="sp_company" id="sp_company">
-									<div class="sp_company_bg">
-										<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
-										<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
-										<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
-											노력을 함께 해주세요</h3>
-									</div> <img class="com_img1"
-=======
+
 							<div class="sp_company" id="sp_company">
 								<div class="sp_company_bg">
 									<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
@@ -218,7 +220,6 @@
 										노력을 함께 해주세요</h3>
 								</div>
 								<img class="com_img1"
->>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
 									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
 									alt=""> <img class="com_img2"
 									src="../resources/images/sp_img/sp_company02_1900_700.png"
@@ -226,33 +227,18 @@
 							</div>
 							<div>
 								<div class="sp_one_one">
-<<<<<<< HEAD
-										<div class="sp_company_bg sp_one_one_bg_m">
-											<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
-												유기 동물 후원</h2>
-											<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
-												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-										</div> <div class="sp_img_con"><img class="com_img1"
-										src="../resources/images/sp_img/sp_company_03_950_700.jpg" alt=""></div>
-								</div>
-								<div class="sp_guardi">
-										<div class="sp_company_bg sp_guardi_bg_m">
-											<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자
-												선택 후원</h2>
-											<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
-												삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
-										</div>  <div class="sp_img_con"><img class="com_img1"
-										src="../resources/images/sp_img/sp_company_04_950_700.jpg" alt=""></div>
-=======
+
 									<div class="sp_company_bg sp_one_one_bg_m">
 										<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
 											유기 동물 후원</h2>
 										<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
 											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
 									</div>
-									<img class="com_img1"
-										src="../resources/images/sp_img/sp_company_03_950_700.jpg"
-										alt="">
+									<div class="sp_img_con">
+										<img class="com_img1"
+											src="../resources/images/sp_img/sp_company_03_950_700.jpg"
+											alt="">
+									</div>
 								</div>
 								<div class="sp_guardi">
 									<div class="sp_company_bg sp_guardi_bg_m">
@@ -261,10 +247,11 @@
 										<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
 											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
 									</div>
-									<img class="com_img1"
-										src="../resources/images/sp_img/sp_company_04_950_700.jpg"
-										alt="">
->>>>>>> 3e213ff785662fce790e1dfaac1be97ff7f8fa75
+									<div class="sp_img_con">
+										<img class="com_img1"
+											src="../resources/images/sp_img/sp_company_04_950_700.jpg"
+											alt="">
+									</div>
 								</div>
 							</div>
 							<div class="sp_info00_con">
@@ -319,37 +306,22 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
+ <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
+	
 	<script>
-	$(function(){
-		 $(".sp_company").on("click",function(){
-			 location.href="${pageContext.request.contextPath}/comInput.sp";
-		 })
-		 $(".sp_one_one").on("click",function(){
-			 location.href="${pageContext.request.contextPath}/adoptList.apt?cpage=1";
-		 })
-		 $(".sp_guardi").on("click",function(){
-			 location.href="${pageContext.request.contextPath}/guardian.sp";
-		 })
-		  // $("#sp_company").hover(function () {
-
-            //     $('.sp_if .sp_company .com_img2').attr('display', 'none')
-            //     $('.sp_if .sp_company .com_img1').attr('display', 'block')
-            // })
-        /*     $('#sp_company').mouseover(function () {
-                $('.sp_if .sp_company .com_img2').show();
-                $(".sp_if .sp_company .com_img1").hide()
-                $('#sp_company .sp_company_bg').css('background-color', '#B9D7EA');
-                //서서히 변하는거 찾아보기
-            })
-            $('#sp_company').mouseout(function () {
-                $('.sp_if .sp_company .com_img1').show();
-                $(".sp_if .sp_company .com_img2").hide()
-                $('#sp_company .sp_company_bg').css('background-color', '#D6E6F2');
-            }) */
-            //이거 위처럼  간단하게  나중에 바꾸기 **css로
-		 
-	})
+		$(function() {
+			$(".sp_company").on("click",function() {
+								location.href = "${pageContext.request.contextPath}/comInput.sp";
+							})
+			$(".sp_one_one").on("click",function() {
+								location.href = "${pageContext.request.contextPath}/adoptList.apt?cpage=1";
+							})
+			$(".sp_guardi").on("click",function() {
+								location.href = "${pageContext.request.contextPath}/guardian.sp";
+							})
+		})
+		
+		
 	</script>
 </body>
 </html>
