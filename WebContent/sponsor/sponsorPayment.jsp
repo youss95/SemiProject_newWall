@@ -288,8 +288,11 @@
 															});
 										});
 						$(".btn_back").on("click", function() {
-							location.href = "${pageContext.request.contextPath}/comInput.sp";
+							//location.href = "${pageContext.request.contextPath}/comInput.sp";
+							window.history.back();
+							//뒤로는가는데 내용을 다지우던지 해야할듯 바로 다시 결제 누르면 에러남**
 						});
+						
 					</script>
 					<!-- 하이 여기는 서브입니다 -->
 				</section>

@@ -9,9 +9,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.kh.config.Db;
+
 import com.kh.dto.MemberDTO;
-import com.kh.dto.tempMemberDTO;
+
 
 public class MemberDAO {
 	private static MemberDAO instance;
@@ -71,7 +71,6 @@ public class MemberDAO {
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setNString(1, id);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -91,7 +90,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress1());
 			pstat.setNString(10, dto.getAddress2());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
@@ -111,7 +109,6 @@ public class MemberDAO {
 			pstat.setNString(9, dto.getAddress2());
 			pstat.setNString(10, dto.getUser_id());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}

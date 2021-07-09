@@ -12,14 +12,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  .card{float:left;margin:10px;}
+  .wrap{overflow:hidden;}
+  </style>
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
 <div class="container">
 			<div class="contents">
-				<section class="lostSection">
+				<section class="lostList">
+				<div class="wrap">
 				<c:forEach var="maplist" items="${mapList}">
-				<div class="card">
+				<div style="width:500px;" class="card">
 				
   <h2 class="card-header" style="font-size:20px;"><span style="padding:6px;background-color:orange;border-radius:5px;">실종</span>&nbsp; ${maplist.lostName}</h2>
   <div class="card-body">
@@ -44,8 +49,9 @@
    <img style="width:150px;height:150px;" src="${pageContext.request.contextPath}/upload/lostAnimal/${maplist.fileRealName}">
   </div>
 </div>
-<br>
+
 </c:forEach>
+</div>
 				</section>
 				</div>
 				</div>
