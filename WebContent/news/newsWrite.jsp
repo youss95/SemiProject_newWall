@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
@@ -19,34 +17,46 @@
 	href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
 <script>
-$(function() {	
-	
-	$("#file-box").on("click",".delFile",function(){
-		$(this).parent().remove();
-	})
+	$(function(){
+		$(document).ready(function() {
+	        $('#subcontents').on('keyup', function() {
+	            $('#subcontents_cnt').html("("+$(this).val().length+" / 150)");
+	 
+	            if($(this).val().length > 100) {
+	                $(this).val($(this).val().substring(0, 150));
+	                $('#subcontents_cnt').html("(150 / 150)");
+	            }
+	        });
+	    });
+		
+		$("#file-box").on("click",".delFile",function(){
+			$(this).parent().remove();
+		})
 
 
-	let fileCount = 1;
-	$("#addFile").on("click", function() {
-		let fileLine = $("<div>")
+		let fileCount = 1;
+		$("#addFile").on("click", function() {
+			let fileLine = $("<div>")
+			
+			let inputFile = $("<input>");
+			inputFile.attr("type", "file");
+			inputFile.attr("name","file"+fileCount++);
+			
+			let btnDel = $("<button>");
+			btnDel.addClass("delFile btn_s btn_white");
+			btnDel.attr("type","button");
+			btnDel.text("-");
+			
+			fileLine.append(inputFile);
+			fileLine.append(btnDel);
+			
+			$("#file-box").append(fileLine);
+		})
 		
-		let inputFile = $("<input>");
-		inputFile.attr("type", "file");
-		inputFile.attr("name","file"+fileCount++);
-		
-		let btnDel = $("<button>");
-		btnDel.addClass("delFile btn_s btn_white");
-		btnDel.attr("type","button");
-		btnDel.text("-");
-		
-		fileLine.append(inputFile);
-		fileLine.append(btnDel);
-		
-		$("#file-box").append(fileLine);
 	})
-})
-	
+
 </script>
+
 
 </head>
 <body>
@@ -57,18 +67,16 @@ $(function() {
 				<section class="notice_list">
 					<div class="board_wrap">
 						<div class="board_title">
-							<strong>공지사항</strong>
+							<strong>뉴스</strong>
 						</div>
-						<form action="${pageContext.request.contextPath}/write.notice"
-							method="post" enctype="multipart/form-data">
+						<form action="${pageContext.request.contextPath}/write.news" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
-								<div class="board_write">
+								<div class="newsboard_write">
 									<div class="title">
 										<dl>
 											<dt>제목</dt>
 											<dd>
-												<input type="text" id="title" name="notice_title"
-													placeholder="제목 입력">
+												<input type="text" id="title" name="news_title" placeholder="제목 입력">
 											</dd>
 										</dl>
 									</div>
@@ -77,16 +85,18 @@ $(function() {
 											<dt>파일 첨부</dt>
 											<button class="btn_s btn_line" id="addFile" type="button">+</button>
 										</dl>
-
+										
+									</div>
+									<div class="subcont">
+										<textarea placeholder="서브 내용 입력" id="subcontents" name="news_sub_contents"></textarea>
+										<div id="subcontents_cnt" class="subcontents_cnt">(0/150)</div>
 									</div>
 									<div class="cont">
-										<textarea placeholder="내용 입력" id="contents"
-											name="notice_contents" maxlength="2048"></textarea>
+										<textarea placeholder="내용 입력" id="contents" name="news_contents" maxlength="2048"></textarea>
 									</div>
 								</div>
 								<div class="bt_wrap">
-									<button class="btn_m btn_primary" type="submit">등록</button>
-									<button class="btn_m btn_white" type="button">취소</button>
+									<button class="btn_m btn_primary" type="submit">등록</button> <button class="btn_m btn_white" type="button" >취소</button>
 								</div>
 							</div>
 						</form>
