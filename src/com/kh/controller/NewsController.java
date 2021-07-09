@@ -2,7 +2,6 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.config.BoardConfig;
-import com.kh.dao.FileDAO;
 import com.kh.dao.NewsDAO;
-import com.kh.dto.FileDTO;
+import com.kh.dao.NewsFileDAO;
 import com.kh.dto.NewsDTO;
+import com.kh.dto.NewsFileDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -46,7 +45,7 @@ public class NewsController extends HttpServlet {
 		try {
 			NewsDAO dao = NewsDAO.getInstance();
 			NewsDTO dto = new NewsDTO();
-			FileDAO fdao = FileDAO.getInstance();
+			NewsFileDAO fdao = NewsFileDAO.getInstance();
 			
 			if(url.contentEquals("/newsBoard.news")) {
 				//뉴스 리스트
@@ -93,17 +92,13 @@ public class NewsController extends HttpServlet {
 				
 				MultipartRequest multi = new MultipartRequest(request, filesPath,maxSize,"utf8", new DefaultFileRenamePolicy());
 				
-				Enumeration files = multi.getFileNames();
-				String str = (String)files.nextElement();
-				String lostFileRealName = multi.getFilesystemName(str);
-				
 				Set<String> fileNames = multi.getFileNameSet();
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
 					String sysName = multi.getFilesystemName(fileName);
 					
 					if(oriName != null) {
-						fdao.insert(new FileDTO(0,oriName, sysName, null, seq));
+						fdao.insert(new NewsFileDTO(0,oriName, sysName, null, seq));
 					}
 				}
 				
@@ -113,13 +108,37 @@ public class NewsController extends HttpServlet {
 				title = XSSFilter(title);
 				System.out.println(title);
 				
+				String subContents = multi.getParameter("news_sub_contents");//뉴스 서브내용
+				subContents = XSSFilter(subContents);
+				System.out.println(subContents);
+				
 				String contents = multi.getParameter("news_contents");//뉴스 내용
 				contents = XSSFilter(contents);
 				System.out.println(contents);
 				
-				int result = dao.newNews(new NewsDTO(seq,title,contents,writer,null,0));
+				int result = dao.newNews(new NewsDTO(seq,title,subContents,contents,writer,null,0));
 				
 				response.sendRedirect("newsBoard.news?cpage=1");
+				
+			}else if(url.contentEquals("/newsView.news")) {
+				//뉴스 보기
+				int seq = Integer.parseInt(request.getParameter("news_seq"));
+				
+				dao.view(seq);
+				
+				dto = dao.detail(seq);
+				
+				int parent = seq;
+				
+				List<NewsFileDTO> flist = fdao.selectBySeq(seq);
+				
+				request.setAttribute("newsView", dto);
+				request.setAttribute("flist", flist);
+				
+//				ncdto = ncdao.commentsAll(parent);
+//				request.setAttribute("nocmtlist", ncdto);
+				
+				request.getRequestDispatcher("newsboard/newsView.jsp").forward(request, response);
 				
 			}
 			
