@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.config.Db;
+import com.kh.config.PageConfig;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
 import com.kh.dto.ProtectDetailDTO;
@@ -294,6 +295,55 @@ public class AnimalDAO {
 				return list;
 			}
 		}
+	}
+	
+	private int getAllCount() throws Exception {
+		String sql="select count(*) from board";
+		try(Connection con = Db.getCon();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
+	//맵 페이지 리스트 네비
+	public List<String> mapPageNavi(int page) throws Exception{
+		 int recordTotalCount = this.getAllCount(); //전체 레코드의 개수 /DB에서 꺼내온느것
+	      int recordCountPerPage = PageConfig.LOST_RECORD_COUNT_PER_PAGE ; //   한페이지당 보여줄 게시글 개수 /개발자가 정하는것
+	      int naviCountPerPage = PageConfig.LOST_NAVI_COUNT_PER_PAGE; //페이지의 갯수, 내 위치 페이지를 기준으로 시작부터 끝까지의 페이지가 총 몇개인지. /개발자가 정하는것
+	      int pageTotalCount = 0;
+	      
+	      if(recordTotalCount % recordCountPerPage > 0) {
+		      pageTotalCount = recordTotalCount / recordCountPerPage + 1;  //마지막 페이지
+		      }else {
+		         pageTotalCount = recordTotalCount / recordCountPerPage;
+		      }
+	      
+	      if( page > pageTotalCount) { //다음으로 넘겼을때 마지막 페이지이면
+		         page = pageTotalCount;
+		      }else if (page < 1 ) {
+		         page = 1;
+		      }
+	      
+	      int startNavi = ((page-1)/naviCountPerPage) * naviCountPerPage + 1;
+	      int endNavi = startNavi + (naviCountPerPage -1 ); //마지막 페이지 번호
+	      if(endNavi > pageTotalCount) {endNavi = pageTotalCount;}
+	      
+	      boolean needPrev = true;
+	      boolean needNext = true;
+	      if(startNavi == 1) {needPrev = false;}
+	      if(endNavi == pageTotalCount) {needNext = false;}
+	      
+	      List<String> pageNavi = new ArrayList<>();
+	      
+	      if(needPrev) {pageNavi.add("<");}
+	      for(int i = startNavi ; i<=endNavi;i++) {
+	         pageNavi.add(String.valueOf(i));
+	      }
+	      if(needNext) {pageNavi.add(">");}
+	      
+	      return pageNavi;
 	}
 }
 
