@@ -73,7 +73,7 @@ public class NewsDAO {
 	
 	public List<NewsDTO> getPageList(int startNum, int endNum) throws Exception {
 		// 뉴스 게시글 리스트
-		String sql = "select * from (select row_number() over(order by news_seq desc) rnum, news_seq, news_title, news_writer, news_reg_date, news_view from news_board) where rnum between ? and ?";
+		String sql = "select * from (select row_number() over(order by news_seq desc) rnum, news_seq, news_title, news_sub_contents, news_writer, news_reg_date, news_view from news_board) where rnum between ? and ?";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, startNum);
@@ -83,11 +83,12 @@ public class NewsDAO {
 				while (rs.next()) {
 					int news_seq = rs.getInt("news_seq");
 					String news_title = rs.getString("news_title");
+					String news_sub_contents = rs.getString("news_sub_contents");
 					String news_writer = rs.getNString("news_writer");
 					Date news_reg_date = rs.getDate("news_reg_date");
 					int news_view = rs.getInt("news_view");
 
-					NewsDTO dto = new NewsDTO(news_seq, news_title, null, news_writer, news_reg_date,
+					NewsDTO dto = new NewsDTO(news_seq, news_title, news_sub_contents, null, news_writer, news_reg_date,
 							news_view);
 					list.add(dto);
 				}
@@ -98,7 +99,7 @@ public class NewsDAO {
 	
 	public List<NewsDTO> getPageList(int startNum, int endNum, String category, String keyword) throws Exception {
 		// 뉴스 게시글 찾기 리스트
-		String sql = "select * from (select row_number() over(order by news_seq desc) rnum, news_seq, news_title, news_writer, news_reg_date, news_view from news_board where "
+		String sql = "select * from (select row_number() over(order by news_seq desc) rnum, news_seq, news_title, news_sub_contents ,news_writer, news_reg_date, news_view from news_board where "
 				+ category + " like ?) where rnum between ? and ?";
 
 		try (Connection con = this.getConnection(); 
@@ -112,11 +113,12 @@ public class NewsDAO {
 				while (rs.next()) {
 					int news_seq = rs.getInt("news_seq");
 					String news_title = rs.getString("news_title");
+					String news_sub_contents = rs.getString("news_sub_contents");
 					String news_writer = rs.getNString("news_writer");
 					Date news_reg_date = rs.getDate("news_reg_date");
 					int news_view = rs.getInt("news_view");
 
-					NewsDTO dto = new NewsDTO(news_seq, news_title, null, news_writer, news_reg_date,
+					NewsDTO dto = new NewsDTO(news_seq, news_title, news_sub_contents,null, news_writer, news_reg_date,
 							news_view);
 					list.add(dto);
 				}
@@ -134,7 +136,7 @@ public class NewsDAO {
 		} else {
 			recordTotalCount = this.getRecordCount(category, keyword);
 		}
-		int recordCountPerPage = BoardConfig.RECORD_COUNT_PER_PAGE; // 한 페이지 당 보여줄 게시글의 개수
+		int recordCountPerPage = (BoardConfig.RECORD_COUNT_PER_PAGE -15); // 한 페이지 당 보여줄 게시글의 개수
 		int naviCountPerPage = BoardConfig.NAVI_COUNT_PER_PAGE; // 내 위치 페이지를 기준으로 시작으로부터 끝까지의 페이지가 총 몇개인지.
 
 		int pageTotalCount = 0; // 총 페이지
@@ -153,7 +155,7 @@ public class NewsDAO {
 		}
 
 		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;// 네비 시작페이지 구하기
-		int endNavi = startNavi + naviCountPerPage - 1; // 네비 마지막 페이지 구하기
+		int endNavi = startNavi + (naviCountPerPage - 1); // 네비 마지막 페이지 구하기
 
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
@@ -164,17 +166,20 @@ public class NewsDAO {
 
 		if (startNavi == 1) { // <, > 페이지 버튼 달아주기 1
 			needPrev = false;
-		} else if (endNavi == pageTotalCount) {
+		}else if (endNavi == pageTotalCount) {
 			needNext = false;
 		}
 
-		List<String> pageNavi = new ArrayList<String>(); // <, > 페이지 버튼 달아주기 2� 2
+		List<String> pageNavi = new ArrayList<String>(); // <, > 페이지 버튼 달아주기 2
 		if (needPrev) {
 			pageNavi.add("<");
-		}
+		}		
+		
+		
 		for (int i = startNavi; i <= endNavi; i++) {
 			pageNavi.add(String.valueOf(i));
 		}
+		
 		if (needNext) {
 			pageNavi.add(">");
 		}
@@ -184,15 +189,16 @@ public class NewsDAO {
 	
 	public int newNews(NewsDTO dto) throws Exception {
 		//뉴스 새글 작성
-		String sql = "insert into news_board values(?,?,?,?,sysdate,0)";
+		String sql = "insert into news_board values(?,?,?,?,?,sysdate,0)";
 		
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 					){
 			pstat.setInt(1, dto.getNews_seq());
 			pstat.setString(2, dto.getNews_title());
-			pstat.setNString(3, dto.getNews_contents());
-			pstat.setString(4, dto.getNews_writer());
+			pstat.setNString(3, dto.getNews_sub_contents());
+			pstat.setNString(4, dto.getNews_contents());
+			pstat.setString(5, dto.getNews_writer());
 			
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -200,19 +206,100 @@ public class NewsDAO {
 		}
 	}
 	
-	public static void main(String[] args) throws Exception {
-		// 뉴스 임시
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Semi", "Semi");
+//	public static void main(String[] args) throws Exception {
+//		// 뉴스 임시
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "Semi", "Semi");
+//
+//		Statement stat = con.createStatement();
+//		for (int i = 0; i < 144; i++) {
+//			stat.addBatch("insert into news_board values(news_num.nextval,'title" + i + "','subcontents" + i + "','contents" + i + "','admin',sysdate,0)");
+//		}
+//		stat.executeBatch();
+//		con.commit();
+//		con.close();
+//	}
+	
 
-		Statement stat = con.createStatement();
-		for (int i = 0; i < 144; i++) {
-			stat.addBatch("insert into news_board values(news_num.nextval,'title" + i + "','contents" + i
-					+ "','admin',sysdate,0)");
+	public int view(int seq) throws Exception{
+		//조회수
+		String sql = "update news_board set news_view = news_view+1 where news_seq = ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);				
+				){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
 		}
-		stat.executeBatch();
-		con.commit();
-		con.close();
+	}
+	
+	public NewsDTO detail(int seq) throws Exception {
+		//공지사항 보기
+		
+		String sql = "select * from news_board where news_seq = ?";
+		
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery();
+					){
+				NewsDTO dto = new NewsDTO();
+				if(rs.next()) {
+					int news_seq = rs.getInt("news_seq");
+					String news_title = rs.getString("news_title");
+					String news_sub_contents = rs.getString("news_sub_contents");
+					String news_contents = rs.getString("news_contents");
+					String news_writer = rs.getString("news_writer");
+					Date news_reg_date = rs.getDate("news_reg_date");
+					int news_view = rs.getInt("news_view");
+					
+					dto.setNews_seq(news_seq);
+					dto.setNews_title(news_title);
+					dto.setNews_sub_contents(news_sub_contents);
+					dto.setNews_contents(news_contents);
+					dto.setNews_writer(news_writer);
+					dto.setNews_reg_date(news_reg_date);
+					dto.setNews_view(news_view);
+					
+					return dto;					
+				}
+			}
+		}
+		return null;
+	}
+	
+	public int delete(int seq) throws Exception {
+		//공지사항 삭제
+		String sql = "delete from news_board where news_seq = ?";
+		
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);	
+				){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int modify(int seq ,String title, String subcontents, String contents) throws Exception {
+		//게시글 수정
+		String sql = "update news_board set news_title=?, news_sub_contents=?, news_contents=? where news_seq = ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);	
+				){
+			pstat.setString(1, title);
+			pstat.setString(2, subcontents);
+			pstat.setString(3, contents);
+			pstat.setInt(4, seq);
+			
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+		
 	}
 	
 	

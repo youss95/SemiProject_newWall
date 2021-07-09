@@ -127,7 +127,7 @@ public class NoticeDAO {
 		}
 
 		int startNavi = (currentPage - 1) / naviCountPerPage * naviCountPerPage + 1;// 네비 시작페이지 구하기
-		int endNavi = startNavi + naviCountPerPage - 1; // 네비 마지막 페이지 구하기
+		int endNavi = startNavi + (naviCountPerPage - 1); // 네비 마지막 페이지 구하기
 
 		if (endNavi > pageTotalCount) {
 			endNavi = pageTotalCount;
@@ -142,7 +142,7 @@ public class NoticeDAO {
 			needNext = false;
 		}
 
-		List<String> pageNavi = new ArrayList<String>(); // <, > 페이지 버튼 달아주기 2� 2
+		List<String> pageNavi = new ArrayList<String>(); // <, > 페이지 버튼 달아주기 2
 		if (needPrev) {
 			pageNavi.add("<");
 		}
@@ -183,6 +183,7 @@ public class NoticeDAO {
 	}
 	
 	public int view(int seq) throws Exception{
+		//조회수
 		String sql = "update notice_board set notice_view = notice_view+1 where notice_seq = ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);				
@@ -192,10 +193,6 @@ public class NoticeDAO {
 			con.commit();
 			return result;
 		}
-	
-	
-	
-	
 	}
 	
 	public NoticeDTO detail(int seq) throws Exception {

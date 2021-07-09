@@ -74,7 +74,7 @@
 								<a
 									href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1"
 									class="btn_s btn_light">목록</a>
-								<%--<c:if test="${login.user_id == admin_id}"> --%>
+								<%--<c:if test="${login.user_id == admin_id} || ${login.user_id == noticeView.notice_writer}"> --%>
 								<a
 									href="${pageContext.request.contextPath}/noticeModify.notice?notice_seq=${noticeView.notice_seq}"
 									class="btn_s btn_primary" id="modify">수정</a> <a

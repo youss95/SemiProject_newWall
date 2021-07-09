@@ -8,22 +8,54 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
-
-<link
-   href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-   rel="stylesheet"
-   integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-   crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
-<script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-   crossorigin="anonymous"></script>
+
+ <script>
+	$(function() {		
+		$(".delAttach").on("click",function(){
+			let seq = $(this).attr("seq");
+			console.log(seq)
+			$(this).parent().remove();
+			
+			let delTarget = $("<input>");
+			delTarget.attr("type","hidden");
+			delTarget.attr("name","delete");
+			delTarget.attr("value",seq);
+			
+			$(".board_write").append(delTarget);
+		})
+
+		$("#file-box").on("click", ".delFile", function() {
+			$(this).parent().remove();
+		})
+
+		let fileCount = 1;
+		$("#addFile").on("click", function() {
+			let fileLine = $("<div>")
+
+			let inputFile = $("<input>");
+			inputFile.attr("type", "file");
+			inputFile.attr("name", "file" + fileCount++);
+
+			let btnDel = $("<button>");
+			btnDel.addClass("delFile btn_s btn_white");
+			btnDel.attr("type", "button");
+			btnDel.text("-");
+
+			fileLine.append(inputFile);
+			fileLine.append(btnDel);
+
+			$("#file-box").append(fileLine);
+		})
+	})
+</script>  
+
 </head>
 <body>
    <div class="wrap">

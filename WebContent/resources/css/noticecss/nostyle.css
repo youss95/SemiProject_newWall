@@ -352,6 +352,8 @@ a {
 .board_write .modiFile{
 	float: left;
 	width: 265px;
+	height: 33px; 
+	line-height:33px;
 }
 
 
