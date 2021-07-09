@@ -181,5 +181,4 @@ public class AnimalDTO {
 		this.an_weight_range = an_weight_range;
 	}
 
-
 }

@@ -28,7 +28,7 @@ em.t_red{font-weight: 700 !important;}
 .t_info p{font-size: 14px;color: #888dac;}
 .ir {display: block; text-indent: -9999px; overflow: hidden;}
 .trans {-webkit-transition: all ease 0.3s; -moz-transition: all ease 0.3s; transition: all ease 0.3s;}
-.t_link{color: #715E99 !important;}
+.t_link{color: #254E7C !important;}
 .t_link:hover{text-decoration: underline;}
 .desc_txt{display:inline-block;margin-left:15px;font-size:14px;color:#888dac;line-height:21px;vertical-align: middle;}
 
@@ -146,6 +146,10 @@ section .contents{padding: 30px 30px 60px 30px;}
 .table tbody .nodata{height:200px;}
 .table tbody .nodata td{line-height:200px;font-weight:400;color:#666;}
 .table-hover tbody tr.nodata:hover{background-color:transparent;}
+
+.page_nav{text-align:center;}
+.page_nav a {display: inline-block;width: 30px;height: 30px;border-radius:50%;font-size: 15px;color: #666;line-height: 30px;text-align: center;font-weight: 700;transition:all .3s ease;}
+.page_nav a:hover{background-color:#C3DFF4;color:#333;text-decoration:underline;}
 
 /* 관리자 동물 정보 등록 폼 */
 .reg_info .form_tbl{width: 100%;}

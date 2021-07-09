@@ -12,7 +12,7 @@
 .flex_box .inp_slct{min-width:auto;}
 .animal_list{font-size:0;}
 .animal_list .item{display:inline-block;width: 30%;vertical-align:top;}
-.animal_list .item .img_wrap{border-radius:3px;overflow:hidden;transition:all .3s ease;}
+.animal_list .item .img_wrap{border-radius:3px;max-height:330px;overflow:hidden;transition:all .3s ease;}
 .animal_list .item .img_wrap:hover{box-shadow: 0 10px 20px rgba(0, 0, 0, .3);}
 .animal_list .item:nth-of-type(3n-1){margin:0 5% 20px;}
 .animal_list .item .txt{font-size:13px;margin:20px 0 30px;font-weight:300;}
