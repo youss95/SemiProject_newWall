@@ -316,9 +316,9 @@
 			$(".sp_one_one").on("click",function() {
 								location.href = "${pageContext.request.contextPath}/adoptList.apt?cpage=1";
 							})
-			$(".sp_guardi").on("click",function() {
+			/* $(".sp_guardi").on("click",function() {
 								location.href = "${pageContext.request.contextPath}/guardian.sp";
-							})
+							}) */
 		})
 		
 		

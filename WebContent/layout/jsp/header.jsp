@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="header">
 	<h1 class="logo">
-		<a href="index.jsp">LOGO IMG</a>
+		<a href="index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
