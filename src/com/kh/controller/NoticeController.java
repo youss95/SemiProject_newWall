@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
-import com.kh.dao.FileDAO;
+import com.kh.dao.NoticeFileDAO;
 import com.kh.dao.NoCommentsDAO;
 import com.kh.dao.NoticeDAO;
-import com.kh.dto.FileDTO;
+import com.kh.dto.NoticeFileDTO;
 import com.kh.dto.NoCommentsDTO;
 import com.kh.dto.NoticeDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -48,7 +48,7 @@ public class NoticeController extends HttpServlet {
 		
 		try {
 			NoticeDAO dao = NoticeDAO.getInstance();
-			FileDAO fdao = FileDAO.getInstance();
+			NoticeFileDAO fdao = NoticeFileDAO.getInstance();
 			NoticeDTO dto = new NoticeDTO();
 			NoCommentsDAO ncdao = NoCommentsDAO.getInstance();
 			List<NoCommentsDTO> ncdto = new ArrayList<>();
@@ -99,17 +99,17 @@ public class NoticeController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request,filesPath,maxSize,"utf8",
 						new DefaultFileRenamePolicy());
 				
-				Enumeration files = multi.getFileNames();
-	            String str = (String)files.nextElement();
-	            String lostFileRealName = multi.getFilesystemName(str);
-				
+//				Enumeration files = multi.getFileNames();
+//	            String str = (String)files.nextElement();
+//	            String lostFileRealName = multi.getFilesystemName(str);
+//				
 				Set<String> fileNames = multi.getFileNameSet();
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
 					String sysName = multi.getFilesystemName(fileName);
 					
 					if(oriName != null) {
-						fdao.insert(new FileDTO(0, oriName, sysName, null, seq));
+						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
 				
@@ -121,7 +121,7 @@ public class NoticeController extends HttpServlet {
 				String contents = multi.getParameter("notice_contents");//공지사항 내용
 				contents = XSSFilter(contents);
 				
-				int result = dao.newNotice(new NoticeDTO(seq, title, contents, writer, null, 0));
+				dao.newNotice(new NoticeDTO(seq, title, contents, writer, null, 0));
 				
 				response.sendRedirect("noticeBoard.notice?cpage=1");
 				
@@ -129,12 +129,13 @@ public class NoticeController extends HttpServlet {
 				//공지사항 보기
 				int seq = Integer.parseInt(request.getParameter("notice_seq"));
 				
-					dao.view(seq);
+				dao.view(seq);
+				
 				dto = dao.detail(seq);
 				
 				int parent = seq;
 				
-				List<FileDTO> flist = fdao.selectBySeq(seq);
+				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
 				
 				request.setAttribute("noticeView", dto);
 				request.setAttribute("flist", flist);
@@ -159,7 +160,7 @@ public class NoticeController extends HttpServlet {
 				
 				dto = dao.detail(seq);
 				
-				List<FileDTO> flist = fdao.selectBySeq(seq);
+				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
 				
 				request.setAttribute("noticeView", dto);
 				request.setAttribute("flist", flist);
@@ -200,12 +201,12 @@ public class NoticeController extends HttpServlet {
 					String sysName = multi.getFilesystemName(fileName);
 					
 					if(oriName != null) {
-						fdao.insert(new FileDTO(0, oriName, sysName, null, seq));
+						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
 				
 				dto = dao.detail(seq);
-				List<FileDTO> flist = fdao.selectBySeq(seq);
+				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
 				request.setAttribute("flist", flist);
 				response.sendRedirect("noticeView.notice?notice_seq=" + seq);
 				
