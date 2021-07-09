@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
 </head>
-
 <body>
 	<div class="wrap">
 		<jsp:include page="../layout/jsp/adminHeader.jsp"></jsp:include>
@@ -25,6 +24,14 @@
 					</div>
 					<div class="contents animal_list">
 						<table class="table table-hover text-center">
+							<colgroup>
+								<col width="10%">
+								<col width="20%">
+								<col width="20%">
+								<col width="20%">
+								<col width="10%">
+								<col width="20%">
+							</colgroup>
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -36,19 +43,40 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+								<c:forEach var="i" items="${list}" varStatus="vs">
+									<tr>
+										<td>${rowNum -(cpage-1)*10 - vs.index}</td>
+										<td><a class="t_link" href="${pageContext.request.contextPath}/animalInfoDetail.adm?code_seq=${i.code_seq}">${i.code_seq}</a></td>
+										<td>${i.an_name}</td>
+										<td>${i.an_category}</td>
+										<td>${i.an_status}</td>
+										<td>${i.an_date}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<div class="btn_wrap">
-							<a href="animalInfoReg.jsp" class="btn_m btn_default btn_style01">동물 정보 등록</a>
+							<a href="animalInfoReg.jsp" class="btn_m btn_default">동물 정보 등록</a>
 						</div>
+						
+						<div class="page_nav">
+						<c:forEach var="i" items="${navi}" varStatus="s">
+							<c:choose>
+								<c:when test="${i == '>'}">
+									<a
+										href="${pageContext.request.contextPath}/animalInfoList.adm?cpage=${navi[s.index-1]+1}">${i}</a>
+								</c:when>
+								<c:when test="${i == '<'}">
+									<a
+										href="${pageContext.request.contextPath}/animalInfoList.adm?cpage=${navi[s.index+1]-1}">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="${pageContext.request.contextPath}/animalInfoList.adm?cpage=${i}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</div>
 					</div>
 				</section>
 				

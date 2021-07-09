@@ -23,6 +23,7 @@
 					class="fas fa-chevron-right"></i></a>
 				<ul>
 					<li class="depth2"><a href="${pageContext.request.contextPath}/admin/adoptRegList.jsp">입양 신청 리스트</a></li>
+					<li class="depth2"><a href="${pageContext.request.contextPath}/admin/adoptRegList.jsp">입양 신청 리스트</a></li>
 					<li class="depth2"><a href="#">입양 신청 상태 관리</a></li>
 				</ul></li>
 			<li class="depth1"><a href="#">후원<i

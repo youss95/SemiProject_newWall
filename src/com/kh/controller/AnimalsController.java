@@ -122,6 +122,7 @@ public class AnimalsController extends HttpServlet {
 					dis.forward(request, response);
 				}
 			} else if(url.equals("/protectBoard.lost")) {
+			
 				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
 				System.out.println(directory);
 				int maxSize = 1024*1024*100;
@@ -139,7 +140,7 @@ public class AnimalsController extends HttpServlet {
 					String protectAddr = multi.getParameter("addResult");
 					String protectFindDate = multi.getParameter("protectFindDate");
 					String protectContent = multi.getParameter("protectContent");
-					
+					String protectWriter = multi.getParameter("protectWriter");
 					
 					
 					Enumeration files = multi.getFileNames();
@@ -156,7 +157,7 @@ public class AnimalsController extends HttpServlet {
 					  protectContent, protectGender,protectImage1,protectImage2);
 					 
 					System.out.println(dto.toString());
-					int result = dao.protectWrite(dto);
+					int result = dao.protectWrite(dto,protectWriter);
 					
 					  if(result >0) { response.setCharacterEncoding("UTF-8");
 					  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
@@ -204,7 +205,9 @@ public class AnimalsController extends HttpServlet {
 				System.out.println(list.toString());
 			}else if(url.equals("/protectDetail.lost")) {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				
 				int result = dao.getViewCount(protectNo);
+			
 				List<ProtectReplyDTO> list = dao.getReplyList(protectNo);
 				if(result>0) {
 					ProtectDetailDTO dto = dao.getDetail(protectNo);

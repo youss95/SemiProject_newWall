@@ -6,10 +6,8 @@
        .protectBoard img{width: 100%; height: 300px;}
       .protectBoard h2{line-height: 1.5;}
       .protectBoard h4{margin-bottom: 10px;}
-      .protectBoard .row{
-    
-       overflow:hidden;
-       }
+      
+       .cont{overflow:hidden;}
        .protectBoard .card{
       
            float: left;
