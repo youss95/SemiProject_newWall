@@ -15,6 +15,9 @@
 <title>아이디/비밀번호 찾기</title>
 </head>
 <body>
+
+<!-- 진행예정 -->
+
 	<%@ include file="../layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">

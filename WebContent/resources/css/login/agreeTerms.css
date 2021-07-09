@@ -25,3 +25,5 @@
 .agreeTerms form{flex-direction:column;display:flex;align-items:center;}
 .agreeTerms th, .agreeTerms td{padding:10px;}
 
+.agreeTerms h2{height:80px; font-size:25px;font-weight:600;padding-bottom:20px;}
+.agreeTerms th{font-size: 17px; text-align: center;}

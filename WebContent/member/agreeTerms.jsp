@@ -7,13 +7,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
 <head>
 <meta charset="UTF-8">
 <title>회원가입 약관동의</title>
+
 </head>
 <body>
 
@@ -24,7 +31,7 @@
 			<div class="contents">
 				<section class="agreeTerms">
 					<form action="${pageContext.request.contextPath}/signup.mem">
-							<h2>회원가입 약관동의</h2>
+						<h2>회원가입 약관동의</h2>
 						<table id="agreeTerms" align=center>
 							<tr>
 								<th>회원 가입 약관</th>
@@ -194,8 +201,7 @@
 								<td colspan="2">
 									<div class="btn_confirm">
 										<a><input type="submit"
-											class="btn_submit btn_m btn_default"
-											value="회원가입"></a>
+											class="btn_submit btn_m btn_default" value="회원가입"></a>
 									</div>
 								</td>
 							</tr>
@@ -208,5 +214,6 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 </body>
 </html>
