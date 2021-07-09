@@ -8,22 +8,12 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 <style>
-
-.ooh{
-    width: 100px;
-    height: 150px;
-}
-
 #map{
 margin-top:100px;
 }
-
-    </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+</style>
+<%@ include file="../layout/jsp/commonModal.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/lostAnimalMap.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 
@@ -31,10 +21,12 @@ margin-top:100px;
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
+				<div id="countTitle">NewWal's 유기동물 통계</div>
 				<div id="lost">
-				<div>실종된 동물</div>
-				<div>마리</div>
-				
+				<div class="counts" style="display:inline-block;">Today</div><div id="countss" style="display:inline-block;">Total</div>
+				<br>
+				<div style="display:inline-block;"><span class="mari">${counts.todayCount}</span>&nbsp;마리</div>
+				<div id="rightMari" style="display:inline-block;"><span class="mari" >${counts.totalCount}</span>&nbsp;마리</div>
 				</div>
 				<div class="map_wrap">
 				<div id="map"
@@ -45,7 +37,7 @@ margin-top:100px;
 				
 
 					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
-					<a href="" class="btn_m btn_light">목록</a>
+					<a href="${pageContext.request.contextPath}/lostMapList.lost" class="btn_m btn_light">목록</a>
 					
 					<a href="#" class="btn_m btn_light">임시보호</a>
 					<a href="${pageContext.request.contextPath}/animal/lostAnimalForm.jsp" class="btn_m btn_light">글쓰기</a>
@@ -65,20 +57,29 @@ margin-top:100px;
 <footer class="footer">
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
+	<%@ include file="../layout/jsp/modal.jsp"%>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
-	<script> 
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 function writeAdd(){
-   
-   
-    
+
 }
 var listData = [  /* */]; 
 
 <c:forEach var="map" items="${mapList}">
-listData.push( ["${map.lostAddr}", '<img class="ooh" src="${pageContext.request.contextPath}/upload/lostAnimal/${map.fileRealName}">',"${map.lostName}","${map.lostAge}"] )
+listData.push( ["${map.lostAddr}", '<img class="ooh" src="${pageContext.request.contextPath}/upload/lostAnimal/${map.fileRealName}">',"${map.lostName}","${map.lostAge}","${map.lostKind}","${map.lostDate}"] )
 </c:forEach>
 
 console.log(listData)
@@ -105,7 +106,7 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
  // 마커를 지도에 표시합니다. 
  marker.setMap(map); 
  // 인포윈도우를 생성합니다 
- var infowindow = new kakao.maps.InfoWindow({ content: '<div class="add" style="width:150px;height:300px;text-align:center;padding:6px 0;">' + addr[1] + '<br><br> 이름: ' + addr[2] +'<br><br> 나이: '+addr[3] +'</div>', removable : true });
+ var infowindow = new kakao.maps.InfoWindow({ content: '<div class="add" style="width:300px;height:310px;padding:0px 0;">' + addr[1] + '<br> 이름: ' + addr[2] +'<br> 나이: '+addr[3] +'<br> 품종: '+addr[4]+'<br> 실종 날짜: '+addr[5]+'<br>상세보기<a href=""><i class="fas fa-arrow-alt-circle-right"></i></a></div>', removable : true });
   // 마커에 클릭이벤트를 등록합니다
    kakao.maps.event.addListener(marker, 'click', function() { 
       // 마커 위에 인포윈도우를 표시합니다 

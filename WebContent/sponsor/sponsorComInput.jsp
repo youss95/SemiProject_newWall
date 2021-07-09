@@ -25,6 +25,10 @@
 	crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -87,6 +91,9 @@
             width: 150px;
             margin: 1%;
             float: left;
+        }
+        .sp_com_input .spp_category1 .btn_pay_set {
+           word-break:keep-all;
         }
 
         .sp_com_input .spp_category1 span {
@@ -296,17 +303,17 @@
                                         <li><button type="button" id="btn_pay10" class="btn_m btn_light btn_pay_set"
                                                 value="10000">1만원</button></li>
                                         <li><button type="button" id="btn_pay20"
-                                                class="btn_m btn_light btn_pay_set">2만원</button></li>
+                                                class="btn_m btn_light btn_pay_set" value="20000">2만원</button></li>
                                         <li><button type="button" id="btn_pay30"
-                                                class="btn_m btn_light btn_pay_set">3만원</button></li>
+                                                class="btn_m btn_light btn_pay_set" value="30000">3만원</button></li>
                                         <li><button type="button" id="btn_pay50"
-                                                class="btn_m btn_light btn_pay_set">5만원</button></li>
+                                                class="btn_m btn_light btn_pay_set" value="50000">5만원</button></li>
                                         <li><button type="button" id="btn_pay100"
-                                                class="btn_m btn_light btn_pay_set">10만원</button></li>
+                                                class="btn_m btn_light btn_pay_set" value="100000">10만원</button></li>
                                         <li><button type="button" id="btn_pay"
                                                 class="btn_m btn_default btn_input btn_pay_set">직접입력</button></li>
                                         <li><input type="number" id="inp_pay" name="sp_amount" class="inpform inp_pay"
-                                                placeholder="숫자만 입력"> <span>원</span></li>
+                                                placeholder="숫자만 입력" value="" required> <span>원</span></li>
                                     </ul>
                                 </div>
                                 <div class="spp_category2 spp_category">
@@ -315,35 +322,35 @@
                                     <h3>만 14세 미만입니까?</h3>
                                     <div class="rd_group age14 selectBox">
                                         <div class="inp_rd">
-                                            <input type="radio" id="age_ck_rd1" name="sp_agecheck" value="Y"> <label
+                                            <input type="radio" class="sp_age14_ck" id="age_ck_rd1" name="sp_agecheck" value="Y"> <label
                                                 for="age_ck_rd1">예</label>
                                         </div>
                                         <div class="inp_rd">
-                                            <input type="radio" id="age_ck_rd2" name="sp_agecheck" value="N" checked>
+                                            <input type="radio" class="sp_age14_ck" id="age_ck_rd2" name="sp_agecheck" value="N" checked>
                                             <label for="age_ck_rd2">아니요</label>
                                         </div>
                                     </div>
                                     <div class="a14up" id="a14up">
                                         <div class="name">
                                             <h3>이름</h3>
-                                            <input type="text" class="inpform na" name="sp_name_01">
+                                            <input type="text" class="inpform na" id="sp_name_01" name="sp_name_01" required>
                                         </div>
                                         <div class="phone">
                                             <h3>휴대폰 번호</h3>
-                                            <input type="number" class="inpform ph" name="sp_ph1_01">-<input
-                                                type="number" class="inpform ph" name="sp_ph2_01">-<input type="number"
-                                                class="inpform ph" name="sp_ph3_01">
+                                            <input type="number" class="inpform ph" id="sp_ph1_01" name="sp_ph1_01" required>-<input
+                                                type="number" class="inpform ph" id="sp_ph2_01" name="sp_ph2_01" required>-<input type="number"
+                                                class="inpform ph" id="sp_ph3_01" name="sp_ph3_01" required>
                                         </div>
                                         <div class="birth">
                                             <h3>생년월일</h3>
                                             <!-- 사이즈 만지기?? 이거 안됨  -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" name="sp_bi_y_01">
+                                                <input type="number" class="inpform bi_y" id="sp_bi_y_01"name="sp_bi_y_01" required>
                                             </div>
                                             년
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_m_01" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_bi_m_01" id="sp_bi_m_01" required>
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -360,8 +367,8 @@
                                             </div>
                                             월
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_d_01" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_bi_d_01" id="sp_bi_d_01" required>
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -404,15 +411,15 @@
                                             <h3>
                                                 이름<br>(법정대리인)
                                             </h3>
-                                            <input type="text" class="inpform na" name="sp_name_02">
+                                            <input type="text" class="inpform na" id="sp_name_02" name="sp_name_02">
                                         </div>
                                         <div class="phone">
                                             <h3>
                                                 휴대폰 번호<br>(법정대리인)
                                             </h3>
-                                            <input type="number" class="inpform ph" name="sp_ph1_02">-<input
-                                                type="number" class="inpform ph" name="sp_ph2_02">-<input type="number"
-                                                class="inpform ph" name="sp_ph3_02">
+                                            <input type="number" class="inpform ph" id="sp_ph1_02" name="sp_ph1_02">-<input
+                                                type="number" class="inpform ph" id="sp_ph2_02" name="sp_ph2_02">-<input type="number"
+                                                class="inpform ph" id="sp_ph3_02" name="sp_ph3_02">
                                         </div>
                                         <div class="birth">
                                             <h3>
@@ -420,12 +427,12 @@
                                             </h3>
                                             <!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" name="sp_bi_y_02">
+                                                <input type="number" class="inpform bi_y" id="sp_bi_y_02" name="sp_bi_y_02">
                                             </div>
                                             년
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_m_02" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_bi_m_02" id="sp_bi_m_02">
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -442,8 +449,8 @@
                                             </div>
                                             월
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_d_02" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_bi_d_02" id="sp_bi_d_02">
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -483,7 +490,7 @@
                                             <h3>
                                                 기부자명<br>(본인)
                                             </h3>
-                                            <input type="text" class="inpform na" name="sp_yname">
+                                            <input type="text" class="inpform na" id="sp_yname" name="sp_yname">
                                         </div>
                                         <div class="birth">
                                             <h3>
@@ -491,12 +498,12 @@
                                             </h3>
                                             <!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" name="sp_ybi_y">
+                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y">
                                             </div>
                                             년
                                             <div class="inp_slct bi">
-                                                <select name="sp_ybi_m" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_ybi_m" id="sp_ybi_m">
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -513,8 +520,8 @@
                                             </div>
                                             월
                                             <div class="inp_slct bi">
-                                                <select name="sp_ybi_d" id="">
-                                                    <option value=null>선택</option>
+                                                <select name="sp_ybi_d" id="sp_ybi_d">
+                                                    <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
                                                     <option value="03">3</option>
@@ -550,11 +557,7 @@
                                             </div>
                                             일
                                         </div>
-
-
-
                                     </div>
-
                                 </div>
                                 <div class="spp_category2_1 spp_category">
                                     <h2 class="spp_category1_title"></h2>
@@ -562,31 +565,27 @@
                                     <div class="sp_email">
                                         <h3>이메일</h3>
                                         <input type="text" class="inpform sp_email_inp"
-                                            placeholder="example123@email.com" name="sp_email">
+                                            placeholder="example123@email.com" name="sp_email" required>
                                     </div>
 
                                     <div class="sp_address">
                                         <div>
                                             <h3 class="ad_h3">우편번호</h3>
                                             <input type="text" id="sp_postcode" name="sp_postcode" class="inpform sp_address_inp sp_address_inp1"
-                                                >
+                                                required>
                                             <button class="btn_m btn_default" id="sp_search"
                                                 class="inpform sp_address_inp" type="button">우편번호 찾기</button>
                                         </div>
                                         <div>
                                             <h3 class="ad_h3">도로명 주소</h3>
-                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2">
+                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2" required>
                                         </div>
                                         <div>
                                             <h3>상세 주소</h3>
-                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2">
+                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2" required>
                                         </div>
                                     </div>
-
                                 </div>
-
-
-                                
                                 <div class="spp_category4 spp_category">
                                     <h2 class="spp_category1_title">04. 약관 동의</h2>
                                     <!-- 수평선 -->
@@ -606,8 +605,7 @@
                                             </div>
                                             <div class="inp_rd">
                                                 <input type="radio" id="sp_terms01_2" name="sp_terms01" value="N">
-                                                <label for="sp_terms01_2">동의하지
-                                                    않습니다</label>
+                                                <label for="sp_terms01_2">동의하지  않습니다</label>
                                             </div>
                                         </div>
                                     </div>
@@ -636,39 +634,30 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="spp_category5 spp_category">
                                     <h2 class="spp_category1_title">05. 회원 여부 확인</h2>
                                     <h3>저희 사이트의 회원 이십니까?</h3>
                                     <div class="rd_group">
                                         <div class="inp_rd">
-                                            <input type="radio" id="id_ck_rd1" name="sp_idcheck" value="Y"> <label
+                                            <input type="radio" id="id_ck_rd1" class="sp_mb_ck" name="sp_idcheck" value="Y"> <label
                                                 for="id_ck_rd1">예</label>
                                         </div>
                                         <div class="inp_rd">
-                                            <input type="radio" id="id_ck_rd2" name="sp_idcheck" value="N" checked>
+                                            <input type="radio" id="id_ck_rd2" class="sp_mb_ck" name="sp_idcheck" value="N" checked>
                                             <label for="id_ck_rd2">아니요</label>
                                         </div>
-
                                     </div>
                                     <div class="sp_id_ck" id="sp_id_ck">
                                         <h3>ID</h3>
-                                        <input type="text" class="inpform sp_id_ck_inp" name="sp_mb_id">
+                                        <input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
                                     </div>
                                 </div>
-
-
                                 <div class="spp_category6 spp_category">
                                     <button class="btn_m btn_line">다음단계</button>
                                 </div>
                             </form>
-
                         </div>
-
-
-
                     </div>
-
                     <!-- 끝 -->
                </section>
 			</div>
@@ -710,111 +699,121 @@
 			</div>
 		</div>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	
 	<script>
 	 $(function () {
          //14세 미만 이상여부
-         $('#age_ck_rd2').on('click', function () {
-             var chkValue = $('input[type=radio][id="age_ck_rd2"]:checked').val();
-            // console.log('dddd');
-             if (chkValue) {
+         $('.sp_age14_ck').on('click', function () {
+             var chkValue = $(this).val();
+             console.log(chkValue);
+             if (chkValue=='N')  {
                  $('#a14down').css('display', 'none');
                  $('#a14up').css('display', 'block');
-             }
-         });
-         $('#age_ck_rd1').on('click', function () {
-             var chkValue = $('input[type=radio][id="age_ck_rd1"]:checked').val();
-             //console.log('gg');
-             if (chkValue) {
-                 $('#a14up').css('display', 'none');
+                 
+                 $("#sp_name_01").prop('required',true);
+                 $("#sp_ph1_01").prop('required',true);
+                 $("#sp_ph2_01").prop('required',true);
+                 $("#sp_ph3_01").prop('required',true);
+                 $("#sp_bi_y_01").prop('required',true);
+                 $("#sp_bi_m_01").prop('required',true);
+                 $("#sp_bi_d_01").prop('required',true);
+                 
+                  $("#sp_name_02").prop('required',false);
+                 $("#sp_ph1_02").prop('required',false);
+                 $("#sp_ph2_02").prop('required',false);
+                 $("#sp_ph3_02").prop('required',false);
+                 $("#sp_bi_y_02").prop('required',false);
+                 $("#sp_bi_m_02").prop('required',false);
+                 $("#sp_bi_d_02").prop('required',false); 
+                 $("#sp_yname").prop('required',false); 
+                 $("#sp_ybi_y").prop('required',false); 
+                 $("#sp_ybi_m").prop('required',false); 
+                 $("#sp_ybi_d").prop('required',false);   
+                 
+             }else if (chkValue=='Y')  {
+            	 $('#a14up').css('display', 'none');
                  $('#a14down').css('display', 'block');
+                 
+                 $("#sp_name_01").prop('required',false);
+                 $("#sp_ph1_01").prop('required',false);
+                 $("#sp_ph2_01").prop('required',false);
+                 $("#sp_ph3_01").prop('required',false);
+                 $("#sp_bi_y_01").prop('required',false);
+                 $("#sp_bi_m_01").prop('required',false);
+                 $("#sp_bi_d_01").prop('required',false);
+                 
+                  $("#sp_name_02").prop('required',true);
+                 $("#sp_ph1_02").prop('required',true);
+                 $("#sp_ph2_02").prop('required',true);
+                 $("#sp_ph3_02").prop('required',true);
+                 $("#sp_bi_y_02").prop('required',true);
+                 $("#sp_bi_m_02").prop('required',true);
+                 $("#sp_bi_d_02").prop('required',true); 
+                 $("#sp_yname").prop('required',true); 
+                 $("#sp_ybi_y").prop('required',true); 
+                 $("#sp_ybi_m").prop('required',true); 
+                 $("#sp_ybi_d").prop('required',true);   
              }
          });
 //아이디 있고 없고 여부
-         $('#id_ck_rd2').on('click', function () {
-             var chkValue = $('input[type=radio][id="id_ck_rd2"]:checked').val();
-            // console.log('dddd');
-             if (chkValue) {
-                 $('#sp_id_ck').css('display', 'none');
+		 $('.sp_mb_ck').on('click', function () {
+             var ckVal_mb = $(this).val();
+             console.log(ckVal_mb);
+             if (ckVal_mb=='N')  {
+            	 $('#sp_id_ck').css('display', 'none');
+            	 $('#sp_id_ck_inp').prop('required',false);
+             }else if(ckVal_mb=='Y'){
+            	 $('#sp_id_ck').css('display', 'block');
+            	 $("#sp_id_ck_inp").prop('required',true);
              }
-         });
-         $('#id_ck_rd1').on('click', function () {
-             var chkValue = $('input[type=radio][id="id_ck_rd1"]:checked').val();
-             //console.log('gg');
-             if (chkValue) {
-                 $('#sp_id_ck').css('display', 'block');
-             }
-         });
-         //약관 동의 벨류값
-	
-         
+		 })
 
-         // $('.btn_pay_set').on('click', function () {
-         //     if ($(this).val = '5000') {
-         //         $('#inp_pay').attr('value', '5000');
-         //     } else if ($(this).val = '10000') {
-         //         $('#inp_pay').attr('value', '10000');
-         //     } else if ((this).id = '#btn_pay20') {
-         //         $('#inp_pay').attr('value', '20000');
-         //     } else if ((this).id = '#btn_pay30') {
-         //         $('#inp_pay').attr('value', '30000');
-         //     } else if ((this).id = '#btn_pay50') {
-         //         $('#inp_pay').attr('value', '50000');
-         //     } else if ((this).id = '#btn_pay10') {
-         //         $('#inp_pay').attr('value', '10000');
-         //     } else if ((this).id = '#btn_pay') {
-         //         $('#inp_pay').attr('value', '');
-         //     }
-         // })
+			$('.btn_pay_set').on('click', function() {
+				
+				var sp_amount_cho = $(this).val();
+				console.log(sp_amount_cho);
+				if (sp_amount_cho == '5000') {
+					//alert('5000');
+					$('#inp_pay').val('');
+					$('#inp_pay').val('5000');
 
-         //금액 입력하다 버튼누르는것 동작 안됨 위처럼 if문으로 해서 한펑션으로 가능히게 하기****
-
-         $('#btn_pay5').on('click', function () {
-             // $('#inp_pay').blur();
-             // $('#inp_pay').empty();
-             //  $('#inp_pay').val('');
-             $('#inp_pay').attr('value', '5000');
-         })
-         $('#btn_pay10').on('click', function () {
-             $('#inp_pay').attr('value', '10000');
-         })
-         $('#btn_pay20').on('click', function () {
-             $('#inp_pay').attr('value', '20000');
-         })
-         $('#btn_pay30').on('click', function () {
-             $('#inp_pay').attr('value', '30000');
-         })
-         $('#btn_pay50').on('click', function () {
-             $('#inp_pay').attr('value', '50000');
-         })
-         $('#btn_pay100').on('click', function () {
-             $('#inp_pay').attr('value', '100000');
-         })
-         $('#btn_pay').on('click', function () {
-             $('#inp_pay').focus();
-         })
+				} else if (sp_amount_cho == '10000') {
+					$('#inp_pay').val('');
+					$('#inp_pay').val('10000');
+				} else if (sp_amount_cho == '20000') {
+					$('#inp_pay').val('');
+					$('#inp_pay').val('20000');
+				} else if (sp_amount_cho == '30000') {
+					$('#inp_pay').val('');
+					$('#inp_pay').val('30000');
+				} else if (sp_amount_cho == '50000') {
+					$('#inp_pay').val('');
+					$('#inp_pay').val('50000');
+				} else if (sp_amount_cho == '100000') {
+					$('#inp_pay').val('');
+					$('#inp_pay').val('100000');
+				} else if (sp_amount_cho == '') {
+					$('#inp_pay').val('');
+					$('#inp_pay').focus();
+				}
+			})
          
           document.getElementById("sp_search").onclick = function () {
                 new daum.Postcode({
                     oncomplete: function (data) {
                         let roadAddr = data.roadAddress; // 도로명 주소 변수
-
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                         document.getElementById('sp_postcode').value = data.zonecode;
                         document.getElementById("sp_address1").value = roadAddr;
-
-                        // 이벤트 처리함수들은 callback function 또는 callback pattern이라고 한다.
-                        // 개발자가 직접적으로 부르는것이 아니라 개발자가 어떠한 조건일때, function을 실행해라라고 코드를 짜면
-                        // JavaScript가 그 조건에 부합하면 알아서 function을 실행시키는
-
                     }
                 }).open();
             }
+         
          
      })
 
 	</script>
 </body>
 </html>
+
+

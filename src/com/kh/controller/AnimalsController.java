@@ -18,8 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.kh.config.Script;
 import com.kh.dao.AnimalDAO;
+import com.kh.dto.AnimalMapCountDTO;
 import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.ProtectBoardDTO;
+import com.kh.dto.ProtectDetailDTO;
+import com.kh.dto.ProtectReplyDTO;
 import com.kh.dto.ProtectionDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -105,13 +108,21 @@ public class AnimalsController extends HttpServlet {
 			} else if(url.equals("/lostAnimalMap.lost")) {
 				
 				List<LostAnimalDTO> list = dao.showMap();
-				System.out.println(list.toString());
+				AnimalMapCountDTO dto = new AnimalMapCountDTO();
+				int today = dao.todayCount();
+				int total = dao.totalCount();
+				System.out.println("오늘" +today);
+				System.out.println("총" +total);
+				dto.setTodayCount(today);
+				dto.setTotalCount(total);
+				request.setAttribute("counts", dto);
 				if(list != null) {
 					request.setAttribute("mapList", list);
 					RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalMap.jsp");
 					dis.forward(request, response);
 				}
 			} else if(url.equals("/protectBoard.lost")) {
+			
 				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
 				System.out.println(directory);
 				int maxSize = 1024*1024*100;
@@ -129,7 +140,7 @@ public class AnimalsController extends HttpServlet {
 					String protectAddr = multi.getParameter("addResult");
 					String protectFindDate = multi.getParameter("protectFindDate");
 					String protectContent = multi.getParameter("protectContent");
-					
+					String protectWriter = multi.getParameter("protectWriter");
 					
 					
 					Enumeration files = multi.getFileNames();
@@ -146,7 +157,7 @@ public class AnimalsController extends HttpServlet {
 					  protectContent, protectGender,protectImage1,protectImage2);
 					 
 					System.out.println(dto.toString());
-					int result = dao.protectWrite(dto);
+					int result = dao.protectWrite(dto,protectWriter);
 					
 					  if(result >0) { response.setCharacterEncoding("UTF-8");
 					  response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
@@ -192,9 +203,63 @@ public class AnimalsController extends HttpServlet {
 				
 				response.getWriter().append(result);
 				System.out.println(list.toString());
+			}else if(url.equals("/protectDetail.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				
+				int result = dao.getViewCount(protectNo);
+			
+				List<ProtectReplyDTO> list = dao.getReplyList(protectNo);
+				if(result>0) {
+					ProtectDetailDTO dto = dao.getDetail(protectNo);
+					System.out.println("dto:" + dto.toString());
+					request.setAttribute("replyList", list);
+					request.setAttribute("protectDetail", dto);
+					RequestDispatcher dis = request.getRequestDispatcher("animal/protectDetail.jsp");
+					dis.forward(request, response);
+				}else {
+					Script.back(response, "조회수 실패");
+				}
+			}else if(url.equals("/comment.lost")) {
+				Gson g = new Gson();
+				String protectWriter = request.getParameter("protectWriter");
+				
+				
+				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+				String replyCon = request.getParameter("replyCon");
+				
+				ProtectReplyDTO dto = new ProtectReplyDTO();
+				dto.setProtectWriter(protectWriter);
+				dto.setBoardNo(boardNo);
+				dto.setReplyCon(replyCon);
+				System.out.println(dto.toString());
+			
+				int result = dao.addReply(dto);
+				dto = dao.findById(boardNo);
+				String data = g.toJson(dto);
+				if(result==1) {
+					response.getWriter().append(data);
+				
+				}
+				
+					//댓글 삭제
+			}else if(url.equals("/replyDel.lost")) {
+				
+				int replyNo = Integer.parseInt(request.getParameter("replyNo"));
+				System.out.println("몇번"+replyNo);
+				int result = dao.replyDel(replyNo);
+				System.out.println(result);
+				if(result==1) {
+					response.getWriter().append(result+"");
+				}		
+				//로스트 맵 목록
+			}else if(url.equals("/lostMapList.lost")) {
+				List<LostAnimalDTO> list = dao.mapList();
+				System.out.println("맵"+list.toString());
+				request.setAttribute("mapList", list);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");
+				dis.forward(request, response);
+				
 			}
-			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

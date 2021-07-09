@@ -1,7 +1,16 @@
 @charset "utf-8";
+@keyframes blink-effect{
+	50%{
+	opacity:0;
+	}
+}
 
 .lostSection{height:800px;}
-
+#countTitle{font-size:26px; font-weight:500;padding-bottom:25px;}
+#countss{float:right; padding:15px;}
+.mari{background-color:black; color:white; padding:1px 15px 1px 15px; animation: blink-effect 1s step-end infinite;animation-iteration-count:3;}
+#rightMari{float:right;}
+.counts{padding:15px;}
 #mainTitle{font-size:40px;color:#254E7C}
 .animalInfo{text-align:center;background-color:#B9D7EA;font-weight:600;font-size:35px;border-radius:8px;}
 #lostName input{width:400px;}
@@ -18,12 +27,12 @@
 .rd_group{display:inline; margin-left:10px;}
 #list{margin-left:300px;}
 /* 통계 */
-#lost{border:1px solid black;padding:10px; width:800px;margin:auto;border-radius:5px;}
+#lost{padding:10px; width:800px;margin:auto;border-radius:5px;}
 #lost div{font-size:20px;}
 
 /* 카카오 주소 검색 창 */
 #resultAdd{position:relative;z-index:0;width:300px; margin-left:40px;}
-#searchBtn{position:absolute;left:330px;top:20px;z-index:1;height:45px;}
+#searchBtn{position:absolute;left:333px;top:23px;z-index:1;height:37px;background-color:white;padding-right:5px;padding-left:5px;border:1px solid white;}
 #searchBtn:hover{cursor:pointer;}
 
 /* kakao map */
@@ -42,7 +51,10 @@
   transform:translate(-50%);
    }
    
-   
+   .ooh{
+   width:300px;
+   height:200px;
+   }
    
    .upload-img img{
    width:300px;

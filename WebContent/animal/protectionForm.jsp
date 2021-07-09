@@ -6,18 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectAnimal.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<%@ include file="../layout/jsp/commonModal.jsp" %>
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/protectBoard.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/protectBoard.lost?page=1" method="post" enctype="multipart/form-data">
 				<div id="mainTitle">임시보호</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
@@ -58,7 +56,7 @@
 					<!-- <span id="centerAddr"></span> -->
 
 
-					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
+					<input type="text" class="inpform" placeholder="주소로 검색후 지도에 장소 클릭" id="resultAdd">
 				</div>
 
 				<button type="button" id="searchBtn">
@@ -83,7 +81,7 @@
                   
                    
 			<input type="hidden" name="addResult" id="hiddenInput">	
-			
+			<input type="hidden" name="protectWriter" value="${sessionScope.loginInfo.user_id}"> 
 			<button id="btn" type="submit" class="btn_m btn_primary">등록</button>	
 			
 			</form>

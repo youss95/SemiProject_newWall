@@ -6,12 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectionBoard.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectionBoard.css">
+<%@ include file="../layout/jsp/commonModal.jsp" %>
 </head>
 <body>
 <div class="wrap">
@@ -29,10 +26,11 @@
             <div class="card-body">
                 <h4>${p.protectName }</h4>
                 <p class="fontC">
-                    고양이<br>
+                    고양이${sessionScope.loginInfo.user_id }<br>
                     암컷<br>
                     8/2/색
                 </p>
+                <a href="/NewWall/protectDetail.lost?protectNo=${p.protectNo}" class="btn_m btn_light">상세</a>
                         </div>
         </div>
         </c:forEach>
@@ -52,7 +50,7 @@
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
 	</div>
-	
+	<%@ include file="../layout/jsp/modal.jsp"%>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
 	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>

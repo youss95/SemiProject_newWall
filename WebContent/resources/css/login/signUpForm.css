@@ -1,32 +1,11 @@
 @charset "UTF-8";
 
-.signUpForm form div {
-	margin-top: 120px
-}
-
-.signUpForm td{
-	font-size: large;
-}
-
-.sinUpForm input {
-  width:150px;
-  height:30px;
-}
-
-.stgnUpForm type{
-	width: 10px;
-}
-
-.signUpForm .inpform{
-	width: 30%;
-}
-
-.signUpForm table{
-	border-spacing:20px;
-	border-collapse: separate;
-}
-
-.signUpForm #join{
-	position: relative;
-	float: right;
-}
+.signUpForm form div {margin-top: 0px}
+.signUpForm td{font-size: large;}
+.sinUpForm input {width:150px; height:30px;}
+.stgnUpForm type{width: 10px;}
+.signUpForm .inpform{width: 30%;}
+.signUpForm table{border-spacing:20px; border-collapse: separate; margin: 0;}
+.signUpForm #join{position: relative; float: right;}
+.signUpForm h2{height:60px;padding:30px;font-size:30px;line-height:15px;font-weight:600; padding-left: 50%; padding-top: 0px;}
+.signUpForm .title{position: relative; height: 5px;}
