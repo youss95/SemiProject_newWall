@@ -49,7 +49,7 @@
 </c:forEach>
 </div>
 
-<c:set var="lastPage"  value="${page-(page-1)%5 }" />
+
 <!-- 페이지 네비 -->
 <ul class="pagination justify-content-center">
 	<c:choose>
@@ -57,7 +57,7 @@
 <li class="page-item  "><a class="page-link"     onclick="alert('이전 페이지가 없습니다.');">&lt</a></li>
 	</c:when>
 	<c:otherwise>
-		<li class="page-item "><a class="page-link" href="/JspBlog/board?cmd=list&page=${param.page-1 }">Previous</a></li>
+		<li class="page-item "><a class="page-link" href="${pageContext.request.contextPath}/lostMapList.lost?page=${param.page-1}">&lt</a></li>
 	</c:otherwise>
 	</c:choose>
 	
@@ -66,15 +66,17 @@
 		<li class="page-item  "><a class="page-link"     onclick="alert('다음 페이지가 없습니다.');">&gt</a></li>
 	</c:when>
 	<c:otherwise>
-		<li class="page-item"><a class="page-link" href="/JspBlog/board?cmd=list&page=${param.page+1}">Next</a></li>
+		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/lostMapList.lost?page=${param.page+1}">&gt</a></li>
 	</c:otherwise>
 	</c:choose>
 	</ul>
-	
+
+
+
 	<!-- 진행바 -->
 <div class="progress col-md-12 m-2">
 	
-		<div class="progress-bar" style="width: ${currentPercent}%" >${currentPercent}%</div>
+		<div class="progress-bar" style="width: ${currentPercent}%" ></div>
 	</div>
 
 				</section>
