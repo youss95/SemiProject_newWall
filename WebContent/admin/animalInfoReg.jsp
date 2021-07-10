@@ -18,6 +18,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
+
 </head>
 
 <body>
@@ -76,19 +78,20 @@
 							<dl>
 								<dt>나이</dt>
 								<dd>
-									<input type="text" name="anAge" id="anAge" class="inpform" placeholder="나이를 입력해주세요."> 살
+									<input type="number" name="anAge" id="anAge" class="inpform" placeholder="나이를 입력해주세요."> 살
 								</dd>
 							</dl>
 							<dl>
 								<dt>무게</dt>
 								<dd>
-									<input type="text" name="anWeight" id="anWeight" class="inpform" placeholder="무게를 입력해주세요.(단위 : kg)"> kg
+									<input type="number" name="anWeight" id="anWeight" class="inpform" placeholder="무게를 입력해주세요.(단위 : kg)"> kg
 								</dd>
 							</dl>
 							<dl>
 								<dt>구조 일자</dt>
 								<dd>
-									<input type="text" name="anDate" id="anDate" class="inpform" placeholder="구조일자를 입력해주세요. (ex: YYYYMMDD)">
+									<input type="date" id="anDate" class="inpform">
+									<input type="hidden" id="anDate_hd" name="anDate">
 								</dd>
 							</dl>
 							<dl>
@@ -126,7 +129,7 @@
 								</dt>
 								<dd>
 									<div class="file_upload">
-										<input type="file" name="anPhoto1" id="anPhoto01">
+										<input type="file" name="anPhoto01" id="anPhoto01">
 										<input type="file" name="anPhoto02" id="anPhoto02">
 										<input type="file" name="anPhoto03" id="anPhoto03">
 									</div>
@@ -150,7 +153,7 @@
 	</div>
 	<script>
 		$(function(){
-			
+	
 			$('#summernote').summernote({
 				height : 300,
 				minHeight : null,
@@ -198,10 +201,10 @@
 					alert("나이를 입력해주세요!");
 					return false;
 				}
-	 			if(!ageRegex.test(age)){
+	 	/* 		if(!ageRegex.test(age)){
 					alert("나이는 숫자만 입력 가능합니다!");
 					return false;
-	  			}
+	  			} */
 	 			
 	 			let weight = $("#anWeight").val();
 	 			let weightRegex = /^[0-9]/;
@@ -209,12 +212,12 @@
 					alert("무게를 입력해주세요!");
 					return false;
 				}
-	 			if(!weightRegex.test(weight)){
+	 			/* if(!weightRegex.test(weight)){
 					alert("무게는 숫자만 입력 가능합니다!");
 					weight = 0;
 					return false;
 					alert('dd');
-	  			}
+	  			} */
 	 			if($("#anDate").val() == ""){
 					alert("구조일자를 입력해주세요!");
 					return false;
@@ -235,6 +238,11 @@
 				$("#animalInfoReg").submit();
 				
 			}) 
+			
+			$('#anDate').on("change", function(){
+				let date = $(this).val().replace(/\-/g,'');
+				$('#anDate_hd').val(date);
+			})
 		})
 	</script>
 </body>

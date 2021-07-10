@@ -78,26 +78,26 @@ public class AdminDAO {
 	}
 
 	// adoption
-	public int animalInfoReg(AnimalDTO adto) throws Exception{
+	public int animalInfoReg(AnimalDTO dto) throws Exception{
 		String sql = "insert into animal values(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, sysdate, ?)";
 
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, adto.getCode_seq());
-			pstat.setString(2, adto.getAn_name());
-			pstat.setString(3, adto.getAn_category());
-			pstat.setString(4, adto.getAn_gender());
-			pstat.setString(5, adto.getAn_kind());
-			pstat.setInt(6, adto.getAn_age());
-			pstat.setInt(7, adto.getAn_weight());
-			pstat.setString(8, adto.getAn_character());
-			pstat.setDate(9, adto.getAn_date());
-			pstat.setString(10, adto.getAn_status());
-			pstat.setString(11, adto.getAn_photo());
-			pstat.setString(12, adto.getAn_contents());
-			pstat.setString(13, adto.getAn_neutering());
+			pstat.setString(1, dto.getCode_seq());
+			pstat.setString(2, dto.getAn_name());
+			pstat.setString(3, dto.getAn_category());
+			pstat.setString(4, dto.getAn_gender());
+			pstat.setString(5, dto.getAn_kind());
+			pstat.setInt(6, dto.getAn_age());
+			pstat.setInt(7, dto.getAn_weight());
+			pstat.setString(8, dto.getAn_character());
+			pstat.setDate(9, dto.getAn_date());
+			pstat.setString(10, dto.getAn_status());
+			pstat.setString(11, dto.getAn_photo());
+			pstat.setString(12, dto.getAn_contents());
+			pstat.setString(13, dto.getAn_neutering());
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -355,8 +355,70 @@ public class AdminDAO {
 		}
 	}
 
+	// adoption
+	public int animalInfoModify(AnimalDTO dto) throws Exception{
+		String sql = null;
+		boolean existPhoto = false;
+		if(dto.getAn_photo() == null) {
+			sql = "update animal set an_name=?, an_category=?, an_gender=?, an_kind=?, an_age=?, an_weight=?, an_character=?, an_date=?, an_status=?, an_neutering=?, an_contents=? where code_seq=?";			
+		}else {
+			existPhoto = true;
+			sql = "update animal set an_name=?, an_category=?, an_gender=?, an_kind=?, an_age=?, an_weight=?, an_character=?, an_date=?, an_status=?, an_photo=?, an_neutering=?, an_contents=? where code_seq=?";
+		}
 
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			System.out.println(dto.getAn_name());
+			if(!existPhoto) {
+				pstat.setNString(1, dto.getAn_name());
+				pstat.setNString(2, dto.getAn_category());
+				pstat.setNString(3, dto.getAn_gender());
+				pstat.setNString(4, dto.getAn_kind());
+				pstat.setInt(5, dto.getAn_age());
+				pstat.setInt(6, dto.getAn_weight());
+				pstat.setString(7, dto.getAn_character());
+				pstat.setDate(8, dto.getAn_date());
+				pstat.setNString(9, dto.getAn_status());
+				pstat.setNString(10, dto.getAn_neutering());				
+				pstat.setNString(11, dto.getAn_contents());
+				pstat.setNString(12, dto.getCode_seq());
+			}else {
+				pstat.setNString(1, dto.getAn_name());
+				pstat.setNString(2, dto.getAn_category());
+				pstat.setNString(3, dto.getAn_gender());
+				pstat.setNString(4, dto.getAn_kind());
+				pstat.setInt(5, dto.getAn_age());
+				pstat.setInt(6, dto.getAn_weight());
+				pstat.setNString(7, dto.getAn_character());
+				pstat.setDate(8, dto.getAn_date());
+				pstat.setNString(9, dto.getAn_status());
+				pstat.setNString(10, dto.getAn_photo());
+				pstat.setNString(11, dto.getAn_neutering());				
+				pstat.setNString(12, dto.getAn_contents());
+				pstat.setNString(13, dto.getCode_seq());
+			}
 
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
 
+	// adoption
+	public int animalInfoDelete(String code_seq) throws Exception{
+
+		String sql = "delete from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+
+	}
 
 }
