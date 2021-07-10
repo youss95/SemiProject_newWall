@@ -25,6 +25,13 @@
 					</div>
 					<div class="contents">
 						<table class="table table-hover text-center adoption_list">
+							<colgroup>
+								<col width="10%">
+								<col width="30%">
+								<col width="20%">
+								<col width="20%">
+								<col width="20%">
+							</colgroup>
 							<thead>
 								<tr>
 									<th>순서</th>

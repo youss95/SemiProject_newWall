@@ -187,9 +187,9 @@
 				$('.age option[value=' + age + ']').prop('selected', 'selected').change();
 				$('.character option[value=' + character + ']').prop('selected','selected').change();
 			}
-			
+			/* 
 			let url = $(".img_wrap img").attr('src');
-			console.log("url : " + url);
+			console.log("url : " + url); */
 			
 
 		});

@@ -56,7 +56,7 @@
 							</tbody>
 						</table>
 						<div class="btn_wrap">
-							<a href="animalInfoReg.jsp" class="btn_m btn_default">동물 정보 등록</a>
+							<a href="${pageContext.request.contextPath}/admin/animalInfoReg.jsp" class="btn_m btn_default">동물 정보 등록</a>
 						</div>
 						
 						<div class="page_nav">

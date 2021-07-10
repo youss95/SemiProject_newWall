@@ -15,23 +15,23 @@ import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.FileDTO;
 
 public class FileDAO {
-private static FileDAO instance;
-	
+	private static FileDAO instance;
+
 	public synchronized static FileDAO getInstance() {
 		if(instance == null) {
 			instance = new FileDAO();
 		}
 		return instance;
 	}
-	
+
 	private FileDAO() {}
-	
+
 	private Connection getConnection() throws Exception {
 		Context ctx = new InitialContext();
 		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
 		return ds.getConnection();
 	}
-	
+
 	// animal
 	public int animalImgUpload(AnimalFilesDTO fdto) throws Exception {
 		String sql = "insert into animal_photos values(photo_seq.nextval, ?, ?, sysdate, ?)";
@@ -48,7 +48,7 @@ private static FileDAO instance;
 			return result;
 		}
 	}
-	
+
 	// animal
 	public  AnimalFilesDTO getAnimalImgs(String parent) throws Exception{
 		String sql = "select * from animal_photos where code_seq = ?";
@@ -105,5 +105,19 @@ private static FileDAO instance;
 		}
 
 	}
-	
+
+	// animal
+	public int animalImgDelete(String code_seq) throws Exception {
+		String sql = "delete from animal_photos where code_seq=?";
+		try (
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+
+			pstat.setString(1, code_seq);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
 }
