@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import com.kh.config.PageConfig;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
+import com.kh.dto.SponsorDTO;
 
 
 public class AdminDAO {
@@ -77,26 +78,26 @@ public class AdminDAO {
 	}
 
 	// adoption
-	public int animalInfoReg(AnimalDTO adto) throws Exception{
+	public int animalInfoReg(AnimalDTO dto) throws Exception{
 		String sql = "insert into animal values(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, sysdate, ?)";
 
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1, adto.getCode_seq());
-			pstat.setString(2, adto.getAn_name());
-			pstat.setString(3, adto.getAn_category());
-			pstat.setString(4, adto.getAn_gender());
-			pstat.setString(5, adto.getAn_kind());
-			pstat.setInt(6, adto.getAn_age());
-			pstat.setInt(7, adto.getAn_weight());
-			pstat.setString(8, adto.getAn_character());
-			pstat.setDate(9, adto.getAn_date());
-			pstat.setString(10, adto.getAn_status());
-			pstat.setString(11, adto.getAn_photo());
-			pstat.setString(12, adto.getAn_contents());
-			pstat.setString(13, adto.getAn_neutering());
+			pstat.setString(1, dto.getCode_seq());
+			pstat.setString(2, dto.getAn_name());
+			pstat.setString(3, dto.getAn_category());
+			pstat.setString(4, dto.getAn_gender());
+			pstat.setString(5, dto.getAn_kind());
+			pstat.setInt(6, dto.getAn_age());
+			pstat.setInt(7, dto.getAn_weight());
+			pstat.setString(8, dto.getAn_character());
+			pstat.setDate(9, dto.getAn_date());
+			pstat.setString(10, dto.getAn_status());
+			pstat.setString(11, dto.getAn_photo());
+			pstat.setString(12, dto.getAn_contents());
+			pstat.setString(13, dto.getAn_neutering());
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -175,7 +176,7 @@ public class AdminDAO {
 				List<AnimalDTO> list = new ArrayList<>();
 				while(rs.next()) {
 					AnimalDTO dto = new AnimalDTO();
-					
+
 					dto.setCode_seq(rs.getNString("code_seq"));
 					dto.setAn_name(rs.getNString("an_name"));
 					dto.setAn_category(rs.getNString("an_category"));
@@ -189,8 +190,8 @@ public class AdminDAO {
 			}
 		}
 	}
-	
-	
+
+
 
 	// adoption
 	public AnimalDTO getAnimalInfo(String code_seq) throws Exception{
@@ -222,15 +223,202 @@ public class AdminDAO {
 					dto.setAn_neutering(rs.getNString("an_neutering"));
 					return dto;
 				}
-				
+
 				return null;
-				
+
 			}
 
 		}
 
 	}
-	
 
+	//sponsor
+	private int adSponsorGetRecordCount() throws Exception{
+		String sql = "select count(*) from sponsor";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	//sponsor
+	private int adSponsorGetRecordCount(String keyword) throws Exception{
+		String sql = "select count(*) from sponsor where sponsor_choice like ?";
+		try(Connection con = this.getConnection();
+
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, keyword+"%");
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+	}
+	//sponsor
+	public List<String> adSponsorGetPageNavi(int cpage, String keyword) throws Exception{
+		int recordTotalCount = 0;
+
+		//search==null||search2==null||keyword == null
+		if(keyword==null) {
+			recordTotalCount=this.adSponsorGetRecordCount();//널 전체 
+		}else if(keyword!=null) {
+			recordTotalCount=this.adSponsorGetRecordCount(keyword);
+		}
+
+		int recordCountPerPage = 10;
+		int naviCountPerPage = 10;
+
+		int pageTotalCount = 0;
+
+		if(recordTotalCount % recordCountPerPage > 0) {  
+			pageTotalCount = recordTotalCount / recordCountPerPage + 1; 
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}
+
+		if(cpage > pageTotalCount) { 
+			cpage = pageTotalCount; 
+
+		}else if(cpage < 1) {
+			cpage = 1;
+		}
+
+		int startNavi = (cpage-1) / naviCountPerPage * naviCountPerPage + 1;
+
+		int endNavi = startNavi + (naviCountPerPage - 1);
+		if(endNavi > pageTotalCount ) { 
+			endNavi = pageTotalCount;
+		}
+
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if(startNavi == 1) {needPrev = false;}
+		if(endNavi == pageTotalCount) {needNext = false;}
+
+		List<String> pageNavi = new ArrayList<>();
+
+		if(needPrev) {pageNavi.add("<");}
+
+		for(int i = startNavi; i <= endNavi; i ++) { 
+			pageNavi.add(String.valueOf(i));
+		}
+
+		if(needNext) {pageNavi.add(">");}
+
+		return pageNavi;
+	}
+	public List<SponsorDTO> adSponsorGetPageList(int startNum, int endNum, String keyword) throws Exception {
+		String sql =  "select * from (select row_number() over (order by seq desc) "
+				+ "rnum,sponsor_seq,sponsor_amount,sponsor_choice, sponsor_agecheck, sponsor_name, sponsor_contact, "
+				+ "sponsor_birth, sponsor_yname, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
+				+ "sponsor_apply_num, sponsor_terms01, sponsor_terms02 , sponsor_mb_id, sponsor_date "
+				+ "from sponsor where sponsor_choice like ?) where rnum between ? and ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, "%"+keyword+"%");
+			pstat.setInt(2, startNum);
+			pstat.setInt(3, endNum);
+			try(ResultSet rs = pstat.executeQuery();){
+
+				List<SponsorDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int sponsor_seq = rs.getInt("sponsor_seq");
+					int sponsor_amount = rs.getInt("sponsor_amount");
+					String sponsor_choice = rs.getNString("sponsor_choice");
+					String sponsor_agecheck = rs.getNString("sponsor_agecheck");
+					String sponsor_name = rs.getNString("sponsor_name");
+					String sponsor_contact = rs.getNString("sponsor_contact");
+					String sponsor_birth = rs.getNString("sponsor_birth");
+					String sponsor_yname = rs.getNString("sponsor_yname");
+					String sponsor_ybirth = rs.getNString("sponsor_ybirth");
+					String sponsor_email = rs.getNString("sponsor_email");
+					String sponsor_postcode = rs.getNString("sponsor_postcode");
+					String sponsor_address1 = rs.getNString("sponsor_address1");
+					String sponsor_address2 = rs.getNString("sponsor_address2");
+					String sponsor_apply_num = rs.getNString("sponsor_apply_num");
+					String sponsor_terms01 = rs.getNString("sponsor_terms01");
+					String sponsor_terms02 = rs.getNString("sponsor_terms02");
+					String sponsor_mb_id = rs.getNString("sponsor_mb_id");
+					Date sponsor_date = rs.getDate("sponsor_date");
+
+					SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
+							sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
+							sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
+							sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
+							sponsor_mb_id,  sponsor_date);
+					list.add(dto);
+				}
+				return list;
+			}
+		}
+	}
+
+	// adoption
+	public int animalInfoModify(AnimalDTO dto) throws Exception{
+		String sql = null;
+		boolean existPhoto = false;
+		if(dto.getAn_photo() == null) {
+			sql = "update animal set an_name=?, an_category=?, an_gender=?, an_kind=?, an_age=?, an_weight=?, an_character=?, an_date=?, an_status=?, an_neutering=?, an_contents=? where code_seq=?";			
+		}else {
+			existPhoto = true;
+			sql = "update animal set an_name=?, an_category=?, an_gender=?, an_kind=?, an_age=?, an_weight=?, an_character=?, an_date=?, an_status=?, an_photo=?, an_neutering=?, an_contents=? where code_seq=?";
+		}
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			System.out.println(dto.getAn_name());
+			if(!existPhoto) {
+				pstat.setNString(1, dto.getAn_name());
+				pstat.setNString(2, dto.getAn_category());
+				pstat.setNString(3, dto.getAn_gender());
+				pstat.setNString(4, dto.getAn_kind());
+				pstat.setInt(5, dto.getAn_age());
+				pstat.setInt(6, dto.getAn_weight());
+				pstat.setString(7, dto.getAn_character());
+				pstat.setDate(8, dto.getAn_date());
+				pstat.setNString(9, dto.getAn_status());
+				pstat.setNString(10, dto.getAn_neutering());				
+				pstat.setNString(11, dto.getAn_contents());
+				pstat.setNString(12, dto.getCode_seq());
+			}else {
+				pstat.setNString(1, dto.getAn_name());
+				pstat.setNString(2, dto.getAn_category());
+				pstat.setNString(3, dto.getAn_gender());
+				pstat.setNString(4, dto.getAn_kind());
+				pstat.setInt(5, dto.getAn_age());
+				pstat.setInt(6, dto.getAn_weight());
+				pstat.setNString(7, dto.getAn_character());
+				pstat.setDate(8, dto.getAn_date());
+				pstat.setNString(9, dto.getAn_status());
+				pstat.setNString(10, dto.getAn_photo());
+				pstat.setNString(11, dto.getAn_neutering());				
+				pstat.setNString(12, dto.getAn_contents());
+				pstat.setNString(13, dto.getCode_seq());
+			}
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	// adoption
+	public int animalInfoDelete(String code_seq) throws Exception{
+
+		String sql = "delete from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+
+	}
 
 }
