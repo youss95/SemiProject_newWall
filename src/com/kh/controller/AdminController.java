@@ -9,6 +9,7 @@ import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -106,34 +107,28 @@ public class AdminController extends HttpServlet {
 				int anWeight = Integer.parseInt(multi.getParameter("anWeight"));
 				String anCharacter = multi.getParameter("anCharacter");
 				Date anDate = transformDate(multi.getParameter("anDate"));
-
-				String anPhoto = multi.getFilesystemName("anPhoto01");
-				anPhoto = Normalizer.normalize(anPhoto, Form.NFC);
+				String thumbImg = multi.getFilesystemName("thumbnail");
+				thumbImg = Normalizer.normalize(thumbImg, Form.NFC);
 				String anContnets = multi.getParameter("anContnets");
 				String anNeutering = multi.getParameter("anNeutering");
-
-				System.out.println("anPhoto : "+ anPhoto);
-
 				String code_seq = admindao.getAnimalCode();
-				AnimalDTO adto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, "N", anPhoto, anContnets, null, anNeutering);
-
-				int result = admindao.animalInfoReg(adto);
 
 				Set<String> fileNames = multi.getFileNameSet(); 
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
-
 					if(oriName == null) continue;
 					oriName = Normalizer.normalize(oriName, Form.NFC);
 					String sysName = multi.getFilesystemName(fileName);
 					sysName = Normalizer.normalize(sysName, Form.NFC);
 
-					if(!fileName.contentEquals("files")) {
+					if(!fileName.contentEquals("files") && !fileName.contentEquals("thumbnail")) {
 						fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
 					}
 				}
-
-				response.sendRedirect("admin/animalInfoReg.jsp");
+				AnimalDTO adto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, "N", thumbImg, anContnets, null, anNeutering);
+				int result = admindao.animalInfoReg(adto);
+				
+				response.sendRedirect(ctxPath + "/animalInfoList.adm?cpage=1");		
 
 			}else if(url.contentEquals("/uploadImg.adm")) {
 
@@ -149,10 +144,6 @@ public class AdminController extends HttpServlet {
 
 				String sysName = multi.getFilesystemName("file");
 				sysName = Normalizer.normalize(sysName, Form.NFC);
-				//				sysName = URLEncoder.encode(sysName,"euc-kr");
-
-				System.out.println("산이1 :" + sysName);
-
 
 				String returnPath = "/upload/editor/" + sysName;
 
@@ -183,24 +174,17 @@ public class AdminController extends HttpServlet {
 				String code_seq = request.getParameter("code_seq");
 
 				AnimalDTO dto = admindao.getAnimalInfo(code_seq);
-				AnimalFilesDTO files = fdao.getAnimalImgs(code_seq);
-
+				List<AnimalFilesDTO> files = fdao.getAnimalImgs(code_seq);
 
 				request.setAttribute("info", dto);
 				request.setAttribute("files", files);
 
 				request.getRequestDispatcher("admin/animalInfoModify.jsp").forward(request, response);
-				// 동물정보 수정할때 파일 업로드에 값이 널이면 수정이 안되게 해야함
-				// 새로운 사진을 넣을시에는 기존디비(사진3장있었던것들 ) 다 업데이트 해줘야함.
 
 			}else if(url.contentEquals("/animalInfoModify.adm")) {
 				System.out.println("동물정보수정");
 
 				String filesPath = request.getServletContext().getRealPath("/upload/animalInfo");
-
-				File filesFolder = new File(filesPath);
-				if(!filesFolder.exists()) filesFolder.mkdir();
-
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8", new DefaultFileRenamePolicy());
 
 				String code_seq = multi.getParameter("code_seq");
@@ -213,20 +197,28 @@ public class AdminController extends HttpServlet {
 				String anCharacter = multi.getParameter("anCharacter");
 				Date anDate = transformDate(multi.getParameter("anDate"));
 				String anStatus = multi.getParameter("anStatus");
-				String anPhoto = multi.getFilesystemName("anPhoto01");
+				String thumbImg = multi.getFilesystemName("thumbnail");
+				if(thumbImg != null) {thumbImg = Normalizer.normalize(thumbImg, Form.NFC);}
 				String anContnets = multi.getParameter("anContnets");
 				String anNeutering = multi.getParameter("anNeutering");
+				
+				// 파일삭제 
+				String[] delTargets = multi.getParameterValues("delete");
+				System.out.println("delTargets : " + delTargets);
+				if(delTargets != null) {
+					System.out.println("파일 삭제 ㅅㅣ작");
 
-				if(anPhoto != null) {
-					anPhoto = Normalizer.normalize(anPhoto, Form.NFC);
+					System.out.println("delTargets.length : " + delTargets.length);
+					for(String target :delTargets) {
+						String sysName = fdao.getSysName(Integer.parseInt(target));
+						File targetFile = new File(filesPath + "/"+ sysName); // 지우고자 하는 파일을 찾음
+						boolean result = targetFile.delete();
+						System.out.println("파일 삭제 여부 : " + result);
+						if(result) { fdao.animalImgDelete(Integer.parseInt(target));}
+					}
 				}
-
-				AnimalDTO dto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, anStatus, anPhoto, anContnets, null, anNeutering);
-
-				int result = admindao.animalInfoModify(dto);
-
-				System.out.println("수정됐니 : " + result);
-
+				
+				//파일 업로드
 				Set<String> fileNames = multi.getFileNameSet(); 
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
@@ -235,23 +227,33 @@ public class AdminController extends HttpServlet {
 					oriName = Normalizer.normalize(oriName, Form.NFC);
 					String sysName = multi.getFilesystemName(fileName);
 					sysName = Normalizer.normalize(sysName, Form.NFC);
-
-					if(!fileName.contentEquals("files")) {
-						int dt = fdao.animalImgDelete(code_seq);
-						int dd = fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
-
-						System.out.println("dd : " + dt);
-						System.out.println("aa : " + dd);
+					
+					if(!fileName.contentEquals("files") && !fileName.contentEquals("thumbnail")) {
+						fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
 					}
 				}
+
+				AnimalDTO dto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, anStatus, thumbImg, anContnets, null, anNeutering);
+				int result = admindao.animalInfoModify(dto);
+				
 				response.sendRedirect(ctxPath + "/animalInfoList.adm?cpage=1");
 				
-				
 			}else if(url.contentEquals("/animalInfoDelete.adm")) {
+
 				String code_seq = request.getParameter("code_seq");
-				System.out.println("code_seq : " + code_seq);
-				int result = admindao.animalInfoDelete(code_seq);
-				System.out.println("삭제됐니 : " + result );
+				ArrayList<String> delTargets = fdao.getFileSysName(code_seq);
+
+				String filesPath = request.getServletContext().getRealPath("/upload/animalInfo");
+				if(delTargets != null) {
+					for(int i=0;i<delTargets.size(); i++) {
+						String sysName = delTargets.get(i);
+						File targetFile = new File(filesPath + "/"+ sysName);
+						boolean result = targetFile.delete();
+					}
+				}
+				admindao.animalInfoDelete(code_seq);
+				fdao.animalImgDelete(code_seq);
+				
 				response.sendRedirect(ctxPath + "/animalInfoList.adm?cpage=1");				
 
 			}else if(url.contentEquals("/adSponsorList.adm")) {
@@ -261,11 +263,7 @@ public class AdminController extends HttpServlet {
 
 				request.setAttribute("slist", slist);
 				request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
-				
-				
-
 			}
-
 
 		}catch(Exception e) {
 			e.printStackTrace();

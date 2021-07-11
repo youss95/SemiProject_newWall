@@ -25,9 +25,7 @@
 							<div class="swiper-wrapper">
 								<c:forEach var="f" items="${files}">				
 									<div class="swiper-slide">
-										<div class="img_bg"
-											style="width:100%;height:100%;background:url(${pageContext.request.contextPath}/upload/animalInfo/${f.ori_name}) 50% 50% no-repeat;background-size:cover;">
-										</div>
+										<img class="slider_img" src="${pageContext.request.contextPath}/upload/animalInfo/${f.ori_name}">
 									</div>
 								</c:forEach>
 							</div>

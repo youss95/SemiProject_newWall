@@ -3,7 +3,7 @@ package com.kh.dto;
 import java.sql.Date;
 
 public class AnimalFilesDTO {
-	private int anfile_seq;
+	private int photo_seq;
 	private String ori_name;
 	private String sys_name;
 	private Date reg_date;
@@ -13,17 +13,17 @@ public class AnimalFilesDTO {
 	
 	public AnimalFilesDTO(int anfile_seq, String ori_name, String sys_name, Date reg_date, String code_seq) {
 		super();
-		this.anfile_seq = anfile_seq;
+		this.photo_seq = photo_seq;
 		this.ori_name = ori_name;
 		this.sys_name = sys_name;
 		this.reg_date = reg_date;
 		this.code_seq = code_seq;
 	}
-	public int getAnfile_seq() {
-		return anfile_seq;
+	public int getPhoto_seq() {
+		return photo_seq;
 	}
-	public void setAnfile_seq(int anfile_seq) {
-		this.anfile_seq = anfile_seq;
+	public void setPhoto_seq(int photo_seq) {
+		this.photo_seq = photo_seq;
 	}
 	public String getOri_name() {
 		return ori_name;

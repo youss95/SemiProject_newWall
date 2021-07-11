@@ -443,7 +443,7 @@ public class AdoptionDAO {
 					AnimalFilesDTO dto = new AnimalFilesDTO();
 
 					dto.setCode_seq(code_seq);
-					dto.setAnfile_seq(rs.getInt("photo_seq"));
+					dto.setPhoto_seq(rs.getInt("photo_seq"));
 					dto.setOri_name(rs.getNString("ori_name"));
 					dto.setSys_name(rs.getNString("sys_name"));
 					dto.setReg_date(rs.getDate("reg_date"));
