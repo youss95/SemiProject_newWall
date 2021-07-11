@@ -10,6 +10,10 @@
 <title>2조 세미 프로젝트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+<script	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
@@ -41,7 +45,8 @@
 							<div class="item">
 								<a href="${pageContext.request.contextPath}/newsView.news?news_seq=${newsAll.news_seq}">
 									<div class="img_wrap">
-										<img src="${pageContext.request.contextPath}/resources/images/bannerImg.png">
+<%-- 										<img src="${pageContext.request.contextPath}/resources/images/bannerImg.png"> --%>
+											<img src="${pageContext.request.contextPath}/upload/news/${newsAll.news_photo}">
 									</div>
 									<div class="txt">
 										<ul>
@@ -83,12 +88,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

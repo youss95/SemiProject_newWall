@@ -26,7 +26,7 @@ public class FileController extends HttpServlet {
 		String url = requestURI.substring(ctxPath.length());
 		System.out.println("요청URL :" + url);
 		
-		if(url.contentEquals("/download.file")) {
+		if(url.contentEquals("/download.sfile")) {
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			
 			//1번 - 하드디스크에 있는 파일의 내용을 램으로 복사한다.

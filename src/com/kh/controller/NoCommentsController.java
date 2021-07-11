@@ -46,7 +46,7 @@ public class NoCommentsController extends HttpServlet {
 				String comments = request.getParameter("ntrp_contents");
 				comments = XSSFilter(comments);				
 				
-				int parent = Integer.parseInt(request.getParameter("parent"));
+				String parent = request.getParameter("parent");
 								
 				dto = new NoCommentsDTO(0,writer,comments,null,parent);
 				dao.insert(dto);
@@ -65,10 +65,20 @@ public class NoCommentsController extends HttpServlet {
 				
 				request.getRequestDispatcher("noticeView.notice?notice_seq="+parent).forward(request, response);
 			
+			}else if(url.contentEquals("/modifyReply.nocmt")){
+				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
+				
+				String comments = request.getParameter("hiddenCon");
+				comments = XSSFilter(comments);
+				
+				String parent = request.getParameter("ntrp_parent");
+				
+				dao.modify(seq, comments);
+				
+				response.sendRedirect("noticeView.notice?notice_seq="+parent);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("error.jsp");
 		}
 
 	}

@@ -3,7 +3,6 @@ package com.kh.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.dao.NewsDAO;
-import com.kh.dao.NewsFileDAO;
+import com.kh.dao.NoticeFileDAO;
 import com.kh.dto.NewsDTO;
-import com.kh.dto.NewsFileDTO;
+import com.kh.dto.NoticeFileDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -45,7 +44,7 @@ public class NewsController extends HttpServlet {
 		try {
 			NewsDAO dao = NewsDAO.getInstance();
 			NewsDTO dto = new NewsDTO();
-			NewsFileDAO fdao = NewsFileDAO.getInstance();
+			NoticeFileDAO fdao = NoticeFileDAO.getInstance();
 			
 			if(url.contentEquals("/newsBoard.news")) {
 				//뉴스 리스트
@@ -79,9 +78,9 @@ public class NewsController extends HttpServlet {
 				
 			}else if(url.contentEquals("/write.news")) {
 				//뉴스 글쓰기 값 받아오기
-				int seq = dao.getSeq();
+				String seq = dao.getSeq();
 				
-				String filesPath = request.getServletContext().getRealPath("files");//파일
+				String filesPath = request.getServletContext().getRealPath("/upload/news");//파일
 				
 				File filesFolder = new File(filesPath);
 				int maxSize = 1024 * 1024 * 100;
@@ -92,15 +91,15 @@ public class NewsController extends HttpServlet {
 				
 				MultipartRequest multi = new MultipartRequest(request, filesPath,maxSize,"utf8", new DefaultFileRenamePolicy());
 				
-				Set<String> fileNames = multi.getFileNameSet();
-				for(String fileName : fileNames) {
-					String oriName = multi.getOriginalFileName(fileName);
-					String sysName = multi.getFilesystemName(fileName);
-					
-					if(oriName != null) {
-						fdao.insert(new NewsFileDTO(0,oriName, sysName, null, seq));
-					}
-				}
+//				Set<String> fileNames = multi.getFileNameSet();
+//				for(String fileName : fileNames) {
+//					String oriName = multi.getOriginalFileName(fileName);
+//					String sysName = multi.getFilesystemName(fileName);
+//					
+//					if(oriName != null) {
+//						fdao.insert(new NewsFileDTO(0,oriName, sysName, null, seq));
+//					}
+//				}
 				
 //				String writer = ((AdminDTO)(request.getSession().getAttribute("login"))).getAdmin_id();//운영자 아이디 로그인완료시 주석취소
 				String writer = "admin";
@@ -111,28 +110,53 @@ public class NewsController extends HttpServlet {
 				subContents = XSSFilter(subContents);
 				
 				String contents = multi.getParameter("news_contents");//뉴스 내용
-				contents = XSSFilter(contents);
 				
-			
+				String photo = multi.getFilesystemName("news_photo");//포토
 				
-				int result = dao.newNews(new NewsDTO(seq,title,subContents,contents,writer,null,0));
+				String oriName = multi.getOriginalFileName("news_photo");
+				String sysName = multi.getFilesystemName("news_photo");
+				
+				fdao.insert(new NoticeFileDTO(0,oriName, sysName, null, seq));
+				
+				System.out.println(photo);
+			 
+				
+				int result = dao.newNews(new NewsDTO(seq,title,subContents,contents,photo,writer,null,0));
 				
 				response.sendRedirect("newsBoard.news?cpage=1");
 				
+			}else if (url.contentEquals("/uploadImg.news")) {
+				//썸머노트 이미지 업로드
+				response.setCharacterEncoding("utf8");
+				response.setContentType("text/html;charset=utf8");
+
+				String realPath = request.getServletContext().getRealPath("upload/news");
+				File filesPath = new File(realPath);
+				System.out.println(realPath);
+
+				if(!filesPath.exists()) {filesPath.mkdir();}
+				MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
+
+				String sysName = multi.getFilesystemName("file");
+				//				sysName = URLEncoder.encode(sysName,"euc-kr");
+
+				String returnPath = "/upload/news/" + sysName;
+
+				System.out.println("returnPath : " + returnPath);
+				response.getWriter().append(returnPath);
+				
 			}else if(url.contentEquals("/newsView.news")) {
 				//뉴스 보기
-				int seq = Integer.parseInt(request.getParameter("news_seq"));
+				String seq = request.getParameter("news_seq");
 				
 				dao.view(seq);
 				
 				dto = dao.detail(seq);
 				
-				int parent = seq;
+				String parent = seq;
 				
-				List<NewsFileDTO> flist = fdao.selectBySeq(seq);
 				
 				request.setAttribute("newsView", dto);
-				request.setAttribute("flist", flist);
 				
 //				ncdto = ncdao.commentsAll(parent);
 //				request.setAttribute("nocmtlist", ncdto);
@@ -141,8 +165,7 @@ public class NewsController extends HttpServlet {
 				
 			}else if(url.contentEquals("/newsDelete.news")) {
 				//뉴스 삭제하기
-				int seq = Integer.parseInt(request.getParameter("news_seq"));
-				System.out.println(seq);
+				String seq = request.getParameter("news_seq");
 				
 				dao.delete(seq);
 				
@@ -150,34 +173,35 @@ public class NewsController extends HttpServlet {
 			
 			}else if(url.contentEquals("/newsModify.news")) {
 				//뉴스값 받아서 보내기
-				int seq = Integer.parseInt(request.getParameter("news_seq"));
+				String seq = request.getParameter("news_seq");
 				
 				dto = dao.detail(seq);
-				System.out.println(dto.getNews_sub_contents());
 				
-				List<NewsFileDTO> flist = fdao.selectBySeq(seq);
+				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
 								
-				request.setAttribute("newsView", dto);
 				request.setAttribute("flist", flist);
+				
+				request.setAttribute("newsView", dto);
 				
 				request.getRequestDispatcher("newsboard/newsModify.jsp").forward(request, response);
 			}else if(url.contentEquals("/newsModifyView.news")) {
 				//뉴스 수정한값 받아서 적용
-				String filesPath = request.getServletContext().getRealPath("files");
+				String filesPath = request.getServletContext().getRealPath("/upload/news");
 				
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8",
 						new DefaultFileRenamePolicy());
 				
-				int seq = Integer.parseInt(multi.getParameter("news_seq"));
+				String seq = multi.getParameter("news_seq");
 				
 				String title = multi.getParameter("news_title");
+				title = XSSFilter(title);
 				
 				String subcontents = multi.getParameter("news_sub_contents");
+				subcontents = XSSFilter(subcontents);
 				
 				String contents = multi.getParameter("news_contents");
 				
 				String[] delTargets = multi.getParameterValues("delete");
-				System.out.println(delTargets);
 				if (delTargets != null) { // 삭제할 항목이 null이 아닌경우
 					for (String target : delTargets) {
 						String sysName = fdao.getSysName(Integer.parseInt(target));
@@ -188,22 +212,40 @@ public class NewsController extends HttpServlet {
 						}
 					}
 				}
+												
+				String photo;
+				photo = multi.getFilesystemName("news_photo");//포토
 				
-				int result = dao.modify(seq, title, subcontents, contents);
+//				String originFile = multi.getFilesystemName("originFile");
+
+				String oriName = multi.getOriginalFileName("news_photo");
+				String sysName = multi.getFilesystemName("news_photo");
 				
-				Set<String> fileNames = multi.getFileNameSet();
-				for(String fileName : fileNames) {
-					String oriName = multi.getOriginalFileName(fileName);
-					String sysName = multi.getFilesystemName(fileName);
-					
-					if(oriName != null) {
-						fdao.insert(new NewsFileDTO(0, oriName, sysName, null, seq));
-					}
+				if(oriName != null) {
+					fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 				}
 				
+				if(photo == null) {
+					photo = multi.getParameter("originFile");
+					System.out.println(photo);
+//					photo = multi.getFilesystemName("originFile");
+//					photo = multi.getOriginalFileName("originFile");
+				}
+				
+				
+				int result = dao.modify(seq, title, subcontents, contents, photo);
+				
+//				Set<String> fileNames = multi.getFileNameSet();
+//				for(String fileName : fileNames) {
+//					String oriName = multi.getOriginalFileName(fileName);
+//					String sysName = multi.getFilesystemName(fileName);
+//					
+//					if(oriName != null) {
+//						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
+//					}
+//				}
+				
 				dto = dao.detail(seq);
-				List<NewsFileDTO> flist = fdao.selectBySeq(seq);
-				request.setAttribute("flist", flist);
 				
 				response.sendRedirect("newsView.news?news_seq=" + seq);
 				
@@ -211,8 +253,7 @@ public class NewsController extends HttpServlet {
 				
 				
 		}catch(Exception e)	{
-		e.printStackTrace();
-		response.sendRedirect("error.jsp");
+			e.printStackTrace();
 		}
 	}
 
