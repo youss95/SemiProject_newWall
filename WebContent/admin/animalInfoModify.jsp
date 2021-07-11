@@ -34,6 +34,12 @@
 						<form
 							action="${pageContext.request.contextPath}/animalInfoModify.adm" method="post" enctype="multipart/form-data" class="form_tbl">
 							<dl>
+								<dt>동물코드</dt>
+								<dd>
+									<span>${info.code_seq}</span>
+								</dd>
+							</dl>
+							<dl>
 								<dt>이름</dt>
 								<dd>
 									<input type="text" name="anName" class="inpform" placeholder="이름을 입력해주세요." value="${info.an_name}">
@@ -145,13 +151,27 @@
 							</dl>
 							<dl>
 								<dt>
-									사진<span class="s_txt">(최대 3장까지 업로드 가능)</span>
+									사진<span class="s_txt">(사진을 1장 이상 업로드 해주세요.)</span>
 								</dt>
 								<dd>
-									<div class="file_upload">
-										<input type="file" name="anPhoto01" id="anPhoto01">
-										<input type="file" name="anPhoto02" id="anPhoto02">
-										<input type="file" name="anPhoto03" id="anPhoto03">
+									<div class="photo_thumb">
+										<strong>썸네일</strong>
+										<p class="f_name">${info.an_photo }</p>
+										<button type="button" id="modi_thumbnail"><i class="fas fa-times"></i></button>
+									</div>
+									<div class="photo_detail">
+										<div id="file-box">
+											<strong>상세 사진 추가</strong>
+											<button id="addFile" type="button" class="btn_plus"><i class="fas fa-plus"></i></button>
+										</div>
+										<div id="fileList">
+											<c:forEach var="file" items="${files}">
+												<div class="oriFile">
+													<span>${file.ori_name}</span>
+													<button class="delFile delAttach" type="button" seq="${file.photo_seq}"><i class='fas fa-times'></i></button>
+												</div>
+											</c:forEach>
+										</div>
 									</div>
 								</dd>
 							</dl>
@@ -265,7 +285,20 @@
 					alert("성격을 선택해주세요!");
 					return false;
 				}
-	 	
+	 			if($("#thumbnail").val() == ""){
+					alert("썸네일 이미지를 등록해주세요!");
+					return false;
+				}
+				if($(".oriFile").length == 0 && $("#file-box input").val() == "" && $("#file-box input").length != 0){
+					alert("사진을 한 장 이상 첨부해주세요!");
+					return false;
+	 			} 
+
+	 			if($(".oriFile").length == 0 && $("#file-box input").length == 0){
+	 				alert("사진을 한 장 이상 첨부해주세요!");
+					return false;
+	 			} 
+	
 	 			if($("#summernote").val() == "" ){
 					alert("구조내용을 입력해주세요!");
 					return false;
@@ -275,6 +308,55 @@
 				
 			})
 			
+		$(".delAttach").on("click", function() {
+			
+			let sysname = $(this).attr("seq");
+
+			let delTarget = $("<input>");
+			delTarget.attr("type", "hidden");
+			delTarget.attr("name", "delete");
+			delTarget.attr("value", sysname);
+
+			$("#fileList").after(delTarget);
+			$(this).parent().remove();
+	
+			
+		})
+
+		let fileCount = 1;
+		$("#addFile").on("click", function() {
+			let fileLine = $("<div>");
+
+			let inputFile = $("<input>");
+			inputFile.attr("type", "file");
+			inputFile.attr("name", "anPhoto" + fileCount++);
+
+			let btnDelete = $("<button>");
+			btnDelete.addClass("delFile");
+			btnDelete.attr("type", "button");
+			btnDelete.append("<i class='fas fa-times'></i>");
+
+			fileLine.append(inputFile);
+			fileLine.append(btnDelete);
+
+			$("#file-box").append(fileLine);
+		})
+
+		$("#file-box").on("click", ".delFile", function() {
+			$(this).parent().remove();
+		});
+		
+		$("#modi_thumbnail").on("click", function() {
+			let inputFile = $("<input>");
+			inputFile.attr("type", "file");
+			inputFile.attr("name", "thumbnail");
+			inputFile.attr("id", "thumbnail");
+			$(this).after(inputFile);
+			$(this).siblings('p').remove();
+			$(this).remove();
+		});
+		
+
 		})
 	</script>
 </body>

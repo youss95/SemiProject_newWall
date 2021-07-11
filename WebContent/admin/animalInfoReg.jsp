@@ -16,10 +16,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-
-
 </head>
 
 <body>
@@ -125,13 +124,18 @@
 							</dl>
 							<dl>
 								<dt>
-									사진<span class="s_txt">(최대 3장까지 업로드 가능)</span>
+									사진<span class="s_txt">(사진을 1장 이상 업로드 해주세요.)</span>
 								</dt>
 								<dd>
-									<div class="file_upload">
-										<input type="file" name="anPhoto01" id="anPhoto01">
-										<input type="file" name="anPhoto02" id="anPhoto02">
-										<input type="file" name="anPhoto03" id="anPhoto03">
+								<div class="photo_thumb">
+										<strong>썸네일</strong>
+										<input type="file" name="thumbnail" id="thumbnail" >
+									</div>
+									<div class="photo_detail">
+										<div id="file-box">
+											<strong>상세 사진 추가</strong>
+											<button id="addFile" type="button" class="btn_plus"><i class="fas fa-plus"></i></button>
+										</div>
 									</div>
 								</dd>
 							</dl>
@@ -142,6 +146,7 @@
 								</dd>
 							</dl>
 							<div class="btn_wrap">
+								<a href="javascript:history.back();" class="btn_m btn_line" style="float:left;">목록</a>
 								<button class="btn_m btn_default btn_submit">정보 등록</button>
 							</div>
 						</form>
@@ -158,7 +163,6 @@
 				height : 300,
 				minHeight : null,
 				maxHeight : null,
-/* 				lang: 'ko-KR', */
 				focus : true,
 				callbacks : {
 					onImageUpload : function(files) {
@@ -226,10 +230,16 @@
 					alert("성격을 선택해주세요!");
 					return false;
 				}
-	 			if($("#anPhoto01").val() == "" && $("#anPhoto02").val() == "" && $("#anPhoto03").val() == ""){
+	 			if($("#thumbnail").val() == ""){
+					alert("썸네일 이미지를 등록해주세요!");
+					return false;
+				}
+	 			
+	 			if($("#file-box input").val() == "" || $("#file-box input").length == 0){
 					alert("사진을 한 장 이상 첨부해주세요!");
 					return false;
 				}
+	 			
 	 			if($("#summernote").val() == "" ){
 					alert("구조내용을 입력해주세요!");
 					return false;
@@ -243,6 +253,32 @@
 				let date = $(this).val().replace(/\-/g,'');
 				$('#anDate_hd').val(date);
 			})
+			
+			
+			
+			let fileCount = 1;
+			$("#addFile").on("click", function() {
+				let fileLine = $("<div>");
+
+				let inputFile = $("<input>");
+				inputFile.attr("type", "file");
+				inputFile.attr("name", "anPhoto" + fileCount++);
+
+				let btnDelete = $("<button>");
+				btnDelete.attr("type", "button");
+				btnDelete.addClass("delFile");
+				btnDelete.append("<i class='fas fa-times'></i>");
+
+				fileLine.append(inputFile);
+				fileLine.append(btnDelete);
+
+				$("#file-box").append(fileLine);
+			})
+
+			$("#file-box").on("click", ".delFile", function() {
+				$(this).parent().remove();
+			});
+
 		})
 	</script>
 </body>
