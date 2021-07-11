@@ -76,7 +76,7 @@
 							class="fas fa-chevron-right"></i></a>
 						<ul>
 							<li class="depth2"><a
-								href="${pageContext.request.contextPath}/adSponsorList.adm">후원금
+								href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=1&sp_slct_cho=all">후원금
 									관리</a></li>
 						</ul></li>
 					<li class="depth1"><a href="#">동물 정보<i
@@ -96,15 +96,15 @@
 					</div>
 					<div class="contents">
 						<form
-							action="${pageContext.request.contextPath}/spAdminSearch.adm"
+							action="${pageContext.request.contextPath}/spAdminSearch.adm?cpage=1"
 							method="post" id="sp_search">
 							<div class="sp_search">
 								<div class="inp_slct sp_slct">
 									<select name="sp_slct_cho" id="sp_slct_cho">
 										<option value="all">전체</option>
-										<option value="NEW-WAL 후원">업체 후원</option>
-										<option value="일대일 후원">일대일 후원</option>
-										<option value="임시보호 후원">임시보호 후원</option>
+										<option value="NEW-WAL">업체 후원</option>
+										<option value="일대일">일대일 후원</option>
+										<option value="임시보호">임시보호 후원</option>
 									</select>
 								</div>
 								<button class="btn_s btn_light sp_search_btn" id="sp_search_btn">검색</button>
@@ -159,6 +159,50 @@
 							</tbody>
 						</table>
 					</div>
+
+					<c:choose>
+						<c:when test="${sp_cho=='all'}">
+							<div>
+								<c:forEach var="i" items="${navi}" varStatus="s">
+
+									<c:choose>
+										<c:when test="${ i == '>' }">
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index-1]+1}&sp_slct_cho=all">${i}</a>
+										</c:when>
+										<c:when test="${ i == '<' }">
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index+1]-1}&sp_slct_cho=all">${i}</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${i}&sp_slct_cho=all">${i}</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div>
+								<c:forEach var="i" items="${navi}" varStatus="s">
+									<c:choose>
+										<c:when test="${ i == '>' }">
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index-1]+1}&sp_slct_cho=${sp_cho}">${i}</a>
+										</c:when>
+										<c:when test="${ i == '<' }">
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index+1]-1}&sp_slct_cho=${sp_cho}">${i}</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${i}&sp_slct_cho=${sp_cho}">${i}</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</section>
 
 			</div>

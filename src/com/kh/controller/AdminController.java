@@ -2,8 +2,6 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
@@ -22,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
+import com.kh.config.SponsorConfig;
 import com.kh.dao.AdminDAO;
 import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
-import com.kh.dao.SponsorDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
@@ -259,23 +257,42 @@ public class AdminController extends HttpServlet {
 			}else if(url.contentEquals("/adSponsorList.adm")) {
 				System.out.println("스폰서 후원");
 				AdminDAO adao =AdminDAO.getInstance(); 
-				List<SponsorDTO> slist = adao.adSponsorSelectAll();
-
-				request.setAttribute("slist", slist);
-				request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int endNum = cpage * (SponsorConfig.RECORD_COUNT_PER_PAGE);
+	            int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
+				List<SponsorDTO> slist = adao.adSponsorGetPageList(startNum, endNum);
+				String sp_slct_cho = request.getParameter("sp_slct_cho");
+				//System.out.println(sp_slct_cho);
+				List<String> navi = adao.adSponsorGetPageNavi(cpage, sp_slct_cho);//
+				request.setAttribute("slist", slist);//이건 모든값
+				request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
+				request.setAttribute("sp_cho", sp_slct_cho);
+				
+				request.getRequestDispatcher("admin/adSponsorList.jsp?cpage=1").forward(request, response);
+				
 			}else if(url.contentEquals("/spAdminSearch.adm")) {
 				System.out.println("카테고리");
+				AdminDAO adao =AdminDAO.getInstance(); 
+				
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int endNum = cpage * (SponsorConfig.RECORD_COUNT_PER_PAGE);
+	            int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
 				String sp_search = request.getParameter("sp_slct_cho");
 				System.out.println(sp_search);
-				if(sp_search.contentEquals("all")) {
-					response.sendRedirect("adSponsorList.adm");
-				}else {
-					AdminDAO adao =AdminDAO.getInstance(); 
-					List<SponsorDTO> slist = adao.adminSponsorSearch(sp_search);
+//				if(sp_search.contentEquals("all")) {
+//					response.sendRedirect("adSponsorList.adm?cpage=1&sp_slct_cho=all");
+//				}else {
+					List<SponsorDTO> slist = adao.adSponsorGetPageList(startNum, endNum, sp_search);
+					//List<SponsorDTO> slist = adao.adminSponsorSearch(sp_search);
+					List<String> navi = adao.adSponsorGetPageNavi(cpage, sp_search);
 					
 					request.setAttribute("slist", slist);
-					request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
-				}
+					request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
+					request.setAttribute("sp_cho", sp_search);
+					System.out.println(sp_search);
+					request.getRequestDispatcher("admin/adSponsorList.jsp?cpage=1").forward(request, response);
+				//}
 				
 			}
 

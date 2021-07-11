@@ -311,7 +311,7 @@ public class AdminDAO {
 			}
 		}
 	}
-	//sponsor
+	//sponsor  전체글 갯수
 	private int adSponsorGetRecordCount() throws Exception{
 		String sql = "select count(*) from sponsor";
 		try(Connection con = this.getConnection();
@@ -321,7 +321,7 @@ public class AdminDAO {
 			return rs.getInt(1);
 		}
 	}
-	//sponsor
+	//sponsor 검색했을때 검색글의갯수
 	private int adSponsorGetRecordCount(String keyword) throws Exception{
 		String sql = "select count(*) from sponsor where sponsor_choice like ?";
 		try(Connection con = this.getConnection();
@@ -334,12 +334,12 @@ public class AdminDAO {
 			}
 		}
 	}
-	//sponsor
+	//sponsor 1~10 버튼만드는거
 	public List<String> adSponsorGetPageNavi(int cpage, String keyword) throws Exception{
 		int recordTotalCount = 0;
 
 		//search==null||search2==null||keyword == null
-		if(keyword==null) {
+		if(keyword.contentEquals("all")) {
 			recordTotalCount=this.adSponsorGetRecordCount();//널 전체 
 		}else if(keyword!=null) {
 			recordTotalCount=this.adSponsorGetRecordCount(keyword);
@@ -388,10 +388,11 @@ public class AdminDAO {
 
 		return pageNavi;
 	}
+	//sponsor 검색했을때 한화면에 보일 데이터 10개의글 
 	public List<SponsorDTO> adSponsorGetPageList(int startNum, int endNum, String keyword) throws Exception {
-		String sql =  "select * from (select row_number() over (order by seq desc) "
+		String sql =  "select * from (select row_number() over (order by sponsor_seq desc) "
 				+ "rnum,sponsor_seq,sponsor_amount,sponsor_choice, sponsor_agecheck, sponsor_name, sponsor_contact, "
-				+ "sponsor_birth, sponsor_yname, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
+				+ "sponsor_birth, sponsor_yname, sponsor.SPONSOR_YBIRTH, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
 				+ "sponsor_apply_num, sponsor_terms01, sponsor_terms02 , sponsor_mb_id, sponsor_date "
 				+ "from sponsor where sponsor_choice like ?) where rnum between ? and ?";
 		try(Connection con = this.getConnection();
@@ -433,6 +434,52 @@ public class AdminDAO {
 			}
 		}
 	}
+
+	//sponsor 한화면에 보일 데이터 10개의글 
+		public List<SponsorDTO> adSponsorGetPageList(int startNum, int endNum) throws Exception {
+			String sql =  "select * from (select row_number() over (order by sponsor_seq desc) "
+					+ "rnum,sponsor_seq,sponsor_amount,sponsor_choice, sponsor_agecheck, sponsor_name, sponsor_contact, "
+					+ "sponsor_birth, sponsor_yname, sponsor.SPONSOR_YBIRTH, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
+					+ "sponsor_apply_num, sponsor_terms01, sponsor_terms02 , sponsor_mb_id, sponsor_date "
+					+ "from sponsor) where rnum between ? and ?";
+			try(Connection con = this.getConnection();
+					PreparedStatement pstat = con.prepareStatement(sql);){
+				pstat.setInt(1, startNum);
+				pstat.setInt(2, endNum);
+				try(ResultSet rs = pstat.executeQuery();){
+
+					List<SponsorDTO> list = new ArrayList<>();
+					while(rs.next()) {
+						int sponsor_seq = rs.getInt("sponsor_seq");
+						int sponsor_amount = rs.getInt("sponsor_amount");
+						String sponsor_choice = rs.getNString("sponsor_choice");
+						String sponsor_agecheck = rs.getNString("sponsor_agecheck");
+						String sponsor_name = rs.getNString("sponsor_name");
+						String sponsor_contact = rs.getNString("sponsor_contact");
+						String sponsor_birth = rs.getNString("sponsor_birth");
+						String sponsor_yname = rs.getNString("sponsor_yname");
+						String sponsor_ybirth = rs.getNString("sponsor_ybirth");
+						String sponsor_email = rs.getNString("sponsor_email");
+						String sponsor_postcode = rs.getNString("sponsor_postcode");
+						String sponsor_address1 = rs.getNString("sponsor_address1");
+						String sponsor_address2 = rs.getNString("sponsor_address2");
+						String sponsor_apply_num = rs.getNString("sponsor_apply_num");
+						String sponsor_terms01 = rs.getNString("sponsor_terms01");
+						String sponsor_terms02 = rs.getNString("sponsor_terms02");
+						String sponsor_mb_id = rs.getNString("sponsor_mb_id");
+						Date sponsor_date = rs.getDate("sponsor_date");
+
+						SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
+								sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
+								sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
+								sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
+								sponsor_mb_id,  sponsor_date);
+						list.add(dto);
+					}
+					return list;
+				}
+			}
+		}
 
 	// adoption
 	public int animalInfoModify(AnimalDTO dto) throws Exception{
