@@ -158,8 +158,42 @@
 		})
 		//댓글추가
 		btnEvent2.addEventListener('click',function(){
+			let data={
+					"protectWriter":"${sessionScope.loginInfo.user_id}", 
+					"boardNo":${protectDetail.protectNo}, 
+					"replyCon":$('#content').val()
+					}
+			$.ajax({
+			url:"${pageContext.request.contextPath}/comment.lost",
+			type:"post",
+			data:data,
+			dataType:"json"		
+		}).done(function(result){
+			alert("댓글 작성 완료!")
+			addReply(result)
+			$('#content').val('');		
+		});
+			})
+			//로그인 체크
+			textWrite.onfocus = function(){
+			<c:if test="${sessionScope.loginInfo==null}">
 		
+		loginBtn.click();
+			
+			</c:if>
+		}
+	function deleteReply(id){
 		
+		$.ajax({
+			type :"post",
+			url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
+			dataType : "json"
+		}).done(function(resp){ 
+			
+			
+			$("#reply-"+id).remove();
+		})
+	}
 	 	
 	</script>
 	
