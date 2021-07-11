@@ -10,6 +10,7 @@
   <style>
   .card{float:left;margin:10px;}
   .wrap{overflow:hidden;}
+  .progress{height:40px; border-radius:30px;}
   </style>
 </head>
 <body>
@@ -47,6 +48,37 @@
 
 </c:forEach>
 </div>
+
+
+<!-- 페이지 네비 -->
+<ul class="pagination justify-content-center">
+	<c:choose>
+	<c:when test="${param.page<=1 }">
+<li class="page-item  "><a class="page-link"     onclick="alert('이전 페이지가 없습니다.');">&lt</a></li>
+	</c:when>
+	<c:otherwise>
+		<li class="page-item "><a class="page-link" href="${pageContext.request.contextPath}/lostMapList.lost?page=${param.page-1}">&lt</a></li>
+	</c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+	<c:when test="${lastPage <= param.page}">
+		<li class="page-item  "><a class="page-link"     onclick="alert('다음 페이지가 없습니다.');">&gt</a></li>
+	</c:when>
+	<c:otherwise>
+		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/lostMapList.lost?page=${param.page+1}">&gt</a></li>
+	</c:otherwise>
+	</c:choose>
+	</ul>
+
+
+
+	<!-- 진행바 -->
+<div class="progress col-md-12 m-2">
+	
+		<div class="progress-bar" style="width: ${currentPercent}%" ></div>
+	</div>
+
 				</section>
 				</div>
 				</div>

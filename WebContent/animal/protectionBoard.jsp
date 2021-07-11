@@ -40,7 +40,7 @@
                 작성자:${p.protectWriter}
                 </p>
                 <div id="boardDetailprotect">
-               <a  href="/NewWall/protectDetail.lost?protectNo=${p.protectNo}" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+               <a  href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${p.protectNo}" >자세히보기<i class="fas fa-angle-double-right"></i></a>
                </div>
                         </div>
         </div>
