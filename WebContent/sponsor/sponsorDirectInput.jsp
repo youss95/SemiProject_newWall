@@ -23,11 +23,13 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 
 <style>
 * {
@@ -93,10 +95,10 @@
 	margin: 1%;
 	float: left;
 }
-.sp_com_input .spp_category1 .btn_pay_set {
-           word-break:keep-all;
-        }
 
+.sp_com_input .spp_category1 .btn_pay_set {
+	word-break: keep-all;
+}
 
 .sp_com_input .spp_category1 span {
 	margin-top: 20px;
@@ -268,6 +270,13 @@
 .sp_com_input .spp_category6 {
 	margin-bottom: 100px;
 }
+.sp_com_input .sp_reg {
+            font-size: 14px;
+    		color: #FFA5A5;
+            margin-left: 10px;
+            display: none;   
+            
+        }
 </style>
 </head>
 <body>
@@ -286,7 +295,8 @@
 						</div>
 						<div class="spp_body">
 
-							<form action="${pageContext.request.contextPath}/PaymentCheck.sp"
+							<form
+								action="${pageContext.request.contextPath}/PaymentCheck.sp?sp_category=일대일 후원_${p_name}"
 								method="post" id="joinForm">
 								<div class="spp_category3 spp_category">
 									<h2 class="spp_category1_title">01. 선택한 후원 대상 확인</h2>
@@ -298,27 +308,27 @@
 									<h2 class="spp_category1_title">02.기부금액</h2>
 									<!-- 수평선 -->
 									<ul>
-                                        <li><button type="button" id="btn_pay5" class="btn_m btn_light btn_pay_set"
-                                                value="5000">5천원</button>
-                                        </li>
-                                        <li><button type="button" id="btn_pay10" class="btn_m btn_light btn_pay_set"
-                                                value="10000">1만원</button></li>
-                                        <li><button type="button" id="btn_pay20"
-                                                class="btn_m btn_light btn_pay_set" value="20000">2만원</button></li>
-                                        <li><button type="button" id="btn_pay30"
-                                                class="btn_m btn_light btn_pay_set" value="30000">3만원</button></li>
-                                        <li><button type="button" id="btn_pay50"
-                                                class="btn_m btn_light btn_pay_set" value="50000">5만원</button></li>
-                                        <li><button type="button" id="btn_pay100"
-                                                class="btn_m btn_light btn_pay_set" value="100000">10만원</button></li>
-                                        <li><button type="button" id="btn_pay"
-                                                class="btn_m btn_default btn_input btn_pay_set">직접입력</button></li>
-                                        <li><input type="number" id="inp_pay" name="sp_amount" class="inpform inp_pay"
-                                                placeholder="숫자만 입력" value="" required> <span>원</span></li>
+										<li><button type="button" id="btn_pay5"
+												class="btn_m btn_light btn_pay_set" value="5000">5천원</button>
+										</li>
+										<li><button type="button" id="btn_pay10"
+												class="btn_m btn_light btn_pay_set" value="10000">1만원</button></li>
+										<li><button type="button" id="btn_pay20"
+												class="btn_m btn_light btn_pay_set" value="20000">2만원</button></li>
+										<li><button type="button" id="btn_pay30"
+												class="btn_m btn_light btn_pay_set" value="30000">3만원</button></li>
+										<li><button type="button" id="btn_pay50"
+												class="btn_m btn_light btn_pay_set" value="50000">5만원</button></li>
+										<li><button type="button" id="btn_pay100"
+												class="btn_m btn_light btn_pay_set" value="100000">10만원</button></li>
+										<li><button type="button" id="btn_pay"
+												class="btn_m btn_default btn_input btn_pay_set">직접입력</button></li>
+										<li><input type="number" id="inp_pay" name="sp_amount" class="inpform inp_pay"
+                                                placeholder="숫자만 입력" value="" required min="100" max="50000000"> <span>원</span></li>
                                     </ul>
-								</div>
-								<div class="spp_category2 spp_category">
-									 <h2 class="spp_category1_title">03. 기부자 정보</h2>
+                                </div>
+                                <div class="spp_category2 spp_category">
+                                    <h2 class="spp_category1_title">03. 기부자 정보</h2>
                                     <!-- 수평선 -->
                                     <h3>만 14세 미만입니까?</h3>
                                     <div class="rd_group age14 selectBox">
@@ -335,22 +345,24 @@
                                         <div class="name">
                                             <h3>이름</h3>
                                             <input type="text" class="inpform na" id="sp_name_01" name="sp_name_01" required>
+                                            <span class="sp_name_01_reg sp_reg" id="sp_name_01_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="phone">
                                             <h3>휴대폰 번호</h3>
-                                            <input type="number" class="inpform ph" id="sp_ph1_01" name="sp_ph1_01" required>-<input
-                                                type="number" class="inpform ph" id="sp_ph2_01" name="sp_ph2_01" required>-<input type="number"
-                                                class="inpform ph" id="sp_ph3_01" name="sp_ph3_01" required>
+                                            <input type="number" class="inpform ph sp_ph01" id="sp_ph1_01" name="sp_ph1_01" required>-<input
+                                                type="number" class="inpform ph sp_ph01" id="sp_ph2_01" name="sp_ph2_01" required>-<input type="number"
+                                                class="inpform ph sp_ph01" id="sp_ph3_01" name="sp_ph3_01" required>
+                                                <span class="sp_ph_01_reg sp_reg" id="sp_ph_01_reg">올바른 휴대폰 번호를 작성해주세요</span>
                                         </div>
                                         <div class="birth">
                                             <h3>생년월일</h3>
                                             <!-- 사이즈 만지기?? 이거 안됨  -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" id="sp_bi_y_01"name="sp_bi_y_01" required>
+                                                <input type="number" class="inpform bi_y sp_bi01" id="sp_bi_y_01"name="sp_bi_y_01" required>
                                             </div>
                                             년
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_m_01" id="sp_bi_m_01" required>
+                                                <select name="sp_bi_m_01 sp_bi01" id="sp_bi_m_01" required>
                                                     <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
@@ -368,7 +380,7 @@
                                             </div>
                                             월
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_d_01" id="sp_bi_d_01" required>
+                                                <select name="sp_bi_d_01 sp_bi01" id="sp_bi_d_01" required>
                                                     <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
@@ -404,6 +416,7 @@
                                                 </select>
                                             </div>
                                             일
+                                            <span class="sp_bi_01_reg sp_reg" id="sp_bi_01_reg">올바른 생년월일 작성해주세요</span>
                                         </div>
 
                                     </div>
@@ -413,14 +426,16 @@
                                                 이름<br>(법정대리인)
                                             </h3>
                                             <input type="text" class="inpform na" id="sp_name_02" name="sp_name_02">
+                                            <span class="sp_name_02_reg sp_reg" id="sp_name_02_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="phone">
                                             <h3>
                                                 휴대폰 번호<br>(법정대리인)
                                             </h3>
-                                            <input type="number" class="inpform ph" id="sp_ph1_02" name="sp_ph1_02">-<input
-                                                type="number" class="inpform ph" id="sp_ph2_02" name="sp_ph2_02">-<input type="number"
-                                                class="inpform ph" id="sp_ph3_02" name="sp_ph3_02">
+                                            <input type="number" class="inpform ph sp_ph02" id="sp_ph1_02" name="sp_ph1_02">-<input
+                                                type="number" class="inpform ph sp_ph02" id="sp_ph2_02" name="sp_ph2_02">-<input type="number"
+                                                class="inpform ph sp_ph02" id="sp_ph3_02" name="sp_ph3_02">
+                                                 <span class="sp_ph_02_reg sp_reg" id="sp_ph_02_reg">올바른 휴대폰 번호를 작성해주세요</span>
                                         </div>
                                         <div class="birth">
                                             <h3>
@@ -486,12 +501,14 @@
                                                 </select>
                                             </div>
                                             일
+                                            <span class="sp_bi_02_reg sp_reg" id="sp_bi_02_reg">올바른 생년월일 작성해주세요</span>
                                         </div>
                                         <div class="name">
                                             <h3>
                                                 기부자명<br>(본인)
                                             </h3>
                                             <input type="text" class="inpform na" id="sp_yname" name="sp_yname">
+                                            <span class="sp_yname_reg sp_reg" id="sp_yname_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="birth">
                                             <h3>
@@ -557,6 +574,7 @@
                                                 </select>
                                             </div>
                                             일
+                                             <span class="sp_ybi_reg sp_reg" id="sp_ybi_reg">올바른 생년월일 작성해주세요</span>
                                         </div>
                                     </div>
                                 </div>
@@ -566,7 +584,8 @@
                                     <div class="sp_email">
                                         <h3>이메일</h3>
                                         <input type="text" class="inpform sp_email_inp"
-                                            placeholder="example123@email.com" name="sp_email" required>
+                                            placeholder="example123@email.com" name="sp_email" id="sp_email" required>
+                                            <span class="sp_email_reg sp_reg" id="sp_email_reg">올바른 이메일을 작성해주세요</span>
                                     </div>
 
                                     <div class="sp_address">
@@ -606,7 +625,7 @@
                                             </div>
                                             <div class="inp_rd">
                                                 <input type="radio" id="sp_terms01_2" name="sp_terms01" value="N">
-                                                <label for="sp_terms01_2">동의하지 않습니다</label>
+                                                <label for="sp_terms01_2">동의하지  않습니다</label>
                                             </div>
                                         </div>
                                     </div>
@@ -635,7 +654,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="spp_category5 spp_category">
                                     <h2 class="spp_category1_title">05. 회원 여부 확인</h2>
                                     <h3>저희 사이트의 회원 이십니까?</h3>
@@ -648,30 +666,60 @@
                                             <input type="radio" id="id_ck_rd2" class="sp_mb_ck" name="sp_idcheck" value="N" checked>
                                             <label for="id_ck_rd2">아니요</label>
                                         </div>
-
                                     </div>
                                     <div class="sp_id_ck" id="sp_id_ck">
                                         <h3>ID</h3>
                                         <input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
                                     </div>
                                 </div>
-
-
                                 <div class="spp_category6 spp_category">
-                                    <button class="btn_m btn_line">다음단계</button>
+                                    <button class="btn_m btn_line" id="sp_send">다음단계</button>
                                 </div>
                             </form>
-						</div>
-					</div>
-					<!-- 끝 -->
-				</section>
+                        </div>
+                    </div>
+                    <!-- 끝 -->
+               </section>
 			</div>
 		</div>
 		<footer class="footer">
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
+	<div class="modal fade" id="loginModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
+						id="popup-img">
+				</div>
+				<div class="modal-header login-title"></div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="user-id" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_id"
+								placeholder="Your ID">
+						</div>
+						<div class="form-group">
+							<label for="user-password" class="col-form-label"></label> <input
+								type="text" class="form-control" id="user_pw"
+								placeholder="Password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn_m btn_default"
+						data-dismiss="modal" style="width: 125%">로그인</button>
+					<button type="button" class="btn_m btn_white" data-dismiss="modal"
+						style="width: 125%">회원가입</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script>
 	 $(function () {
          //14세 미만 이상여부
@@ -780,9 +828,123 @@
                     }
                 }).open();
             }
-         
+            
+		 let nameReg = /^[가-힣]{3,5}$/;  
+		 let ph1Reg = /^01[0-9]$/; 
+		 let ph2Reg = /^[0-9]{3,4}$/; 
+		 let ph3Reg = /^[0-9]{4}$/; 
+		 let emailReg = /^[A-Za-z0-9_]+@[a-z]+[.][a-z]{2,3}$/; 
+
+           //1.기부금액
+		  $("#inp_pay").focusout(function(){
+			    let val= $(this).val();
+			    if(val < 100 || val > 50000000) {
+			        alert("100~50,000,000 범위로 입력해 주십시오.");
+			        $(this).val('');
+			    }
+			}); 
+		 
+             //성인
+		  $("#sp_name_01").focusout(function(){
+			  if (!(nameReg.test($(this).val()))) {
+				  $("#sp_name_01_reg").css('display', 'inline-block');
+				  $(this).val('');
+					return false;
+				}
+			  $("#sp_name_01_reg").css('display', 'none');
+		  });
+		  
+		  $(".sp_ph01").focusout(function(){
+			  if (!(ph1Reg.test($("#sp_ph1_01").val()))) {
+				  $("#sp_ph_01_reg").css('display', 'inline-block');
+					return false;
+				}
+			  if (!(ph2Reg.test($("#sp_ph2_01").val()))) {
+				  $("#sp_ph_01_reg").css('display', 'inline-block');
+					return false;
+				}
+			  if (!(ph3Reg.test($("#sp_ph3_01").val()))) {
+				  $("#sp_ph_01_reg").css('display', 'inline-block');
+					return false;
+				} 
+			  $("#sp_ph_01_reg").css('display', 'none');
+		  });
+	
+		  $("#sp_bi_y_01").focusout(function(){
+			    let val= $(this).val();
+
+			    if(val < 1900 || val > 2021) {
+			    	//$("#sp_bi_01_reg").css('display', 'inline-block');
+			        $(this).val('');
+			    }
+			    //$("#sp_bi_01_reg").css('display', 'none');
+			}); 
+		  //청소년
+		   $("#sp_name_02").focusout(function(){
+			  if (!(nameReg.test($(this).val()))) {
+				  $("#sp_name_02_reg").css('display', 'inline-block');
+				  $(this).val('');
+					return false;
+				}
+			  $("#sp_name_02_reg").css('display', 'none');
+		  });
+		   $(".sp_ph02").focusout(function(){
+				  if (!(ph1Reg.test($("#sp_ph1_02").val()))) {
+					  $("#sp_ph_02_reg").css('display', 'inline-block');
+						return false;
+					}
+				  if (!(ph2Reg.test($("#sp_ph2_02").val()))) {
+					  $("#sp_ph_02_reg").css('display', 'inline-block');
+						return false;
+					}
+				  if (!(ph3Reg.test($("#sp_ph3_02").val()))) {
+					  $("#sp_ph_02_reg").css('display', 'inline-block');
+						return false;
+					} 
+				  $("#sp_ph_02_reg").css('display', 'none');
+			  });
+		   
+		   $("#sp_bi_y_02").focusout(function(){
+			    let val= $(this).val();
+
+			    if(val < 1900 || val > 2021) {
+			    	//$("#sp_bi_02_reg").css('display', 'inline-block');
+			        $(this).val('');
+			    }
+			   // $("#sp_bi_02_reg").css('display', 'none');
+			}); 
+		   $("#sp_yname").focusout(function(){
+				  if (!(nameReg.test($(this).val()))) {
+					  $("#sp_yname_reg").css('display', 'inline-block');
+					  $(this).val('');
+						return false;
+					}
+				  $("#sp_yname_reg").css('display', 'none');
+			  });
+			  
+		   
+		   $("#sp_ybi_y").focusout(function(){
+			    let val= $(this).val();
+
+			    if(val < 1900 || val > 2021) {
+			    	//$("#sp_ybi_reg").css('display', 'inline-block');
+			        $(this).val('');
+			    }
+			   // $("#sp_ybi_reg").css('display', 'none');
+			}); 
+      
+		  //공통
+		  $("#sp_email").focusout(function(){
+			  if (!(emailReg.test($(this).val()))) {
+				  $("#sp_email_reg").css('display', 'inline-block');
+					return false;
+				}
+			  $("#sp_email_reg").css('display', 'none');
+		  });
+      
          
      })
+
 	</script>
 </body>
 </html>

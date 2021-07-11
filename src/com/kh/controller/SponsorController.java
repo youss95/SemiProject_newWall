@@ -117,8 +117,12 @@ public class SponsorController extends HttpServlet {
 								null, null);
 
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}else if(sp_idcheck.contentEquals("Y")) {
 						//아이디 널인거 짜로 빼줘야 널오류 안날듯
 						SponsorDTO dto = new  SponsorDTO(0, sp_amount, sp_category, sp_agecheck,
@@ -127,8 +131,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								sp_mb_id, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}
 
 				}else if(sp_agecheck.contentEquals("Y")) {
@@ -141,8 +149,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								null, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}else if(sp_idcheck.contentEquals("Y")) {
 						SponsorDTO dto = new  SponsorDTO(0, sp_amount, sp_category, sp_agecheck,
 								sp_name_02, sp_phone_02, sp_birth_02, sp_yname,
@@ -150,8 +162,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								sp_mb_id, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}
 				}
 			}else if(cmd.contains("/PaymentComplete.sp")) {
