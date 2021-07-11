@@ -186,27 +186,21 @@ public class SponsorController extends HttpServlet {
 			}else if (cmd.contains("/directInput.sp")) {
 				System.out.println("일단 일대일다이렉트 시 입력창");
 				String code_seq = request.getParameter("code_seq");
-				String p_name = adoptdao.getAnimalName(code_seq);
+				String one_name = adoptdao.getAnimalName(code_seq);
+				String p_pname = "일대일 후원_"+code_seq +"_"+ one_name;
 				
-				request.setAttribute("p_name", p_name);
+				request.setAttribute("p_name", p_pname);
 				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}else if (cmd.contains("/protectInput.sp")) {
 				System.out.println("일단 임보후원 입력창");
-//				String code_seq = request.getParameter("code_seq");
-//				String p_name = adoptdao.getAnimalName(code_seq);
-//				
-//				request.setAttribute("p_name", p_name);
-//				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
+				String protect_no = request.getParameter("protect_no");
+				String protect_name = request.getParameter("protect_name");
+				String p_pname = "임시보호 후원_"+protect_no +"_"+ protect_name;
+				
+				request.setAttribute("p_name", p_pname);
+				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}
-//			else if (cmd.contains("/testtest.sp")) {
-//				System.out.println("testtest");
-//				String test_seq = request.getParameter("sponsor_seq");
-//				System.out.println(test_seq);
-//				//String p_name = adoptdao.getAnimalName(code_seq);
-//				
-//				request.setAttribute("test_seq", test_seq);
-//				request.getRequestDispatcher("adSponsorList.adm").forward(request, response);	
-//			}
+
 
 		}catch(Exception e) {
 			e.printStackTrace();

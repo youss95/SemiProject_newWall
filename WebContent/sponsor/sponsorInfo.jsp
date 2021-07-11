@@ -45,6 +45,7 @@
 
 .sp_if .sp_company_title {
 	font-size: 23px;
+	font-weight: 600;
 }
 
 .sp_if .sp_company_bg {
@@ -231,8 +232,7 @@
 									<div class="sp_company_bg sp_one_one_bg_m">
 										<h2 class="sp_company_title sp_one_one_title">1 : 1 보호소
 											유기 동물 후원</h2>
-										<h3 class="sp_company_sub sp_one_one_sub">동물과 사람이 함께 행복한
-											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										<h3 class="sp_company_sub sp_one_one_sub">보호소의 동물들에게 특별한 사랑을 나눠주세요</h3>
 									</div>
 									<div class="sp_img_con">
 										<img class="com_img1"
@@ -244,8 +244,7 @@
 									<div class="sp_company_bg sp_guardi_bg_m">
 										<h2 class="sp_company_title sp_guardi_title">개인 임시 보호자 선택
 											후원</h2>
-										<h3 class="sp_company_sub sp_guardi_sub">동물과 사람이 함께 행복한
-											삶을 위해 세상을 바꾸는 노력을 함께 해주세요</h3>
+										<h3 class="sp_company_sub sp_guardi_sub">개인 임시보호자의 부담을 조금만 덜어주세요</h3>
 									</div>
 									<div class="sp_img_con">
 										<img class="com_img1"

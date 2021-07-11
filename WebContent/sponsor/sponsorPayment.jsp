@@ -67,9 +67,6 @@
 	font-size: 20px;
 	margin: 2%;
 	font-weight: 600; 
-
-	/*  */
-	
 }
 .sp_pay_section .sp_pay_con .sp_pay_btncon .btn_sp_info {
 	width: 45%;
@@ -77,9 +74,6 @@
 	font-size: 20px;
 	margin: 2%;
 	font-weight: 600; 
-
-	/*  */
-	
 }
 
 .sp_pay_section .sp_pay_con .sp_pay_title {

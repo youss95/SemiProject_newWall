@@ -364,11 +364,11 @@
                                             <h3>생년월일</h3>
                                             <!-- 사이즈 만지기?? 이거 안됨  -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y sp_bi01" id="sp_bi_y_01"name="sp_bi_y_01" required>
+                                                <input type="number" class="inpform bi_y sp_bi01" id="sp_bi_y_01"name="sp_bi_y_01" placeholder="1999" required>
                                             </div>
                                             년
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_m_01 sp_bi01" id="sp_bi_m_01" required>
+                                                <select name="sp_bi_m_01"class="sp_bi_m_01 sp_bi01" id="sp_bi_m_01" required>
                                                     <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
@@ -386,7 +386,7 @@
                                             </div>
                                             월
                                             <div class="inp_slct bi">
-                                                <select name="sp_bi_d_01 sp_bi01" id="sp_bi_d_01" required>
+                                                <select name="sp_bi_d_01" class="sp_bi_d_01 sp_bi01" id="sp_bi_d_01" required>
                                                     <option value="">선택</option>
                                                     <option value="01">1</option>
                                                     <option value="02">2</option>
@@ -449,7 +449,7 @@
                                             </h3>
                                             <!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" id="sp_bi_y_02" name="sp_bi_y_02">
+                                                <input type="number" class="inpform bi_y" id="sp_bi_y_02" name="sp_bi_y_02"  placeholder="1999">
                                             </div>
                                             년
                                             <div class="inp_slct bi">
@@ -522,7 +522,7 @@
                                             </h3>
                                             <!-- 사이즈 만지기?? 이거 안됨 셀렉트 -->
                                             <div class="">
-                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y">
+                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y"  placeholder="1999">
                                             </div>
                                             년
                                             <div class="inp_slct bi">

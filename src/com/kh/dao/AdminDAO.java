@@ -231,7 +231,86 @@ public class AdminDAO {
 		}
 
 	}
+	//sponsor
+	public List<SponsorDTO> adSponsorSelectAll() throws Exception {
+		String sql = "select * from sponsor order by 1 desc";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();){
 
+			List<SponsorDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				int sponsor_seq = rs.getInt("sponsor_seq");
+				int sponsor_amount = rs.getInt("sponsor_amount");
+				String sponsor_choice = rs.getNString("sponsor_choice");
+				String sponsor_agecheck = rs.getNString("sponsor_agecheck");
+				String sponsor_name = rs.getNString("sponsor_name");
+				String sponsor_contact = rs.getNString("sponsor_contact");
+				String sponsor_birth = rs.getNString("sponsor_birth");
+				String sponsor_yname = rs.getNString("sponsor_yname");
+				String sponsor_ybirth = rs.getNString("sponsor_ybirth");
+				String sponsor_email = rs.getNString("sponsor_email");
+				String sponsor_postcode = rs.getNString("sponsor_postcode");
+				String sponsor_address1 = rs.getNString("sponsor_address1");
+				String sponsor_address2 = rs.getNString("sponsor_address2");
+				String sponsor_apply_num = rs.getNString("sponsor_apply_num");
+				String sponsor_terms01 = rs.getNString("sponsor_terms01");
+				String sponsor_terms02 = rs.getNString("sponsor_terms02");
+				String sponsor_mb_id = rs.getNString("sponsor_mb_id");
+				Date sponsor_date = rs.getDate("sponsor_date");
+
+				SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
+						sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
+						sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
+						sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
+						sponsor_mb_id,  sponsor_date);
+				list.add(dto);
+			}
+			return list;
+		}
+	}
+
+	//sponsor
+	public List<SponsorDTO> adminSponsorSearch(String sp_search) throws Exception {
+		String sql = "select * from sponsor where sponsor_choice like ? order by 1 desc";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, sp_search+"%");
+
+			try(ResultSet rs = pstat.executeQuery();){
+
+				List<SponsorDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int sponsor_seq = rs.getInt("sponsor_seq");
+					int sponsor_amount = rs.getInt("sponsor_amount");
+					String sponsor_choice = rs.getNString("sponsor_choice");
+					String sponsor_agecheck = rs.getNString("sponsor_agecheck");
+					String sponsor_name = rs.getNString("sponsor_name");
+					String sponsor_contact = rs.getNString("sponsor_contact");
+					String sponsor_birth = rs.getNString("sponsor_birth");
+					String sponsor_yname = rs.getNString("sponsor_yname");
+					String sponsor_ybirth = rs.getNString("sponsor_ybirth");
+					String sponsor_email = rs.getNString("sponsor_email");
+					String sponsor_postcode = rs.getNString("sponsor_postcode");
+					String sponsor_address1 = rs.getNString("sponsor_address1");
+					String sponsor_address2 = rs.getNString("sponsor_address2");
+					String sponsor_apply_num = rs.getNString("sponsor_apply_num");
+					String sponsor_terms01 = rs.getNString("sponsor_terms01");
+					String sponsor_terms02 = rs.getNString("sponsor_terms02");
+					String sponsor_mb_id = rs.getNString("sponsor_mb_id");
+					Date sponsor_date = rs.getDate("sponsor_date");
+
+					SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
+							sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
+							sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
+							sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
+							sponsor_mb_id,  sponsor_date);
+					list.add(dto);
+				}
+				return list;
+			}
+		}
+	}
 	//sponsor
 	private int adSponsorGetRecordCount() throws Exception{
 		String sql = "select count(*) from sponsor";

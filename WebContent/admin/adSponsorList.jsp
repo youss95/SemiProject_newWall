@@ -21,13 +21,27 @@
 	display: none;
 }
 
-/* 이거 섹션밖이라 아이디잡긴했는데 아중에 확인해보기** */
-#sponsorModal .sp_category{
-text-align: left;
+.spadmin .sp_search {
+	overflow: hidden;
 }
-#sponsorModal .sp_th_title{
-text-align: left;
-font-weight: 400; 
+
+.spadmin .sp_slct {
+	width: 250px;
+	float: right;
+}
+
+.spadmin .sp_search_btn {
+	float: right;
+}
+
+/* 이거 섹션밖이라 아이디잡긴했는데 아중에 확인해보기** */
+#sponsorModal .sp_category {
+	text-align: left;
+}
+
+#sponsorModal .sp_th_title {
+	text-align: left;
+	font-weight: 400;
 }
 </style>
 
@@ -81,14 +95,21 @@ font-weight: 400;
 						<h2>후원 내역 리스트</h2>
 					</div>
 					<div class="contents">
-					<div class="inp_slct">
-										<select name="sp_qqqqq" id="sp_qqqqq">
-											<option value="">전체</option>
-											<option value="company_">업체 후원</option>
-											<option value="aa">일대일 후원</option>
-											<option value="bb">임보자 후원</option>
-										</select>
-									</div>
+						<form
+							action="${pageContext.request.contextPath}/spAdminSearch.adm"
+							method="post" id="sp_search">
+							<div class="sp_search">
+								<div class="inp_slct sp_slct">
+									<select name="sp_slct_cho" id="sp_slct_cho">
+										<option value="all">전체</option>
+										<option value="NEW-WAL 후원">업체 후원</option>
+										<option value="일대일 후원">일대일 후원</option>
+										<option value="임시보호 후원">임시보호 후원</option>
+									</select>
+								</div>
+								<button class="btn_s btn_light sp_search_btn" id="sp_search_btn">검색</button>
+							</div>
+						</form>
 						<table class="table table-hover text-center adoption_list">
 							<thead>
 								<tr>
@@ -99,7 +120,7 @@ font-weight: 400;
 									<th>이름</th>
 									<th>연락처</th>
 									<th class="detail">생년월일</th>
-									<th>청소년 후원자 이름</th>
+									<th class="detail">청소년 후원자 이름</th>
 									<th class="detail">청소년 후원자 생년월일</th>
 									<th class="detail">이메일</th>
 									<th class="detail">우편번호</th>
@@ -117,12 +138,12 @@ font-weight: 400;
 									<tr class="open_modal">
 										<td class="sp_seq">${si.sponsor_seq}</td>
 										<td class="sp_amount">${si.sponsor_amount}</td>
-										<td  class="sp_choice">${si.sponsor_choice}</td>
+										<td class="sp_choice">${si.sponsor_choice}</td>
 										<td class="detail sp_agecheck">${si.sponsor_agecheck}</td>
 										<td class="sp_name">${si.sponsor_name}</td>
 										<td class="sp_contact">${si.sponsor_contact}</td>
 										<td class="detail sp_birth">${si.sponsor_birth}</td>
-										<td class="sp_yname">${si.sponsor_yname}</td>
+										<td class="detail sp_yname">${si.sponsor_yname}</td>
 										<td class="detail sp_ybirth">${si.sponsor_ybirth}</td>
 										<td class="detail sp_email">${si.sponsor_email}</td>
 										<td class="detail sp_postcode">${si.sponsor_postcode}</td>
@@ -266,7 +287,7 @@ font-weight: 400;
 			$(".open_modal").on('click', function() {
 				//alert();
 				$("#sponsorModal").modal("show");
-				
+
 				$("#msp_seq").html($(this).find(".sp_seq").html());
 				$("#msp_amount").html($(this).find(".sp_amount").html());
 				$("#msp_choice").html($(this).find(".sp_choice").html());
@@ -287,7 +308,6 @@ font-weight: 400;
 				$("#msp_date").html($(this).find(".sp_date").html());
 			})
 		})
-		
 	</script>
 </body>
 

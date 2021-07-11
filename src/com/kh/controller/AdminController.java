@@ -258,11 +258,25 @@ public class AdminController extends HttpServlet {
 
 			}else if(url.contentEquals("/adSponsorList.adm")) {
 				System.out.println("스폰서 후원");
-				SponsorDAO sdao =SponsorDAO.getInstance(); 
-				List<SponsorDTO> slist = sdao.selectAll();
+				AdminDAO adao =AdminDAO.getInstance(); 
+				List<SponsorDTO> slist = adao.adSponsorSelectAll();
 
 				request.setAttribute("slist", slist);
 				request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+			}else if(url.contentEquals("/spAdminSearch.adm")) {
+				System.out.println("카테고리");
+				String sp_search = request.getParameter("sp_slct_cho");
+				System.out.println(sp_search);
+				if(sp_search.contentEquals("all")) {
+					response.sendRedirect("adSponsorList.adm");
+				}else {
+					AdminDAO adao =AdminDAO.getInstance(); 
+					List<SponsorDTO> slist = adao.adminSponsorSearch(sp_search);
+					
+					request.setAttribute("slist", slist);
+					request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				}
+				
 			}
 
 		}catch(Exception e) {
