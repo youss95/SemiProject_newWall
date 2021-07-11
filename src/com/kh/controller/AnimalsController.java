@@ -258,7 +258,7 @@ public class AnimalsController extends HttpServlet {
 				List<LostAnimalDTO> list = dao.mapList(page);
 				int boardCount = dao.getAllCount();
 				System.out.println(boardCount);
-				int lastPage = (int)Math.ceil(boardCount/8.0);
+				int lastPage = (int)Math.ceil(boardCount/6.0);
 				System.out.println("last"+lastPage);
 				double currentPercent = (double)(page-1)/(lastPage-1)*100.0;
 				
