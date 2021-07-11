@@ -218,8 +218,8 @@ public class AnimalDAO {
 		String sql = "select * from (select row_number() over(order by protect_replyno desc) rnum,protect_replyno, protect_replycon, protect_writer,protect_boardno,protect_replcreateDate from protect_replys where protect_boardno = ?) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, boardNo);
-			pstmt.setInt(2, (page-1)*10+1);
-			pstmt.setInt(3, page*10 );
+			pstmt.setInt(2, (page-1)*5+1);
+			pstmt.setInt(3, page*5 );
 		try(ResultSet rs = pstmt.executeQuery()){
 			while(rs.next()) {
 				ProtectReplyDTO dto;
@@ -273,8 +273,8 @@ public class AnimalDAO {
 		List<LostAnimalDTO> list = new ArrayList<>();
 		String sql = "select * from (select row_number() over(order by lost_no desc) rnum,lost_no,lost_name,lost_age,lost_kind,lost_category,lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content, lost_gender from lost_animal) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setInt(1, (page-1)*8+1);
-			pstmt.setInt(2, page*8 );
+			pstmt.setInt(1, (page-1)*6+1);
+			pstmt.setInt(2, page*6 );
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
 					LostAnimalDTO dto;
