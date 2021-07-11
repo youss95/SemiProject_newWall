@@ -19,7 +19,7 @@
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
-	 <div class="container">
+	 <div class="container" style="padding-bottom:120px;">
 		<div class="contents">
 			<section class="protectDetail">
 				<div class="protectRow">
@@ -102,7 +102,35 @@
 						<!-- 댓글 리스트 끝-->
 					</div>
 				</div>
+<c:set var="startNum" value="${param.page-(param.page-1)%5}"></c:set>
 
+
+<nav aria-label="Page navigation example ">
+  <ul class="pagination mt-4 justify-content-center align-items-center">
+  <c:choose>
+  <c:when test="${param.page<=1}">
+   <li class="page-item  "><a class="page-link"     onclick="alert('이전 페이지가 없습니다.');">Previous</a></li>
+    </c:when>
+    <c:otherwise>
+     <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${startNum-1}">Previous</a></li>
+     </c:otherwise>
+    </c:choose>
+    <c:forEach var="i" begin="${starNum}" end="${lastPage-1}" step="1">
+    <li class="page-item"><a class="page-link" href="">${i+1}</a></li>
+   </c:forEach>
+   
+   <c:choose>
+   
+   	<c:when test="${param.page >= lastPage }">
+   		<li class="page-item  "><a class="page-link"     onclick="alert('마지막 페이지 입니다.');">Next</a></li>
+   	</c:when>
+   	<c:otherwise>
+   	 <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${startNum+1}">Next</a></li>
+   	</c:otherwise>
+    </c:choose>
+  </ul>
+  
+</nav>
 			</section>
 		</div>
 	</div>
@@ -113,7 +141,7 @@
  <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/animal/protectDetail.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/animal/protectDetail.js"></script> 
 	<script>
 	let btnEvent = document.querySelector('#btnSub')
 	let btnEvent2 = document.querySelector('#btnWrite')
@@ -132,44 +160,7 @@
 		btnEvent2.addEventListener('click',function(){
 		
 		
-	 	let data={
-				"protectWriter":"${sessionScope.loginInfo.user_id}", 
-				"boardNo":${protectDetail.protectNo}, 
-				"replyCon":$('#content').val()
-				}
-		$.ajax({
-		url:"${pageContext.request.contextPath}/comment.lost",
-		type:"post",
-		data:data,
-		dataType:"json"		
-	}).done(function(result){
-		alert("댓글 작성 완료!")
-		addReply(result)
-		$('#content').val('');		
-	});
-		})
-		//로그인 체크
-		textWrite.onfocus = function(){
-		<c:if test="${sessionScope.loginInfo==null}">
-	
-	loginBtn.click();
-		
-		</c:if>
-
-	}
-	//댓글 삭제
-	function deleteReply(id){
-	
-		$.ajax({
-			type :"post",
-			url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
-			dataType : "json"
-		}).done(function(resp){ 
-			
-			
-			$("#reply-"+id).remove();
-		})
-	}
+	 	
 	</script>
 	
 </body>

@@ -176,11 +176,7 @@ public class AnimalsController extends HttpServlet {
 				int page = Integer.parseInt(request.getParameter("page"));
 				System.out.println(page);
 				List<ProtectBoardDTO> list = dao.getList(page);
-				//String result = g.toJson(list);
-				//System.out.println("result" + result);
-				//response.setContentType("text/html; charset=UTF-8");
 				
-				//response.getWriter().append(result);
 				System.out.println(list.toString());
 				
 					request.setAttribute("protectList", list);
@@ -206,13 +202,16 @@ public class AnimalsController extends HttpServlet {
 				System.out.println(list.toString());
 			}else if(url.equals("/protectDetail.lost")) {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
-				
+				int page = Integer.parseInt(request.getParameter("page"));
 				int result = dao.getViewCount(protectNo);
-			
-				List<ProtectReplyDTO> list = dao.getReplyList(protectNo);
+				int boardCount = dao.getAllCount();
+				
+				List<ProtectReplyDTO> list = dao.getReplyList(protectNo,page);
+				int lastPage = (int)Math.ceil(boardCount/10.0);
 				if(result>0) {
 					ProtectDetailDTO dto = dao.getDetail(protectNo);
 					System.out.println("dto:" + dto.toString());
+					request.setAttribute("lastPage", lastPage);
 					request.setAttribute("replyList", list);
 					request.setAttribute("protectDetail", dto);
 					RequestDispatcher dis = request.getRequestDispatcher("animal/protectDetail.jsp");
@@ -259,7 +258,7 @@ public class AnimalsController extends HttpServlet {
 				List<LostAnimalDTO> list = dao.mapList(page);
 				int boardCount = dao.getAllCount();
 				System.out.println(boardCount);
-				int lastPage = (int)Math.ceil(boardCount/2.0);
+				int lastPage = (int)Math.ceil(boardCount/8.0);
 				System.out.println("last"+lastPage);
 				double currentPercent = (double)(page-1)/(lastPage-1)*100.0;
 				

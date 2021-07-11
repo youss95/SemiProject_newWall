@@ -3,6 +3,12 @@
  */
 
 let page=1;
+function getContextPath() {
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+}
+ var ss = "a";
+var s ='protectDetail.lost';
 	function listLoad(){
 		let loading = $('#loading');
 		$.ajax({
@@ -21,16 +27,24 @@ let page=1;
             <div class="card-body">
                 <h4>${res.protectName}</h4>
                 <p class="fontC">
-                    고양이<br>
-                    암컷<br>
-                    8/2/색
+  구조장소:${res.protectAddr}<br>
+         성별:` 
+   if(res.protectAddr == 'F'){
+	item+=   `암컷`
+} else{
+	  item+=`수컷`
+}
+ item+=`<br>`
+ item+=`작성자:${res.protectWriter}
                 </p>
- <a href="/NewWall/protectDetail.lost?protectNo=${res.protectNo}" class="btn_m btn_light">상세</a>
-                        </div>
-        </div>
-       
-        
-		`
+<div id="boardDetailprotect">
+    <a  href="${s}?protectNo=${res.protectNo}&page=1" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+               </div>
+`
+
+    
+ 
+		
 		loading.append(item);
 		})
 		}).fail(error=>{
@@ -49,6 +63,10 @@ let page=1;
 		console.log(checkNum)
 		if(checkNum < 1 && checkNum > -1){
 			page++;
-			listLoad();
+			setTimeout(function() {
+ 			 listLoad();
+			}, 50);
+
+			
 		}
 	})

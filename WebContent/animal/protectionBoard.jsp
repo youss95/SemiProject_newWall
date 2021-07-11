@@ -40,7 +40,7 @@
                 작성자:${p.protectWriter}
                 </p>
                 <div id="boardDetailprotect">
-               <a  href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${p.protectNo}" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+               <a  href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${p.protectNo}&page=1" >자세히보기<i class="fas fa-angle-double-right"></i></a>
                </div>
                         </div>
         </div>
@@ -61,9 +61,11 @@
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
 	</div>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<%@ include file="../layout/jsp/modal.jsp"%>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
-	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>  
+	
 </body>
 </html>

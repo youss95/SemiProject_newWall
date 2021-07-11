@@ -213,11 +213,13 @@ public class AnimalDAO {
 		}
 	}
 	
-	public List<ProtectReplyDTO> getReplyList(int boardNo) throws Exception{
+	public List<ProtectReplyDTO> getReplyList(int boardNo,int page) throws Exception{
 		List<ProtectReplyDTO> list = new ArrayList<ProtectReplyDTO>();
-		String sql = "select * from protect_replys where protect_boardno=? order by protect_replyno desc";
+		String sql = "select * from (select row_number() over(order by protect_replyno desc) rnum,protect_replyno, protect_replycon, protect_writer,protect_boardno,protect_replcreateDate from protect_replys where protect_boardno = ?) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, (page-1)*10+1);
+			pstmt.setInt(3, page*10 );
 		try(ResultSet rs = pstmt.executeQuery()){
 			while(rs.next()) {
 				ProtectReplyDTO dto;
@@ -296,6 +298,8 @@ public class AnimalDAO {
 			}
 		}
 	}
+	
+	
 	
 	public int getAllCount() throws Exception {
 		String sql="select count(*) from lost_animal";
