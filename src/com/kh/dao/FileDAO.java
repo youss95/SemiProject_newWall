@@ -48,9 +48,10 @@ public class FileDAO {
 			return result;
 		}
 	}
+	
 
 	// animal
-	public  AnimalFilesDTO getAnimalImgs(String parent) throws Exception{
+	public  List<AnimalFilesDTO> getAnimalImgs(String parent) throws Exception{
 		String sql = "select * from animal_photos where code_seq = ?";
 		try (
 				Connection con = this.getConnection();
@@ -62,18 +63,19 @@ public class FileDAO {
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){
-				if(rs.next()) {
+				List<AnimalFilesDTO> list = new ArrayList<AnimalFilesDTO>();
+				while(rs.next()) {
 					AnimalFilesDTO dto = new AnimalFilesDTO();
 
-					dto.setAnfile_seq(rs.getInt("photo_seq"));
+					dto.setPhoto_seq(rs.getInt("photo_seq"));
 					dto.setOri_name(rs.getNString("ori_name"));
 					dto.setSys_name(rs.getNString("sys_name"));
 					dto.setReg_date(rs.getDate("reg_date"));
 					dto.setCode_seq(parent);
 
-					return dto;
+					list.add(dto);
 				}
-				return null;
+				return list;
 			}
 		}
 	}
@@ -105,7 +107,41 @@ public class FileDAO {
 		}
 
 	}
+	
+	// animal
+	public String getSysName(int seq) throws Exception{
+		String sql = "select sys_name from animal_photos where photo_seq = ?";
+		try( 
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getNString("sys_name");
+			}
+			
+		}
+		
+	}
+	
+	public int animalImgDelete(int seq) throws Exception{
+		String sql = "delete from animal_photos where photo_seq=?";
 
+		try( 
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			
+			return result;
+			
+		}
+	}
+	
 	// animal
 	public int animalImgDelete(String code_seq) throws Exception {
 		String sql = "delete from animal_photos where code_seq=?";
@@ -119,5 +155,27 @@ public class FileDAO {
 			return result;
 		}
 	}
+	
+	// animal
+	public ArrayList<String> getFileSysName(String code_seq) throws Exception {
+		String sql = "select sys_name from animal_photos where code_seq=?";
+		try (
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				ArrayList<String> arr = new ArrayList<String>();
+				while(rs.next()) {
+					arr.add(rs.getNString(1));
+				}
+				System.out.println("arr" + arr);
+				return arr;
+			}
 
+		}
+	}
+	
 }

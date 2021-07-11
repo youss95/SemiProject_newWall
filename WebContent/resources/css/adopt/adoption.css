@@ -29,6 +29,7 @@
 .animal_info>div{width:50%;float:left;}
 .photo_box{padding-right:25px;}
 .photo_box .swiper-container{width:100%;height:525px;}
+.photo_box .swiper-container .slider_img{width:100%;}
 .photo_box .swiper-pagination-bullet-active{background-color:rgba(255,255,255,.8);}
 .photo_box .swiper-button-next,.swiper-button-prev{color:rgba(255,255,255,.8);}
 .info_box{padding-left:25px;margin:60px 0;}
