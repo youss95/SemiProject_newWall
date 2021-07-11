@@ -25,6 +25,10 @@
 #sponsorModal .sp_category{
 text-align: left;
 }
+#sponsorModal .sp_th_title{
+text-align: left;
+font-weight: 400; 
+}
 </style>
 
 <body>
@@ -164,75 +168,75 @@ text-align: left;
 						</tr>
 
 						<tr>
-							<td class="sp_category">순서</td>
+							<td class="sp_category sp_th_title">순서</td>
 							<td class="sp_category" id="msp_seq"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">후원 금액</td>
+							<td class="sp_category sp_th_title">후원 금액</td>
 							<td class="sp_category" id="msp_amount"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">후원 분야</td>
+							<td class="sp_category sp_th_title">후원 분야</td>
 							<td class="sp_category" id="msp_choice"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">14세 미만 여부</td>
+							<td class="sp_category sp_th_title">14세 미만 여부</td>
 							<td class="sp_category" id="msp_agecheck"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">이름 (본인 혹은 보호자)</td>
+							<td class="sp_category sp_th_title">이름 (본인 혹은 보호자)</td>
 							<td class="sp_category" id="msp_name"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">연락처 (본인 혹은 보호자)</td>
+							<td class="sp_category sp_th_title">연락처 (본인 혹은 보호자)</td>
 							<td class="sp_category" id="msp_contact"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">생년월일 (본인 혹은 보호자)</td>
+							<td class="sp_category sp_th_title">생년월일 (본인 혹은 보호자)</td>
 							<td class="sp_category" id="msp_birth"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">청소년 후원자 이름</td>
+							<td class="sp_category sp_th_title">청소년 후원자 이름</td>
 							<td class="sp_category" id="msp_yname"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">청소년 후원자 생일</td>
+							<td class="sp_category sp_th_title">청소년 후원자 생일</td>
 							<td class="sp_category" id="msp_ybirth sp_category"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">이메일</td>
+							<td class="sp_category sp_th_title">이메일</td>
 							<td class="sp_category" id="msp_email"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">우편번호</td>
+							<td class="sp_category sp_th_title">우편번호</td>
 							<td class="sp_category" id="msp_postcode"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">도로명주소</td>
+							<td class="sp_category sp_th_title">도로명주소</td>
 							<td class="sp_category" id="msp_address1"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">상세주소</td>
+							<td class="sp_category sp_th_title">상세주소</td>
 							<td class="sp_category" id="msp_address2"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">결제 승인 번호</td>
+							<td class="sp_category sp_th_title">결제 승인 번호</td>
 							<td class="sp_category" id="msp_apply_num"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">약관1 동의 여부</td>
+							<td class="sp_category sp_th_title">약관1 동의 여부</td>
 							<td class="sp_category" id="msp_terms01"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">약관2 동의 여부</td>
+							<td class="sp_category sp_th_title">약관2 동의 여부</td>
 							<td class="sp_category" id="msp_terms02"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">회원 인 경우 ID</td>
+							<td class="sp_category sp_th_title">회원 인 경우 ID</td>
 							<td class="sp_category" id="msp_mb_id"></td>
 						</tr>
 						<tr>
-							<td class="sp_category">후원 일자</td>
+							<td class="sp_category sp_th_title">후원 일자</td>
 							<td class="sp_category" id="msp_date"></td>
 						</tr>
 					</table>

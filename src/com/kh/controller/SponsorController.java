@@ -190,6 +190,13 @@ public class SponsorController extends HttpServlet {
 				
 				request.setAttribute("p_name", p_name);
 				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
+			}else if (cmd.contains("/protectInput.sp")) {
+				System.out.println("일단 임보후원 입력창");
+//				String code_seq = request.getParameter("code_seq");
+//				String p_name = adoptdao.getAnimalName(code_seq);
+//				
+//				request.setAttribute("p_name", p_name);
+//				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}
 //			else if (cmd.contains("/testtest.sp")) {
 //				System.out.println("testtest");
