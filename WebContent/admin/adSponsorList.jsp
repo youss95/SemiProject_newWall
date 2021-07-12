@@ -23,15 +23,27 @@
 
 .spadmin .sp_search {
 	overflow: hidden;
+	text-align:right;
+	margin-bottom: 20px;
 }
 
 .spadmin .sp_slct {
 	width: 250px;
-	float: right;
 }
 
 .spadmin .sp_search_btn {
-	float: right;
+    margin-left: 10px;
+    height: 40px;
+}
+.spadmin .sp_page_num {
+    text-align:center;
+    font-size: 17px;
+    padding-bottom: 50px;
+}
+.spadmin .sp_page_num a {
+    text-align:center;
+    font-size: 17px;
+    margin: 10px;
 }
 
 /* 이거 섹션밖이라 아이디잡긴했는데 아중에 확인해보기** */
@@ -47,46 +59,7 @@
 
 <body>
 	<div class="wrap">
-		<nav>
-			<div class="lnb">
-				<h1>
-					<a href="#">LOGO</a>
-				</h1>
-				<ul class="slide_menu">
-					<li class="depth1"><a href="#">회원관리<i
-							class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">회원 명단 보기</a></li>
-							<li class="depth2"><a href="#">회원관리</a></li>
-						</ul></li>
-					<li class="depth1"><a href="#">게시판 관리<i
-							class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">회원작성 글</a></li>
-							<li class="depth2"><a href="#">뉴스</a></li>
-							<li class="depth2"><a href="#">공지사항</a></li>
-						</ul></li>
-					<li class="depth1"><a href="#">입양<i
-							class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">입양 신청 리스트</a></li>
-							<li class="depth2"><a href="#">입양 신청 상태 관리</a></li>
-						</ul></li>
-					<li class="depth1"><a href="#">후원<i
-							class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a
-								href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=1&sp_slct_cho=all">후원금
-									관리</a></li>
-						</ul></li>
-					<li class="depth1"><a href="#">동물 정보<i
-							class="fas fa-chevron-right"></i></a>
-						<ul>
-							<li class="depth2"><a href="#">동물 정보 관리</a></li>
-						</ul></li>
-				</ul>
-			</div>
-		</nav>
+	<jsp:include page="../layout/jsp/adminHeader.jsp"></jsp:include>
 
 		<div class="main">
 			<div class="container">
@@ -96,19 +69,20 @@
 					</div>
 					<div class="contents">
 						<form
-							action="${pageContext.request.contextPath}/spAdminSearch.adm?cpage=1"
+							action="${pageContext.request.contextPath}/spAdminSearch.adm"
 							method="post" id="sp_search">
 							<div class="sp_search">
 								<div class="inp_slct sp_slct">
 									<select name="sp_slct_cho" id="sp_slct_cho">
-										<option value="all">전체</option>
+										<option value="">전체</option>
 										<option value="NEW-WAL">업체 후원</option>
 										<option value="일대일">일대일 후원</option>
 										<option value="임시보호">임시보호 후원</option>
 									</select>
 								</div>
-								<button class="btn_s btn_light sp_search_btn" id="sp_search_btn">검색</button>
+								<button class="btn_m btn_light sp_search_btn" id="sp_search_btn">검색</button>
 							</div>
+							<input type="hidden" name="cpage" value="1">
 						</form>
 						<table class="table table-hover text-center adoption_list">
 							<thead>
@@ -160,49 +134,25 @@
 						</table>
 					</div>
 
-					<c:choose>
-						<c:when test="${sp_cho=='all'}">
-							<div>
-								<c:forEach var="i" items="${navi}" varStatus="s">
+					<div class="sp_page_num">
+						<c:forEach var="i" items="${navi}" varStatus="s">
 
-									<c:choose>
-										<c:when test="${ i == '>' }">
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index-1]+1}&sp_slct_cho=all">${i}</a>
-										</c:when>
-										<c:when test="${ i == '<' }">
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index+1]-1}&sp_slct_cho=all">${i}</a>
-										</c:when>
-										<c:otherwise>
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${i}&sp_slct_cho=all">${i}</a>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div>
-								<c:forEach var="i" items="${navi}" varStatus="s">
-									<c:choose>
-										<c:when test="${ i == '>' }">
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index-1]+1}&sp_slct_cho=${sp_cho}">${i}</a>
-										</c:when>
-										<c:when test="${ i == '<' }">
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${navi[s.index+1]-1}&sp_slct_cho=${sp_cho}">${i}</a>
-										</c:when>
-										<c:otherwise>
-											<a
-												href="${pageContext.request.contextPath}/adSponsorList.adm?cpage=${i}&sp_slct_cho=${sp_cho}">${i}</a>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</div>
-						</c:otherwise>
-					</c:choose>
+							<c:choose>
+								<c:when test="${ i == '>' }">
+									<a
+										href="${pageContext.request.contextPath}/spAdminSearch.adm?cpage=${navi[s.index-1]+1}&sp_slct_cho=${sp_cho}">${i}</a>
+								</c:when>
+								<c:when test="${ i == '<' }">
+									<a
+										href="${pageContext.request.contextPath}/spAdminSearch.adm?cpage=${navi[s.index+1]-1}&sp_slct_cho=${sp_cho}">${i}</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="${pageContext.request.contextPath}/spAdminSearch.adm?cpage=${i}&sp_slct_cho=${sp_cho}">${i}</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</div>
 				</section>
 
 			</div>
