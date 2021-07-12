@@ -1,0 +1,94 @@
+package com.kh.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.kh.dao.NewsCommentsDAO;
+import com.kh.dto.NewsCommentsDTO;
+
+
+
+@WebServlet("*.necmt")
+public class NewsCommenstController extends HttpServlet {
+	private String XSSFilter(String target) {
+		if (target != null) {
+			target = target.replaceAll("<", "&lt;");
+			target = target.replaceAll(">", "&gt;");
+			target = target.replaceAll("&", "&amp;");
+
+		}
+		return target;
+	}
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf8;");
+
+		String requestURI = request.getRequestURI();
+		String ctxPath = request.getContextPath();
+
+		String url = requestURI.substring(ctxPath.length());
+		System.out.println("유형 : " + url);
+
+		
+		try {
+			NewsCommentsDTO dto = new NewsCommentsDTO();
+			NewsCommentsDAO dao = NewsCommentsDAO.getInstance();
+			
+			if (url.contentEquals("/newsWrite.necmt")) {
+				String writer = "admin";
+
+				String comments = request.getParameter("nrp_contents");
+				comments = XSSFilter(comments);			
+				System.out.println(comments);
+				
+				String parent = request.getParameter("parent");
+				System.out.println(parent);
+								
+				dto = new NewsCommentsDTO(0,writer,comments,null,parent);
+				dao.insert(dto);
+				
+				List<NewsCommentsDTO> list = dao.commentsAll(parent);
+								
+				request.setAttribute("necmtlist", list);
+				response.sendRedirect("newsView.news?news_seq="+parent);
+				
+			}else if(url.contentEquals("/nedelete.necmt")){
+				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
+				
+				String parent = request.getParameter("nrp_parent");
+				
+				int result = dao.delete(seq);
+				
+				response.sendRedirect("newsView.news?news_seq="+parent);
+			
+			}else if(url.contentEquals("/modifyReply.necmt")){
+				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
+				
+				String comments = request.getParameter("hiddenCon");
+				comments = XSSFilter(comments);
+				
+				String parent = request.getParameter("nrp_parent");
+				
+				dao.modify(seq, comments);
+				
+				response.sendRedirect("newsView.news?news_seq="+parent);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

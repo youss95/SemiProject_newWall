@@ -218,8 +218,8 @@ public class AnimalDAO {
 		String sql = "select * from (select row_number() over(order by protect_replyno desc) rnum,protect_replyno, protect_replycon, protect_writer,protect_boardno,protect_replcreateDate from protect_replys where protect_boardno = ?) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, boardNo);
-			pstmt.setInt(2, (page-1)*5+1);
-			pstmt.setInt(3, page*5 );
+			pstmt.setInt(2, (page-1)*10+1);
+			pstmt.setInt(3, page*10 );
 		try(ResultSet rs = pstmt.executeQuery()){
 			while(rs.next()) {
 				ProtectReplyDTO dto;
@@ -300,6 +300,17 @@ public class AnimalDAO {
 	}
 	
 	
+	public int getAllReplyCount(int protectNo) throws Exception {
+		String sql="select count(*) from protect_replys where protect_boardno=?";
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, protectNo);
+			try(ResultSet rs = pstmt.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+			}
+		}
+	}
+	
 	
 	public int getAllCount() throws Exception {
 		String sql="select count(*) from lost_animal";
@@ -312,6 +323,38 @@ public class AnimalDAO {
 	}
 	
 	
+	public int protectUpdate(ProtectionDTO dto , int protectNo) throws Exception {
+		String sql ="update protect_animal set protect_name = ? ,protect_kind=? ,protect_findDate =? ,protect_findAddr=?, protect_content=? , protect_gender =? , protect_fileRealName1 =? , protect_fileRealName2 =? where protect_no =? ";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, dto.getProtectName());
+			pstmt.setString(2, dto.getProtectKind());
+			pstmt.setString(3, dto.getProtectFindDate());
+			pstmt.setString(4, dto.getProtectFindAddr());
+			pstmt.setString(5, dto.getProtectContent());
+			pstmt.setString(6, dto.getProtectGender());
+			pstmt.setString(7, dto.getProtectFileRealName1());
+			pstmt.setString(8, dto.getProtectFileRealName2());
+			pstmt.setInt(9, protectNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+			
+		}
+	}
+	
+	public int protectDelete(int protectNo) throws Exception {
+		String sql = "delete from protect_animal where protect_no = ?";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, protectNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
 	
 }
 

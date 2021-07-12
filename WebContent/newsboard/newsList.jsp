@@ -9,21 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-<script	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
 <script>
 	$(function() {
@@ -40,6 +32,17 @@
 		<div class="container">
 			<div class="contents">
 				<section class="news_list">
+					<form action="${pageContext.request.contextPath}/newsBoard.news" method="get">
+						<div class="search">
+							<input type="hidden" name="cpage" value=1> 
+								<select	name="category">
+								<option value="news_title">제목</option>
+								<option value="news_writer">작성자</option>
+							    </select> 
+							<input type="text" name="keyword" placeholder="검색을 입력하세요.">
+							<button class="btn_s btn_line" id="search">검색</button>
+						</div>
+					</form>
 					<div class="list_wrap">
 						<c:forEach var="newsAll" items="${newsAll}">
 							<div class="item">

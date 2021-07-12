@@ -19,7 +19,6 @@
 
 </head>
 <body>
-	<!-- Modal -->
 	<div class="modal fade" id="passwordModal1" tabindex="-1"
 		aria-labelledby="passwordModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -52,12 +51,12 @@
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Close</button>
 					<button type="button" id="changepw"
-						class="btn_submit btn_m btn_default" data-bs-target="#passwordModal2">Save changes</button>
+						class="btn_submit btn_m btn_default"
+						data-bs-target="#passwordModal2">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="wrap">
 		<%@ include file="../layout/jsp/header.jsp"%>
 		<div class="container">
@@ -154,12 +153,10 @@
 			</div>
 		</div>
 	</div>
+
 	<footer class="footer">
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
-
-
-
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>

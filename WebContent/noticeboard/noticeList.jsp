@@ -6,16 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
-
 <script>
 	$(function() {
 		$(".writeBtn").on("click",function() {
@@ -51,7 +48,7 @@
 						<div class="board_list_wrap">
 							<div class="board_list">
 								<div class="top">
-									<div class="num">번호</div>
+<!-- 									<div class="num">번호</div> -->
 									<div class="title">제목</div>
 									<div class="writer">글쓴이</div>
 									<div class="date">작성일</div>
@@ -59,7 +56,7 @@
 								</div>
 								<c:forEach var="noticeAll" items="${noticeAll}">
 									<div>
-										<div class="num">${noticeAll.notice_seq}</div>
+										<input type="hidden" class="num" name="notice_seq" value="${noticeAll.notice_seq}">
 										<div class="title">
 											<a
 												href="${pageContext.request.contextPath}/noticeView.notice?notice_seq=${noticeAll.notice_seq}">${noticeAll.notice_title}</a>
@@ -100,11 +97,5 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
