@@ -24,6 +24,7 @@
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
+
 <script>
 	$(function(){
 		$('#summernote').summernote({

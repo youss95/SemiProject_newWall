@@ -59,12 +59,12 @@ public class NoCommentsController extends HttpServlet {
 			}else if(url.contentEquals("/nodelete.nocmt")){
 				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
 				
-				int parent = Integer.parseInt(request.getParameter("ntrp_parent"));
+				String parent = request.getParameter("ntrp_parent");
 				
 				int result = dao.delete(seq);
 				
-				request.getRequestDispatcher("noticeView.notice?notice_seq="+parent).forward(request, response);
-			
+				response.sendRedirect("noticeView.notice?notice_seq="+parent);
+				
 			}else if(url.contentEquals("/modifyReply.nocmt")){
 				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
 				
