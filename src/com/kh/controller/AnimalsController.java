@@ -73,6 +73,7 @@ public class AnimalsController extends HttpServlet {
 					String lostContent = multi.getParameter("lostContent");
 					String lostAddr = multi.getParameter("addResult");
 					String lostCategory = multi.getParameter("lostCategory");
+					String lostWriter = multi.getParameter("lostWriter");
 					
 					Enumeration files = multi.getFileNames();
 					String str = (String)files.nextElement();
@@ -87,6 +88,7 @@ public class AnimalsController extends HttpServlet {
 					dto.setLostContent(lostContent);
 					dto.setLostCategory(lostCategory);
 					dto.setLostAddr(lostAddr);
+					dto.setLostWriter(lostWriter);
 					dto.setFileRealName(lostFileRealName);
 					System.out.println(dto.toString());
 					int result = dao.LostAnimalFormWrite(dto);
@@ -107,7 +109,7 @@ public class AnimalsController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else if(url.equals("/lostAnimalMap.lost")) {
-				
+				String lostWriter = request.getParameter("lostWriter");
 				List<LostAnimalDTO> list = dao.showMap();
 				AnimalMapCountDTO dto = new AnimalMapCountDTO();
 				int today = dao.todayCount();
@@ -339,6 +341,20 @@ public class AnimalsController extends HttpServlet {
 					out.print("<script>");
 					out.print("alert('삭제 성공');");
 					out.print("window.location.href='protectList.lost?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
+			}else if(url.equals("/lostDelete.lost")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				int result = dao.lostDelete(lostNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='lostMapList.lost?page=1';"); 
 					out.print("</script>");
 					out.flush();
 				}

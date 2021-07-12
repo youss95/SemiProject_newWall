@@ -7,12 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
 #map{
 margin-top:100px;
 }
 </style>
-<%@ include file="../layout/jsp/commonModal.jsp" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/lostAnimalMap.css">
 </head>
 <body>
@@ -70,7 +76,7 @@ function writeAdd(){
 var listData = [  /* */]; 
 
 <c:forEach var="map" items="${mapList}">
-listData.push( ["${map.lostAddr}", '<img class="ooh" src="${pageContext.request.contextPath}/upload/lostAnimal/${map.fileRealName}">',"${map.lostName}","${map.lostAge}","${map.lostKind}","${map.lostDate}"] )
+listData.push( ["${map.lostAddr}", '<img class="ooh" src="${pageContext.request.contextPath}/upload/lostAnimal/${map.fileRealName}">',"${map.lostName}","${map.lostAge}","${map.lostKind}","${map.lostDate}","${map.lostWriter}"] )
 </c:forEach>
 
 console.log(listData)
@@ -97,7 +103,7 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
  // 마커를 지도에 표시합니다. 
  marker.setMap(map); 
  // 인포윈도우를 생성합니다 
- var infowindow = new kakao.maps.InfoWindow({ content: '<div class="add" style="width:300px;height:310px;padding:0px 0;">' + addr[1] + '<br> 이름: ' + addr[2] +'<br> 나이: '+addr[3] +'<br> 품종: '+addr[4]+'<br> 실종 날짜: '+addr[5]+'<br>상세보기<a href=""><i class="fas fa-arrow-alt-circle-right"></i></a></div>', removable : true });
+ var infowindow = new kakao.maps.InfoWindow({ content: '<div class="add" style="width:300px;height:310px;padding:0px 0;">' + addr[1] + '<br> 이름: ' + addr[2] +'<br> 나이: '+addr[3] +'<br> 품종: '+addr[4]+'<br> 실종 날짜: '+addr[5]+'<br>작성자: '+addr[6], removable : true });
   // 마커에 클릭이벤트를 등록합니다
    kakao.maps.event.addListener(marker, 'click', function() { 
       // 마커 위에 인포윈도우를 표시합니다 
