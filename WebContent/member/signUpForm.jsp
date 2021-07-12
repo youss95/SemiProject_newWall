@@ -124,7 +124,7 @@
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="019">019</option>
-									</select> - <input type="text" name="phone" id="phone" class="inpform"
+									</select> - <input type="text" id="phone" class="inpform"
 										name="contact2" maxlength=4> - <input type="text"
 										name="contact3" id="phone" class="inpform" maxlength=4></td>
 								</tr>
