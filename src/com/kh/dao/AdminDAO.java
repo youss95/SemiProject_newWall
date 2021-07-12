@@ -421,4 +421,44 @@ public class AdminDAO {
 
 	}
 
+	// adoption
+	public String getAnimalContents(String code_seq) throws Exception{
+
+		String sql = "select an_contents from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	// adoption
+	public String getImgName(String code_seq) throws Exception{
+
+		String sql = "select an_photo from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	
+
 }
