@@ -129,12 +129,12 @@
 										name="contact3" id="phone" class="inpform" maxlength=4></td>
 								</tr>
 								<tr>
-								<tr>
+							<!-- 	<tr>
 									<td>입양 신청 상태</td>
 									<td><input type="radio" name="status" value="Y">Yes
 										&nbsp;&nbsp;&nbsp; <input type="radio" name="status" value="N"
 										checked>No</td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td><label for="postcode">우편번호</label></td>
 									<td><input type="text" name="postcode" id="postcode"
@@ -142,12 +142,12 @@
 										id="address" value="우편번호검색" class="btn_s btn_light"></td>
 								</tr>
 								<tr>
-									<td><label for="home">주소</label></td>
+									<td><label for="address1">주소</label></td>
 									<td><input type="text" name="address1" id="address1"
 										class="inpform" placeholder="도로명/지번" maxlength=20></td>
 								</tr>
 								<tr>
-									<td><label for="homeAddress">상세주소</label></td>
+									<td><label for="address2">상세주소</label></td>
 									<td><input type="text" name="address2" id="address2"
 										class="inpform" maxlength=20></td>
 								</tr>

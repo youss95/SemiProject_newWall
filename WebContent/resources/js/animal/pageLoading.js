@@ -38,13 +38,9 @@ var s ='protectDetail.lost';
  item+=`작성자:${res.protectWriter}
                 </p>
 <div id="boardDetailprotect">
-    <a  href="${s}?protectNo=${res.protectNo}&page=1" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+    <a  href="/NewWall/protectDetail.lost?protectNo=${res.protectNo}&page=1" >자세히보기<i class="fas fa-angle-double-right"></i></a>
                </div>
 `
-
-    
- 
-		
 		loading.append(item);
 		})
 		}).fail(error=>{

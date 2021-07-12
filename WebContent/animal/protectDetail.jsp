@@ -30,7 +30,8 @@
 					<div class="protectInfo">
 						<div id="status">작성일: ${protectDetail.createDate}
 							&nbsp;&nbsp; 조회수:${protectDetail.protectViewCount}</div>
-						<div id="animalName">${protectDetail.protectName}</div>
+							<!--동물이름과 후원버튼   -->
+						<div id="animalName">${protectDetail.protectName} <span style="color: violet; margin-left:55px; font-size:20px;"><a href="${pageContext.request.contextPath}/protectInput.sp?protect_no=${protectDetail.protectNo}&protect_name=${protectDetail.protectName}">후원&nbsp;<i class="fas fa-hand-holding-heart"></i></a></span>    </div>
 
 						<ul class="list-info">
 							<li>
@@ -158,8 +159,42 @@
 		})
 		//댓글추가
 		btnEvent2.addEventListener('click',function(){
+			let data={
+					"protectWriter":"${sessionScope.loginInfo.user_id}", 
+					"boardNo":${protectDetail.protectNo}, 
+					"replyCon":$('#content').val()
+					}
+			$.ajax({
+			url:"${pageContext.request.contextPath}/comment.lost",
+			type:"post",
+			data:data,
+			dataType:"json"		
+		}).done(function(result){
+			alert("댓글 작성 완료!")
+			addReply(result)
+			$('#content').val('');		
+		});
+			})
+			//로그인 체크
+			textWrite.onfocus = function(){
+			<c:if test="${sessionScope.loginInfo==null}">
 		
+		loginBtn.click();
+			
+			</c:if>
+		}
+	function deleteReply(id){
 		
+		$.ajax({
+			type :"post",
+			url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
+			dataType : "json"
+		}).done(function(resp){ 
+			
+			
+			$("#reply-"+id).remove();
+		})
+	}
 	 	
 	</script>
 	

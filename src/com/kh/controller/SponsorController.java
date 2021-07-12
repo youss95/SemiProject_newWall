@@ -117,8 +117,12 @@ public class SponsorController extends HttpServlet {
 								null, null);
 
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}else if(sp_idcheck.contentEquals("Y")) {
 						//아이디 널인거 짜로 빼줘야 널오류 안날듯
 						SponsorDTO dto = new  SponsorDTO(0, sp_amount, sp_category, sp_agecheck,
@@ -127,8 +131,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								sp_mb_id, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}
 
 				}else if(sp_agecheck.contentEquals("Y")) {
@@ -141,8 +149,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								null, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}else if(sp_idcheck.contentEquals("Y")) {
 						SponsorDTO dto = new  SponsorDTO(0, sp_amount, sp_category, sp_agecheck,
 								sp_name_02, sp_phone_02, sp_birth_02, sp_yname,
@@ -150,8 +162,12 @@ public class SponsorController extends HttpServlet {
 								sp_address2, null, sp_terms01, sp_terms02,
 								sp_mb_id, null);
 						request.getSession().setAttribute("sponsor", dto);
+						
+						request.setAttribute("sp_idcheck", sp_idcheck);
+						request.getRequestDispatcher("sponsor/sponsorPayment.jsp").forward(request, response);	
+						
 						//dao.sp_inp(dto);
-						response.sendRedirect("sponsor/sponsorPayment.jsp");
+						//response.sendRedirect("sponsor/sponsorPayment.jsp");
 					}
 				}
 			}else if(cmd.contains("/PaymentComplete.sp")) {
@@ -170,20 +186,21 @@ public class SponsorController extends HttpServlet {
 			}else if (cmd.contains("/directInput.sp")) {
 				System.out.println("일단 일대일다이렉트 시 입력창");
 				String code_seq = request.getParameter("code_seq");
-				String p_name = adoptdao.getAnimalName(code_seq);
+				String one_name = adoptdao.getAnimalName(code_seq);
+				String p_pname = "일대일 후원_"+code_seq +"_"+ one_name;
 				
-				request.setAttribute("p_name", p_name);
+				request.setAttribute("p_name", p_pname);
+				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
+			}else if (cmd.contains("/protectInput.sp")) {
+				System.out.println("일단 임보후원 입력창");
+				String protect_no = request.getParameter("protect_no");
+				String protect_name = request.getParameter("protect_name");
+				String p_pname = "임시보호 후원_"+protect_no +"_"+ protect_name;
+				
+				request.setAttribute("p_name", p_pname);
 				request.getRequestDispatcher("sponsor/sponsorDirectInput.jsp").forward(request, response);	
 			}
-//			else if (cmd.contains("/testtest.sp")) {
-//				System.out.println("testtest");
-//				String test_seq = request.getParameter("sponsor_seq");
-//				System.out.println(test_seq);
-//				//String p_name = adoptdao.getAnimalName(code_seq);
-//				
-//				request.setAttribute("test_seq", test_seq);
-//				request.getRequestDispatcher("adSponsorList.adm").forward(request, response);	
-//			}
+
 
 		}catch(Exception e) {
 			e.printStackTrace();
