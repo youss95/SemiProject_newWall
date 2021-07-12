@@ -2,6 +2,7 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
+import com.kh.dao.NewsCommentsDAO;
 import com.kh.dao.NewsDAO;
 import com.kh.dao.NoticeFileDAO;
+import com.kh.dto.NewsCommentsDTO;
 import com.kh.dto.NewsDTO;
 import com.kh.dto.NoticeFileDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -45,6 +48,8 @@ public class NewsController extends HttpServlet {
 			NewsDAO dao = NewsDAO.getInstance();
 			NewsDTO dto = new NewsDTO();
 			NoticeFileDAO fdao = NoticeFileDAO.getInstance();
+			NewsCommentsDAO nedao = NewsCommentsDAO.getInstance();
+			List<NewsCommentsDTO> nedto = new ArrayList<>();
 			
 			if(url.contentEquals("/newsBoard.news")) {
 				//뉴스 리스트
@@ -158,8 +163,8 @@ public class NewsController extends HttpServlet {
 				
 				request.setAttribute("newsView", dto);
 				
-//				ncdto = ncdao.commentsAll(parent);
-//				request.setAttribute("nocmtlist", ncdto);
+				nedto = nedao.commentsAll(parent);
+				request.setAttribute("necmtlist", nedto);
 				
 				request.getRequestDispatcher("newsboard/newsView.jsp").forward(request, response);
 				

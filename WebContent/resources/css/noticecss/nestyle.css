@@ -33,6 +33,7 @@ a{text-decoration: none;}
 .newsboard_write .info {border-top: 1px dashed #ddd; border-bottom: 1px solid #000;}
 .newsboard_write .info dl {display: inline-block; width: 50%; vertical-align: middle;}
 
+.news_list .search {text-align:right; margin-right:5px; margin-bottom:5px;}
 .news_list .list_wrap .item{overflow:hidden;padding:40px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .news_list .list_wrap .item+.item{border-top:none;}
 .list_wrap .item .img_wrap{width:30%;float:left;height:180px;overflow: hidden;}
