@@ -127,7 +127,7 @@
 									사진<span class="s_txt">(사진을 1장 이상 업로드 해주세요.)</span>
 								</dt>
 								<dd>
-								<div class="photo_thumb">
+									<div class="photo_thumb">
 										<strong>썸네일</strong>
 										<input type="file" name="thumbnail" id="thumbnail" >
 									</div>

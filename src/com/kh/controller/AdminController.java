@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,6 +61,18 @@ public class AdminController extends HttpServlet {
 		Date d = Date.valueOf(transDate);
 
 		return d;
+	}
+
+	private List<String> getImgSrc(String str) {
+		Pattern nonValidPattern = Pattern
+				.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+
+		List<String> result = new ArrayList<String>();
+		Matcher matcher = nonValidPattern.matcher(str);
+		while (matcher.find()) {
+			result.add(matcher.group(1));
+		}
+		return result;
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -196,6 +210,10 @@ public class AdminController extends HttpServlet {
 				Date anDate = transformDate(multi.getParameter("anDate"));
 				String anStatus = multi.getParameter("anStatus");
 				String thumbImg = multi.getFilesystemName("thumbnail");
+				
+				String deleteImg = multi.getParameter("deleteImg"); // 수정 이전의 원래 썸네일 
+				
+				
 				if(thumbImg != null) {thumbImg = Normalizer.normalize(thumbImg, Form.NFC);}
 				String anContnets = multi.getParameter("anContnets");
 				String anNeutering = multi.getParameter("anNeutering");
@@ -230,6 +248,10 @@ public class AdminController extends HttpServlet {
 						fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
 					}
 				}
+				
+				File targetFile = new File(filesPath + "/"+ deleteImg); // 썸네일 이미지 삭제
+				targetFile.delete();
+
 
 				AnimalDTO dto = new AnimalDTO(code_seq, anName, anCategory, anGender, anKind, anAge, anWeight, anCharacter, anDate, anStatus, thumbImg, anContnets, null, anNeutering);
 				int result = admindao.animalInfoModify(dto);
@@ -240,15 +262,33 @@ public class AdminController extends HttpServlet {
 
 				String code_seq = request.getParameter("code_seq");
 				ArrayList<String> delTargets = fdao.getFileSysName(code_seq);
+				String contents = admindao.getAnimalContents(code_seq);
 
 				String filesPath = request.getServletContext().getRealPath("/upload/animalInfo");
-				if(delTargets != null) {
+				String editPath = request.getServletContext().getRealPath("/upload/editor");
+
+				List<String> imgUrl = getImgSrc(contents);
+				for(String sysName : imgUrl) { // 에디터 업로드 파일 삭제
+					String folder = "/editor/";
+					int idx = sysName.indexOf(folder); 
+					int length = folder.length();
+					sysName = sysName.substring(idx+length);
+					File targetFile = new File(editPath + "/"+ sysName);
+					boolean result = targetFile.delete();
+				}
+				if(delTargets != null) { // 첨부파일 삭제
 					for(int i=0;i<delTargets.size(); i++) {
 						String sysName = delTargets.get(i);
 						File targetFile = new File(filesPath + "/"+ sysName);
 						boolean result = targetFile.delete();
 					}
 				}
+				String thumbImg = admindao.getImgName(code_seq); // 썸네일 이미지 삭제
+				File targetFile = new File(filesPath + "/"+ thumbImg);
+				boolean result = targetFile.delete();
+				System.out.println("썸네일 모냐 : "+targetFile);
+				System.out.println("썸네일 삭제되냐 " + result);
+
 				admindao.animalInfoDelete(code_seq);
 				fdao.animalImgDelete(code_seq);
 
