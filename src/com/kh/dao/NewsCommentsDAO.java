@@ -69,7 +69,7 @@ public class NewsCommentsDAO {
 	}
 	
 	public int delete(int seq) throws Exception {
-		String sql = "delete from notice_reply where ntrp_seq = ?";
+		String sql = "delete from news_reply where nrp_seq = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class NewsCommentsDAO {
 	}
 	
 	public int pdelete(String parent) throws Exception {
-		String sql = "delete from notice_reply where ntrp_parent = ?";
+		String sql = "delete from news_reply where nrp_parent = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -93,7 +93,7 @@ public class NewsCommentsDAO {
 	}
 	
 	public int modify(int seq , String comments) throws Exception {
-		String sql = "update notice_reply set ntrp_contents=? where ntrp_seq = ?";
+		String sql = "update news_reply set nrp_contents=? where nrp_seq = ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);	
 				){

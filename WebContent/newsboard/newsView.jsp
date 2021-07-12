@@ -83,7 +83,7 @@
 							<%--</c:if> --%>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/newrite.necmt"
+					<form action="${pageContext.request.contextPath}/newsWrite.necmt"
 						method="post">
 						<div id="nrp-comments" class="nrp-comments">
 							<div class="comments-row">
@@ -101,15 +101,15 @@
 						<div class="reply-container">
 							<c:forEach var="i" items="${necmtlist}">
 								<div class="reply">
-									<div class="ntrp_writer">${i.nrp_writer}</div>
-									<div class="ntrp_contents">${i.nrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.nrp_contents}"></div>
-									<div class="ntrp_reg_date">${i.nrp_reg_date}</div>
+									<div class="nrp_writer">${i.nrp_writer}</div>
+									<div class="nrp_contents">${i.nrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.nrp_contents}"></div>
+									<div class="nrp_reg_date">${i.nrp_reg_date}</div>
 									<%-- <c:if test="${i.writer == login.id }"> --%>
 									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
 									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
 									<%-- </c:if> --%>
-									<input type="hidden" name="ntrp_seq" value="${i.nrp_seq}"> 
-									<input type="hidden" name="ntrp_parent" value="${i.nrp_parent}">
+									<input type="hidden" name="nrp_seq" value="${i.nrp_seq}"> 
+									<input type="hidden" name="nrp_parent" value="${i.nrp_parent}">
 								</div>
 							</c:forEach>
 						</div>

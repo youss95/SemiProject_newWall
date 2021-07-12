@@ -42,13 +42,15 @@ public class NewsCommenstController extends HttpServlet {
 			NewsCommentsDTO dto = new NewsCommentsDTO();
 			NewsCommentsDAO dao = NewsCommentsDAO.getInstance();
 			
-			if (url.contentEquals("/newrite.necmt")) {
+			if (url.contentEquals("/newsWrite.necmt")) {
 				String writer = "admin";
 
 				String comments = request.getParameter("nrp_contents");
-				comments = XSSFilter(comments);				
+				comments = XSSFilter(comments);			
+				System.out.println(comments);
 				
 				String parent = request.getParameter("parent");
+				System.out.println(parent);
 								
 				dto = new NewsCommentsDTO(0,writer,comments,null,parent);
 				dao.insert(dto);
@@ -56,7 +58,7 @@ public class NewsCommenstController extends HttpServlet {
 				List<NewsCommentsDTO> list = dao.commentsAll(parent);
 								
 				request.setAttribute("necmtlist", list);
-				response.sendRedirect("newsView.notice?news_seq="+parent);
+				response.sendRedirect("newsView.news?news_seq="+parent);
 				
 			}else if(url.contentEquals("/nedelete.necmt")){
 				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
@@ -65,7 +67,7 @@ public class NewsCommenstController extends HttpServlet {
 				
 				int result = dao.delete(seq);
 				
-				request.getRequestDispatcher("newsView.news?news_seq="+parent).forward(request, response);
+				response.sendRedirect("newsView.news?news_seq="+parent);
 			
 			}else if(url.contentEquals("/modifyReply.necmt")){
 				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
