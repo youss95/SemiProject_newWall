@@ -217,7 +217,7 @@ public class AdminController extends HttpServlet {
 				if(thumbImg != null) {thumbImg = Normalizer.normalize(thumbImg, Form.NFC);}
 				String anContnets = multi.getParameter("anContnets");
 				String anNeutering = multi.getParameter("anNeutering");
-				
+
 				// 파일삭제 
 				String[] delTargets = multi.getParameterValues("delete");
 				System.out.println("delTargets : " + delTargets);
@@ -294,13 +294,14 @@ public class AdminController extends HttpServlet {
 
 				response.sendRedirect(ctxPath + "/animalInfoList.adm?cpage=1");				
 
-			}else if(url.contentEquals("/adSponsorList.adm")) {
+			}
+			/*else if(url.contentEquals("/adSponsorList.adm")) {
 				System.out.println("스폰서 후원");
 				AdminDAO adao =AdminDAO.getInstance(); 
-				
+
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int endNum = cpage * (SponsorConfig.RECORD_COUNT_PER_PAGE);
-	            int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
+				int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
 				List<SponsorDTO> slist = adao.adSponsorGetPageList(startNum, endNum);
 				String sp_slct_cho = request.getParameter("sp_slct_cho");
 				//System.out.println(sp_slct_cho);
@@ -308,32 +309,36 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("slist", slist);//이건 모든값
 				request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
 				request.setAttribute("sp_cho", sp_slct_cho);
-				
+
 				request.getRequestDispatcher("admin/adSponsorList.jsp?cpage=1").forward(request, response);
-				
-			}else if(url.contentEquals("/spAdminSearch.adm")) {
+
+			}*/
+			else if(url.contentEquals("/spAdminSearch.adm")) {
 				System.out.println("카테고리");
-				AdminDAO adao =AdminDAO.getInstance(); 
-				
+
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				int endNum = cpage * (SponsorConfig.RECORD_COUNT_PER_PAGE);
-	            int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
+				int startNum = endNum - (SponsorConfig.RECORD_COUNT_PER_PAGE - 1);
 				String sp_search = request.getParameter("sp_slct_cho");
-				System.out.println(sp_search);
-//				if(sp_search.contentEquals("all")) {
-//					response.sendRedirect("adSponsorList.adm?cpage=1&sp_slct_cho=all");
-//				}else {
-					List<SponsorDTO> slist = adao.adSponsorGetPageList(startNum, endNum, sp_search);
-					//List<SponsorDTO> slist = adao.adminSponsorSearch(sp_search);
-					List<String> navi = adao.adSponsorGetPageNavi(cpage, sp_search);
-					
+				System.out.println("검색 : "+ sp_search);
+				List<SponsorDTO> slist;
+				List<String> navi = admindao.adSponsorGetPageNavi(cpage, sp_search);
+				System.out.println("검색 : "+ sp_search);
+				if(sp_search == null || sp_search.contentEquals("")) {
+
+					System.out.println("검색 : "+ sp_search);
+					slist = admindao.adSponsorGetPageList(startNum, endNum);
+				}else {
+					System.out.println("검색 : "+ sp_search);
+					slist = admindao.adSponsorGetPageList(startNum, endNum, sp_search);
+				}
 					request.setAttribute("slist", slist);
+					request.setAttribute("cpage", cpage);
 					request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
 					request.setAttribute("sp_cho", sp_search);
 					System.out.println(sp_search);
-					request.getRequestDispatcher("admin/adSponsorList.jsp?cpage=1").forward(request, response);
-				//}
-				
+					request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+
 			}
 
 		}catch(Exception e) {

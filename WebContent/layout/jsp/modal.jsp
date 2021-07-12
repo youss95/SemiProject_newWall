@@ -38,7 +38,6 @@
 					<a href="${pageContext.request.contextPath}/findAccount.mem"><button
 							type="button" class="find" data-dismiss="modal" id="idPwHov">아이디/비밀번호
 							찾기</button></a>
-
 				</div>
 			</form>
 		</div>
