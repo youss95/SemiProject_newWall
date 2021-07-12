@@ -19,7 +19,7 @@
 
 </head>
 <body>
-	<div class="modal fade" id="passwordModal1" tabindex="-1"
+	<div class="modal fade" id="passwordModal" tabindex="-1"
 		aria-labelledby="passwordModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -51,12 +51,43 @@
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Close</button>
 					<button type="button" id="changepw"
-						class="btn_submit btn_m btn_default"
-						data-bs-target="#passwordModal2">Save changes</button>
+						class="btn_submit btn_m btn_default">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	<div class="modal fade" id="memberOutModal" tabindex="-1"
+		aria-labelledby="memberOutModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="memberOutModalLabel">회원 탈퇴 확인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="user-id" class="col-form-label">정말 탈퇴하시겠습니까?</label> 
+						<div class="text-muted">
+							탈퇴하시려면 [ ${loginInfo.user_id } ] 를 정확히 입력해주세요.
+						</div>
+						<input type="text" class="form-control" id="outID">
+					</div>
+					<div id="outResult" style="color: crimson"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="button" id="memberOut"
+						class="btn_submit btn_m btn_default">Out</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<div class="wrap">
 		<%@ include file="../layout/jsp/header.jsp"%>
 		<div class="container">
@@ -74,7 +105,7 @@
 								<div class="label">Password</div>
 								<div class="value" itemid="password">
 									<button type="button" class="btn_submit btn_m btn_default"
-										data-bs-toggle="modal" data-bs-target="#passwordModal1">
+										data-bs-toggle="modal" data-bs-target="#passwordModal">
 										Password 변경</button>
 								</div>
 								<div class="control"></div>
@@ -143,9 +174,17 @@
 									<i class="fas fa-times"></i>
 								</div>
 							</li>
+							<li class="list-group-item">
+								<div class="label">MemberOut</div>
+								<div class="value">
+									<button id="memberOut" class="btn_submit btn_m btn_default" data-bs-target="#memberOutModal" data-bs-toggle="modal">회원탈퇴</button>
+								</div>
+								<div class="control">
+								</div>
+							</li>
 							<li class="list-group-item justify-content-center"><a
 								href="${pageContext.request.contextPath}/index.jsp">
-									<button class="btn_submit btn_m btn_default">back</button>
+									<button class="btn_submit btn_m btn_default">돌아가기</button>
 							</a></li>
 						</ul>
 					</div>
@@ -164,13 +203,18 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
 		$(function() {
-			
-			$("#close").on("click",function(){
-				
+			$("#memberOut").on("click",function(){
+				let outID = $("#outID").val();
+				if("${loginInfo.user_id}" == outID){
+					alert("이용해주셔서 감사했습니다.");
+					location.href="memberOutProc.mem";
+				}else{
+					$("#outID").val("");
+					$("#outResult").text("입력값이 정확하지 않습니다.");
+				}
 			})
 			
 			$("#changepw").on("click", function() {
-				
 				if($("#oldpw").val()==""){
 					$("#oldResult").text("이전 패스워드를 입력하세요.")
 					return;
