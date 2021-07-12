@@ -35,14 +35,15 @@
 								<tr>
 									<td><label for="signup_user_id">아이디</label></td>
 									<td><input type="text" name="user_id" id="signup_user_id"
-										class="inpform" maxlength=16 required> <input type="button"
-										id="idCheck" value="중복확인" class="btn_s btn_light"> <span
-										style="color: crimson" id="duplCheckResult"></span></td>
+										class="inpform" maxlength=16 required> <input
+										type="button" id="idCheck" value="중복확인"
+										class="btn_s btn_light"> <span style="color: crimson"
+										id="duplCheckResult"></span></td>
 								</tr>
 								<tr>
 									<td><label for="password">비밀번호</label></td>
-									<td><input type="password" name="user_password" id="user_password"
-										class="inpform" maxlength=16 required></td>
+									<td><input type="password" name="user_password"
+										id="user_password" class="inpform" maxlength=16 required></td>
 								</tr>
 								<tr>
 									<td><label for="pwdCheck">비밀번호 확인</label></td>
@@ -52,7 +53,8 @@
 								<tr>
 									<td><label for="email">이메일</label></td>
 									<td><input type="text" name="email" id="email"
-										class="inpform" maxlength=16> @ <select id="emailSuffix" class="inpform">
+										class="inpform" maxlength=16> @ <select
+										id="emailSuffix" class="inpform">
 											<option value="gmail.com">gmail.com</option>
 											<option value="naver.com">naver.com</option>
 											<option value="daum.net">daum.net</option>
@@ -69,12 +71,12 @@
 
 								<tr>
 									<td>생년월일</td>
-									<td><span class="box"> 
-									<select id="birthday_yy" class="int inpform" name="birthday_yy" required>
-										<option disabled selected>년</option>
-									</select>
-									</span> <span class="box"> <select
-											id="birthday_mm" class="inpform" name="birthday_mm" required>
+									<td><span class="box"> <select id="birthday_yy"
+											class="int inpform" name="birthday_yy" required>
+												<option disabled selected>년</option>
+										</select>
+									</span> <span class="box"> <select id="birthday_mm"
+											class="inpform" name="birthday_mm" required>
 												<option disabled selected>월</option>
 												<option value="01">01</option>
 												<option value="02">02</option>
@@ -89,8 +91,8 @@
 												<option value="11">11</option>
 												<option value="12">12</option>
 										</select>
-									</span> <span class="box"> <select id="birthday_dd" class="inpform"
-											name="birthday_dd" required>
+									</span> <span class="box"> <select id="birthday_dd"
+											class="inpform" name="birthday_dd" required>
 												<option disabled selected>일</option>
 												<option value="01">1</option>
 												<option value="02">2</option>
@@ -133,11 +135,9 @@
 											<option value="010">010</option>
 											<option value="011">011</option>
 											<option value="019">019</option>
-									</select> - 
-									<input type="text" class="inpform" name="contact2" id="contact2"
-										maxlength=4> - 
-										<input type="text" name="contact3" id="contact3"
-										class="inpform" maxlength=4></td>
+									</select> - <input type="text" class="inpform" name="contact2"
+										id="contact2" maxlength=4> - <input type="text"
+										name="contact3" id="contact3" class="inpform" maxlength=4></td>
 								</tr>
 								<tr>
 									<!-- 	<tr>
@@ -150,17 +150,18 @@
 									<td><label for="postcode">우편번호</label></td>
 									<td><input type="text" name="postcode" id="postcode"
 										class="inpform" maxlength=5> <input type="button"
-										id="searchAddr" value="우편번호검색" class="btn_s btn_light" required></td>
+										id="searchAddr" value="우편번호검색" class="btn_s btn_light"
+										required></td>
 								</tr>
 								<tr>
 									<td><label for="address1">주소</label></td>
 									<td><input type="text" name="address1" id="address1"
-										class="inpform" placeholder="도로명/지번" maxlength=100  required></td>
+										class="inpform" placeholder="도로명/지번" maxlength=100 required></td>
 								</tr>
 								<tr>
 									<td><label for="address2">상세주소</label></td>
 									<td><input type="text" name="address2" id="address2"
-										class="inpform" maxlength=100  required></td>
+										class="inpform" maxlength=100 required></td>
 								</tr>
 							</table>
 							<input type="submit" id="join" value="회원가입"
@@ -177,71 +178,86 @@
 	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 	<script>
 		$(function() {
-			let now = new Date(); 
+			let now = new Date();
 			let year = now.getFullYear();
-			for(let i = year ; i >= 1900 ; i--) { $('#birthday_yy').append('<option value="' + i + '">' + i + '</option>'); }
-			
+			for (let i = year; i >= 1900; i--) {
+				$('#birthday_yy').append(
+						'<option value="' + i + '">' + i + '</option>');
+			}
+
 			let idFlag = false;
-			$("#signup_user_id").on("input",function(){
+			$("#signup_user_id").on("input", function() {
 				idFlag = false;
 			})
-			
-			$("#signupForm").on("submit",function(){
-				let idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
-				let user_id =  $("#signup_user_id").val();
-				if( !idReg.test(user_id) ) {
-		            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
-		            return false;
-		        }
-				
-				let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-				let pw = $("#user_password").val();
-				if(!pwReg.test(pwReg)){
-					alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
-					return false;
-				}
-				
-				let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-				let email = $("#email").val() + "@" + $("#emailSuffix option:selected").val();
-				
-				if(!emailReg.test(email)){
-					alert("이메일 형식을 다시 확인해주세요.");
-					return false;
-				}
 
-				
-				let nameReg = /^[가-힣]{2,4}$/;
-				let name = $("#name").val();
-				if(!nameReg.test(name)){
-					alert("이름은 한글 2 글자 이상 4글자 미만으로 입력해야 합니다.");
-					return false;
-				}
-				
-				let phoneReg = /^\d{3}\d{3,4}\d{4}$/;
-				let phone = $("#contact1 option:selected").val() + $("#contact2").val() + $("#contact3").val();
-				
-				if(!phoneReg.test(phone)){
-					alert("핸드폰 번호를 다시 확인해주세요.");
-					return false;
-				}
-				
-				if($("#birthday_yy option:selected").val()=="년" || $("#birthday_mm option:selected").val()=="월" || $("#birthday_dd option:selected").val()=="일"){
-					alert("생년월일을 선택하세요.")
-					return false;
-				}
-				
-				if(!idFlag){
-					alert("ID 중복체크를 진행하세요.")
-					return false;
-				}
-			})
-			
+			$("#signupForm")
+					.on(
+							"submit",
+							function() {
+								let idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+								let user_id = $("#signup_user_id").val();
+								if (!idReg.test(user_id)) {
+									alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+									return false;
+								}
+
+								let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+								let pw = $("#user_password").val();
+								if (!pwReg.test(pwReg)) {
+									alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+									return false;
+								}
+
+								let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+								let email = $("#email").val()
+										+ "@"
+										+ $("#emailSuffix option:selected")
+												.val();
+
+								if (!emailReg.test(email)) {
+									alert("이메일 형식을 다시 확인해주세요.");
+									return false;
+								}
+
+								let nameReg = /^[가-힣]{2,4}$/;
+								let name = $("#name").val();
+								if (!nameReg.test(name)) {
+									alert("이름은 한글 2 글자 이상 4글자 미만으로 입력해야 합니다.");
+									return false;
+								}
+
+								let phoneReg = /^\d{3}\d{3,4}\d{4}$/;
+								let phone = $("#contact1 option:selected")
+										.val()
+										+ $("#contact2").val()
+										+ $("#contact3").val();
+
+								if (!phoneReg.test(phone)) {
+									alert("핸드폰 번호를 다시 확인해주세요.");
+									return false;
+								}
+
+								if ($("#birthday_yy option:selected").val() == "년"
+										|| $("#birthday_mm option:selected")
+												.val() == "월"
+										|| $("#birthday_dd option:selected")
+												.val() == "일") {
+									alert("생년월일을 선택하세요.")
+									return false;
+								}
+
+								if (!idFlag) {
+									alert("ID 중복체크를 진행하세요.")
+									return false;
+								}
+							})
+
 			$("#idCheck").on("click", function() {
-				if($("#signup_user_id").val()==""){
+				if ($("#signup_user_id").val() == "") {
 					alert("ID를 입력하세요.")
 					return;
 				}
-				
+
 				$.ajax({
 					url : "${pageContext.request.contextPath}/idDuplCheck.mem",
 					data : {
@@ -259,19 +275,25 @@
 
 				})
 			})
-			
-			$("#searchAddr").on("click",function(){
-				new daum.Postcode({
-					oncomplete : function(data) {
-						var roadAddr = data.roadAddress; // 도로명 주소 변수
-					
-						document.getElementById('postcode').value = data.zonecode;
-						document.getElementById("address1").value = roadAddr;
-						document.getElementById("address2").value = data.jibunAddress;
-					}
-				}).open();
-			})
-			
+
+			$("#searchAddr")
+					.on(
+							"click",
+							function() {
+								new daum.Postcode(
+										{
+											oncomplete : function(data) {
+												var roadAddr = data.roadAddress; // 도로명 주소 변수
+
+												document
+														.getElementById('postcode').value = data.zonecode;
+												document
+														.getElementById("address1").value = roadAddr;
+												document
+														.getElementById("address2").value = data.jibunAddress;
+											}
+										}).open();
+							})
 
 		})
 	</script>
