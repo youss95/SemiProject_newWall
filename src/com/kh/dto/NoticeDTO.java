@@ -3,7 +3,7 @@ package com.kh.dto;
 import java.sql.Date;
 
 public class NoticeDTO {
-	private int notice_seq;
+	private String notice_seq;
 	private String notice_title;
 	private String notice_contents;
 	private String notice_writer;
@@ -12,7 +12,7 @@ public class NoticeDTO {
 	
 	public NoticeDTO() {}
 
-	public NoticeDTO(int notice_seq, String notice_title, String notice_contects, String notice_writer,
+	public NoticeDTO(String notice_seq, String notice_title, String notice_contects, String notice_writer,
 			Date notice_reg_date, int notice_view) {
 		this.notice_seq = notice_seq;
 		this.notice_title = notice_title;
@@ -22,10 +22,10 @@ public class NoticeDTO {
 		this.notice_view = notice_view;
 	}
 
-	public int getNotice_seq() {
+	public String getNotice_seq() {
 		return notice_seq;
 	}
-	public void setNotice_seq(int notice_seq) {
+	public void setNotice_seq(String notice_seq) {
 		this.notice_seq = notice_seq;
 	}
 	public String getNotice_title() {

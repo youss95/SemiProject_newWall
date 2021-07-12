@@ -2,6 +2,8 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,6 +21,7 @@ import com.kh.dao.NoticeFileDAO;
 import com.kh.dao.NoCommentsDAO;
 import com.kh.dao.NoticeDAO;
 import com.kh.dto.NoticeFileDTO;
+import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.NoCommentsDTO;
 import com.kh.dto.NoticeDTO;
 import com.oreilly.servlet.MultipartRequest;
@@ -62,6 +65,7 @@ public class NoticeController extends HttpServlet {
 				
 				String category = request.getParameter("category");//카테고리
 				String keyword = request.getParameter("keyword");//키워드
+				keyword = XSSFilter(keyword);
 				
 				List<NoticeDTO> list;
 				
@@ -85,7 +89,7 @@ public class NoticeController extends HttpServlet {
 			
 			}else if(url.contentEquals("/write.notice")) {
 				//공지사항 글쓰기값 받아오기
-				int seq = dao.getSeq(); //공지사항 넘버
+				String seq = dao.getSeq(); //공지사항 넘버
 				
 				String filesPath = request.getServletContext().getRealPath("files");//파일
 				
@@ -107,8 +111,8 @@ public class NoticeController extends HttpServlet {
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
 					String sysName = multi.getFilesystemName(fileName);
-					
-					if(oriName != null) {
+										
+					if(!fileName.contentEquals("files") && oriName != null) {
 						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
@@ -119,21 +123,40 @@ public class NoticeController extends HttpServlet {
 				title = XSSFilter(title);
 				
 				String contents = multi.getParameter("notice_contents");//공지사항 내용
-				contents = XSSFilter(contents);
+//				contents = XSSFilter(contents);
 				
 				dao.newNotice(new NoticeDTO(seq, title, contents, writer, null, 0));
 				
 				response.sendRedirect("noticeBoard.notice?cpage=1");
 				
+			}else if (url.contentEquals("/uploadImg.notice")) {
+				//썸머노트 이미지 업로드
+				response.setCharacterEncoding("utf8");
+				response.setContentType("text/html;charset=utf8");
+
+				String realPath = request.getServletContext().getRealPath("upload/notice");
+				File filesPath = new File(realPath);
+				System.out.println(realPath);
+
+				if(!filesPath.exists()) {filesPath.mkdir();}
+				MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
+
+				String sysName = multi.getFilesystemName("file");
+				//				sysName = URLEncoder.encode(sysName,"euc-kr");
+				String returnPath = "/upload/notice/" + sysName;
+
+				System.out.println("returnPath : " + returnPath);
+				response.getWriter().append(returnPath);
+				
 			}else if (url.contentEquals("/noticeView.notice")) {
 				//공지사항 보기
-				int seq = Integer.parseInt(request.getParameter("notice_seq"));
+				String seq = request.getParameter("notice_seq");
 				
 				dao.view(seq);
 				
 				dto = dao.detail(seq);
 				
-				int parent = seq;
+				String parent = seq;
 				
 				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
 				
@@ -147,16 +170,19 @@ public class NoticeController extends HttpServlet {
 				
 			}else if (url.contentEquals("/noticeDelete.notice")) {
 				//공지사항 삭제하기
-				int seq = Integer.parseInt(request.getParameter("notice_seq"));
-				System.out.println(seq);
+				String seq = request.getParameter("notice_seq");
 				
 				dao.delete(seq);
+				
+				String parent = seq;
+				
+				ncdao.pdelete(parent);
 				
 				response.sendRedirect("noticeBoard.notice?cpage=1");
 			
 			}else if (url.contentEquals("/noticeModify.notice")) {
 				// 공지사항 값을 받아서 수정jsp로 보내기
-				int seq = Integer.parseInt(request.getParameter("notice_seq"));
+				String seq = request.getParameter("notice_seq");
 				
 				dto = dao.detail(seq);
 				
@@ -175,11 +201,14 @@ public class NoticeController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8",
 						new DefaultFileRenamePolicy());
 				
-				int seq = Integer.parseInt(multi.getParameter("notice_seq"));
+				String seq = multi.getParameter("notice_seq");
 				
 				String title = multi.getParameter("notice_title");
+				title = XSSFilter(title);
+				
 				
 				String contents = multi.getParameter("notice_contents");
+//				contents = XSSFilter(contents);
 				
 				String[] delTargets = multi.getParameterValues("delete");
 				if (delTargets != null) { // 삭제할 항목이 null이 아닌경우
@@ -212,13 +241,9 @@ public class NoticeController extends HttpServlet {
 				
 			}
 			
-			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("error.jsp");
 		}
-	
 	
 	}
 

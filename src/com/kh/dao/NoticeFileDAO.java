@@ -33,7 +33,7 @@ private static NoticeFileDAO instance;
 	}
 	
 	public String getSysName(int seq) throws Exception {
-		String sql = "select sysname from notice_files where seq = ?";
+		String sql = "select sysname from files where seq = ?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
@@ -46,7 +46,7 @@ private static NoticeFileDAO instance;
 	}
 	
 	public int insert(NoticeFileDTO dto) throws Exception{
-		String sql = "insert into notice_files values(nofiles_seq.nextval,?,?,sysdate,?)";
+		String sql = "insert into files values(files_seq.nextval,?,?,sysdate,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -54,20 +54,19 @@ private static NoticeFileDAO instance;
 			
 				pstat.setString(1, dto.getOriName());
 				pstat.setString(2, dto.getSysName());
-				pstat.setInt(3, dto.getParent());
+				pstat.setString(3, dto.getParent());
 				int result = pstat.executeUpdate();
-				con.commit();
 				return result;
 		}
 	}
 	
-	public List<NoticeFileDTO> selectBySeq(int fparent) throws Exception {
-		String sql = "select * from notice_files where parent = ?";
+	public List<NoticeFileDTO> selectBySeq(String fparent) throws Exception {
+		String sql = "select * from files where parent = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);				
 				){
-			pstat.setInt(1, fparent);
+			pstat.setString(1, fparent);
 			try(ResultSet rs = pstat.executeQuery()
 					){
 				List<NoticeFileDTO> list = new ArrayList<>();
@@ -76,7 +75,7 @@ private static NoticeFileDAO instance;
 					String oriName = rs.getString("oriName");
 					String sysName = rs.getString("sysName");
 					Date reg_date = rs.getDate("reg_date");
-					int parent = rs.getInt("parent");
+					String parent = rs.getString("parent");
 					list.add(new NoticeFileDTO(seq,oriName,sysName,reg_date,parent));
 					
 				}
@@ -88,7 +87,7 @@ private static NoticeFileDAO instance;
 	}
 	
 	public int delete(int seq) throws Exception {
-		String sql = "delete from notice_files where seq = ?";
+		String sql = "delete from files where seq = ?";
 	
 		try(
 				Connection con = this.getConnection();
@@ -96,7 +95,6 @@ private static NoticeFileDAO instance;
 				){
 				pstat.setInt(1, seq);
 				int result = pstat.executeUpdate();
-				con.commit();
 				return result;			
 		}	
 	}

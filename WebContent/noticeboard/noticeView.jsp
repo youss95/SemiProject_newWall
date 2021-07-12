@@ -18,10 +18,28 @@
 
 <script>
  $(function(){
-	$("#hiddenCon").on("click",function(){
-		
-		
+	$("#modiReply").on("click",function(){
+		if($(this).text()=="수정") {
+			$(this).text("확인");
+			$(this).siblings(".ntrp_contents").attr("contenteditable","true");
+			$(this).siblings(".ntrp_contents").focus();
+		}
+		$("#modiReply").on("click",function(){
+			 $("#hiddenCon").val($(this).siblings(".ntrp_contents").text());
+			 $("#replyFrm").attr("action", "${pageContext.request.contextPath}/modifyReply.nocmt");
+	         $("#replyFrm").submit();
+		})
 	}) 
+	
+	
+	
+	$(".delReply").on("click",function(){
+        if(confirm("정말 삭제하시겠습니까?")){    
+           $("#replyFrm").attr("action", "${pageContext.request.contextPath}/nodelete.nocmt");
+          
+           $("#replyFrm").submit();
+        }
+	})
  
  
  })
@@ -84,7 +102,7 @@
 							</div>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/newrite.necmt"
+					<form action="${pageContext.request.contextPath}/nowrite.nocmt"
 						method="post">
 						<div id="ntrp-comments" class="ntrp-comments">
 							<div class="comments-row">
@@ -103,11 +121,11 @@
 							<c:forEach var="i" items="${nocmtlist}">
 								<div class="reply">
 									<div class="ntrp_writer">${i.ntrp_writer}</div>
-									<div class="ntrp_contents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" value="${i.ntrp_contents}"></div>
+									<div class="ntrp_contents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.ntrp_contents}"></div>
 									<div class="ntrp_reg_date">${i.ntrp_reg_date}</div>
 									<%-- <c:if test="${i.writer == login.id }"> --%>
-									<button class="btn_s btn_default delReply" type="button">삭제</button>
-									<button class="btn_s btn_primary modiReply">수정</button>
+									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
+									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
 									<%-- </c:if> --%>
 									<input type="hidden" name="ntrp_seq" value="${i.ntrp_seq}"> 
 									<input type="hidden" name="ntrp_parent" value="${i.ntrp_parent}">

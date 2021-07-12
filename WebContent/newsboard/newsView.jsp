@@ -6,15 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+
+<script	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+
+<script>
+ $(function(){
+	$("#modiReply").on("click",function(){
+		if($(this).text()=="수정") {
+			$(this).text("확인");
+			$(this).siblings(".nrp_contents").attr("contenteditable","true");
+			$(this).siblings(".nrp_contents").focus();
+		}
+		$("#modiReply").on("click",function(){
+			 $("#hiddenCon").val($(this).siblings(".nrp_contents").text());
+			 $("#replyFrm").attr("action", "${pageContext.request.contextPath}/modifyReply.necmt");
+	         $("#replyFrm").submit();
+		})
+	}) 
+	
+	
+	
+	$(".delReply").on("click",function(){
+        if(confirm("정말 삭제하시겠습니까?")){    
+           $("#replyFrm").attr("action", "${pageContext.request.contextPath}/nedelete.necmt");
+          
+           $("#replyFrm").submit();
+        }
+	})
+ 
+ 
+ })
+
+</script>
 
 </head>
 <body>
@@ -29,12 +59,6 @@
 						</div>
 						<div class="news_view_wrap">
 							<div class="title">${newsView.news_title}</div>
-							<c:forEach var="file" items="${flist}">
-								<div class="file">
-									<a
-										href="download.file?seq=${file.seq}&sysname=${file.sysName}&oriname=${file.oriName}">${file.oriName}</a>
-								</div>
-							</c:forEach>
 							<div class="info">
 								<dl>
 									<dt>글쓴이</dt>
@@ -59,16 +83,41 @@
 							<%--</c:if> --%>
 						</div>
 					</div>
+					<form action="${pageContext.request.contextPath}/newsWrite.necmt"
+						method="post">
+						<div id="nrp-comments" class="nrp-comments">
+							<div class="comments-row">
+								<textarea id="nrp_contents" name="nrp_contents"
+									placeholder="댓글을 입력해주세요" rows="3"></textarea>
+								<input type="hidden" value="${newsView.news_seq}"
+									name=parent>
+								<button class="writeBtn" type="submit">
+									<i class="far fa-edit"></i>등록
+								</button>
+							</div>
+						</div>
+					</form>
+					<form id="replyFrm" class="replyFrm">
+						<div class="reply-container">
+							<c:forEach var="i" items="${necmtlist}">
+								<div class="reply">
+									<div class="nrp_writer">${i.nrp_writer}</div>
+									<div class="nrp_contents">${i.nrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.nrp_contents}"></div>
+									<div class="nrp_reg_date">${i.nrp_reg_date}</div>
+									<%-- <c:if test="${i.writer == login.id }"> --%>
+									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
+									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
+									<%-- </c:if> --%>
+									<input type="hidden" name="nrp_seq" value="${i.nrp_seq}"> 
+									<input type="hidden" name="nrp_parent" value="${i.nrp_parent}">
+								</div>
+							</c:forEach>
+						</div>
+					</form>
 				</section>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

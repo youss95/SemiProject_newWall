@@ -32,7 +32,12 @@ a{text-decoration: none;}
 .newsboard_write .title input[type="text"] {padding: 10px; box-sizing: border-box;}
 .newsboard_write .info {border-top: 1px dashed #ddd; border-bottom: 1px solid #000;}
 .newsboard_write .info dl {display: inline-block; width: 50%; vertical-align: middle;}
+.reply-container .nrp_writer {float: left; width: 10%; line-height: 35px;}
+.reply-container .nrp_contents {float: left; width: 60%; line-height: 35px;}
+.nrp_contents .hiddenCon {width: 100%; height: 100%;}
+.reply-container .nrp_reg_date {float: left; width: 15%; line-height: 35px;}
 
+.news_list .search {text-align:right; margin-right:5px; margin-bottom:5px;}
 .news_list .list_wrap .item{overflow:hidden;padding:40px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .news_list .list_wrap .item+.item{border-top:none;}
 .list_wrap .item .img_wrap{width:30%;float:left;height:180px;overflow: hidden;}

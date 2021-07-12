@@ -35,13 +35,13 @@ public class NoticeDAO {
 		return ds.getConnection();
 	}
 
-	public int getSeq() throws Exception {
-		String sql = "select notice_num.nextval from dual";
+	public String getSeq() throws Exception {
+		String sql = "select 'notice' || LPAD(notice_num.nextval,5,0) from dual";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				ResultSet rs = pstat.executeQuery();) {
 			rs.next();
-			return rs.getInt(1);
+			return rs.getString(1);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class NoticeDAO {
 			try (ResultSet rs = pstat.executeQuery();) {
 				List<NoticeDTO> list = new ArrayList<>();
 				while (rs.next()) {
-					int notice_seq = rs.getInt("notice_seq");
+					String notice_seq = rs.getString("notice_seq");
 					String notice_title = rs.getString("notice_title");
 					String notice_writer = rs.getNString("notice_writer");
 					Date notice_reg_date = rs.getDate("notice_reg_date");
@@ -84,7 +84,7 @@ public class NoticeDAO {
 			try (ResultSet rs = pstat.executeQuery();) {
 				List<NoticeDTO> list = new ArrayList<>();
 				while (rs.next()) {
-					int notice_seq = rs.getInt("notice_seq");
+					String notice_seq = rs.getString("notice_seq");
 					String notice_title = rs.getString("notice_title");
 					String notice_writer = rs.getNString("notice_writer");
 					Date notice_reg_date = rs.getDate("notice_reg_date");
@@ -138,7 +138,8 @@ public class NoticeDAO {
 
 		if (startNavi == 1) { // <, > 페이지 버튼 달아주기 1
 			needPrev = false;
-		} else if (endNavi == pageTotalCount) {
+		}
+		if (endNavi == pageTotalCount) {
 			needNext = false;
 		}
 
@@ -182,20 +183,19 @@ public class NoticeDAO {
 		}
 	}
 	
-	public int view(int seq) throws Exception{
+	public int view(String seq) throws Exception{
 		//조회수
 		String sql = "update notice_board set notice_view = notice_view+1 where notice_seq = ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);				
 				){
-			pstat.setInt(1, seq);
+			pstat.setString(1, seq);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
 	
-	public NoticeDTO detail(int seq) throws Exception {
+	public NoticeDTO detail(String seq) throws Exception {
 		//공지사항 보기
 		
 		String sql = "select * from notice_board where notice_seq = ?";
@@ -203,12 +203,12 @@ public class NoticeDAO {
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setInt(1, seq);
+			pstat.setString(1, seq);
 			try(ResultSet rs = pstat.executeQuery();
 					){
 				NoticeDTO dto = new NoticeDTO();
 				if(rs.next()) {
-					int notice_seq = rs.getInt("notice_seq");
+					String notice_seq = rs.getString("notice_seq");
 					String notice_title = rs.getString("notice_title");
 					String notice_contents = rs.getString("notice_contents");
 					String notice_writer = rs.getString("notice_writer");
@@ -229,21 +229,20 @@ public class NoticeDAO {
 		return null;
 	}
 	
-	public int delete(int seq) throws Exception {
+	public int delete(String seq) throws Exception {
 		//공지사항 삭제
 		String sql = "delete from notice_board where notice_seq = ?";
 		
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);	
 				){
-			pstat.setInt(1, seq);
+			pstat.setString(1, seq);
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
 	
-	public int modify(int seq ,String title, String contents) throws Exception {
+	public int modify(String seq ,String title, String contents) throws Exception {
 		//게시글 수정
 		String sql = "update notice_board set notice_title=?, notice_contents=? where notice_seq = ?";
 		try(Connection con = this.getConnection();
@@ -251,10 +250,9 @@ public class NoticeDAO {
 				){
 			pstat.setString(1, title);
 			pstat.setString(2, contents);
-			pstat.setInt(3, seq);
+			pstat.setString(3, seq);
 			
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 		
@@ -265,13 +263,12 @@ public class NoticeDAO {
 		String sql = "insert into notice_board values(?,?,?,?,sysdate,0)";
 
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(1, dto.getNotice_seq());
+			pstat.setString(1, dto.getNotice_seq());
 			pstat.setString(2, dto.getNotice_title());
 			pstat.setString(3, dto.getNotice_contents());
 			pstat.setString(4, dto.getNotice_writer());
 
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}

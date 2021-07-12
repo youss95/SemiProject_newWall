@@ -9,17 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
 <script>
 	$(function() {
@@ -36,12 +32,24 @@
 		<div class="container">
 			<div class="contents">
 				<section class="news_list">
+					<form action="${pageContext.request.contextPath}/newsBoard.news" method="get">
+						<div class="search">
+							<input type="hidden" name="cpage" value=1> 
+								<select	name="category">
+								<option value="news_title">제목</option>
+								<option value="news_writer">작성자</option>
+							    </select> 
+							<input type="text" name="keyword" placeholder="검색을 입력하세요.">
+							<button class="btn_s btn_line" id="search">검색</button>
+						</div>
+					</form>
 					<div class="list_wrap">
 						<c:forEach var="newsAll" items="${newsAll}">
 							<div class="item">
 								<a href="${pageContext.request.contextPath}/newsView.news?news_seq=${newsAll.news_seq}">
 									<div class="img_wrap">
-										<img src="${pageContext.request.contextPath}/resources/images/bannerImg.png">
+<%-- 										<img src="${pageContext.request.contextPath}/resources/images/bannerImg.png"> --%>
+											<img src="${pageContext.request.contextPath}/upload/news/${newsAll.news_photo}">
 									</div>
 									<div class="txt">
 										<ul>
@@ -83,12 +91,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

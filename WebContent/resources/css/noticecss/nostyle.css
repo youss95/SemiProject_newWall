@@ -79,13 +79,13 @@ a {
 /*         cursor: pointer; */
 /*       } */
 
-.bt_wrap a {
-    display: inline-block;
-    min-width: 80px;
-    margin-left: 3px;
-    padding: 10px;
-    font-size: 1.4rem;
-}
+/* .bt_wrap a { */
+/*     display: inline-block; */
+/*     min-width: 80px; */
+/*     margin-left: 3px; */
+/*     padding: 10px; */
+/*     font-size: 1.4rem; */
+/* } */
 
 /* .bt_wrap a:first-child { */
 /*     margin-left: 0; */
@@ -124,15 +124,12 @@ a {
 	line-height: 35px;
 }
 
-.reply-container .modiReply {
+.reply button {
 	float: right;
 	margin-right: 5px;
 }
 
-.reply-container .delReply {
-	float: right;
-	margin-right: 5px;
-}
+
 
 .comments-row{
 	overflow: hidden;
@@ -198,12 +195,12 @@ a {
 }
 
 .board_list .title {
-    width: 60%;
-    text-align: left;
+    width: 70%;
 }
 
 .board_list .top .title {
     text-align: center;
+	float:left;
 }
 
 .board_list .writer {
@@ -276,7 +273,6 @@ a {
 }
 
 .board_view .file {
-	border-bottom: 1px solid #999;
 	text-align: right;
 	padding: 0 20px;
 }
@@ -285,6 +281,7 @@ a {
 	text-align:right;
     padding: 15px;
     border-bottom: 1px solid #999;
+    border-top: 1px solid #999;
     font-size: 0;
 }
 
