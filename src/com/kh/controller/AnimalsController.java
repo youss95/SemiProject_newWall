@@ -329,7 +329,19 @@ public class AnimalsController extends HttpServlet {
 					e.printStackTrace();
 				}
 				}else if(url.equals("/protectDelete.lost")) {
-				
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				int result = dao.protectDelete(protectNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='protectList.lost?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

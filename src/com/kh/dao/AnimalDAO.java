@@ -344,5 +344,17 @@ public class AnimalDAO {
 		}
 	}
 	
+	public int protectDelete(int protectNo) throws Exception {
+		String sql = "delete from protect_animal where protect_no = ?";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, protectNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
 }
 
