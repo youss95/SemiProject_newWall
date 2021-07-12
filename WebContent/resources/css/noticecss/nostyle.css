@@ -79,13 +79,13 @@ a {
 /*         cursor: pointer; */
 /*       } */
 
-.bt_wrap a {
-    display: inline-block;
-    min-width: 80px;
-    margin-left: 3px;
-    padding: 10px;
-    font-size: 1.4rem;
-}
+/* .bt_wrap a { */
+/*     display: inline-block; */
+/*     min-width: 80px; */
+/*     margin-left: 3px; */
+/*     padding: 10px; */
+/*     font-size: 1.4rem; */
+/* } */
 
 /* .bt_wrap a:first-child { */
 /*     margin-left: 0; */
@@ -124,15 +124,12 @@ a {
 	line-height: 35px;
 }
 
-.reply-container .modiReply {
+.reply button {
 	float: right;
 	margin-right: 5px;
 }
 
-.reply-container .delReply {
-	float: right;
-	margin-right: 5px;
-}
+
 
 .comments-row{
 	overflow: hidden;

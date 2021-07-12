@@ -7,11 +7,11 @@ public class NoCommentsDTO {
 	private String ntrp_contents;
 	private String ntrp_writer;
 	private Date ntrp_reg_date;
-	private int ntrp_parent;
+	private String ntrp_parent;
 	
 	public NoCommentsDTO() {}
 
-	public NoCommentsDTO(int ntrp_seq, String ntrp_contents, String ntrp_writer, Date ntrp_reg_date, int ntrp_parent) {
+	public NoCommentsDTO(int ntrp_seq, String ntrp_contents, String ntrp_writer, Date ntrp_reg_date, String ntrp_parent) {
 		this.ntrp_seq = ntrp_seq;
 		this.ntrp_contents = ntrp_contents;
 		this.ntrp_writer = ntrp_writer;
@@ -43,10 +43,10 @@ public class NoCommentsDTO {
 	public void setNtrp_reg_date(Date ntrp_reg_date) {
 		this.ntrp_reg_date = ntrp_reg_date;
 	}
-	public int getNtrp_parent() {
+	public String getNtrp_parent() {
 		return ntrp_parent;
 	}
-	public void setNtrp_parent(int ntrp_parent) {
+	public void setNtrp_parent(String ntrp_parent) {
 		this.ntrp_parent = ntrp_parent;
 	}
 }

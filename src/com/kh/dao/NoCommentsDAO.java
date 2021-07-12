@@ -37,17 +37,16 @@ public class NoCommentsDAO {
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getNtrp_writer());
 			pstat.setString(2, dto.getNtrp_contents());
-			pstat.setInt(3, dto.getNtrp_parent());
+			pstat.setString(3, dto.getNtrp_parent());
 			int result = pstat.executeUpdate();
-			con.commit();
 			return result;
 		}
 	}
 
-	public List<NoCommentsDTO> commentsAll(int parent) throws Exception {
+	public List<NoCommentsDTO> commentsAll(String parent) throws Exception {
 		String sql = "select * from notice_reply where ntrp_parent = ? order by ntrp_seq desc";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
-			pstat.setInt(1, parent);
+			pstat.setString(1, parent);
 			try (ResultSet rs = pstat.executeQuery();) {
 				List<NoCommentsDTO> list = new ArrayList<>();
 				while (rs.next()) {
@@ -55,7 +54,7 @@ public class NoCommentsDAO {
 					String ntrp_contents = rs.getString("ntrp_contents");
 					String ntrp_writer = rs.getString("ntrp_writer");
 					Date ntrp_reg_date = rs.getDate("ntrp_reg_date");
-					int ntrp_parent = rs.getInt("ntrp_parent");
+					String ntrp_parent = rs.getString("ntrp_parent");
 					
 					NoCommentsDTO dto = new NoCommentsDTO(ntrp_seq,ntrp_contents,ntrp_writer,ntrp_reg_date,ntrp_parent);
 					list.add(dto);				
@@ -73,8 +72,32 @@ public class NoCommentsDAO {
 				){
 				pstat.setInt(1, seq);
 				int result = pstat.executeUpdate();
-				con.commit();
 				return result;
+		}
+	}
+	
+	public int pdelete(String parent) throws Exception {
+		String sql = "delete from notice_reply where ntrp_parent = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				pstat.setString(1, parent);
+				int result = pstat.executeUpdate();
+				return result;
+		}
+	}
+	
+	public int modify(int seq , String comments) throws Exception {
+		String sql = "update notice_reply set ntrp_contents=? where ntrp_seq = ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);	
+				){
+			pstat.setString(1, comments);
+			pstat.setInt(2, seq);
+			
+			int result = pstat.executeUpdate();
+			return result;
 		}
 	}
 
