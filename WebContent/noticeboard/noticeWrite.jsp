@@ -8,45 +8,24 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
+<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
+
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/all.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
-<script>
-$(function() {	
-	
-	$("#file-box").on("click",".delFile",function(){
-		$(this).parent().remove();
-	})
-
-
-	let fileCount = 1;
-	$("#addFile").on("click", function() {
-		let fileLine = $("<div>")
-		
-		let inputFile = $("<input>");
-		inputFile.attr("type", "file");
-		inputFile.attr("name","file"+fileCount++);
-		
-		let btnDel = $("<button>");
-		btnDel.addClass("delFile btn_s btn_white");
-		btnDel.attr("type","button");
-		btnDel.text("-");
-		
-		fileLine.append(inputFile);
-		fileLine.append(btnDel);
-		
-		$("#file-box").append(fileLine);
-	})
-})
-	
-</script>
 
 </head>
 <body>
@@ -80,8 +59,8 @@ $(function() {
 
 									</div>
 									<div class="cont">
-										<textarea placeholder="내용 입력" id="contents"
-											name="notice_contents" maxlength="2048"></textarea>
+										<textarea placeholder="내용 입력" id="summernote" 
+											name="notice_contents"></textarea>
 									</div>
 								</div>
 								<div class="bt_wrap">
@@ -96,11 +75,63 @@ $(function() {
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	
+	<script>
+$(function() {
+	$('#summernote').summernote({
+		height : 300,
+		minHeight : null,
+		maxHeight : null,
+		focus : true,
+		callbacks : {
+			onImageUpload : function(files) {
+				let editor = this;
+				let file = files[0];
+				let form = new FormData();
+				form.append("file", file);
+				console.log(file);
+				
+				$.ajax({
+					data: form,
+					type: "post",
+					url : '${pageContext.request.contextPath}/uploadImg.notice',
+					contentType : false,
+					processData : false,
+					enctype : 'multipart/form-data',
+				}).done(function(resp){
+					console.log("URI" + resp);
+					$(editor).summernote('insertImage', "${pageContext.request.contextPath}" + resp);
+				})
+			}
+		}
+	});	
+	
+	$("#file-box").on("click",".delFile",function(){
+		$(this).parent().remove();
+	})
+
+
+	let fileCount = 1;
+	$("#addFile").on("click", function() {
+		let fileLine = $("<div>")
+		
+		let inputFile = $("<input>");
+		inputFile.attr("type", "file");
+		inputFile.attr("name","file"+fileCount++);
+		
+		let btnDel = $("<button>");
+		btnDel.addClass("delFile btn_s btn_white");
+		btnDel.attr("type","button");
+		btnDel.text("-");
+		
+		fileLine.append(inputFile);
+		fileLine.append(btnDel);
+		
+		$("#file-box").append(fileLine);
+	})
+})
+	
+</script>
+	
 </body>
 </html>

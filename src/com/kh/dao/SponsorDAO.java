@@ -66,7 +66,7 @@ public class SponsorDAO {
 		}
 	}
 	public List<SponsorDTO> selectAll() throws Exception {
-		String sql = "select * from sponsor";
+		String sql = "select * from sponsor order by 1 desc";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				ResultSet rs = pstat.executeQuery();){

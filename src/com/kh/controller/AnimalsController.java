@@ -165,7 +165,7 @@ public class AnimalsController extends HttpServlet {
 					  response.getWriter();
 					  
 					  out.print("<script>"); out.print("alert('성공');");
-					  out.print("window.location.href='protectList.lost';");
+					  out.print("window.location.href='protectList.lost?page=1';");
 					  out.print("</script>"); out.flush(); }
 					 
 				}catch(Exception e) {
@@ -204,8 +204,8 @@ public class AnimalsController extends HttpServlet {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
 				int page = Integer.parseInt(request.getParameter("page"));
 				int result = dao.getViewCount(protectNo);
-				int boardCount = dao.getAllCount();
-				
+				int boardCount = dao.getAllReplyCount(protectNo);
+				System.out.println("boardcount"+boardCount);
 				List<ProtectReplyDTO> list = dao.getReplyList(protectNo,page);
 				int lastPage = (int)Math.ceil(boardCount/10.0);
 				if(result>0) {
@@ -237,6 +237,8 @@ public class AnimalsController extends HttpServlet {
 				dto = dao.findById(boardNo);
 				String data = g.toJson(dto);
 				if(result==1) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
 					response.getWriter().append(data);
 				
 				}
@@ -258,7 +260,7 @@ public class AnimalsController extends HttpServlet {
 				List<LostAnimalDTO> list = dao.mapList(page);
 				int boardCount = dao.getAllCount();
 				System.out.println(boardCount);
-				int lastPage = (int)Math.ceil(boardCount/8.0);
+				int lastPage = (int)Math.ceil(boardCount/6.0);
 				System.out.println("last"+lastPage);
 				double currentPercent = (double)(page-1)/(lastPage-1)*100.0;
 				
@@ -270,11 +272,85 @@ public class AnimalsController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");
 				dis.forward(request, response);
 				
+			}else if(url.equals("/protectUpdateForm.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				ProtectDetailDTO dto = dao.getDetail(protectNo);
+				request.setAttribute("protectNo", protectNo);
+				request.setAttribute("protectDetail", dto);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/protectUpdateForm.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/protectUpdate.lost")) {
+				System.out.println("가능");
+				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
+				System.out.println(directory);
+				int maxSize = 1024*1024*100;
+				
+				String encoding = "UTF-8";
+				try {
+					MultipartRequest multi =
+							new MultipartRequest(request, directory, maxSize, encoding,
+									new DefaultFileRenamePolicy());
+					
+					int protectNo = Integer.parseInt(multi.getParameter("protectNo"));
+					System.out.println(protectNo);
+					String protectName = multi.getParameter("protectName");
+					System.out.println(protectName);
+					String protectKind = multi.getParameter("protectKind");
+					String protectGender = multi.getParameter("protectGender");
+					String protectAddr = multi.getParameter("addResult");
+					String protectFindDate = multi.getParameter("protectFindDate");
+					String protectContent = multi.getParameter("protectContent");
+					
+					
+					
+					Enumeration files = multi.getFileNames();
+					String str = (String)files.nextElement();
+					String protectImage1 = multi.getFilesystemName(str);
+					
+					
+					String str2 = (String)files.nextElement();
+					String protectImage2 = multi.getFilesystemName(str2);
+					
+					
+					  ProtectionDTO dto = new
+					  ProtectionDTO(protectName,protectKind,protectFindDate,protectAddr,
+					  protectContent, protectGender,protectImage1,protectImage2);
+					 
+					System.out.println(dto.toString());
+					int result = dao.protectUpdate(dto,protectNo);
+					System.out.println();
+					  if(result >0) { response.setCharacterEncoding("UTF-8");
+					
+					  response.sendRedirect("protectDetail.lost?page=1&protectNo="+protectNo);
+					
+				 }
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				}else if(url.equals("/protectDelete.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				int result = dao.protectDelete(protectNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='protectList.lost?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-
 }
+		
+	
+
+		
+

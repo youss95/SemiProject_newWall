@@ -29,7 +29,7 @@
 		<div class="container">
 			<div class="contents">
 				<section class="">
-					<!— 하이 여기는 서브입니다 —>
+				
 				</section>
 			</div>
 		</div>
