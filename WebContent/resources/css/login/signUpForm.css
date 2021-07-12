@@ -4,7 +4,10 @@
 .signUpForm td{font-size: large;}
 .sinUpForm input {width:150px; height:30px;}
 .stgnUpForm type{width: 10px;}
-.signUpForm .inpform{width: 30%;}
+
+.signUpForm .inpform:not(#address1,#address2){width: 30%;}
+.signUpForm #address1{width: 245px;}
+
 .signUpForm table{border-spacing:20px; border-collapse: separate; margin: 0;}
 .signUpForm #join{position: relative; float: right;}
 .signUpForm h2{height:60px;padding:30px;font-size:30px;line-height:15px;font-weight:600; padding-left: 50%; padding-top: 0px;}
