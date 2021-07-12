@@ -24,7 +24,7 @@
 }
 
 .sp_pay_section .sp_pay_con {
-	width: 500px;
+	width: 550px;
 	/* height: 1000px; */
 	padding: 3%;
 	margin-top: 100px;
@@ -61,11 +61,19 @@
 	text-align: center;
 }
 
-.sp_pay_section .sp_pay_con .sp_pay_btncon button {
+.sp_pay_section .sp_pay_con .sp_pay_btncon .btn_sp_pay {
 	width: 40%;
 	height: 50px;
 	font-size: 20px;
-    margin: 2%;
+	margin: 2%;
+	font-weight: 600; 
+}
+.sp_pay_section .sp_pay_con .sp_pay_btncon .btn_sp_info {
+	width: 45%;
+	height: 50px;
+	font-size: 20px;
+	margin: 2%;
+	font-weight: 600; 
 }
 
 .sp_pay_section .sp_pay_con .sp_pay_title {
@@ -74,51 +82,24 @@
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	font-weight: 600; 
 }
+/*  */
+.sp_pay_section .sp_dp_none {
+	display: none;
+}
+
+
 </style>
 </head>
 <body>
 	<div class="wrap">
-	<!--	<header class="header">
- 			<h1 class="logo">
-				<a href="#">LOGO IMG</a>
-			</h1>
-			<div class="gnb">
-				<ul class="clear">
-					<li class="has"><a href="#">입양하기</a>
-						<ul class="s_menu clear adopt">
-							<li><a href="#">입양하기</a></li>
-							<li><a href="#">입양 후기</a></li>
-						</ul></li>
-					<li><a href="#">후원하기</a></li>
-					<li class="has"><a href="#">도움이필요해요</a>
-						<ul class="s_menu clear help">
-							<li><a href="#">잃어버렸어요</a></li>
-							<li><a href="#">보호중이에요</a></li>
-						</ul></li>
-					<li class="has"><a href="#">뉴스레터</a>
-						<ul class="s_menu clear news">
-							<li><a href="#">공지사항</a></li>
-							<li><a href="#">소식</a></li>
-						</ul></li>
-					<li><a href="#">봉사활동</a></li> 보류
-				</ul>
-			</div>
-			<div class="utils">
-				<ul class="clear">
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
-					<li><a href="#">마이페이지</a></li>
-					<li><a href="#">로그아웃</a></li>
-				</ul>
-			</div>
-			<div class="s_menu_bg"></div> 
-		</header>-->
+		
 		<div class="container">
 			<div class="contents">
 				<section class="sp_pay_section">
 					<!-- 하이 여기는 서브입니다 -->
-				
+
 					<div class="sp_pay_con">
 						<div class="sp_pay_incon">
 							<h2 class="sp_pay_title">입력 정보 확인</h2>
@@ -133,7 +114,7 @@
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_amount}" disabled>
 						</div>
-						<div class="sp_pay_incon">
+						<div class="sp_pay_incon sp_dp_none">
 							<h3 class="sp_pay_cal">14세 미만 여부(확인후 뺄것)</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_agecheck}" disabled>
@@ -153,13 +134,13 @@
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_birth}" disabled>
 						</div>
-						<div class="sp_pay_incon">
-							<h3 class="sp_pay_cal">기부자명</h3>
+						<div class="sp_pay_incon sp_age_down_set">
+							<h3 class="sp_pay_cal">청소년 기부자명</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_yname}" disabled>
 						</div>
-						<div class="sp_pay_incon">
-							<h3 class="sp_pay_cal">14세미만 기부자 생년월일</h3>
+						<div class="sp_pay_incon sp_age_down_set">
+							<h3 class="sp_pay_cal">청소년 기부자 생년월일</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_ybirth}" disabled>
 						</div>
@@ -183,30 +164,46 @@
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_address2}" disabled>
 						</div>
-						
-						<div class="sp_pay_incon">
+
+						<div class="sp_pay_incon sp_dp_none">
 							<h3 class="sp_pay_cal">개인정보 수집 약관 동의 여부(확인후 뺄것)</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_terms01}" disabled>
 						</div>
-						<div class="sp_pay_incon">
+						<div class="sp_pay_incon sp_dp_none">
 							<h3 class="sp_pay_cal">개인정보 제3자 제공 약관 동의 여부(확인후 뺄것)</h3>
 							<input type="text" class="inpform sp_inp_ck"
 								value="${sponsor.sponsor_terms02}" disabled>
 						</div>
-						<div class="sp_pay_incon">
-							<h3 class="sp_pay_cal">회원인 경우 ID</h3>
-							<input type="text" class="inpform sp_inp_ck"
+						<div class="sp_pay_incon sp_mb_id">
+							<h3 class="sp_pay_cal">회원 ID</h3>
+							<input type="text" class="inpform sp_inp_ck "
 								value="${sponsor.sponsor_mb_id}" disabled>
 						</div>
 						<div class="sp_pay_incon sp_pay_btncon">
-							<button type="button" class="btn_m btn_light btn_back">뒤로가기</button>
-                            <button type="button" id="check_module" class="btn_m btn_default">결제하기</button>
+							<button type="button" class="btn_m btn_light btn_sp_info">후원메인으로</button>
+							<button type="button" id="check_module" class="btn_m btn_default btn_sp_pay">결제하기</button>
 						</div>
 
 					</div>
 
 					<script>
+						if ('${sponsor.sponsor_agecheck}' == 'N') {
+							$('.sp_age_down_set').css('display', 'none');
+							if ('${sp_idcheck}' == 'N') {
+								$('.sp_mb_id').css('display', 'none');
+							} else if ('${sp_idcheck}' == 'Y') {
+								$('.sp_mb_id').css('display', 'block');
+							}
+						} else if ('${sponsor.sponsor_agecheck}' == 'Y') {
+							$('.sp_age_down_set').css('display', 'block');
+							if ('${sp_idcheck}' == 'N') {
+								$('.sp_mb_id').css('display', 'none');
+							} else if ('${sp_idcheck}' == 'Y') {
+								$('.sp_mb_id').css('display', 'block');
+							}
+						}
+
 						$("#check_module")
 								.click(
 										function() {
@@ -268,31 +265,36 @@
 																console
 																		.log(rsp);
 																if (rsp.success) {
-																	var msg = '결제가 완료되었습니다.';
-																	msg += '고유ID : '
+																	var msg = '결제가 완료되었습니다.\n';
+																	/* msg += '\n고유ID : '
 																			+ rsp.imp_uid;
-																	msg += '상점 거래ID : '
-																			+ rsp.merchant_uid;
-																	msg += '결제 금액 : '
+																	msg += '\n상점 거래ID : '
+																			+ rsp.merchant_uid; */
+																	msg += '\n결제 금액 : '
 																			+ rsp.paid_amount;
-																	msg += '카드 승인번호 : '
+																	msg += '\n카드 승인번호 : '
 																			+ rsp.apply_num;
-																	
-																	location.href = "${pageContext.request.contextPath}/PaymentComplete.sp?apply_num="+rsp.apply_num;
+																	msg += '\n\n 확인 후 메인 페이지로 이동합니다.'
+
+																	location.href = "${pageContext.request.contextPath}/PaymentComplete.sp?apply_num="
+																			+ rsp.apply_num;
 																} else {
-																	var msg = '결제에 실패하였습니다.';
-																	msg += '에러내용 : '
+																	var msg = '결제에 실패하였습니다. \n 후원하기 페이지로 이동합니다.';
+																	msg += '\n 에러내용 : '
 																			+ rsp.error_msg;
+																	location.href = "${pageContext.request.contextPath}/sponsor.sp";
 																}
 																alert(msg);
 															});
 										});
-						$(".btn_back").on("click", function() {
-							//location.href = "${pageContext.request.contextPath}/comInput.sp";
-							window.history.back();
-							//뒤로는가는데 내용을 다지우던지 해야할듯 바로 다시 결제 누르면 에러남**
-						});
-						
+						$(".btn_sp_info")
+								.on(
+										"click",
+										function() {
+											location.href = "${pageContext.request.contextPath}/sponsor.sp";
+											//window.history.back();
+											//뒤로는가는데 내용을 다지우던지 해야할듯 바로 다시 결제 누르면 에러남**
+										});
 					</script>
 					<!-- 하이 여기는 서브입니다 -->
 				</section>
@@ -302,7 +304,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	
+
 
 	<%-- <script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>  --%>
