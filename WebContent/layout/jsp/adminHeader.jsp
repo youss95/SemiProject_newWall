@@ -17,7 +17,7 @@
 				<ul>
 					<li class="depth2"><a href="#">회원작성 글</a></li>
 					<li class="depth2"><a href="#">뉴스</a></li>
-					<li class="depth2"><a href="#">공지사항</a></li>
+					<li class="depth2"><a href="${pageContext.request.contextPath}/noticeInfo.adm">공지사항</a></li>
 				</ul></li>
 			<li class="depth1"><a href="#">입양<i
 					class="fas fa-chevron-right"></i></a>
