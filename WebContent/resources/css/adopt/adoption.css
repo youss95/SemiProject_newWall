@@ -52,7 +52,7 @@
 .animal_history .cont:before{width:4px;height:60px;background-color:#ffa5a5;position:absolute;left:0;top:0;content:'';}
 .animal_history .cont>h2{height:60px;padding:0 30px;font-size:20px;line-height:60px;font-weight:600;}
 .animal_history .cont>div{padding:50px;}
-
+/* 입양신청 */
 .adoptRegForm .banner {width: 100%;height: 400px;opacity:.8;}
 .adoptRegForm .title{text-align: center;margin:40px auto 60px}
 .adoptRegForm .title h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin-bottom:15px;}
@@ -71,4 +71,50 @@
 .adoptRegForm .terms ol{margin-left:20px;}
 .adoptRegForm .terms ol li{font-size:14px;line-height:1.6;list-style: decimal;}
 .adoptRegForm .btn_wrap{text-align: right;}
+/* title common */
+.title{text-align: center;margin:40px auto 60px}
+.title>h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin-bottom:15px;}
+.title>h2:after{display:block;width:100%;height:8px;background-color:#5C969E;position: relative;top: -6px;z-index: -1;opacity: .8;content:'';}
+.title>p{font-size:13px;font-weight:300;}
+.title>p em{font-weight:600;}
+/* review */
+.review_list .list_wrap{font-size:0;}
+.review_list .list_wrap .item{display:inline-block;width:calc(50% - 20px);margin-right:40px;margin-bottom:40px;overflow:hidden;background-color:#cfe9ec50;vertical-align:top;}
+.review_list .list_wrap .item:nth-of-type(2n){margin-right:0;}
+.review_list .btn_wrap{padding-top:30px;border-top:1px solid #ddd;}
+.list_wrap .item .img_wrap{position:relative;width:50%;display:inline-block;height:180px;overflow: hidden;vertical-align: middle;}
+.list_wrap .item .img_wrap img{transition: all .3s ease;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.list_wrap .item > a{display:block;padding:30px;transition: all .4s ease;}
+.list_wrap .item > a:hover {background-color:#cfe9ecb0;}
+.list_wrap .item .txt{width:50%;display:inline-block;vertical-align:middle;padding-left:30px;}
+.list_wrap .item .txt ul li{display:inline-block;color:#999;line-height:11px;font-weight:300;vertical-align: top;font-size:12px;padding-right:15px;margin-right:15px;border-right:1px solid #ddd;}
+.list_wrap .item .txt ul li:last-child{padding-right:0;border-right:0;margin-right:0;}
+.list_wrap .item .txt ul li.date{display:block;border-right:0;margin-bottom:5px;}
+.list_wrap .item .txt h2{font-size:18px;font-weight:600;margin:15px 0 20px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;transition: all .3s ease;}
+.list_wrap .item .txt p{font-size:13px;font-weight:300;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;word-wrap:break-word; line-height: 1.3;max-height: 3.9em;transition: all .3s ease;}
+.review_list .search_box{text-align:right;margin-bottom:20px;}
+.review_list .search_box *{vertical-align:top;}
+.review_list .search_box .inp_slct{width:130px;min-width:auto;}
+.review_list .search_box .inpform{width:300px;margin-left:5px;}
+.review_detail .view .title{text-align:left;margin-bottom:30px;border-bottom:1px solid #ddd;padding-bottom:10px;}
+.review_detail .view .title h3{font-size:30px;font-weight: 600;margin-bottom:15px;}
+.review_detail .view .title p{font-weight: 400;margin-bottom:15px;}
+.review_detail .view .title ul li{display:inline-block;color:#999;line-height:11px;font-weight:300;vertical-align: top;font-size:12px;padding-right:15px;margin-right:15px;border-right:1px solid #ddd;}
+.review_detail .view .title ul li:last-child{border-right:0;}
+.review_detail .view .contents{min-height:180px;padding-bottom:30px;border-bottom:1px solid #ddd;margin-bottom:30px;}
+.review_detail .btn_wrap {text-align:right;}
+.review_detail .btn_wrap .btn_list{float:left;}
+.review_write .view .title{text-align:left;margin-bottom:30px;}
+.review_write .view .title ul li{display:inline-block;color:#999;line-height:11px;font-weight:300;vertical-align: top;font-size:12px;padding-right:15px;margin-right:15px;border-right:1px solid #ddd;}
+.review_write .view .title ul li:last-child{border-right:0;}
+.review_write .view .cont{border-bottom:1px solid #ddd;margin-bottom:30px;}
+.review_write h3{font-weight:600;font-size: 20px;margin-bottom: 20px;border-bottom: 2px solid #5C969E;margin:40px 0 20px;padding-bottom:15px;}
+.review_write dl dt{margin-bottom:10px;font-weight:600;}
+.review_write dl dd{margin-bottom:30px;}
+.review_write .btn_wrap .btn_line{float:left;}
+.review_write .btn_wrap .btn_regi{float:right;}
+.review_write.modify .btn_wrap{text-align:right;}
+.review_write.modify .btn_wrap .btn_del{margin-right:5px;}
+.review_write.modify .photo_thumb>.f_name{display:inline-block;line-height:40px;margin-right:5px;}
+.review_write.modify .photo_thumb>.f_name+button{width:20px;height:20px;border-radius:50%;border:1px solid #ddd;}
 
