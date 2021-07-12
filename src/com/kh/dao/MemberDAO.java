@@ -28,6 +28,18 @@ public class MemberDAO {
 	}
 	private MemberDAO() {}
 	
+	
+	public boolean isIdAvailable(String id) throws Exception{
+		String sql = "select * from member where user_id =?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			try(ResultSet rs = pstat.executeQuery()){
+				return !rs.next();
+			}
+		}
+	}
+	
 	public boolean isLoginOk(String id, String pw) throws Exception {
 		String sql = "select * from member where user_id=? and user_password=?";
 		try(Connection con = this.getConnection();
@@ -37,6 +49,29 @@ public class MemberDAO {
 			try(ResultSet rs = pstat.executeQuery()){
 				return rs.next();
 			}
+		}
+	}
+	
+	public boolean isPwOk(String id, String pw) throws Exception{
+		String sql = "select * from member where user_id = ? and user_password=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			pstat.setNString(2, pw);
+			try(ResultSet rs = pstat.executeQuery()){
+				return rs.next();
+			}
+		}
+	}
+	
+	public int changePw(String id, String pw) throws Exception{
+		String sql = "update member set user_password=? where user_id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, pw);
+			pstat.setNString(2, id);
+			int result = pstat.executeUpdate();
+			return result;
 		}
 	}
 	
@@ -94,20 +129,12 @@ public class MemberDAO {
 		}
 	}
 	
-	public int modify(MemberDTO dto) throws Exception{
-		String sql = "update member set user_password=?, email = ?, name = ?, birthday = ?, contact = ?, status = ?, postcode = ?, address1 = ?, address2 = ? where user_id=?";
+	public int modify(String column, String value, String id) throws Exception{
+		String sql = "update member set "+column+"=? where user_id=?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setNString(1, dto.getUser_password());
-			pstat.setNString(2, dto.getEmail());
-			pstat.setNString(3, dto.getName());
-			pstat.setDate(4, dto.getBirthday());
-			pstat.setNString(5, dto.getContact());
-			pstat.setString(6, String.valueOf(dto.getStatus()));
-			pstat.setNString(7, dto.getPostcode());
-			pstat.setNString(8, dto.getAddress1());
-			pstat.setNString(9, dto.getAddress2());
-			pstat.setNString(10, dto.getUser_id());
+			pstat.setNString(1, value);
+			pstat.setNString(2, id);
 			int result = pstat.executeUpdate();
 			return result;
 		}

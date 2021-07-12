@@ -321,7 +321,7 @@
 			$(this).parent().remove();
 	
 			
-		})
+		});
 
 		let fileCount = 1;
 		$("#addFile").on("click", function() {
@@ -347,11 +347,19 @@
 		});
 		
 		$("#modi_thumbnail").on("click", function() {
+			let valtxt = $(".f_name").text();
 			let inputFile = $("<input>");
 			inputFile.attr("type", "file");
 			inputFile.attr("name", "thumbnail");
 			inputFile.attr("id", "thumbnail");
 			$(this).after(inputFile);
+
+			let inphd = $("<input>");
+			inphd.attr("type", "hidden");
+			inphd.attr("name", "deleteImg");
+			inphd.attr("value", valtxt);
+			$("#thumbnail").after(inphd);
+			
 			$(this).siblings('p').remove();
 			$(this).remove();
 		});
