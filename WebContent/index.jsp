@@ -113,7 +113,7 @@
 				<div class="swiper-slide">
 					<div class="l_side">
 						<div class="img_wrap">
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/newsView.news?news_seq=news00001">
 								<img src="${pageContext.request.contextPath}/resources/images/main/img_news02.png">
 							</a>
 						</div>
@@ -132,7 +132,7 @@
 				<div class="swiper-slide">
 					<div class="l_side">
 						<div class="img_wrap">
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/newsView.news?news_seq=news00002">
 								<img src="${pageContext.request.contextPath}/resources/images/main/img_news03.png">
 							</a>
 						</div>
@@ -153,7 +153,7 @@
 				<div class="swiper-slide">
 					<div class="l_side">
 						<div class="img_wrap">
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/newsView.news?news_seq=news00003">
 								<img src="${pageContext.request.contextPath}/resources/images/main/img_news04.png">
 							</a>
 						</div>
