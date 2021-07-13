@@ -7,7 +7,7 @@
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
-			<li class="has"><a href="#">입양하기</a>
+			<li class="has"><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양하기</a>
 				<ul class="s_menu clear adopt">
 					<li><a
 						href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양하기</a></li>

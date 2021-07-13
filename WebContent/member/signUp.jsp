@@ -10,7 +10,7 @@
 <jsp:include page="/layout/jsp/commonModal.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 <style>
@@ -172,7 +172,7 @@
 							</p>
 						</div>
 
-						<form action="" method="post" id="">
+						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="">
 							<!-- <h3>개인 정보</h3> -->
 							<div class="su_persnal_info">
 								<dl>
@@ -356,6 +356,16 @@
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
 	<script>
 	$(function() {
+		document.getElementById("searchAddr").onclick = function () {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    let roadAddr = data.roadAddress; // 도로명 주소 변수
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("address1").value = roadAddr;
+                }
+            }).open();
+        }
 		let now = new Date();
 		let year = now.getFullYear();
 		for (let i = year; i >= 1900; i--) {
