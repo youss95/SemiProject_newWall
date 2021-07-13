@@ -105,13 +105,12 @@ $(function() {
 									<div class="info">
 										<dl id="file-box">
 											<dt>파일 첨부</dt>
-											<button class="btn_s btn_line" id="addFile" type="button">+</button>
+											<button class="btn_s btn_line" name="addFile" id="addFile" type="button">+</button>
 										</dl>
 
 									</div>
 									<div class="cont">
-										<textarea placeholder="내용 입력" id="summernote" 
-											name="notice_contents"></textarea>
+										<textarea placeholder="내용 입력" id="summernote" name="notice_contents"></textarea>
 									</div>
 								</div>
 								<div class="bt_wrap">

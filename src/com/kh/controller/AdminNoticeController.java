@@ -2,6 +2,8 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +19,7 @@ import com.kh.config.FileConfig;
 import com.kh.dao.NoCommentsDAO;
 import com.kh.dao.NoticeDAO;
 import com.kh.dao.NoticeFileDAO;
+import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.NoCommentsDTO;
 import com.kh.dto.NoticeDTO;
 import com.kh.dto.NoticeFileDTO;
@@ -94,13 +97,19 @@ public class AdminNoticeController extends HttpServlet {
 
 				MultipartRequest multi = new MultipartRequest(request, filesPath, maxSize, "utf8",
 						new DefaultFileRenamePolicy());
+				
+//				String addFile = multi.getFilesystemName("addFile");
+//				addFile = Normalizer.normalize(addFile, Form.NFC);
 
-				Set<String> fileNames = multi.getFileNameSet();
-				for (String fileName : fileNames) {
+				Set<String> fileNames = multi.getFileNameSet(); 
+				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
+					if(oriName == null) continue;
+					oriName = Normalizer.normalize(oriName, Form.NFC);
 					String sysName = multi.getFilesystemName(fileName);
+					sysName = Normalizer.normalize(sysName, Form.NFC);
 
-					if (!fileName.contentEquals("files") && oriName != null) {
+					if(!fileName.contentEquals("files") && !fileName.contentEquals("addFile")) {
 						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
@@ -211,12 +220,15 @@ public class AdminNoticeController extends HttpServlet {
 				
 				int result = dao.modify(seq, title, contents);
 				
-				Set<String> fileNames = multi.getFileNameSet();
+				Set<String> fileNames = multi.getFileNameSet(); 
 				for(String fileName : fileNames) {
 					String oriName = multi.getOriginalFileName(fileName);
+					if(oriName == null) continue;
+					oriName = Normalizer.normalize(oriName, Form.NFC);
 					String sysName = multi.getFilesystemName(fileName);
-					
-					if(oriName != null) {
+					sysName = Normalizer.normalize(sysName, Form.NFC);
+
+					if(!fileName.contentEquals("files") && !fileName.contentEquals("addFile")) {
 						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}

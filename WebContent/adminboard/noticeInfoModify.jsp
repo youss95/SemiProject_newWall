@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
+	
 <script>
 	$(function() {	
 		$('#summernote').summernote({
@@ -39,7 +40,7 @@
 					$.ajax({
 						data: form,
 						type: "post",
-						url : '${pageContext.request.contextPath}/uploadImg.notice',
+						url : '${pageContext.request.contextPath}/uploadImg.sumAdm',
 						contentType : false,
 						processData : false,
 						enctype : 'multipart/form-data',
@@ -115,7 +116,7 @@
 									<div class="info">
 										<dl id="file-box">
 											<dt>파일 첨부</dt>
-											<button class="btn_s btn_line" id="addFile" type="button">+</button>
+											<button class="btn_s btn_line" id="addFile" name="addFile" type="button">+</button>
 											<c:forEach var="file" items="${flist}">
 												<div>
 													<div class="modiFile">${file.oriName}</div>
@@ -131,7 +132,7 @@
 								</div>
 								<div class="bt_wrap">
 									<button class="btn_m btn_primary" type="submit">등록</button>
-									<a href="javascript:history.back()" class="btn_m btn_white" type="button">취소</a>
+									<button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
 								</div>
 							</div>
 						</form>

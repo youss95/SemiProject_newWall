@@ -39,7 +39,7 @@
 					$.ajax({
 						data: form,
 						type: "post",
-						url : '${pageContext.request.contextPath}/uploadImg.news',
+						url : '${pageContext.request.contextPath}/newsuploadImg.newsAdm',
 						contentType : false,
 						processData : false,
 						enctype : 'multipart/form-data',
@@ -107,7 +107,7 @@
 						<div class="board_title">
 							<strong>뉴스</strong>
 						</div>
-						<form action="${pageContext.request.contextPath}/newsInfoView.sumAdm" method="post" enctype="multipart/form-data">
+						<form action="${pageContext.request.contextPath}/newsModifyView.newsAdm" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
 								<div class="newsboard_write">
 									<div class="title">
