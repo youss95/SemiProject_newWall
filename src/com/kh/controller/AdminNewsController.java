@@ -2,6 +2,8 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +114,9 @@ public class AdminNewsController extends HttpServlet {
 			String photo = multi.getFilesystemName("news_photo");//포토
 			
 			String oriName = multi.getOriginalFileName("news_photo");
+			oriName = Normalizer.normalize(oriName, Form.NFC);
 			String sysName = multi.getFilesystemName("news_photo");
+			sysName = Normalizer.normalize(sysName, Form.NFC);
 			
 			fdao.insert(new NoticeFileDTO(0,oriName, sysName, null, seq));
 			
@@ -217,7 +221,9 @@ public class AdminNewsController extends HttpServlet {
 //			String originFile = multi.getFilesystemName("originFile");
 
 			String oriName = multi.getOriginalFileName("news_photo");
+			oriName = Normalizer.normalize(oriName, Form.NFC);
 			String sysName = multi.getFilesystemName("news_photo");
+			sysName = Normalizer.normalize(sysName, Form.NFC);
 			
 			if(oriName != null) {
 				fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
