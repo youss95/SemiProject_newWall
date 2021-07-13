@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 				//----------------------------------------------------------------------------------------- 회원가입 약관으로
 				response.sendRedirect("member/agreeTerms.jsp");
 			}else if(url.contentEquals("/signup.mem")) { 
-				//----------------------------------------------------------------------------------------- 회원가입 페이지로
+				//---------------------------------------------------------signUp.jsp페이지 새로생성함----------- 회원가입 페이지로
 				response.sendRedirect("member/signUpForm.jsp");
 			}else if(url.contentEquals("/signupProc.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 요청 처리
