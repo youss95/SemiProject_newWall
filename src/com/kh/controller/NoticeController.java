@@ -83,71 +83,66 @@ public class NoticeController extends HttpServlet {
 				request.setAttribute("keyword", keyword);
 				request.getRequestDispatcher("noticeboard/noticeList.jsp").forward(request, response);
 			
-			}else if(url.contentEquals("/noticeWrite.notice")) {
-				//공지사항 글쓰기로 이동
-				response.sendRedirect("noticeboard/noticeWrite.jsp");
-			
-			}else if(url.contentEquals("/write.notice")) {
-				//공지사항 글쓰기값 받아오기
-				String seq = dao.getSeq(); //공지사항 넘버
-				
-				String filesPath = request.getServletContext().getRealPath("files");//파일
-				
-				File filesFolder = new File(filesPath);
-				int maxSize = 1024 * 1024 * 100;
-				
-				if(!filesFolder.exists()) {
-					filesFolder.mkdir();
-				}
-				
-				MultipartRequest multi = new MultipartRequest(request,filesPath,maxSize,"utf8",
-						new DefaultFileRenamePolicy());
-				
-//				Enumeration files = multi.getFileNames();
-//	            String str = (String)files.nextElement();
-//	            String lostFileRealName = multi.getFilesystemName(str);
+//			}else if(url.contentEquals("/noticeWrite.notice")) {
+//				//공지사항 글쓰기로 이동
+//				response.sendRedirect("noticeboard/noticeWrite.jsp");
+//			
+//			}else if(url.contentEquals("/write.notice")) {
+//				//공지사항 글쓰기값 받아오기
+//				String seq = dao.getSeq(); //공지사항 넘버
 //				
-				Set<String> fileNames = multi.getFileNameSet();
-				for(String fileName : fileNames) {
-					String oriName = multi.getOriginalFileName(fileName);
-					String sysName = multi.getFilesystemName(fileName);
-										
-					if(!fileName.contentEquals("files") && oriName != null) {
-						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
-					}
-				}
-				
-//				String writer = ((AdminDTO)(request.getSession().getAttribute("login"))).getAdmin_id();//운영자 아이디 로그인완료시 주석취소
-				String writer = "admin";
-				String title = multi.getParameter("notice_title");//공지사항 타이틀
-				title = XSSFilter(title);
-				
-				String contents = multi.getParameter("notice_contents");//공지사항 내용
-//				contents = XSSFilter(contents);
-				
-				dao.newNotice(new NoticeDTO(seq, title, contents, writer, null, 0));
-				
-				response.sendRedirect("noticeBoard.notice?cpage=1");
-				
-			}else if (url.contentEquals("/uploadImg.notice")) {
-				//썸머노트 이미지 업로드
-				response.setCharacterEncoding("utf8");
-				response.setContentType("text/html;charset=utf8");
-
-				String realPath = request.getServletContext().getRealPath("upload/notice");
-				File filesPath = new File(realPath);
-				System.out.println(realPath);
-
-				if(!filesPath.exists()) {filesPath.mkdir();}
-				MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
-
-				String sysName = multi.getFilesystemName("file");
-				//				sysName = URLEncoder.encode(sysName,"euc-kr");
-				String returnPath = "/upload/notice/" + sysName;
-
-				System.out.println("returnPath : " + returnPath);
-				response.getWriter().append(returnPath);
-				
+//				String filesPath = request.getServletContext().getRealPath("files");//파일
+//				
+//				File filesFolder = new File(filesPath);
+//				int maxSize = 1024 * 1024 * 100;
+//				
+//				if(!filesFolder.exists()) {
+//					filesFolder.mkdir();
+//				}
+//				
+//				MultipartRequest multi = new MultipartRequest(request,filesPath,maxSize,"utf8",
+//						new DefaultFileRenamePolicy());
+//
+//				Set<String> fileNames = multi.getFileNameSet();
+//				for(String fileName : fileNames) {
+//					String oriName = multi.getOriginalFileName(fileName);
+//					String sysName = multi.getFilesystemName(fileName);
+//										
+//					if(!fileName.contentEquals("files") && oriName != null) {
+//						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
+//					}
+//				}
+//				
+//				String writer = "admin";
+//				String title = multi.getParameter("notice_title");//공지사항 타이틀
+//				title = XSSFilter(title);
+//				
+//				String contents = multi.getParameter("notice_contents");//공지사항 내용
+//
+//				
+//				dao.newNotice(new NoticeDTO(seq, title, contents, writer, null, 0));
+//				
+//				response.sendRedirect("noticeBoard.notice?cpage=1");
+//				
+//			}else if (url.contentEquals("/uploadImg.notice")) {
+//				//썸머노트 이미지 업로드
+//				response.setCharacterEncoding("utf8");
+//				response.setContentType("text/html;charset=utf8");
+//
+//				String realPath = request.getServletContext().getRealPath("upload/notice");
+//				File filesPath = new File(realPath);
+//				System.out.println(realPath);
+//
+//				if(!filesPath.exists()) {filesPath.mkdir();}
+//				MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
+//
+//				String sysName = multi.getFilesystemName("file");
+//				//				sysName = URLEncoder.encode(sysName,"euc-kr");
+//				String returnPath = "/upload/notice/" + sysName;
+//
+//				System.out.println("returnPath : " + returnPath);
+//				response.getWriter().append(returnPath);
+//				
 			}else if (url.contentEquals("/noticeView.notice")) {
 				//공지사항 보기
 				String seq = request.getParameter("notice_seq");
@@ -168,78 +163,79 @@ public class NoticeController extends HttpServlet {
 				
 				request.getRequestDispatcher("noticeboard/noticeView.jsp").forward(request, response);
 				
-			}else if (url.contentEquals("/noticeDelete.notice")) {
-				//공지사항 삭제하기
-				String seq = request.getParameter("notice_seq");
-				
-				dao.delete(seq);
-				
-				String parent = seq;
-				
-				ncdao.pdelete(parent);
-				
-				response.sendRedirect("noticeBoard.notice?cpage=1");
-			
-			}else if (url.contentEquals("/noticeModify.notice")) {
-				// 공지사항 값을 받아서 수정jsp로 보내기
-				String seq = request.getParameter("notice_seq");
-				
-				dto = dao.detail(seq);
-				
-				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
-				
-				request.setAttribute("noticeView", dto);
-				request.setAttribute("flist", flist);
-				
-				request.getRequestDispatcher("noticeboard/noticeModify.jsp").forward(request, response);
-				
-			}else if(url.contentEquals("/noticeModifyView.notice")) {
-				//공지사항 글 수정
-				
-				String filesPath = request.getServletContext().getRealPath("files");
-				
-				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8",
-						new DefaultFileRenamePolicy());
-				
-				String seq = multi.getParameter("notice_seq");
-				
-				String title = multi.getParameter("notice_title");
-				title = XSSFilter(title);
-				
-				
-				String contents = multi.getParameter("notice_contents");
-//				contents = XSSFilter(contents);
-				
-				String[] delTargets = multi.getParameterValues("delete");
-				if (delTargets != null) { // 삭제할 항목이 null이 아닌경우
-					for (String target : delTargets) {
-						String sysName = fdao.getSysName(Integer.parseInt(target));
-						File targetFile = new File(filesPath + "/" + sysName);
-						boolean result = targetFile.delete();
-						if (result) {
-							fdao.delete(Integer.parseInt(target));
-						}
-					}
-				}
-				
-				int result = dao.modify(seq, title, contents);
-				
-				Set<String> fileNames = multi.getFileNameSet();
-				for(String fileName : fileNames) {
-					String oriName = multi.getOriginalFileName(fileName);
-					String sysName = multi.getFilesystemName(fileName);
-					
-					if(oriName != null) {
-						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
-					}
-				}
-				
-				dto = dao.detail(seq);
-				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
-				request.setAttribute("flist", flist);
-				response.sendRedirect("noticeView.notice?notice_seq=" + seq);
-				
 			}
+//			else if (url.contentEquals("/noticeDelete.notice")) {
+//				//공지사항 삭제하기
+//				String seq = request.getParameter("notice_seq");
+//				
+//				dao.delete(seq);
+//				
+//				String parent = seq;
+//				
+//				ncdao.pdelete(parent);
+//				
+//				response.sendRedirect("noticeBoard.notice?cpage=1");
+//			
+//			}else if (url.contentEquals("/noticeModify.notice")) {
+//				// 공지사항 값을 받아서 수정jsp로 보내기
+//				String seq = request.getParameter("notice_seq");
+//				
+//				dto = dao.detail(seq);
+//				
+//				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
+//				
+//				request.setAttribute("noticeView", dto);
+//				request.setAttribute("flist", flist);
+//				
+//				request.getRequestDispatcher("noticeboard/noticeModify.jsp").forward(request, response);
+//				
+//			}else if(url.contentEquals("/noticeModifyView.notice")) {
+//				//공지사항 글 수정
+//				
+//				String filesPath = request.getServletContext().getRealPath("files");
+//				
+//				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8",
+//						new DefaultFileRenamePolicy());
+//				
+//				String seq = multi.getParameter("notice_seq");
+//				
+//				String title = multi.getParameter("notice_title");
+//				title = XSSFilter(title);
+//				
+//				
+//				String contents = multi.getParameter("notice_contents");
+////				contents = XSSFilter(contents);
+//				
+//				String[] delTargets = multi.getParameterValues("delete");
+//				if (delTargets != null) { // 삭제할 항목이 null이 아닌경우
+//					for (String target : delTargets) {
+//						String sysName = fdao.getSysName(Integer.parseInt(target));
+//						File targetFile = new File(filesPath + "/" + sysName);
+//						boolean result = targetFile.delete();
+//						if (result) {
+//							fdao.delete(Integer.parseInt(target));
+//						}
+//					}
+//				}
+//				
+//				int result = dao.modify(seq, title, contents);
+//				
+//				Set<String> fileNames = multi.getFileNameSet();
+//				for(String fileName : fileNames) {
+//					String oriName = multi.getOriginalFileName(fileName);
+//					String sysName = multi.getFilesystemName(fileName);
+//					
+//					if(oriName != null) {
+//						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
+//					}
+//				}
+//				
+//				dto = dao.detail(seq);
+//				List<NoticeFileDTO> flist = fdao.selectBySeq(seq);
+//				request.setAttribute("flist", flist);
+//				response.sendRedirect("noticeView.notice?notice_seq=" + seq);
+//				
+//			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();

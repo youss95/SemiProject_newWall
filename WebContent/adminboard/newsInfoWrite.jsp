@@ -2,30 +2,27 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>관리자페이지</title>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
-
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-
-
-<script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
+	
+	<script>
 	$(function(){
 		$('#summernote').summernote({
 			height : 300,
@@ -69,19 +66,18 @@
 
 </script>
 
-
 </head>
 <body>
 	<div class="wrap">
-		<jsp:include page="../layout/jsp/header.jsp"></jsp:include>
-		<div class="container">
-			<div class="contents">
-				<section class="notice_list">
-					<div class="board_wrap">
+		<jsp:include page="../layout/jsp/adminHeader.jsp"></jsp:include>
+		<div class="main">
+			<div class="container">
+				<section class="shadow-sm rounded">
+					<div class="board_wrap" style="width:95%;">
 						<div class="board_title">
 							<strong>뉴스</strong>
 						</div>
-						<form action="${pageContext.request.contextPath}/write.news" method="post" enctype="multipart/form-data">
+						<form action="${pageContext.request.contextPath}/write.newsAdm" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
 								<div class="newsboard_write">
 									<div class="title">
@@ -117,6 +113,8 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	
+
 </body>
+
 </html>

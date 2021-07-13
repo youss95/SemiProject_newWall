@@ -63,11 +63,11 @@
 							</div>
 						</c:forEach>
 						<div class="board_page">
-							<div class="bt_wrap">
-								<button class="writeBtn">
-									<i class="far fa-edit"></i>글쓰기
-								</button>
-							</div>
+<!-- 							<div class="bt_wrap"> -->
+<!-- 								<button class="writeBtn"> -->
+<!-- 									<i class="far fa-edit"></i>글쓰기 -->
+<!-- 								</button> -->
+<!-- 							</div> -->
 							<c:forEach var="i" items="${navi}" varStatus="s">
 								<c:choose>
 									<c:when test="${i == '>'}">

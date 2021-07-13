@@ -26,9 +26,9 @@
 			<div class="container">
 				<section class="shadow-sm rounded">
 					<div class="title_area">
-						<h2>공지 사항</h2>
+						<h2>뉴스</h2>
 					</div>
-					<div class="contents notice_list">
+					<div class="contents news_list">
 						<table class="table table-hover text-center">
 							<colgroup>
 								<col width="10%">
@@ -47,19 +47,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="i" items="${noticeAll}" varStatus="vs">
+								<c:forEach var="i" items="${newsAll}" varStatus="vs">
 									<tr>
 										<td>${rowNum -(cpage-1)*10 - vs.index}</td>
-										<td><a class="t_link" href="${pageContext.request.contextPath}/noticeInfoView.sumAdm?notice_seq=${i.notice_seq}">${i.notice_title}</a></td>
-										<td>${i.notice_writer}</td>
-										<td>${i.notice_reg_date}</td>
-										<td>${i.notice_view}</td>
+										<td><a class="t_link" href="${pageContext.request.contextPath}/newsInfoView.newsAdm?news_seq=${i.news_seq}">${i.news_title}</a></td>
+										<td>${i.news_writer}</td>
+										<td>${i.news_reg_date}</td>
+										<td>${i.news_view}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						<div class="btn_wrap" style="text-align : right;">
-							<a href="${pageContext.request.contextPath}/adminboard/noticeInfoWrite.jsp" class="btn_m btn_default">글쓰기</a>
+							<a href="${pageContext.request.contextPath}/adminboard/newsInfoWrite.jsp" class="btn_m btn_default">글쓰기</a>
 						</div>
 						
 						<div class="page_nav">
@@ -67,15 +67,15 @@
 							<c:choose>
 								<c:when test="${i == '>'}">
 									<a
-										href="${pageContext.request.contextPath}/noticeInfo.sumAdm?cpage=${navi[s.index-1]+1}">${i}</a>
+										href="${pageContext.request.contextPath}/newsInfo.newsAdm?cpage=${navi[s.index-1]+1}">${i}</a>
 								</c:when>
 								<c:when test="${i == '<'}">
 									<a
-										href="${pageContext.request.contextPath}/noticeInfo.sumAdm?cpage=${navi[s.index+1]-1}">${i}</a>
+										href="${pageContext.request.contextPath}/newsInfo.newsAdm?cpage=${navi[s.index+1]-1}">${i}</a>
 								</c:when>
 								<c:otherwise>
 									<a
-										href="${pageContext.request.contextPath}/noticeInfo.sumAdm?cpage=${i}">${i}</a>
+										href="${pageContext.request.contextPath}/newsInfo.newsAdm?cpage=${i}">${i}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

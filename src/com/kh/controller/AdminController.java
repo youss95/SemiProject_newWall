@@ -26,10 +26,12 @@ import com.kh.dao.AdminDAO;
 import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
 import com.kh.dao.NoticeDAO;
+import com.kh.dao.NoticeFileDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.NoticeDTO;
+import com.kh.dto.NoticeFileDTO;
 import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -63,7 +65,7 @@ public class AdminController extends HttpServlet {
 
 		return d;
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 
@@ -297,29 +299,6 @@ public class AdminController extends HttpServlet {
 					request.getRequestDispatcher("admin/adSponsorList.jsp?cpage=1").forward(request, response);
 				//}
 				
-			}else if(url.contentEquals("noticeInfo.adm")) {
-				//관리자페이지에서 공지사항보기
-				int cpage = Integer.parseInt(request.getParameter("cpage")); //게시글 네비
-				NoticeDAO nodao = NoticeDAO.getInstance(); 
-
-				int endNum = cpage * BoardConfig.RECORD_COUNT_PER_PAGE;
-				int startNum = endNum - (BoardConfig.RECORD_COUNT_PER_PAGE -1);
-			
-				
-				List<NoticeDTO> nolist;
-				
-				nolist = nodao.getPageList(startNum, endNum);
-				
-				
-				List<String> pageNavi = nodao.getPageNavi(cpage,null,null);
-				int rowNum = nodao.getRecordCount();
-				
-				request.setAttribute("noticeAll", nolist);
-				request.setAttribute("navi", pageNavi);
-				request.setAttribute("cpage", cpage);
-				request.setAttribute("rowNum", rowNum);
-				request.getRequestDispatcher(ctxPath + "/noticeInfo.jsp").forward(request, response);
-			
 			}
 
 		}catch(Exception e) {
