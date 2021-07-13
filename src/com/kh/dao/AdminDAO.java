@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.kh.config.Db;
 import com.kh.config.PageConfig;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
@@ -595,6 +596,15 @@ public class AdminDAO {
 
 	}
 
-	
+	//임시보호 게시판 글 개수 가져오기
+	public int pTotalCount() throws Exception {
+		String sql = "select count(*) from protect_animal";
+		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
+		try(ResultSet rs = pstmt.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+		}
+		}
+	}
 
 }

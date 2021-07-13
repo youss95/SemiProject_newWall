@@ -78,8 +78,8 @@
 						<div class="news_bt_wrap">
 							<a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1" class="btn_s btn_light">목록</a> 
 							<%--<c:if test="${login.user_id == admin_id} || ${login.user_id == newsView.news_writer}"> --%>
-							<a href="${pageContext.request.contextPath}/newsModify.news?news_seq=${newsView.news_seq}" class="btn_s btn_primary" id="newsmodify">수정</a> 
-							<a href="${pageContext.request.contextPath}/newsDelete.news?news_seq=${newsView.news_seq}" class="btn_s btn_default" id="newsdelete">삭제</a>
+<%-- 							<a href="${pageContext.request.contextPath}/newsModify.news?news_seq=${newsView.news_seq}" class="btn_s btn_primary" id="newsmodify">수정</a>  --%>
+<%-- 							<a href="${pageContext.request.contextPath}/newsDelete.news?news_seq=${newsView.news_seq}" class="btn_s btn_default" id="newsdelete">삭제</a> --%>
 							<%--</c:if> --%>
 						</div>
 					</div>
