@@ -5,9 +5,10 @@
 	justify-content:center;
 }
 .mypage .card{
-	min-width:500px;
+	min-width:1100px;
 }
 .mypage *{text-align:center;}
+.mypage div{}
 .mypage .list-group-item{
 	display:flex;
 	justify-content:space-between;
@@ -16,7 +17,6 @@
 	padding:0px;
 }
 .mypage .list-group-item .label{
-	background-color:lightgray;
 	align-items:stretch;
 	width:20%;
 }
@@ -27,13 +27,13 @@
 	width:15%;
 }
 
-.mypage .fa-edit,
-.mypage .fa-times,
-.mypage .fa-check-circle{
+#sp_com_input .fa-edit,
+#sp_com_input .fa-times,
+#sp_com_input .fa-check-circle{
 	cursor:pointer;
 	margin-left:3px;
 	margin-right:3px;
 }
-.mypage .fa-times, .mypage .fa-check-circle{
+#sp_com_input .fa-times, #sp_com_input .fa-check-circle{
 	display:none;
 }
