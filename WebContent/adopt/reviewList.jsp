@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -32,109 +30,65 @@
 									<option value="contents">글내용</option>
 								</select>
 							</div>
-							<input type="text" class="inpform" placeholder="검색하실 내용을 입력하세요.">
+							<input type="text" class="inpform" placeholder="검색하실 내용을 입력하세요." name="inp_contents">
 							<button class="btn_m btn_default">검색</button>
 							<input type="hidden" name="cpage" value="1">
 						</form>
 						
 					</div>
 					<div class="list_wrap">
-					
-						<c:forEach var="i" items="${list}">
-							<%-- <tr>
-								<td>${rowNum -(cpage-1)*10 - vs.index}</td>
-								<td><a class="t_link" href="${pageContext.request.contextPath}/animalInfoDetail.adm?code_seq=${i.code_seq}">${i.code_seq}</a></td>
-								<td>${i.an_name}</td>
-								<td>${i.an_category}</td>
-								<td>${i.an_status}</td>
-								<td>${i.an_date}</td>
-							</tr> --%>
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<p class="nodata">검색결과가 없습니다.</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="i" items="${list}">
+									<div class="item">
+										<a href="${pageContext.request.contextPath}/reviewDetail.apt?review_seq=${i.review_seq}">
+											<div class="img_wrap">
+												<img src="${pageContext.request.contextPath}/upload/review/${i.review_thumbnail}">
+											</div>
+											<div class="txt">
+												<ul>
+													<li class="date">등록일 : ${i.reg_date}</li>
+													<li class="view">조회수 : ${i.review_view }</li>
+													<li class="like">좋아요 : ${i.review_like }</li>
+												</ul>
+												<h2>${i.review_title }</h2>
+												<p>${i.review_introduce }</p>
+												<span class="writer">작성자 : ${i.review_writer }</span>
+											</div>
+										</a>
+									</div> 
+								
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 							
-							<div class="item">
-								<a href="${pageContext.request.contextPath}/reviewDetail.apt?review_seq=${i.review_seq}">
-									<div class="img_wrap">
-										<img src="${pageContext.request.contextPath}/upload/review/${i.review_thumbnail}">
-									</div>
-									<div class="txt">
-										<ul>
-											<li class="date">등록일 : ${i.reg_date}</li>
-											<li class="view">조회수 : ${i.review_view }</li>
-											<li class="like">좋아요 : ${i.review_like }</li>
-										</ul>
-										<h2>${i.review_title }</h2>
-										<p>${i.review_introduce }</p>
-										<span class="writer">작성자 : ${i.review_writer }</span>
-									</div>
-								</a>
-							</div> 
-						
-						</c:forEach>
+					</div>
 					
-						
-						<!-- <div class="item">
-							<a href="#">
-								<div class="img_wrap">
-									<img src="../resources/images/bannerImg.png" alt="">
-								</div>
-								<div class="txt">
-									<ul>
-										<li class="date">등록일 : 2021-07-07</li>
-										<li class="view">조회수 : 0</li>
-									</ul>
-									<h2>[카라 동물권 더배움 2021] 온라인 주제강좌 '동물학대와 미디어' 참여자 모집</h2>
-									<p>카라 동물권 더배움의 이번 주제는 동물 학대와 미디어입니다. 반드시 처벌해야 하는 동물학대 범죄를 국내외 사례와 프로파일링을 중심으로 분석하고, 오직 인간의 흥미를 위해 학대받는 야생동물의 삶을 살펴봅니다. 또한, 미디어에서 모든 생명이 해를 입지 않기 위한 각 분야의 고민과 경험을 나</p>
-								</div>
-							</a>
-						</div> 
-						<div class="item">
-							<a href="#">
-								<div class="img_wrap">
-									<img src="../resources/images/bannerImg.png" alt="">
-								</div>
-								<div class="txt">
-									<ul>
-										<li class="date">등록일 : 2021-07-07</li>
-										<li class="view">조회수 : 0</li>
-									</ul>
-									<h2>[카라 동물권 더배움 2021] 온라인 주제강좌 '동물학대와 미디어' 참여자 모집</h2>
-									<p>카라 동물권 더배움의 이번 주제는 동물 학대와 미디어입니다. 반드시 처벌해야 하는 동물학대 범죄를 국내외 사례와 프로파일링을 중심으로 분석하고, 오직 인간의 흥미를 위해 학대받는 야생동물의 삶을 살펴봅니다. 또한, 미디어에서 모든 생명이 해를 입지 않기 위한 각 분야의 고민과 경험을 나</p>
-								</div>
-							</a>
-						</div> 
-						<div class="item">
-							<a href="#">
-								<div class="img_wrap">
-									<img src="../resources/images/bannerImg.png" alt="">
-								</div>
-								<div class="txt">
-									<ul>
-										<li class="date">등록일 : 2021-07-07</li>
-										<li class="view">조회수 : 0</li>
-									</ul>
-									<h2>[카라 동물권 더배움 2021] 온라인 주제강좌 '동물학대와 미디어' 참여자 모집</h2>
-									<p>카라 동물권 더배움의 이번 주제는 동물 학대와 미디어입니다. 반드시 처벌해야 하는 동물학대 범죄를 국내외 사례와 프로파일링을 중심으로 분석하고, 오직 인간의 흥미를 위해 학대받는 야생동물의 삶을 살펴봅니다. 또한, 미디어에서 모든 생명이 해를 입지 않기 위한 각 분야의 고민과 경험을 나</p>
-								</div>
-							</a>
-						</div>  -->
-					</div>
-					<div class="btn_wrap">
-						<button type="button" class="btn_m btn_line" id="btn_write" style="float:right;">후기 작성</button>
-					</div>
+					<c:choose>
+						<c:when test="${adopt_chk > 0}">
+							<div class="btn_wrap">
+								<button type="button" class="btn_m btn_line" id="btn_write" style="float:right;">후기 작성</button>
+							</div>
+						</c:when>
+					</c:choose>
 
 					<div class="page_nav">
 						<c:forEach var="i" items="${navi}" varStatus="s">
 							<c:choose>
 								<c:when test="${i == '>'}">
 									<a
-										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${navi[s.index-1]+1}&category=${category}&contents=${contents}">${i}</a>
+										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${navi[s.index-1]+1}&category=${category}&inp_contents=${contents}">${i}</a>
 								</c:when>
 								<c:when test="${i == '<'}">
 									<a
-										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${navi[s.index+1]-1}&category=${category}&contents=${contents}">${i}</a>
+										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${navi[s.index+1]-1}&category=${category}&inp_contents=${contents}">${i}</a>
 								</c:when>
 								<c:otherwise>
 									<a
-										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${i}&category=${category}&contents=${contents}">${i}</a>
+										href="${pageContext.request.contextPath}/reviewList.apt?cpage=${i}&category=${category}&inp_contents=${contents}">${i}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

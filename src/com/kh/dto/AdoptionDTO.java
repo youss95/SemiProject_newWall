@@ -17,6 +17,7 @@ public class AdoptionDTO {
 	private String p_address;
 	private String p_mstatus;
 	private String p_arg;
+	private String ad_status;
 	private String q01_aname;
 	private String q02_alternative;
 	private String q03_time_to_worry;
@@ -38,20 +39,21 @@ public class AdoptionDTO {
 	public AdoptionDTO() {}
 	
 	// adoption list
-	public AdoptionDTO(String user_id, String p_name, Date reg_date, String code_seq, int adopt_seq, String q01_aname) {
+	public AdoptionDTO(String user_id, String p_name, Date reg_date, String code_seq, int adopt_seq, String ad_status) {
 		super();
 		this.user_id = user_id;
 		this.p_name = p_name;
 		this.reg_date = reg_date;
 		this.code_seq = code_seq;
 		this.adopt_seq = adopt_seq;
-		this.q01_aname = q01_aname;
+		this.ad_status = ad_status;
 	}
+
 
 	public AdoptionDTO(int adopt_seq, String code_seq, Date reg_date, String user_id, String p_name, String p_phone01,
 			String p_phone02, String p_email, String p_gender, String p_age, String p_address, String p_mstatus,
-			String p_arg, String q01_aname, String q02_alternative, String q03_time_to_worry, String q04_reason,
-			String q05_family_member, String q06_family_arg, String q07_pet, String q08_experience,
+			String p_arg, String ad_status, String q01_aname, String q02_alternative, String q03_time_to_worry,
+			String q04_reason, String q05_family_member, String q06_family_arg, String q07_pet, String q08_experience,
 			String q09_housing_type, String q10_host_consent, String q11_impossible_situation,
 			String q12_lodging_problem, String q13_payment_arg, String q14_neutered_arg, String q15_visit_agr,
 			String q16_adopt_arg) {
@@ -69,6 +71,7 @@ public class AdoptionDTO {
 		this.p_address = p_address;
 		this.p_mstatus = p_mstatus;
 		this.p_arg = p_arg;
+		this.ad_status = ad_status;
 		this.q01_aname = q01_aname;
 		this.q02_alternative = q02_alternative;
 		this.q03_time_to_worry = q03_time_to_worry;
@@ -85,6 +88,14 @@ public class AdoptionDTO {
 		this.q14_neutered_arg = q14_neutered_arg;
 		this.q15_visit_agr = q15_visit_agr;
 		this.q16_adopt_arg = q16_adopt_arg;
+	}
+
+	public String getAd_status() {
+		return ad_status;
+	}
+
+	public void setAd_status(String ad_status) {
+		this.ad_status = ad_status;
 	}
 
 	public int getAdopt_seq() {

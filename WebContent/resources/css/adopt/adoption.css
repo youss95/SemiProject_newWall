@@ -101,6 +101,9 @@
 .review_detail .view .title p{font-weight: 400;margin-bottom:15px;}
 .review_detail .view .title ul li{display:inline-block;color:#999;line-height:11px;font-weight:300;vertical-align: top;font-size:12px;padding-right:15px;margin-right:15px;border-right:1px solid #ddd;}
 .review_detail .view .title ul li:last-child{border-right:0;}
+.review_detail .utils_wrap{overflow:hidden;}
+.review_detail .utils_wrap .utils{float:left;}
+.review_detail .utils_wrap .v_like{float:right;font-size:20px;color:#FFA5A5;}
 .review_detail .view .contents{min-height:180px;padding-bottom:30px;border-bottom:1px solid #ddd;margin-bottom:30px;}
 .review_detail .btn_wrap {text-align:right;}
 .review_detail .btn_wrap .btn_list{float:left;}
@@ -113,6 +116,7 @@
 .review_write dl dd{margin-bottom:30px;}
 .review_write .btn_wrap .btn_line{float:left;}
 .review_write .btn_wrap .btn_regi{float:right;}
+
 .review_write.modify .btn_wrap{text-align:right;}
 .review_write.modify .btn_wrap .btn_del{margin-right:5px;}
 .review_write.modify .photo_thumb>.f_name{display:inline-block;line-height:40px;margin-right:5px;}

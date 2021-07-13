@@ -484,7 +484,7 @@ public class AdoptionDAO {
 
 	//adoption
 	public int insertRegForm(AdoptionDTO dto) throws Exception{
-		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try(
 				Connection con = this.getConnection();
@@ -517,6 +517,7 @@ public class AdoptionDAO {
 			pstat.setString(25, dto.getQ14_neutered_arg());
 			pstat.setString(26, dto.getQ15_visit_agr());
 			pstat.setString(27, dto.getQ16_adopt_arg());
+			pstat.setString(28, dto.getAd_status());
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -710,10 +711,10 @@ public class AdoptionDAO {
 
 	// review
 	public List<String> getPageNavi(int currentPage, String category, String contents) throws Exception{ 
-	
+
 		int recordTotalCount = this.getReviewRecordCount(category, contents); 
 
-		
+
 		int recordCountPerPage = PageConfig.REVIEW_RECORD_COUNT_PER_PAGE; 
 		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
 
@@ -758,7 +759,7 @@ public class AdoptionDAO {
 
 		String sql = null;
 
-		if((category == null || category.contentEquals(""))) { // 초기로드
+		if(category == null || category.contentEquals("")) { // 초기로드
 			sql = "select count(*) from review";
 		}else {
 			if(category.contentEquals("title")) {
@@ -771,7 +772,7 @@ public class AdoptionDAO {
 				sql = "select count(*) from review where review_contents like '%"+ contents + "%'";
 			}
 		}
-		
+
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -782,7 +783,7 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 	//review
 	public List<ReviewDTO> getReviewPageList(int startNum, int endNum) throws Exception{
 
@@ -802,7 +803,7 @@ public class AdoptionDAO {
 
 				List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 				while(rs.next()) {
-					
+
 					ReviewDTO dto = new ReviewDTO();
 					dto.setReview_seq(rs.getInt("review_seq"));
 					dto.setReview_title(rs.getNString("review_title"));
@@ -822,15 +823,15 @@ public class AdoptionDAO {
 
 		}
 	}
-	
-	
+
+
 	public List<ReviewDTO> getReviewPageList(int startNum, int endNum, String category, String contents) throws Exception{
 		String sql = null;
 
 		if((category == null || category.contentEquals(""))) { // 초기로드
 			sql = "select count(*) from review";
 		}else {
-			sql = "select * from  (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, reg_date, review_thumbnail, review_view, review_like from review where";
+			sql = "select * from  (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, reg_date, review_thumbnail, review_view, review_like from review where ";
 			if(category.contentEquals("title")) {
 				sql += "review_title like '%" + contents +"%') where row_number between ? and ?";
 			}else if(category.contentEquals("writer")) {
@@ -850,6 +851,7 @@ public class AdoptionDAO {
 			pstat.setInt(1, startNum);
 			pstat.setInt(2, endNum);
 
+			System.out.println("입양 동물 리스트 검색 :  " + sql);
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){
@@ -876,4 +878,21 @@ public class AdoptionDAO {
 
 	}
 
+	public int getAdoptionRecord(String user_id) throws Exception{
+		String sql = "select count(*) from adoption where user_id = ? and ad_status='완료' ";;
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, user_id);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+
+	}
 }

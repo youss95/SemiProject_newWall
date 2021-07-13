@@ -6,13 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
 </head>
 <body>
 	<div class="wrap">
@@ -170,6 +165,7 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	 <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 	<script>
 		$(function() {
 
@@ -187,10 +183,6 @@
 				$('.age option[value=' + age + ']').prop('selected', 'selected').change();
 				$('.character option[value=' + character + ']').prop('selected','selected').change();
 			}
-			/* 
-			let url = $(".img_wrap img").attr('src');
-			console.log("url : " + url); */
-			
 
 		});
 	</script>

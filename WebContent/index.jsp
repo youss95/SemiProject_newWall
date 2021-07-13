@@ -55,7 +55,9 @@
 <div id="fullpage">
 	<div class="section main_visual active" id="section0">
 		<div class="txt_box">
-			<h2><em><b>NEW</b> <img src="${pageContext.request.contextPath}/resources/images/main/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
+<%-- 			<h2><em><b>NEW</b> <img src="${pageContext.request.contextPath}/resources/images/main/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
+			<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p> --%>
+			<h2><img src="${pageContext.request.contextPath}/resources/images/main/MainLogo3_.png">은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
 			<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p>
 		</div>
 		<div class="swiper-container">
