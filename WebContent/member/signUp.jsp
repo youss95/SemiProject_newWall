@@ -18,17 +18,17 @@
 	box-sizing: border-box;
 }
 
-#sp_com_input .su_banner img {
+#mem_signup_con .su_banner img {
 	opacity: 0.9;
 }
 
-#sp_com_input .su_title h2 {
+#mem_signup_con .su_title h2 {
 	font-size: 36px;
 	font-weight: 600;
 	margin-bottom: 15px;
 }
 
-#sp_com_input .su_title h2::after {
+#mem_signup_con .su_title h2::after {
 	display: block;
 	width: 100%;
 	height: 8px;
@@ -36,29 +36,29 @@
 	/* 안되네 나중에 다시 */
 }
 
-#sp_com_input .su_title {
+#mem_signup_con .su_title {
 	text-align: center;
 	margin-top: 20px;
 	padding-bottom: 10px;
 	/* border-bottom: #FFF0F0 solid 2px; */
 }
 
-#sp_com_input .su_persnal_info input {
+#mem_signup_con .su_persnal_info input {
 	border: 1px solid #FCDADA;
 	color: #5C969E;
 }
 
-#sp_com_input .su_persnal_info select {
+#mem_signup_con .su_persnal_info select {
 	border: 1px solid #FCDADA;
 	color: #5C969E;
 }
 
-#sp_com_input .su_persnal_info dl {
+#mem_signup_con .su_persnal_info dl {
 	margin: 40px;
 	/* width: 500px; */
 }
 
-#sp_com_input .su_persnal_info .su_ti {
+#mem_signup_con .su_persnal_info .su_ti {
 	/*  margin: 10px;
             width: 500px; */
 	font-size: 17px;
@@ -67,7 +67,7 @@
 	padding-bottom: 10px;
     /*  border-bottom: 2px solid #FFA5A5;   */
 }
-#sp_com_input .su_persnal_info .su_ti_o {
+#mem_signup_con .su_persnal_info .su_ti_o {
 	/*  margin: 10px;
             width: 500px; */
 	font-size: 20px;
@@ -77,19 +77,19 @@
 border-bottom: 2px solid #FFA5A5; 
 }
 
-#sp_com_input .su_persnal_info .su_s_ip {
+#mem_signup_con .su_persnal_info .su_s_ip {
 	width: 200px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
 
-#sp_com_input .su_persnal_info .su_l_ip {
+#mem_signup_con .su_persnal_info .su_l_ip {
 	width: 500px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
 
-#sp_com_input .su_persnal_info .su_btn_detail {
+#mem_signup_con .su_persnal_info .su_btn_detail {
 	margin-left: 10px;
 	height: 40px;
 	background-color: #FCDADA;
@@ -97,7 +97,7 @@ border-bottom: 2px solid #FFA5A5;
 	border: 1px solid #FFF0F0;
 }
 
-#sp_com_input .btn_wrap .su_btn_detail_big {
+#mem_signup_con .btn_wrap .su_btn_detail_big {
 	margin-left: 10px;
 	width: 250px;
 	height: 60px;
@@ -108,42 +108,42 @@ border-bottom: 2px solid #FFA5A5;
 	font-weight: 600;
 }
 
-#sp_com_input .btn_wrap {
+#mem_signup_con .btn_wrap {
 	text-align: center;
 }
 
-#sp_com_input .su_persnal_info .su_m_ip {
+#mem_signup_con .su_persnal_info .su_m_ip {
 	width: 300px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
-#sp_com_input .su_persnal_info .su_sss_ip {
+#mem_signup_con .su_persnal_info .su_sss_ip {
 	width: 80px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
 
-#sp_com_input .su_persnal_info .su_pw_sub {
+#mem_signup_con .su_persnal_info .su_pw_sub {
 	padding-top: 10px;
 }
 
-#sp_com_input .su_persnal_info .su_pw_ck {
+#mem_signup_con .su_persnal_info .su_pw_ck {
 	margin-left: 10px;
 }
 
-#sp_com_input .su_persnal_info .su_birthday_con {
+#mem_signup_con .su_persnal_info .su_birthday_con {
 	overflow: hidden;
 }
 
-#sp_com_input .su_persnal_info .su_birthday_con .su_birthday {
+#mem_signup_con .su_persnal_info .su_birthday_con .su_birthday {
 	float: left;
 }
 
-#sp_com_input .su_persnal_info .su_birthday_con .su_address {
+#mem_signup_con .su_persnal_info .su_birthday_con .su_address {
 	float: left;
 }
 
-#sp_com_input .su_persnal_info .su_birthday_con .su_birthday_text {
+#mem_signup_con .su_persnal_info .su_birthday_con .su_birthday_text {
 	margin-left: 10px;
 	margin-right: 30px;
 }
@@ -154,7 +154,7 @@ border-bottom: 2px solid #FFA5A5;
 		<jsp:include page="../layout/jsp/header.jsp"></jsp:include>
 		<div class="container">
 			<div class="contents">
-				<section id="sp_com_input">
+				<section id="mem_signup_con">
 					<!-- 하이 여기는 서브입니다 -->
 					<div class="signup_con">
 						<div class="su_banner">
