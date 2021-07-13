@@ -451,6 +451,12 @@
 		</div>
 	</div>
 	<script>
+	$(function(){
+		$('#fullpage').fullpage({
+			navigation: true,
+			navigationPosition: 'right',
+		});
+	
 		const mainSwiper = new Swiper('.main_visual .swiper-container', {
 			loop: true,
 			effect: "fade",
@@ -464,7 +470,7 @@
 				disableOnInteraction: false,
 			},
 		});
-
+	
 		const newsSwiper = new Swiper('.news .swiper-container', {
 			loop: true,
 			// effect: "fade",
@@ -482,7 +488,7 @@
 				disableOnInteraction: false,
 			},
 		});
-
+	
 		$('.btn_nav').on('click',function(){
 			$(this).toggleClass('on');
 			if($(this).hasClass('on')){
@@ -492,13 +498,14 @@
 			}
 			$('.nav').toggleClass('open');
 		});
-
+	
 		$(".nav .has").on("click", function(){
 			$(this).toggleClass("open");
 			$(this).siblings().removeClass('open');
 			$(this).children('.submenu').slideToggle();
 			$(this).siblings().children('.submenu').slideUp();
 		});
+	})
 	</script>
 </body>
 
