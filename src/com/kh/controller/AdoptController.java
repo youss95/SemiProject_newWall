@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
@@ -24,6 +25,7 @@ import com.kh.dao.FileDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.ReviewDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -50,8 +52,8 @@ public class AdoptController extends HttpServlet {
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
 		AdoptionDAO adoptdao = AdoptionDAO.getInstance();
+		HttpSession session = request.getSession();
 
-		
 		try {
 			if(url.contentEquals("/adoptList.apt")) {
 				System.out.println("입양 동물 리스트");
@@ -108,9 +110,9 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/adoptReg.apt")) {
 				System.out.println("입양신청버튼 클릭");
-				
+				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+
 				String code_seq = request.getParameter("code_seq");
-				String user_id = request.getParameter("user_id");
 				String p_name = request.getParameter("p_name");
 				String p_phone01 = request.getParameter("p_phone01");
 				String p_phone02 = request.getParameter("p_phone02");
@@ -137,7 +139,7 @@ public class AdoptController extends HttpServlet {
 				String q15_visit_agr = request.getParameter("visit_agr");
 				String q16_adopt_arg = request.getParameter("adopt_arg");
 				
-				AdoptionDTO dto = new AdoptionDTO(0, code_seq, null, user_id, p_name, p_phone01, p_phone02, p_email, p_gender, p_age, p_address, p_mstatus, p_arg, q01_aname, q02_alternative, q03_time_to_worry, q04_reason, q05_family_member, q06_family_arg, q07_pet, q08_experience, q09_housing_type, q10_host_consent, q11_impossible_situation, q12_lodging_problem, q13_payment_arg, q14_neutered_arg, q15_visit_agr, q16_adopt_arg);
+				AdoptionDTO dto = new AdoptionDTO(0, code_seq, null, user_id, p_name, p_phone01, p_phone02, p_email, p_gender, p_age, p_address, p_mstatus, p_arg,"신청중",q01_aname, q02_alternative, q03_time_to_worry, q04_reason, q05_family_member, q06_family_arg, q07_pet, q08_experience, q09_housing_type, q10_host_consent, q11_impossible_situation, q12_lodging_problem, q13_payment_arg, q14_neutered_arg, q15_visit_agr, q16_adopt_arg);
 				
 				int result = adoptdao.insertRegForm(dto);
 				
@@ -146,15 +148,16 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/reviewWrite.apt")) {
 				System.out.println("입양후기 작성");
-				String filesPath = request.getServletContext().getRealPath("/upload/review");
 
+				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				String filesPath = request.getServletContext().getRealPath("/upload/review");
 				File filesFolder = new File(filesPath);
 				if(!filesFolder.exists()) filesFolder.mkdir();
 
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8", new DefaultFileRenamePolicy());
 
 				String review_title = multi.getParameter("title");
-				String review_writer = "test";
+				String review_writer = user_id;
 				String review_introduce = multi.getParameter("introduce");
 				String review_thumbnail = multi.getFilesystemName("thumbnail");
 				review_thumbnail = Normalizer.normalize(review_thumbnail, Form.NFC);
@@ -163,7 +166,7 @@ public class AdoptController extends HttpServlet {
 				ReviewDTO dto = new ReviewDTO(0, review_title, review_writer, review_introduce,review_thumbnail, review_contents, null, 0, 0);
 				int result = adoptdao.insertReview(dto);
 
-				response.sendRedirect(ctxPath+"/reviewList.apt");	
+				response.sendRedirect(ctxPath+"/reviewList.apt?cpage=1");	
 				
 			}else if(url.contentEquals("/reviewList.apt")) {
 				
@@ -171,20 +174,20 @@ public class AdoptController extends HttpServlet {
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");
-				String contents = request.getParameter("contents");
+				String contents = request.getParameter("inp_contents");
 
 				int endNum = cpage * PageConfig.REVIEW_RECORD_COUNT_PER_PAGE;
 				int startNum = endNum - (PageConfig.REVIEW_RECORD_COUNT_PER_PAGE - 1);
 				
+				System.out.println("category : " + category);
+				System.out.println("inp_contents : " + contents);
 				List<ReviewDTO> list;
 				List<String> pageNavi = adoptdao.getPageNavi(cpage, category, contents);
-				AnimalDTO dto;
 				if(category == null || category.contentEquals("")) { //검색조건없이 초기로드
 					list = adoptdao.getReviewPageList(startNum, endNum);
 				}else{ // 검색 값이 있을 경우
 					list = adoptdao.getReviewPageList(startNum, endNum, category, contents);
 				}
-				
 				request.setAttribute("cpage", cpage);
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);

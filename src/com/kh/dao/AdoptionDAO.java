@@ -501,22 +501,24 @@ public class AdoptionDAO {
 			pstat.setString(9, dto.getP_address());
 			pstat.setString(10, dto.getP_mstatus());
 			pstat.setString(11, dto.getP_arg());
-			pstat.setString(12, dto.getQ01_aname());
-			pstat.setString(13, dto.getQ02_alternative());
-			pstat.setString(14, dto.getQ03_time_to_worry());
-			pstat.setString(15, dto.getQ04_reason());
-			pstat.setString(16, dto.getQ05_family_member());
-			pstat.setString(17, dto.getQ06_family_arg());
-			pstat.setString(18, dto.getQ07_pet());
-			pstat.setString(19, dto.getQ08_experience());
-			pstat.setString(20, dto.getQ09_housing_type());
-			pstat.setString(21, dto.getQ10_host_consent());
-			pstat.setString(22, dto.getQ11_impossible_situation());
-			pstat.setString(23, dto.getQ12_lodging_problem());
-			pstat.setString(24, dto.getQ13_payment_arg());
-			pstat.setString(25, dto.getQ14_neutered_arg());
-			pstat.setString(26, dto.getQ15_visit_agr());
-			pstat.setString(27, dto.getQ16_adopt_arg());
+			pstat.setString(12, dto.getAd_status());
+			pstat.setString(13, dto.getQ01_aname());
+			pstat.setString(14, dto.getQ02_alternative());
+			pstat.setString(15, dto.getQ03_time_to_worry());
+			pstat.setString(16, dto.getQ04_reason());
+			pstat.setString(17, dto.getQ05_family_member());
+			pstat.setString(18, dto.getQ06_family_arg());
+			pstat.setString(19, dto.getQ07_pet());
+			pstat.setString(20, dto.getQ08_experience());
+			pstat.setString(21, dto.getQ09_housing_type());
+			pstat.setString(22, dto.getQ10_host_consent());
+			pstat.setString(23, dto.getQ11_impossible_situation());
+			pstat.setString(24, dto.getQ12_lodging_problem());
+			pstat.setString(25, dto.getQ13_payment_arg());
+			pstat.setString(26, dto.getQ14_neutered_arg());
+			pstat.setString(27, dto.getQ15_visit_agr());
+			pstat.setString(28, dto.getQ16_adopt_arg());
+
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -758,7 +760,7 @@ public class AdoptionDAO {
 
 		String sql = null;
 
-		if((category == null || category.contentEquals(""))) { // 초기로드
+		if(category == null || category.contentEquals("")) { // 초기로드
 			sql = "select count(*) from review";
 		}else {
 			if(category.contentEquals("title")) {
@@ -830,7 +832,7 @@ public class AdoptionDAO {
 		if((category == null || category.contentEquals(""))) { // 초기로드
 			sql = "select count(*) from review";
 		}else {
-			sql = "select * from  (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, reg_date, review_thumbnail, review_view, review_like from review where";
+			sql = "select * from  (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, reg_date, review_thumbnail, review_view, review_like from review where ";
 			if(category.contentEquals("title")) {
 				sql += "review_title like '%" + contents +"%') where row_number between ? and ?";
 			}else if(category.contentEquals("writer")) {
@@ -850,6 +852,7 @@ public class AdoptionDAO {
 			pstat.setInt(1, startNum);
 			pstat.setInt(2, endNum);
 
+			System.out.println("입양 동물 리스트 검색 :  " + sql);
 			try(
 					ResultSet rs = pstat.executeQuery();
 					){

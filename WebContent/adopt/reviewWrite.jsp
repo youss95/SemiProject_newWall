@@ -6,15 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min_v4.css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min_v4.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 </head>
 <body>
@@ -93,7 +97,7 @@
 							$(editor).summernote('insertImage', "${pageContext.request.contextPath}" + resp);
 						})
 					}
-				}
+				},
 			});	
 			
 			$("#btn_regi").on("click", function(){

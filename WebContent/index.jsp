@@ -33,8 +33,8 @@
 					<li class="has">
 						<a href="#">입양</a>
 						<ul class="submenu">
-							<li><a href="#">입양동물</a></li>
-							<li><a href="#">입양후기</a></li>
+							<li><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양동물</a></li>
+							<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양후기</a></li>
 						</ul>
 					</li>
 					<li><a href="#">후원</a></li>
@@ -55,7 +55,9 @@
 <div id="fullpage">
 	<div class="section main_visual active" id="section0">
 		<div class="txt_box">
-			<h2><em><b>NEW</b> <img src="${pageContext.request.contextPath}/resources/images/main/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
+<%-- 			<h2><em><b>NEW</b> <img src="${pageContext.request.contextPath}/resources/images/main/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
+			<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p> --%>
+			<h2><img src="${pageContext.request.contextPath}/resources/images/main/MainLogo3_.png">은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
 			<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p>
 		</div>
 		<div class="swiper-container">
@@ -75,7 +77,7 @@
 		</div>
 		<ul class="list">
 			<li class="item">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">
 					<div class="img_wrap" style="background:url(${pageContext.request.contextPath}/resources/images/main/img_adopt.jpg) 50% 50% no-repeat;background-size:cover;"></div>
 					<div class="txt">
 						<span>ADOPT</span>

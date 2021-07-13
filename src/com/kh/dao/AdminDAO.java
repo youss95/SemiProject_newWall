@@ -37,32 +37,6 @@ public class AdminDAO {
 	}
 
 	// adoption
-	public List<AdoptionDTO> getAdoptionList() throws Exception{
-		String sql = "select * from adoption";
-
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery();
-				){
-			List<AdoptionDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				AdoptionDTO dto = new AdoptionDTO();
-
-				dto.setP_name(rs.getNString("p_name"));
-				dto.setReg_date(rs.getDate("reg_date"));
-				dto.setCode_seq(rs.getNString("code_seq"));
-				dto.setAdopt_seq(rs.getInt("adopt_seq"));
-				dto.setQ01_aname(rs.getNString("q01_aname"));
-				dto.setUser_id(rs.getNString("user_id"));
-
-				list.add(dto);
-			}
-			return list;
-		}
-	}
-
-	// adoption
 	public String getAnimalCode() throws Exception{
 		String sql = "select 'AM'|| LPAD(code_seq.nextval,5,0) from dual";
 
@@ -190,8 +164,6 @@ public class AdminDAO {
 			}
 		}
 	}
-
-
 
 	// adoption
 	public AnimalDTO getAnimalInfo(String code_seq) throws Exception{
@@ -344,9 +316,9 @@ public class AdminDAO {
 	//sponsor 1~10 버튼만드는거
 	public List<String> adSponsorGetPageNavi(int cpage, String search) throws Exception{
 
-		
+
 		int recordTotalCount = this.adSponsorGetRecordCount(search);
-		
+
 		int recordCountPerPage = PageConfig.ADOPT_RECORD_COUNT_PER_PAGE; 
 		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
 
@@ -358,8 +330,8 @@ public class AdminDAO {
 			recordTotalCount=this.adSponsorGetRecordCount(keyword);
 		}*/
 
-//		int recordCountPerPage = 10;
-	//	int naviCountPerPage = 10;
+		//		int recordCountPerPage = 10;
+		//	int naviCountPerPage = 10;
 
 		int pageTotalCount = 0; 
 
@@ -446,50 +418,50 @@ public class AdminDAO {
 	}
 
 	//sponsor 한화면에 보일 데이터 10개의글 
-		public List<SponsorDTO> adSponsorGetPageList(int startNum, int endNum) throws Exception {
-			String sql =  "select * from (select row_number() over (order by sponsor_seq desc) "
-					+ "rnum,sponsor_seq,sponsor_amount,sponsor_choice, sponsor_agecheck, sponsor_name, sponsor_contact, "
-					+ "sponsor_birth, sponsor_yname, sponsor.SPONSOR_YBIRTH, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
-					+ "sponsor_apply_num, sponsor_terms01, sponsor_terms02 , sponsor_mb_id, sponsor_date "
-					+ "from sponsor) where rnum between ? and ?";
-			try(Connection con = this.getConnection();
-					PreparedStatement pstat = con.prepareStatement(sql);){
-				pstat.setInt(1, startNum);
-				pstat.setInt(2, endNum);
-				try(ResultSet rs = pstat.executeQuery();){
+	public List<SponsorDTO> adSponsorGetPageList(int startNum, int endNum) throws Exception {
+		String sql =  "select * from (select row_number() over (order by sponsor_seq desc) "
+				+ "rnum,sponsor_seq,sponsor_amount,sponsor_choice, sponsor_agecheck, sponsor_name, sponsor_contact, "
+				+ "sponsor_birth, sponsor_yname, sponsor.SPONSOR_YBIRTH, sponsor_email, sponsor_postcode, sponsor_address1, sponsor_address2, "
+				+ "sponsor_apply_num, sponsor_terms01, sponsor_terms02 , sponsor_mb_id, sponsor_date "
+				+ "from sponsor) where rnum between ? and ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, startNum);
+			pstat.setInt(2, endNum);
+			try(ResultSet rs = pstat.executeQuery();){
 
-					List<SponsorDTO> list = new ArrayList<>();
-					while(rs.next()) {
-						int sponsor_seq = rs.getInt("sponsor_seq");
-						int sponsor_amount = rs.getInt("sponsor_amount");
-						String sponsor_choice = rs.getNString("sponsor_choice");
-						String sponsor_agecheck = rs.getNString("sponsor_agecheck");
-						String sponsor_name = rs.getNString("sponsor_name");
-						String sponsor_contact = rs.getNString("sponsor_contact");
-						String sponsor_birth = rs.getNString("sponsor_birth");
-						String sponsor_yname = rs.getNString("sponsor_yname");
-						String sponsor_ybirth = rs.getNString("sponsor_ybirth");
-						String sponsor_email = rs.getNString("sponsor_email");
-						String sponsor_postcode = rs.getNString("sponsor_postcode");
-						String sponsor_address1 = rs.getNString("sponsor_address1");
-						String sponsor_address2 = rs.getNString("sponsor_address2");
-						String sponsor_apply_num = rs.getNString("sponsor_apply_num");
-						String sponsor_terms01 = rs.getNString("sponsor_terms01");
-						String sponsor_terms02 = rs.getNString("sponsor_terms02");
-						String sponsor_mb_id = rs.getNString("sponsor_mb_id");
-						Date sponsor_date = rs.getDate("sponsor_date");
+				List<SponsorDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int sponsor_seq = rs.getInt("sponsor_seq");
+					int sponsor_amount = rs.getInt("sponsor_amount");
+					String sponsor_choice = rs.getNString("sponsor_choice");
+					String sponsor_agecheck = rs.getNString("sponsor_agecheck");
+					String sponsor_name = rs.getNString("sponsor_name");
+					String sponsor_contact = rs.getNString("sponsor_contact");
+					String sponsor_birth = rs.getNString("sponsor_birth");
+					String sponsor_yname = rs.getNString("sponsor_yname");
+					String sponsor_ybirth = rs.getNString("sponsor_ybirth");
+					String sponsor_email = rs.getNString("sponsor_email");
+					String sponsor_postcode = rs.getNString("sponsor_postcode");
+					String sponsor_address1 = rs.getNString("sponsor_address1");
+					String sponsor_address2 = rs.getNString("sponsor_address2");
+					String sponsor_apply_num = rs.getNString("sponsor_apply_num");
+					String sponsor_terms01 = rs.getNString("sponsor_terms01");
+					String sponsor_terms02 = rs.getNString("sponsor_terms02");
+					String sponsor_mb_id = rs.getNString("sponsor_mb_id");
+					Date sponsor_date = rs.getDate("sponsor_date");
 
-						SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
-								sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
-								sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
-								sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
-								sponsor_mb_id,  sponsor_date);
-						list.add(dto);
-					}
-					return list;
+					SponsorDTO dto = new SponsorDTO(sponsor_seq, sponsor_amount, sponsor_choice,  sponsor_agecheck,
+							sponsor_name,  sponsor_contact,  sponsor_birth,  sponsor_yname,
+							sponsor_ybirth,  sponsor_email,  sponsor_postcode,  sponsor_address1,
+							sponsor_address2,  sponsor_apply_num,  sponsor_terms01,  sponsor_terms02,
+							sponsor_mb_id,  sponsor_date);
+					list.add(dto);
 				}
+				return list;
 			}
 		}
+	}
 
 	// adoption
 	public int animalInfoModify(AnimalDTO dto) throws Exception{
@@ -595,6 +567,213 @@ public class AdminDAO {
 
 	}
 
-	
+	//adoption
+	public List<AdoptionDTO> getAdoptionPageList(int startNum, int endNum) throws Exception{
+		String sql = "select * from (select row_number() over(order by adopt_seq desc) row_number, user_id, adopt_seq, code_seq, reg_date, p_name, ad_status from adoption) where row_number between ? and ?";
 
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, startNum);
+			pstat.setInt(2, endNum);
+
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<AdoptionDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					AdoptionDTO dto = new AdoptionDTO();
+
+					dto.setAdopt_seq(rs.getInt("adopt_seq"));
+					dto.setCode_seq(rs.getNString("code_seq"));
+					dto.setP_name(rs.getNString("p_name"));
+					dto.setUser_id(rs.getNString("user_id"));
+					dto.setAd_status(rs.getNString("ad_status"));
+					dto.setReg_date(rs.getDate("reg_date"));
+
+					list.add(dto);
+				}
+				return list;
+			}
+		}
+	}
+
+	//adoption
+	public List<AdoptionDTO> getAdoptionPageList(int startNum, int endNum, String filter) throws Exception{
+		String sql = "select * from (select row_number() over(order by adopt_seq desc) row_number, user_id, adopt_seq, code_seq, reg_date, p_name, ad_status from adoption where ad_status = ?) where row_number between ? and ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, filter);
+			pstat.setInt(2, startNum);
+			pstat.setInt(3, endNum);
+
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				List<AdoptionDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					AdoptionDTO dto = new AdoptionDTO();
+
+					dto.setAdopt_seq(rs.getInt("adopt_seq"));
+					dto.setCode_seq(rs.getNString("code_seq"));
+					dto.setP_name(rs.getNString("p_name"));
+					dto.setUser_id(rs.getNString("user_id"));
+					dto.setAd_status(rs.getNString("ad_status"));
+					dto.setReg_date(rs.getDate("reg_date"));
+
+					list.add(dto);
+				}
+				return list;
+			}
+		}
+	}
+
+
+	// adoption
+	public List<String> getAdoptionPageNavi(int currentPage, String filter) throws Exception{ 
+
+		int recordTotalCount = this.getAdoptionRecordCount(filter); 
+
+		int recordCountPerPage = PageConfig.ADOPTION_RECORD_COUNT_PER_PAGE; 
+		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
+
+		int pageTotalCount = 0; 
+
+		if((recordTotalCount % recordCountPerPage) > 0) { 
+			pageTotalCount =recordTotalCount / recordCountPerPage + 1; 
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage; 
+		}
+
+		if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}else if(currentPage < 1) {
+			currentPage = 1;
+		}
+
+		int startNavi = (currentPage-1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1; 
+
+		if(endNavi > pageTotalCount) {endNavi = pageTotalCount;} 
+
+		boolean needPrev = true; 
+		boolean needNext = true; 
+
+		if(startNavi == 1) {needPrev = false;} 
+		if(endNavi == pageTotalCount) {needNext = false;}
+
+
+		List<String> pageNavi = new ArrayList<String>(); 
+		if(needPrev) {pageNavi.add("<");}
+		for(int i = startNavi; i<= endNavi; i++) {			
+			pageNavi.add(String.valueOf(i));
+		}
+		if(needNext) {pageNavi.add(">");}
+
+		return pageNavi;
+	}
+
+	//	adoption
+	public int getAdoptionRecordCount(String filter) throws Exception{
+
+		String sql= null;
+
+		if(filter == null || filter.contentEquals("")) {
+			sql = "select count(*) from adoption";
+		}else {
+			sql = "select count(*) from adoption where ad_status = '"+ filter +"'";
+		}
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+
+
+	//adoption
+	public AdoptionDTO getAdoptionInfo(int adopt_seq) throws Exception{
+
+		String sql= "select * from adoption where adopt_seq = ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, adopt_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				AdoptionDTO dto = new AdoptionDTO();
+				if(rs.next()){
+					dto.setAdopt_seq(adopt_seq);
+					dto.setCode_seq(rs.getString("code_seq"));
+					dto.setReg_date(rs.getDate("reg_date"));
+					dto.setUser_id(rs.getString("user_id"));
+					dto.setP_name(rs.getString("p_name"));
+					dto.setP_phone01(rs.getString("p_phone01"));
+					dto.setP_phone02(rs.getString("p_phone02"));
+					dto.setP_email(rs.getString("p_email"));
+					dto.setP_gender(rs.getString("p_gender"));
+					dto.setP_age(rs.getString("p_age"));
+					dto.setP_address(rs.getString("p_address"));
+					dto.setP_mstatus(rs.getString("p_mstatus"));
+					dto.setP_arg(rs.getString("p_arg"));
+					dto.setAd_status(rs.getString("ad_status"));
+					dto.setQ01_aname(rs.getString("q01_aname"));
+					dto.setQ02_alternative(rs.getNString("q02_alternative"));
+					dto.setQ03_time_to_worry(rs.getString("q03_time_to_worry"));
+					dto.setQ04_reason(rs.getString("q04_reason"));
+					dto.setQ05_family_member(rs.getString("q05_family_member"));
+					dto.setQ06_family_arg(rs.getString("q06_family_arg"));
+					dto.setQ07_pet(rs.getString("q07_pet"));
+					dto.setQ08_experience(rs.getString("q08_experience"));
+					dto.setQ09_housing_type(rs.getString("q09_housing_type"));
+					dto.setQ10_host_consent(rs.getString("q10_host_consent"));
+					dto.setQ11_impossible_situation(rs.getString("q11_impossible_situation"));
+					dto.setQ12_lodging_problem(rs.getString("q12_lodging_problem"));
+					dto.setQ13_payment_arg(rs.getString("q13_payment_arg"));
+					dto.setQ14_neutered_arg(rs.getString("q14_neutered_arg"));
+					dto.setQ15_visit_agr(rs.getString("q15_visit_agr"));
+					dto.setQ16_adopt_arg(rs.getString("q16_adopt_arg"));
+
+					return dto;
+				}
+				return null;
+			}
+
+		}
+
+	}
+	
+	
+	//adoption
+	public ArrayList<String> statusUpdate(int adopt_seq, String ad_status) throws Exception{
+		String sql = "update adoption set ad_status = ? where adopt_seq = ?";
+		try(
+				Connection con= this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){			
+			pstat.setString(1, ad_status);
+			pstat.setInt(2, adopt_seq);
+
+			int result = pstat.executeUpdate();
+			
+			ArrayList<String> rs = new ArrayList<String>();
+			rs.add(String.valueOf(result));
+			rs.add(String.valueOf(adopt_seq));
+			rs.add(ad_status);
+			return rs;
+		}
+	}
+	
 }
+
+
+

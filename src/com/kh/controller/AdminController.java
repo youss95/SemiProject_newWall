@@ -93,17 +93,47 @@ public class AdminController extends HttpServlet {
 
 		try {
 			if(url.contentEquals("/adoptRegList.adm")) {
+				System.out.println("입양신청리스트");
+
+				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				int endNum = cpage * PageConfig.ADOPTION_RECORD_COUNT_PER_PAGE;
+				int startNum = endNum - (PageConfig.ADOPTION_RECORD_COUNT_PER_PAGE - 1);
+				String filter = request.getParameter("ad_status");
+				
+				List<AdoptionDTO> list;
+				List<String> pageNavi = admindao.getAdoptionPageNavi(cpage, filter);
+
+				if(filter == null || filter.contentEquals("")) { //검색조건없이 초기로드
+					list = admindao.getAdoptionPageList(startNum, endNum);
+				}else{ // 검색 값이 있을 경우
+					list = admindao.getAdoptionPageList(startNum, endNum, filter);
+				}
+
+				request.setAttribute("ad_status", filter);
+				request.setAttribute("list", list);
+				request.setAttribute("navi", pageNavi);
+				request.setAttribute("cpage", cpage);
+				request.getRequestDispatcher("admin/adoptRegList.jsp").forward(request, response);
+
+			}else if(url.contentEquals("/adoptRegInfo.adm")) { 
 				response.setContentType("text/html;charset=utf-8");
-
+				int adopt_seq = Integer.parseInt(request.getParameter("adopt_seq"));
 				Gson g = new Gson();
-				List<AdoptionDTO> list = admindao.getAdoptionList();
-
-				String result = g.toJson(list);
+				AdoptionDTO info = admindao.getAdoptionInfo(adopt_seq);
+				String result = g.toJson(info);
+				response.getWriter().append(result);
+			}else if(url.contentEquals("/adoptionUpdate.adm")) { 
+				
+				response.setContentType("text/html;charset=utf-8");
+				int adopt_seq = Integer.parseInt(request.getParameter("p_seq"));
+				String ad_status = request.getParameter("p_ad_status");
+				Gson g = new Gson();
+				ArrayList<String> rs = admindao.statusUpdate(adopt_seq, ad_status);
+				String result = g.toJson(rs);				
 				response.getWriter().append(result);
 			}else if(url.contentEquals("/animalInfoReg.adm")) { 
 
 				System.out.println("동물 정보 등록");
-
 				String filesPath = request.getServletContext().getRealPath("/upload/animalInfo");
 
 				File filesFolder = new File(filesPath);
