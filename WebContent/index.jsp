@@ -31,19 +31,19 @@
 			<div class="menu">
 				<ul>
 					<li class="has">
-						<a href="#">입양</a>
+						<a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양</a>
 						<ul class="submenu">
-							<li><a href="#">입양동물</a></li>
-							<li><a href="#">입양후기</a></li>
+							<li><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양동물</a></li>
+							<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양후기</a></li>
 						</ul>
 					</li>
-					<li><a href="#">후원</a></li>
-					<li><a href="#">임시보호</a></li>
+					<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원</a></li>
+					<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a></li>
 					<li class="has">
-						<a href="#">뉴스레터</a>
+						<a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스레터</a>
 						<ul class="submenu">
-							<li><a href="#">뉴스</a></li>
-							<li><a href="#">공지사항</a></li>
+							<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스</a></li>
+							<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -75,7 +75,7 @@
 		</div>
 		<ul class="list">
 			<li class="item">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">
 					<div class="img_wrap" style="background:url(${pageContext.request.contextPath}/resources/images/main/img_adopt.jpg) 50% 50% no-repeat;background-size:cover;"></div>
 					<div class="txt">
 						<span>ADOPT</span>
@@ -84,7 +84,7 @@
 				</a>
 			</li>
 			<li class="item">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/sponsor.sp">
 					<div class="img_wrap" style="background:url(${pageContext.request.contextPath}/resources/images/main/img_sponsor.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
 					<div class="txt">
 						<span>SPONSOR</span>
@@ -93,7 +93,7 @@
 				</a>
 			</li>
 			<li class="item">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/protectList.lost?page=1">
 					<div class="img_wrap" style="background:url(${pageContext.request.contextPath}/resources/images/main/img_lost.jpg) 50% 50% no-repeat;background-size:cover;"></div>
 					<div class="txt">
 						<span>PROTECT</span>
