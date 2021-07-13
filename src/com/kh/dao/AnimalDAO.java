@@ -371,5 +371,36 @@ public class AnimalDAO {
 		}
 	}
 	
+	public LostAnimalDTO lostList(int lostNo) throws Exception{
+		String sql = "select * from lost_animal where lost_no=?";
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, lostNo);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					LostAnimalDTO dto;
+					int lost_no = rs.getInt(1);
+					String lost_name = rs.getString(2);
+					int lost_age = rs.getInt(3);
+					String lost_kind = rs.getString(4);
+					String lost_category = rs.getString(5);
+					String lost_date = rs.getString(6);
+					String lost_addr = rs.getString(7);
+					String lost_fileRealName = rs.getString(8);
+					String lost_content = rs.getString(9);
+					String lost_gender = rs.getString(10);
+					Date lost_createDate = rs.getDate(11);
+					String lost_writer = rs.getString(12);
+					dto = new LostAnimalDTO(lost_no,lost_name,lost_age,lost_kind,lost_category,
+							lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content,lost_gender,
+							lost_writer);
+					con.close();
+					return dto;
+				}
+				
+			}
+		}
+		return null;
+	}
+	
 }
 

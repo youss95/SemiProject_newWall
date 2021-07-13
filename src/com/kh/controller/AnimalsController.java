@@ -358,6 +358,13 @@ public class AnimalsController extends HttpServlet {
 					out.print("</script>");
 					out.flush();
 				}
+			}else if(url.equals("/lostUpdate.lost")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				LostAnimalDTO dto = dao.lostList(lostNo);
+				request.setAttribute("lostNo", lostNo);
+				request.setAttribute("lostDetail", dto);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalUpdateForm.jsp");
+				dis.forward(request, response);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

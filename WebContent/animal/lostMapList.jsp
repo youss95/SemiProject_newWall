@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <style>
   .card{float:left;margin:10px;}
-  .wrap{overflow:hidden;}
+  .wrap{overflow:hidden;margin-left:28px;}
   .progress{height:40px; border-radius:30px;}
   </style>
 </head>
@@ -24,6 +24,7 @@
 			<div class="contents">
 				<section class="lostList">
 				<div class="wrap">
+				<h2 style="font-size:29px;">실종 동물</h2>
 				<c:forEach var="maplist" items="${mapList}">
 				<div style="width:500px;" class="card">
 				
@@ -31,7 +32,7 @@
   <span style="float:right;">
   <c:if test="${sessionScope.loginInfo != null}">
   	<a href="${pageContext.request.contextPath}/lostDelete.lost?lostNo=${maplist.lostNo}"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;&nbsp;
-  	<a href=""><i class="fas fa-edit"></i></a>
+  	<a href="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
   	</c:if>
   </span>
   </h2>
@@ -88,7 +89,7 @@
 	<!-- 진행바 -->
 <div class="progress col-md-12 m-2">
 	
-		<div class="progress-bar" style="width: ${currentPercent}%" ></div>
+		<div class="progress-bar" style="width: ${currentPercent}%; font-size:20px;" >${currentPercent}%</div>
 	</div>
 
 				</section>
