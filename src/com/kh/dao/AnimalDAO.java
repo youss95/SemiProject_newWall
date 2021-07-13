@@ -402,5 +402,25 @@ public class AnimalDAO {
 		return null;
 	}
 	
+	public int lostUpdate(LostAnimalDTO dto , int lostNo) throws Exception {
+		String sql ="update lost_animal set lost_name= ?, lost_age=?, lost_kind=?, lost_category=?, lost_date=?, lost_addr=?, lost_fileRealName=? , lost_content=?, lost_gender=? where lost_no="+lostNo;
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, dto.getLostName());
+			pstmt.setInt(2, dto.getLostAge());
+			pstmt.setString(3, dto.getLostKind());
+			pstmt.setString(4, dto.getLostCategory());
+			pstmt.setString(5, dto.getLostDate());
+			pstmt.setString(6, dto.getLostAddr());
+			pstmt.setString(7, dto.getFileRealName());
+			pstmt.setString(8, dto.getLostContent());
+			pstmt.setString(9, dto.getLostGender());
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
 }
 

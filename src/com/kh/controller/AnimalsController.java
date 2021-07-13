@@ -282,7 +282,7 @@ public class AnimalsController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("animal/protectUpdateForm.jsp");
 				dis.forward(request, response);
 			}else if(url.equals("/protectUpdate.lost")) {
-				System.out.println("가능");
+				
 				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
 				System.out.println(directory);
 				int maxSize = 1024*1024*100;
@@ -358,13 +358,65 @@ public class AnimalsController extends HttpServlet {
 					out.print("</script>");
 					out.flush();
 				}
-			}else if(url.equals("/lostUpdate.lost")) {
+			}else if(url.equals("/lostUpdateForm.lost")) {
 				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
 				LostAnimalDTO dto = dao.lostList(lostNo);
 				request.setAttribute("lostNo", lostNo);
 				request.setAttribute("lostDetail", dto);
 				RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalUpdateForm.jsp");
 				dis.forward(request, response);
+			}else if(url.equals("/lostUpdate.lost")) {
+				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
+				System.out.println(directory);
+				int maxSize = 1024*1024*100;
+				
+				String encoding = "UTF-8";
+				try {
+					MultipartRequest multi =
+							new MultipartRequest(request, directory, maxSize, encoding,
+									new DefaultFileRenamePolicy());
+					
+					int lostNo = Integer.parseInt(multi.getParameter("lostNo"));
+					
+					String lostName = multi.getParameter("lostName");
+					System.out.println(lostName);
+					String lostCategory = multi.getParameter("lostCategory");
+					int lostAge = Integer.parseInt(multi.getParameter("lostAge"));
+					String lostKind = multi.getParameter("lostKind");
+					String lostGender = multi.getParameter("lostGender");
+					String lostAddr = multi.getParameter("addResult");
+					String lostDate = multi.getParameter("lostDate");
+					String lostContent = multi.getParameter("lostContent");
+					String lostWriter = multi.getParameter("lostWriter");
+					
+					Enumeration files = multi.getFileNames();
+					String str = (String)files.nextElement();
+					String lostFileRealName = multi.getFilesystemName(str); //실제에 서버에 업로드가된 네임
+					
+					LostAnimalDTO dto = new LostAnimalDTO();
+					dto.setLostName(lostName);
+					dto.setLostAge(lostAge);
+					dto.setLostKind(lostKind);
+					dto.setLostGender(lostGender);
+					dto.setLostDate(lostDate);
+					dto.setLostContent(lostContent);
+					dto.setLostCategory(lostCategory);
+					dto.setLostAddr(lostAddr);
+					dto.setLostWriter(lostWriter);
+					dto.setFileRealName(lostFileRealName);
+					 
+					System.out.println(dto.toString());
+					int result = dao.lostUpdate(dto,lostNo);
+					System.out.println();
+					  if(result >0) { response.setCharacterEncoding("UTF-8");
+					
+					  response.sendRedirect("lostMapList.lost?page=1");
+					
+				 }
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

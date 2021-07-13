@@ -14,7 +14,7 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/lostAnimal.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${lostDetail.lostNo}" method="post" enctype="multipart/form-data">
 				<div id="mainTitle">실종 신고</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
@@ -36,12 +36,7 @@
 											<label for="rd1">개</label>
 										</div>
 										</c:if>
-										<c:if test="${lostDetail.lostCategory == 'cat'}">
-										<div class="inp_rd">
-											<input type="radio" id="rd2" name="lostCategory" value="cat">
-											<label for="rd2">고양이</label>
-										</div>
-										</c:if>
+										
 										<c:if test="${lostDetail.lostCategory != 'cat'}">
 										<div class="inp_rd">
 											<input type="radio" id="rd2" name="lostCategory" value="cat">
@@ -50,7 +45,7 @@
 										</c:if>
 										<c:if test="${lostDetail.lostCategory == 'cat'}">
 										<div class="inp_rd">
-											<input type="radio" id="rd2" name="lostCategory" value="cat">
+											<input type="radio" id="rd2" name="lostCategory" value="cat" checked>
 											<label for="rd2">고양이</label>
 										</div>
 										</c:if>
@@ -58,14 +53,29 @@
 									
 				</div>
 				<div id="animalDetail">
-				<span>나이:</span><input type="text" name="lostAge" class="inpform toMargin" value=${lostDetail.lostAge} >
+				<span>나이:</span><input type="text" name="lostAge" class="inpform toMargin" value=${lostDetail.lostAge} required>
 				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin" value=${lostDetail.lostKind }>
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct">
 										<select name="lostGender" id="lostGender">
 											<option value="">선택</option>
+											<c:choose>
+											<c:when test="${lostDetail.lostGender == 'F' }">
+											<option value="F" selected>암컷</option>
+											</c:when>
+											<c:otherwise>
 											<option value="F">암컷</option>
+											</c:otherwise>
+											</c:choose>
+											<c:choose>
+											<c:when test="${lostDetail.lostGender == 'M' }">
+											<option value="M" selected>숫컷</option>
+											</c:when>
+											<c:otherwise>
 											<option value="M">숫컷</option>
+											</c:otherwise>
+											</c:choose>
+											
 										</select>
 									</div>
 				</div>
@@ -99,10 +109,10 @@
 			</div>
 			
 			<div id="animalImage">
-				이미지: <input type="file" name="animalImage" onChange="imageChoose(this)">
+				이미지: <input type="file" name="animalImage" onChange="imageChoose(this)" required>
 				</div> 
 				   <div class="upload-img">
-                        <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview" />
+                        <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview"  />
                    </div>
 			<input type="hidden" name="addResult" id="hiddenInput">	
 			<input type="hidden" name="lostWriter" value="${sessionScope.loginInfo.user_id}"> 

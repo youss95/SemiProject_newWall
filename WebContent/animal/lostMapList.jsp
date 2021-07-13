@@ -32,7 +32,7 @@
   <span style="float:right;">
   <c:if test="${sessionScope.loginInfo != null}">
   	<a href="${pageContext.request.contextPath}/lostDelete.lost?lostNo=${maplist.lostNo}"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;&nbsp;
-  	<a href="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
+  	<a href="${pageContext.request.contextPath}/lostUpdateForm.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
   	</c:if>
   </span>
   </h2>
