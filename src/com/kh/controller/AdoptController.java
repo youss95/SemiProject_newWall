@@ -107,11 +107,19 @@ public class AdoptController extends HttpServlet {
 				request.setAttribute("pet_name", p_name);
 				request.setAttribute("code_seq", code_seq);
 				request.getRequestDispatcher("adopt/adoptRegForm.jsp").forward(request, response);	
-				
+
 			}else if(url.contentEquals("/adoptReg.apt")) {
 				System.out.println("입양신청버튼 클릭");
-				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
-
+				
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				
+				if(session_chk == null && user_id == null) { 
+					user_id = "비회원";
+				}else {
+					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				}
+				System.out.println("user_id : " + user_id);
 				String code_seq = request.getParameter("code_seq");
 				String p_name = request.getParameter("p_name");
 				String p_phone01 = request.getParameter("p_phone01");
@@ -148,8 +156,16 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/reviewWrite.apt")) {
 				System.out.println("입양후기 작성");
-
-				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				
+				if(session_chk == null && user_id == null) { 
+					user_id = "비회원";
+				}else {
+					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				}
+				
+//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				String filesPath = request.getServletContext().getRealPath("/upload/review");
 				File filesFolder = new File(filesPath);
 				if(!filesFolder.exists()) filesFolder.mkdir();
@@ -170,7 +186,15 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/reviewList.apt")) {
 				
-//				List<ReviewDTO> list = adoptdao.getAllReview();
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				int adopt_chk = 0;
+				if(session_chk != null) { 
+					String user_id = session_chk.getUser_id();
+					adopt_chk = adoptdao.getAdoptionRecord(user_id);
+				}
+				
+//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+//				int adopt_chk = adoptdao.getAdoptionRecord(user_id);
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");
@@ -193,19 +217,32 @@ public class AdoptController extends HttpServlet {
 				request.setAttribute("navi", pageNavi);
 				request.setAttribute("category", category);
 				request.setAttribute("contents", contents);
+				request.setAttribute("adopt_chk", adopt_chk);
 
 				request.getRequestDispatcher("adopt/reviewList.jsp").forward(request, response);
 				
 			}else if(url.contentEquals("/reviewDetail.apt")) {
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				if(session_chk != null) { 
+					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				}
 				System.out.println("리뷰 상세페이지");
-				
 				int review_seq = Integer.parseInt(request.getParameter("review_seq"));
-				
 				adoptdao.viewCount(review_seq);
 				ReviewDTO review = adoptdao.getReviewContents(review_seq);
 				
 				request.setAttribute("rv", review);
 				request.getRequestDispatcher("adopt/reviewDetail.jsp").forward(request, response);	
+				
+			}else if(url.contentEquals("/reviewLike.apt")) {
+
+				// review_seq 랑 user_id랑 count해서 좋아요 업데이트.
+				// 좋아요 하트 누르면 table에 insert
+				// 데이터가 있으면 하트불들어오고 데이터 없으면 불끄기
+				// review_seq랑 user_id랑 비교해서 불끌때 데이터 삭제해주기 
+				// 테이블 외래키 설정
+				
 				
 			}else if(url.contentEquals("/reviewDelete.apt")) {
 				System.out.println("리뷰 삭제");

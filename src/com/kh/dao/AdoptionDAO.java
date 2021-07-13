@@ -484,7 +484,7 @@ public class AdoptionDAO {
 
 	//adoption
 	public int insertRegForm(AdoptionDTO dto) throws Exception{
-		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try(
 				Connection con = this.getConnection();
@@ -501,24 +501,23 @@ public class AdoptionDAO {
 			pstat.setString(9, dto.getP_address());
 			pstat.setString(10, dto.getP_mstatus());
 			pstat.setString(11, dto.getP_arg());
-			pstat.setString(12, dto.getAd_status());
-			pstat.setString(13, dto.getQ01_aname());
-			pstat.setString(14, dto.getQ02_alternative());
-			pstat.setString(15, dto.getQ03_time_to_worry());
-			pstat.setString(16, dto.getQ04_reason());
-			pstat.setString(17, dto.getQ05_family_member());
-			pstat.setString(18, dto.getQ06_family_arg());
-			pstat.setString(19, dto.getQ07_pet());
-			pstat.setString(20, dto.getQ08_experience());
-			pstat.setString(21, dto.getQ09_housing_type());
-			pstat.setString(22, dto.getQ10_host_consent());
-			pstat.setString(23, dto.getQ11_impossible_situation());
-			pstat.setString(24, dto.getQ12_lodging_problem());
-			pstat.setString(25, dto.getQ13_payment_arg());
-			pstat.setString(26, dto.getQ14_neutered_arg());
-			pstat.setString(27, dto.getQ15_visit_agr());
-			pstat.setString(28, dto.getQ16_adopt_arg());
-
+			pstat.setString(12, dto.getQ01_aname());
+			pstat.setString(13, dto.getQ02_alternative());
+			pstat.setString(14, dto.getQ03_time_to_worry());
+			pstat.setString(15, dto.getQ04_reason());
+			pstat.setString(16, dto.getQ05_family_member());
+			pstat.setString(17, dto.getQ06_family_arg());
+			pstat.setString(18, dto.getQ07_pet());
+			pstat.setString(19, dto.getQ08_experience());
+			pstat.setString(20, dto.getQ09_housing_type());
+			pstat.setString(21, dto.getQ10_host_consent());
+			pstat.setString(22, dto.getQ11_impossible_situation());
+			pstat.setString(23, dto.getQ12_lodging_problem());
+			pstat.setString(24, dto.getQ13_payment_arg());
+			pstat.setString(25, dto.getQ14_neutered_arg());
+			pstat.setString(26, dto.getQ15_visit_agr());
+			pstat.setString(27, dto.getQ16_adopt_arg());
+			pstat.setString(28, dto.getAd_status());
 
 			int result = pstat.executeUpdate();
 			return result;
@@ -712,10 +711,10 @@ public class AdoptionDAO {
 
 	// review
 	public List<String> getPageNavi(int currentPage, String category, String contents) throws Exception{ 
-	
+
 		int recordTotalCount = this.getReviewRecordCount(category, contents); 
 
-		
+
 		int recordCountPerPage = PageConfig.REVIEW_RECORD_COUNT_PER_PAGE; 
 		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
 
@@ -773,7 +772,7 @@ public class AdoptionDAO {
 				sql = "select count(*) from review where review_contents like '%"+ contents + "%'";
 			}
 		}
-		
+
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -784,7 +783,7 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 	//review
 	public List<ReviewDTO> getReviewPageList(int startNum, int endNum) throws Exception{
 
@@ -804,7 +803,7 @@ public class AdoptionDAO {
 
 				List<ReviewDTO> list = new ArrayList<ReviewDTO>();
 				while(rs.next()) {
-					
+
 					ReviewDTO dto = new ReviewDTO();
 					dto.setReview_seq(rs.getInt("review_seq"));
 					dto.setReview_title(rs.getNString("review_title"));
@@ -824,8 +823,8 @@ public class AdoptionDAO {
 
 		}
 	}
-	
-	
+
+
 	public List<ReviewDTO> getReviewPageList(int startNum, int endNum, String category, String contents) throws Exception{
 		String sql = null;
 
@@ -879,4 +878,21 @@ public class AdoptionDAO {
 
 	}
 
+	public int getAdoptionRecord(String user_id) throws Exception{
+		String sql = "select count(*) from adoption where user_id = ? and ad_status='완료' ";;
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, user_id);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+
+	}
 }

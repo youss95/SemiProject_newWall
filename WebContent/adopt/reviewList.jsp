@@ -6,10 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -68,9 +66,14 @@
 						</c:choose>
 							
 					</div>
-					<div class="btn_wrap">
-						<button type="button" class="btn_m btn_line" id="btn_write" style="float:right;">후기 작성</button>
-					</div>
+					
+					<c:choose>
+						<c:when test="${adopt_chk > 0}">
+							<div class="btn_wrap">
+								<button type="button" class="btn_m btn_line" id="btn_write" style="float:right;">후기 작성</button>
+							</div>
+						</c:when>
+					</c:choose>
 
 					<div class="page_nav">
 						<c:forEach var="i" items="${navi}" varStatus="s">

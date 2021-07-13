@@ -7,13 +7,11 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
 </head>
 <body>
 	<div class="wrap">
 		<jsp:include page="../layout/jsp/header.jsp"></jsp:include>
-		<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 		<div class="container">
 			<div class="contents">
 				<section class="adopt_list">

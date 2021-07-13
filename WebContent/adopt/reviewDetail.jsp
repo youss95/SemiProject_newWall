@@ -6,10 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -24,14 +23,19 @@
 					<div class="view">
 						<div class="title">
 							<h3>${rv.review_title}</h3>
-							<ul class="utils">
-								<li>작성자 : <span>${rv.review_writer}</span></li>
-								<li>작성일 : <span>${rv.reg_date}</span></li>
- 								<li>좋아요 : <span>${rv.review_like}</span></li>
-								<li>조회수 : <span>${rv.review_view}</span></li>
-							</ul>
-							<div class="v_like">
-								
+							<div class="utils_wrap">
+								<ul class="utils">
+									<li>작성자 : <span>${rv.review_writer}</span></li>
+									<li>작성일 : <span>${rv.reg_date}</span></li>
+	 								<li>좋아요 : <span>${rv.review_like}</span></li>
+									<li>조회수 : <span>${rv.review_view}</span></li>
+								</ul>
+								<div class="v_like">
+									<a href="javascript:;" class="btn_like">
+										<i class="far fa-heart off"></i>
+										<i class="fas fa-heart on"></i>
+									</a>
+								</div>
 							</div>
 						</div>
 						<div class="contents">
