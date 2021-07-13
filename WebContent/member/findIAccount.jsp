@@ -181,7 +181,7 @@
 					<!-- 하이 여기는 서브입니다 -->
 					<div class="signup_con">
 						<div class="su_banner">
-							<img src="../resources/images/id_pw_1100_400.jpg" alt="">
+							<!-- <img src="../resources/images/id_pw_1100_400.jpg" alt=""> -->
 						</div>
 						<div class="su_title">
 							<h2>아이디 / 비밀번호 찾기</h2>
