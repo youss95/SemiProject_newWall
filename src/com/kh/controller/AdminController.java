@@ -2,6 +2,7 @@ package com.kh.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
@@ -13,6 +14,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +22,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
 import com.kh.config.SponsorConfig;
 import com.kh.dao.AdminDAO;
 import com.kh.dao.AdoptionDAO;
+import com.kh.dao.AnimalDAO;
 import com.kh.dao.FileDAO;
+import com.kh.dao.NoticeDAO;
+import com.kh.dao.NoticeFileDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.LostAnimalDTO;
+import com.kh.dto.NoticeDTO;
+import com.kh.dto.NoticeFileDTO;
+import com.kh.dto.ProtectBoardDTO;
 import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -63,6 +73,7 @@ public class AdminController extends HttpServlet {
 		return d;
 	}
 
+
 	private List<String> getImgSrc(String str) {
 		Pattern nonValidPattern = Pattern
 				.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
@@ -74,6 +85,7 @@ public class AdminController extends HttpServlet {
 		}
 		return result;
 	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -369,7 +381,83 @@ public class AdminController extends HttpServlet {
 					System.out.println(sp_search);
 					request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
 
+			}else if(url.equals("/protectAnimal.adm")) {
+				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.ANIMAL_RECORD_COUNT_PER_PAGE;  //10
+				//총 몇개?
+				int boardCount = admindao.pTotalCount();
+				//게시글 리스트
+				List<ProtectBoardDTO> list = AnimalDAO.getList(page, count);
+				System.out.println("게시글 리스트"+list);
+			
+				int lastPage = (int)Math.ceil(boardCount/10.0); //임시적인 마지막 페이지
+				 //보여질 페이지 네비 연산
+				int nowGrp = (int)(Math.ceil((double)page/10)); 
+				int startNum = ((nowGrp-1) * 10) +1 ;
+				int lastNum = (nowGrp * 10);
+				request.setAttribute("adProtect", list);
+				
+				int endPage = lastNum > lastPage ? lastPage : lastNum; //실제 보여질 페이지
+				request.setAttribute("lastPage", lastPage);
+				request.setAttribute("lastNum", endPage);
+				request.setAttribute("startNum", startNum);
+				RequestDispatcher dis = request.getRequestDispatcher("admin/userArticles.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/paDelete.adm")) {
+				
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				int result = AnimalDAO.protectDelete(protectNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='protectAnimal.adm?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
+			}else if(url.equals("/lostAnimal.adm")) {
+				
+				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.ADMIN_PROTECT_RECORD_COUNT_PER_PAGE;
+				List<LostAnimalDTO> list = AnimalDAO.mapList(page,count);
+				System.out.println("로스트"+list.toString());
+				int boardCount = AnimalDAO.getAllCount();
+				System.out.println(boardCount);
+				int lastPage = (int)Math.ceil(boardCount/10.0); //임시적인 마지막 페이지
+				 //보여질 페이지 네비 연산
+				int nowGrp = (int)(Math.ceil((double)page/10)); 
+				int startNum = ((nowGrp-1) * 10) +1 ;
+				int lastNum = (nowGrp * 10);
+				request.setAttribute("adProtect", list);
+				
+				int endPage = lastNum > lastPage ? lastPage : lastNum; //실제 보여질 페이지
+				request.setAttribute("lastPage", lastPage);
+				request.setAttribute("lastNum", endPage);
+				request.setAttribute("startNum", startNum);
+				
+				request.setAttribute("mapList", list);
+				
+				RequestDispatcher dis = request.getRequestDispatcher("admin/userLostArticles.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/laDelete.adm")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				int result = AnimalDAO.lostDelete(lostNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='lostAnimal.adm?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
 			}
+					
 
 		}catch(Exception e) {
 			e.printStackTrace();

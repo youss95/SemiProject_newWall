@@ -8,11 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"> 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
@@ -692,7 +689,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<div class="modal fade" id="loginModal" tabindex="-1"
+	<%-- <div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -716,16 +713,16 @@
 						</div>
 					</form>
 				</div>
-				<div class="modal-footer">
+				 <div class="modal-footer">
 					<button type="button" class="btn_m btn_default"
 						data-dismiss="modal" style="width: 125%">로그인</button>
 					<button type="button" class="btn_m btn_white" data-dismiss="modal"
 						style="width: 125%">회원가입</button>
-				</div>
+				</div> 
 			</div>
-		</div>
-	</div>
-	
+		</div> 
+	</div>--%>
+	 <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 	<script>
 	 $(function () {
          //14세 미만 이상여부

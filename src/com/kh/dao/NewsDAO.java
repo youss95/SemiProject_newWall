@@ -45,7 +45,7 @@ public class NewsDAO {
 		}
 	}
 	
-	private int getRecordCount() throws Exception {
+	public int getRecordCount() throws Exception {
 		// 게시글 카운트
 		String sql = "select count(*) from news_board";
 		try (Connection con = this.getConnection();

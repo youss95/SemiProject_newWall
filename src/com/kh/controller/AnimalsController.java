@@ -177,7 +177,8 @@ public class AnimalsController extends HttpServlet {
 				//Gson g = new Gson();
 				int page = Integer.parseInt(request.getParameter("page"));
 				System.out.println(page);
-				List<ProtectBoardDTO> list = dao.getList(page);
+				int count = PageConfig.PROTECT_COUNT_PER_PAGE;
+				List<ProtectBoardDTO> list = AnimalDAO.getList(page,count);
 				
 				System.out.println(list.toString());
 				
@@ -194,8 +195,9 @@ public class AnimalsController extends HttpServlet {
 			}else if(url.equals("/proList.lost")) {
 				Gson g = new Gson();
 				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.PROTECT_COUNT_PER_PAGE;
 				System.out.println(page);
-				List<ProtectBoardDTO> list = dao.getList(page);
+				List<ProtectBoardDTO> list = AnimalDAO.getList(page,count);
 				String result = g.toJson(list);
 				System.out.println("result" + result);
 				response.setContentType("text/html; charset=UTF-8");
@@ -210,12 +212,19 @@ public class AnimalsController extends HttpServlet {
 				System.out.println("boardcount"+boardCount);
 				List<ProtectReplyDTO> list = dao.getReplyList(protectNo,page);
 				int lastPage = (int)Math.ceil(boardCount/10.0);
+				int nowGrp = (int)(Math.ceil((double)page/10));
+				int startNum = ((nowGrp-1) * 10) +1 ;
+				int lastNum = (nowGrp * 10);
+				int endPage = lastNum > lastPage ? lastPage : lastNum;
+				System.out.println(lastPage);
 				if(result>0) {
 					ProtectDetailDTO dto = dao.getDetail(protectNo);
 					System.out.println("dto:" + dto.toString());
 					request.setAttribute("lastPage", lastPage);
 					request.setAttribute("replyList", list);
 					request.setAttribute("protectDetail", dto);
+					request.setAttribute("lastNum", endPage);
+					request.setAttribute("startNum", startNum);
 					RequestDispatcher dis = request.getRequestDispatcher("animal/protectDetail.jsp");
 					dis.forward(request, response);
 				}else {
@@ -258,8 +267,9 @@ public class AnimalsController extends HttpServlet {
 				//로스트 맵 목록
 			}else if(url.equals("/lostMapList.lost")) {
 				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.LOST_COUNT_PER_PAGE;
 				System.out.println("page" + page);
-				List<LostAnimalDTO> list = dao.mapList(page);
+				List<LostAnimalDTO> list = dao.mapList(page,count);
 				int boardCount = dao.getAllCount();
 				System.out.println(boardCount);
 				int lastPage = (int)Math.ceil(boardCount/6.0);
@@ -332,7 +342,7 @@ public class AnimalsController extends HttpServlet {
 				}
 				}else if(url.equals("/protectDelete.lost")) {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
-				int result = dao.protectDelete(protectNo);
+				int result = AnimalDAO.protectDelete(protectNo);
 				if(result>0) {
 					response.setCharacterEncoding("UTF-8");
 					response.setContentType("text/html; charset=UTF-8");

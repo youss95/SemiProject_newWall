@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="header">
 	<h1 class="logo">
-		<a href="index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
+		<a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
@@ -14,7 +14,7 @@
 					<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양 후기</a></li>
 				</ul></li>
 			<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원하기</a></li>
-			<li class="has"><a href="#">실종/보호</a>
+			<li class="has"><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a>
 				<ul class="s_menu clear help">
 					<li><a
 						href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종
@@ -24,8 +24,8 @@
 				</ul></li>
 			<li class="has"><a href="#">뉴스레터</a>
 				<ul class="s_menu clear news">
-					<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
 					<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">소식</a></li>
+					<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
 				</ul></li>
 			<!-- <li><a href="#">봉사활동</a></li> 보류 -->
 		</ul>
@@ -39,7 +39,7 @@
 					<li><a href="${pageContext.request.contextPath}/logoutProc.mem">로그아웃</a>
 				</c:when>
 				<c:otherwise>
-					<li><a id="loginLogin" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+					<li><a id="loginLogin" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
 					<li><a href="${pageContext.request.contextPath}/terms.mem">회원가입</a></li>
 				</c:otherwise>
 			</c:choose>

@@ -56,6 +56,22 @@ public class NoCommentsController extends HttpServlet {
 				request.setAttribute("nocmtlist", list);
 				response.sendRedirect("noticeView.notice?notice_seq="+parent);
 				
+			}else if (url.contentEquals("/noadminwrite.nocmt")) {
+				String writer = "admin";
+
+				String comments = request.getParameter("ntrp_contents");
+				comments = XSSFilter(comments);				
+				
+				String parent = request.getParameter("parent");
+								
+				dto = new NoCommentsDTO(0,writer,comments,null,parent);
+				dao.insert(dto);
+				
+				List<NoCommentsDTO> list = dao.commentsAll(parent);
+								
+				request.setAttribute("nocmtlist", list);
+				response.sendRedirect("noticeInfoView.sumAdm?notice_seq="+parent);
+				
 			}else if(url.contentEquals("/nodelete.nocmt")){
 				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
 				
@@ -64,6 +80,15 @@ public class NoCommentsController extends HttpServlet {
 				int result = dao.delete(seq);
 				
 				response.sendRedirect("noticeView.notice?notice_seq="+parent);
+				
+			}else if(url.contentEquals("/noadmindelete.nocmt")){
+				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
+				
+				String parent = request.getParameter("ntrp_parent");
+				
+				int result = dao.delete(seq);
+				
+				response.sendRedirect("noticeInfoView.sumAdm?notice_seq="+parent);
 				
 			}else if(url.contentEquals("/modifyReply.nocmt")){
 				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
@@ -76,6 +101,18 @@ public class NoCommentsController extends HttpServlet {
 				dao.modify(seq, comments);
 				
 				response.sendRedirect("noticeView.notice?notice_seq="+parent);
+				
+			}else if(url.contentEquals("/modifyadminReply.nocmt")){
+				int seq = Integer.parseInt(request.getParameter("ntrp_seq"));
+				
+				String comments = request.getParameter("hiddenCon");
+				comments = XSSFilter(comments);
+				
+				String parent = request.getParameter("ntrp_parent");
+				
+				dao.modify(seq, comments);
+				
+				response.sendRedirect("noticeInfoView.sumAdm?notice_seq="+parent);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.kh.config.Db;
 import com.kh.config.PageConfig;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
@@ -751,8 +752,7 @@ public class AdminDAO {
 		}
 
 	}
-	
-	
+
 	//adoption
 	public ArrayList<String> statusUpdate(int adopt_seq, String ad_status) throws Exception{
 		String sql = "update adoption set ad_status = ? where adopt_seq = ?";
@@ -762,9 +762,8 @@ public class AdminDAO {
 				){			
 			pstat.setString(1, ad_status);
 			pstat.setInt(2, adopt_seq);
-
 			int result = pstat.executeUpdate();
-			
+
 			ArrayList<String> rs = new ArrayList<String>();
 			rs.add(String.valueOf(result));
 			rs.add(String.valueOf(adopt_seq));
@@ -772,7 +771,20 @@ public class AdminDAO {
 			return rs;
 		}
 	}
-	
+
+	//임시보호 게시판 글 개수 가져오기
+	public int pTotalCount() throws Exception {
+		String sql = "select count(*) from protect_animal";
+		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+	}
+
+
+
 }
 
 
