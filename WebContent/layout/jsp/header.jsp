@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header class="header">
 	<h1 class="logo">
-		<a href="index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
+		<a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/resources/images/login_logo6.png"></a>
 	</h1>
 	<div class="gnb">
 		<ul class="clear">
@@ -39,7 +39,7 @@
 					<li><a href="${pageContext.request.contextPath}/logoutProc.mem">로그아웃</a>
 				</c:when>
 				<c:otherwise>
-					<li><a id="loginLogin" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+					<li><a id="loginLogin" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
 					<li><a href="${pageContext.request.contextPath}/terms.mem">회원가입</a></li>
 				</c:otherwise>
 			</c:choose>

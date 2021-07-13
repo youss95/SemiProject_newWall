@@ -14,6 +14,7 @@ import com.kh.dao.MemberDAO;
 import com.kh.dto.MemberDTO;
 import com.kh.utils.DateUtils;
 import com.kh.utils.EncryptUtils;
+import com.kh.utils.MailUtils;
 
 
 @WebServlet("*.mem")
@@ -34,7 +35,7 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect("member/agreeTerms.jsp");
 			}else if(url.contentEquals("/signup.mem")) { 
 				//---------------------------------------------------------signUp.jsp페이지 새로생성함----------- 회원가입 페이지로
-				response.sendRedirect("member/signUpForm.jsp");
+				response.sendRedirect("member/signUp.jsp");
 			}else if(url.contentEquals("/signupProc.mem")) { 
 				//----------------------------------------------------------------------------------------- 회원가입 요청 처리
 				String user_id = request.getParameter("user_id");
@@ -113,8 +114,32 @@ public class MemberController extends HttpServlet {
 				String id = request.getParameter("user_id");
 				boolean result = dao.isIdAvailable(id);
 				response.getWriter().append(String.valueOf(result));
+			}else if(url.contentEquals("/mailAuthReq.mem")) {
+				String email = request.getParameter("email");
+				String code = MailUtils.generateCertChar();
+				MailUtils.sendMail(email, code);
+				System.out.println(email + " : " + code);
+				request.getSession().setAttribute("mailAuthCode", code);
+				new Thread() {
+					public void run() {
+						for(int timer = 30000;timer > 0;timer--) {
+							try {Thread.sleep(1000);} 
+							catch (InterruptedException e) {e.printStackTrace();}
+						}
+						request.getSession().removeAttribute("mailAuthCode");
+					}
+				}.start();
+			}else if(url.contentEquals("/mailAuthProc.mem")) {
+				String code = request.getParameter("code");
+				String authCode = (String)request.getSession().getAttribute("mailAuthCode");
+				if(authCode.contentEquals(code)) {
+					response.getWriter().append("authorized");
+				}else if(!authCode.contentEquals(code)) {
+					response.getWriter().append("incorrect");
+				}else {
+					response.getWriter().append("expired");
+				}
 			}
-
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");

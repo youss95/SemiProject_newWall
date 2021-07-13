@@ -372,13 +372,20 @@ dd div.inpform {
 										
 											<h3 class="ad_h3 su_address">상세 주소</h3>
 											<div id="sp_address2" name="sp_address2"
-												class="inpform su_address su_l_ip" itemid="address2">${loginInfo.address2 }</div>
+												class="inpform su_address su_l_ip" itemid="address2" style="display:inline-block">${loginInfo.address2 }</div>
 										
-											<div class="control">
+											<div class="control" style="display:inline-block">
 												<i class="far fa-edit"></i> <i class="far fa-check-circle"></i>
 												<i class="fas fa-times"></i>
 											</div>
 										</div>
+									</dd>
+								</dl>
+								<dl>
+									<dt class="su_ti">회원탈퇴</dt>
+									<dd>
+										<button type="button" class="btn_submit btn_m btn_default"
+											data-bs-toggle="modal" data-bs-target="#memberOutModal">회원탈퇴</button>
 									</dd>
 								</dl>
 							</div>
@@ -389,7 +396,7 @@ dd div.inpform {
 			</div>
 		</div>
 	</div>
-	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="/layout/jsp/footer.jsp"></jsp:include>
 
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
