@@ -40,7 +40,7 @@
 					$.ajax({
 						data: form,
 						type: "post",
-						url : '${pageContext.request.contextPath}/uploadImg.news',
+						url : '${pageContext.request.contextPath}/newsuploadImg.newsAdm',
 						contentType : false,
 						processData : false,
 						enctype : 'multipart/form-data',

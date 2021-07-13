@@ -86,7 +86,7 @@
 									href="${pageContext.request.contextPath}/noticeInfoModify.sumAdm?notice_seq=${noticeView.notice_seq}"
 									class="btn_s btn_primary" id="modify">수정</a>
 								<a
-									href="${pageContext.request.contextPath}/noticeInfoDelete.sumAdmnotice_seq=${noticeView.notice_seq}"
+									href="${pageContext.request.contextPath}/noticeInfoDelete.sumAdm?notice_seq=${noticeView.notice_seq}"
 									class="btn_s btn_default" id="delete">삭제</a>
 						
 							</div>
