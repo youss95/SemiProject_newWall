@@ -1,8 +1,14 @@
 let page=1;
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+var ctx = getContextPath();
+
 	function listLoad(){
 		let loading = $('#loading');
 		$.ajax({
-			url:`/NewWall/proList.lost?page=${page}`,
+			url:`${ctx}/proList.lost?page=${page}`,
 			
 			type:"get",
 			dataType:"json"		
@@ -12,8 +18,9 @@ let page=1;
 
 		let item = `
 
-        <div class="card shadow-soft">
-            <img src="/NewWall/upload/lostAnimal/${res.protectFileRealName1}">
+        <div class="card shadow-soft">`
+       item+= `<img src=${ctx}`
+item+=`/upload/lostAnimal/${res.protectFileRealName1}>
             <div class="card-body">
                 <h4>${res.protectName}</h4>
                 <p class="fontC">
@@ -26,13 +33,11 @@ let page=1;
 }
 item+=`<br>`
  item+=`작성자:${res.protectWriter}
-                </p>
- <a  href="/NewWall/protectDetail.lost?protectNo=${res.protectNo}&page=1" >자세히보기<i class="fas fa-angle-double-right"></i></a>
+                </p>`
+ item+=`<a  href=${ctx}`
+item+=`/protectDetail.lost?protectNo=${res.protectNo}&page=1>자세히보기<i class="fas fa-angle-double-right"></i></a>
                         </div>
-        </div>
-       
-        
-		`
+        </div>`
 		loading.append(item);
 		})
 		}).fail(error=>{

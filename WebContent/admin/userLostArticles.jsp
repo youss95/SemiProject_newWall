@@ -22,7 +22,7 @@
 			<jsp:include page="../layout/jsp/adminBoardNav.jsp"></jsp:include>
 				<section class="shadow-sm rounded">
 					<div class="title_area">
-						<h2>임시보호 게시판</h2>
+						<h2>실종동물 게시판</h2>
 					</div>
 					<div class="contents animal_list">
 						<table class="table table-hover text-center">
@@ -45,12 +45,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="ap" items="${adProtect}">
+								<c:forEach var="al" items="${mapList}">
 								<tr>
-										<td><a href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${ap.protectNo}&page=1">${ap.protectNo}</a></td>
-										<td>${ap.protectWriter}</td>
-										<td>${ap.protectName}/${ap.protectGender}/${ap.protectKind}</td>
-										<td>${ap.protectCreateDate}<span style="float:right;padding-right:10px;"><a href="${pageContext.request.contextPath}/paDelete.adm?protectNo=${ap.protectNo}"><i class="fas fa-backspace"></i></a></span> </td>
+										<td><a href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${ap.protectNo}&page=1">${al.lostNo}</a></td>
+										<td>${al.lostWriter}</td>
+										<td>${al.lostName}/${al.lostGender}/${al.lostCategory}/${al.lostAge}</td>
+										<td>${al.createDate}<span style="float:right;padding-right:10px;"><a href="${pageContext.request.contextPath}/laDelete.adm?lostNo=${al.lostNo}"><i class="fas fa-backspace"></i></a></span> </td>
 										
 									</tr>
 								</c:forEach>
@@ -65,7 +65,7 @@
    <li class="page-item  "><a class="page-link"     onclick="alert('이전 페이지가 없습니다.');">Previous</a></li>
     </c:when>
     <c:otherwise>
-     <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectAnimal.adm?page=${param.page-1}">Previous</a></li>
+     <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/lostAnimal.adm?page=${param.page-1}">Previous</a></li>
      </c:otherwise>
     </c:choose>
     <c:forEach var="i" begin="${startNum}" end="${lastNum}" step="1">
@@ -78,7 +78,7 @@
    		<li class="page-item  "><a class="page-link"     onclick="alert('마지막 페이지 입니다.');">Next</a></li>
    	</c:when>
    	<c:otherwise>
-   	 <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectAnimal.adm?page=${param.page+1}">Next</a></li>
+   	 <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/lostAnimal.adm?page=${param.page+1}">Next</a></li>
    	</c:otherwise>
     </c:choose>
   </ul>

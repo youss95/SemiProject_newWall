@@ -267,8 +267,9 @@ public class AnimalsController extends HttpServlet {
 				//로스트 맵 목록
 			}else if(url.equals("/lostMapList.lost")) {
 				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.LOST_COUNT_PER_PAGE;
 				System.out.println("page" + page);
-				List<LostAnimalDTO> list = dao.mapList(page);
+				List<LostAnimalDTO> list = dao.mapList(page,count);
 				int boardCount = dao.getAllCount();
 				System.out.println(boardCount);
 				int lastPage = (int)Math.ceil(boardCount/6.0);

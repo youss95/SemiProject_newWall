@@ -150,6 +150,7 @@
 </nav>
 			</section>
 		</div>
+		
 	</div>
 
 	<footer class="footer">

@@ -271,12 +271,12 @@ public class AnimalDAO {
 		}
 	}
 	//맵 리스트
-	public List<LostAnimalDTO> mapList(int page) throws Exception	{
+	public static List<LostAnimalDTO> mapList(int page,int count) throws Exception	{
 		List<LostAnimalDTO> list = new ArrayList<>();
 		String sql = "select * from (select row_number() over(order by lost_no desc) rnum,lost_no,lost_name,lost_age,lost_kind,lost_category,lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content, lost_gender, lost_writer from lost_animal) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setInt(1, (page-1)*6+1);
-			pstmt.setInt(2, page*6 );
+			pstmt.setInt(1, (page-1)*count+1);
+			pstmt.setInt(2, page*count );
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
 					LostAnimalDTO dto;
@@ -359,7 +359,7 @@ public class AnimalDAO {
 		}
 	}
 	
-	public int lostDelete(int lostNo) throws Exception {
+	public static int lostDelete(int lostNo) throws Exception {
 		String sql = "delete from lost_animal where lost_no = ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, lostNo);

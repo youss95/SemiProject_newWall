@@ -35,7 +35,7 @@ import com.kh.dao.NoticeFileDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
-
+import com.kh.dto.LostAnimalDTO;
 import com.kh.dto.NoticeDTO;
 import com.kh.dto.NoticeFileDTO;
 import com.kh.dto.ProtectBoardDTO;
@@ -388,7 +388,46 @@ public class AdminController extends HttpServlet {
 					out.print("</script>");
 					out.flush();
 				}
+			}else if(url.equals("/lostAnimal.adm")) {
+				
+				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.ADMIN_PROTECT_RECORD_COUNT_PER_PAGE;
+				List<LostAnimalDTO> list = AnimalDAO.mapList(page,count);
+				System.out.println("로스트"+list.toString());
+				int boardCount = AnimalDAO.getAllCount();
+				System.out.println(boardCount);
+				int lastPage = (int)Math.ceil(boardCount/10.0); //임시적인 마지막 페이지
+				 //보여질 페이지 네비 연산
+				int nowGrp = (int)(Math.ceil((double)page/10)); 
+				int startNum = ((nowGrp-1) * 10) +1 ;
+				int lastNum = (nowGrp * 10);
+				request.setAttribute("adProtect", list);
+				
+				int endPage = lastNum > lastPage ? lastPage : lastNum; //실제 보여질 페이지
+				request.setAttribute("lastPage", lastPage);
+				request.setAttribute("lastNum", endPage);
+				request.setAttribute("startNum", startNum);
+				
+				request.setAttribute("mapList", list);
+				
+				RequestDispatcher dis = request.getRequestDispatcher("admin/userLostArticles.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/laDelete.adm")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				int result = AnimalDAO.lostDelete(lostNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='lostAnimal.adm?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
 			}
+					
 
 		}catch(Exception e) {
 			e.printStackTrace();
