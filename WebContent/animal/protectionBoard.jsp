@@ -8,19 +8,71 @@
 <title>뉴월</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectionBoard.css">
-<%@ include file="../layout/jsp/commonModal.jsp" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
+.container{padding-top:60px;}
 #boardDetailprotect{margin-top:10px;}
+.img {	margin-top:60px;
+        position: relative;
+        background-image: url(${pageContext.request.contextPath}/resources/images/img07.jpeg);
+        height: 250px;
+        background-size: cover;
+        width:100%;
+      }
+
+      .img-cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .img .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3rem;
+        color: white;
+        z-index: 2;
+        text-align: center;
+      }
+	.gosp{
+	font-size:20px;
+	
+	}
 </style>
 </head>
 <body>
 <div class="wrap">
 <%@ include file="../layout/jsp/header.jsp" %>
+	<div class="img">
+      <div class="content">
+      
+       <div>임시보호동물 소개</div>
+
+       
+       <div class="gosp">
+       <a href=""><span >후원하러 가기 >></span></a>
+       </div>
+      </div>
+      <div class="img-cover"></div>
+    </div>
 <div class="container">
 			<div class="contents">
-			<img src="${pageContext.request.contextPath}/resources/images/img05.jpeg"/>
+			
+		
 				<section class="protectBoard">
 				
+
+
+
 				 <div class="cont">
      <div class="row">
     <c:forEach var="p" items="${protectList}">

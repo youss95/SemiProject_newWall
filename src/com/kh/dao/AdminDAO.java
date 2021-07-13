@@ -323,11 +323,18 @@ public class AdminDAO {
 	}
 	//sponsor 검색했을때 검색글의갯수
 	private int adSponsorGetRecordCount(String keyword) throws Exception{
-		String sql = "select count(*) from sponsor where sponsor_choice like ?";
+		String sql = null;
+		if(keyword != null) {			
+			sql = "select count(*) from sponsor where sponsor_choice like ?";			
+		}else {
+			sql = "select count(*) from sponsor";
+		}
 		try(Connection con = this.getConnection();
 
 				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setNString(1, keyword+"%");
+			if(keyword != null) {			
+				pstat.setNString(1, "%"+keyword+"%");
+			}
 			try(ResultSet rs = pstat.executeQuery();){
 				rs.next();
 				return rs.getInt(1);
@@ -335,55 +342,56 @@ public class AdminDAO {
 		}
 	}
 	//sponsor 1~10 버튼만드는거
-	public List<String> adSponsorGetPageNavi(int cpage, String keyword) throws Exception{
-		int recordTotalCount = 0;
+	public List<String> adSponsorGetPageNavi(int cpage, String search) throws Exception{
+
+		
+		int recordTotalCount = this.adSponsorGetRecordCount(search);
+		
+		int recordCountPerPage = PageConfig.ADOPT_RECORD_COUNT_PER_PAGE; 
+		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
 
 		//search==null||search2==null||keyword == null
-		if(keyword.contentEquals("all")) {
+		/*
+		if(keyword.contentEquals("") || keyword == null) {
 			recordTotalCount=this.adSponsorGetRecordCount();//널 전체 
 		}else if(keyword!=null) {
 			recordTotalCount=this.adSponsorGetRecordCount(keyword);
-		}
+		}*/
 
-		int recordCountPerPage = 10;
-		int naviCountPerPage = 10;
+//		int recordCountPerPage = 10;
+	//	int naviCountPerPage = 10;
 
-		int pageTotalCount = 0;
+		int pageTotalCount = 0; 
 
-		if(recordTotalCount % recordCountPerPage > 0) {  
-			pageTotalCount = recordTotalCount / recordCountPerPage + 1; 
+		if((recordTotalCount % recordCountPerPage) > 0) { 
+			pageTotalCount =recordTotalCount / recordCountPerPage + 1; 
 		}else {
-			pageTotalCount = recordTotalCount / recordCountPerPage;
+			pageTotalCount = recordTotalCount / recordCountPerPage; 
 		}
 
-		if(cpage > pageTotalCount) { 
-			cpage = pageTotalCount; 
-
+		if(cpage > pageTotalCount) {
+			cpage = pageTotalCount;
 		}else if(cpage < 1) {
 			cpage = 1;
 		}
 
 		int startNavi = (cpage-1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1; 
 
-		int endNavi = startNavi + (naviCountPerPage - 1);
-		if(endNavi > pageTotalCount ) { 
-			endNavi = pageTotalCount;
-		}
+		if(endNavi > pageTotalCount) {endNavi = pageTotalCount;} 
 
-		boolean needPrev = true;
-		boolean needNext = true;
+		boolean needPrev = true; 
+		boolean needNext = true; 
 
-		if(startNavi == 1) {needPrev = false;}
+		if(startNavi == 1) {needPrev = false;} 
 		if(endNavi == pageTotalCount) {needNext = false;}
 
-		List<String> pageNavi = new ArrayList<>();
 
+		List<String> pageNavi = new ArrayList<String>(); 
 		if(needPrev) {pageNavi.add("<");}
-
-		for(int i = startNavi; i <= endNavi; i ++) { 
+		for(int i = startNavi; i<= endNavi; i++) {			
 			pageNavi.add(String.valueOf(i));
 		}
-
 		if(needNext) {pageNavi.add(">");}
 
 		return pageNavi;
@@ -397,6 +405,8 @@ public class AdminDAO {
 				+ "from sponsor where sponsor_choice like ?) where rnum between ? and ?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
+
+			System.out.println("keyword : " +keyword);
 			pstat.setNString(1, "%"+keyword+"%");
 			pstat.setInt(2, startNum);
 			pstat.setInt(3, endNum);
@@ -546,5 +556,45 @@ public class AdminDAO {
 		}
 
 	}
+
+	// adoption
+	public String getAnimalContents(String code_seq) throws Exception{
+
+		String sql = "select an_contents from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	// adoption
+	public String getImgName(String code_seq) throws Exception{
+
+		String sql = "select an_photo from animal where code_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	
 
 }

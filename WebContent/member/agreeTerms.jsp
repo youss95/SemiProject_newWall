@@ -7,16 +7,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>회원가입 약관동의</title>
@@ -30,7 +27,7 @@
 		<div class="container">
 			<div class="contents">
 				<section class="agreeTerms">
-					<form action="${pageContext.request.contextPath}/signup.mem">
+					<form action="${pageContext.request.contextPath}/signup.mem" id="termsForm">
 						<h2>회원가입 약관동의</h2>
 						<table id="agreeTerms" align=center>
 							<tr>
@@ -38,7 +35,6 @@
 								<th>개인정보의 수집 이용목적 및 항목</th>
 							</tr>
 							<tr>
-
 								<td>
 									<div class="terms">
 										<div class="box">
@@ -149,7 +145,7 @@
 											처벌조치에도 이의를 제기함이 없이 따를 것을 서약합니다.</p>
 										<div class="chk_group">
 											<label class="inp_chk"><input type="checkbox"
-												id="agreeTerms_arg" name="agreeTerms_arg"><span
+												id="agreeTerms_arg1" name="agreeTerms_arg"><span
 												class="chkmark"></span>위의 유의사항을 확인하였으며, 이에 동의합니다. </label>
 										</div>
 									</div>
@@ -190,7 +186,7 @@
 											처벌조치에도 이의를 제기함이 없이 따를 것을 서약합니다.</p>
 										<div class="chk_group">
 											<label class="inp_chk"><input type="checkbox"
-												id="agreeTerms_arg" name="agreeTerms_arg"><span
+												id="agreeTerms_arg2" name="agreeTerms_arg"><span
 												class="chkmark"></span>위의 유의사항을 확인하였으며, 이에 동의합니다. </label>
 										</div>
 									</div>
@@ -214,6 +210,17 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
+	<script>
+		$("#termsForm").on("submit",function(){
+			let result1 = $("#agreeTerms_arg1").is(":checked");
+			let result2 = $("#agreeTerms_arg2").is(":checked");
+			if(result1 && result2){
+				return true;
+			}
+			alert("필수 약관에 동의해주세요.")
+			return false;
+		})
+	</script>
 	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 </body>
 </html>

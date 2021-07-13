@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Continuous scrolling - fullPage.js</title>
+	<meta name="author" content="Matthew Howell" />
+	<meta name="description" content="fullPage continuous scrolling demo." />
+	<meta name="keywords" content="fullpage,jquery,demo,scroll,loop,continuous" />
+	<meta name="Resource-type" content="Document" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/swiper-bundle.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/style.css" />
+	<script type="text/javascript" src="../../resources/js/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/swiper-bundle.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/jquery.fullPage.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#fullpage').fullpage({
+				navigation: true,
+				navigationPosition: 'right',
+			});
+		});
+	</script>
+	<style>
+		body{background-color:#fff0f09f}
+		.logo{position:fixed;left:30px;top:30px;font-size:0;}
+		.header .logo {width: 160px;height:50px;float:left;margin-top:15px;}
+		.header .logo a{display:block;width:100%;height:100%;text-align:center;line-height:50px;}
+		.main_visual .swiper-container {height: 100%;position:relative;opacity:1;position:relative;z-index:-1;}
+		.main_visual .swiper-container:before{display:block;content:'';width:100%;height:100%;background-color:#000;opacity:.4;position:absolute;top:0;left:0;z-index:9;}
+		.main_visual .txt_box{width:100%;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);z-index:999;}
+		.main_visual .txt_box h2{font-size:52px;line-height:1.4;font-weight:300;color:#fff;opacity:1;}
+		.main_visual .txt_box img{vertical-align:middle;margin-top:-12px;display: inline-block;}
+		.main_visual .txt_box h2 em{font-size:60px;font-weight:700;color:#254E7C;	position:relative;top:4px;}
+		.main_visual .txt_box h2 em b{color:#ffa5a5;}
+		.main_visual .txt_box p{width:100%;color:#fff;opacity:.85;font-weight:300;margin-top:20px;}
+		.main_visual .swiper-button-next{right: 100px;}
+		.main_visual .swiper-button-prev{left: 100px;}
+		.section{text-align:center;}
+		.section .title{height:25%;}
+		.section .title h2{display: inline-block;font-size: 38px;font-weight: 700;z-index:1;line-height:1;margin:5% 0 10px;position:relative;}
+		.section .title h2:after{display: block;width: 100%;height: 8px;background-color: #ffa5a5;position: relative;top: -8px;z-index: -1;opacity: .8;content: '';transition:all .3s ease;}
+		.section .title h2+p{font-size: 13px;font-weight: 300;}
+		#section1 .list{font-size:0;width: 100%;height: 75%;font-size: 0;}
+		#section1 .list .item{position:relative;display:inline-block;width:33.3333%;height:100%;vertical-align: bottom;}
+		#section1 .list .item a{display:block;width:100%;height:100%;overflow:hidden;}
+		#section1 .list .item a .img_wrap{width:100%;height:100%;opacity:.9;transition:all .5s ease;}
+		#section1 .list .item a:hover .img_wrap{transform:scale(1.03);opacity:1;}
+		#section1 .list .item a .img_wrap:after{display:block;width:100%;height:100%;content:'';background-color:#000;opacity:0;transition:all .3s ease;}
+		#section1 .list .item a:hover .img_wrap:after{opacity:.1;}
+		#section1 .list .item:last-child{margin-right:0;}
+		#section1 .list .item .txt{position:absolute;top:50%;text-align:center;width:100%;transform:translateY(-50%);z-index:9;opacity:.85;}
+		#section1 .list .item .txt span{display:block;font-size:12px;color:#fff;font-weight: 300;margin-bottom:5px;}
+		#section1 .list .item .txt h3{display:inline-block;position:relative;font-size:30px;color:#fff;font-weight: 600;}
+		#section1 .list .item .txt h3:after{display: block;width: 0;height: 8px;background-color: #254E7C;position: relative;top: -8px;z-index: -1;opacity: .8;content: '';transition:all .3s ease;}
+		#section1 .list .item a:hover .txt h3:after{width:100%;}
+		#section2 .swiper-container{width:100%;height:75%;} 
+		.news .swiper-container{max-width:1440px;}
+		.news .swiper-slide{font-size:0;}
+		.news .swiper-slide>div{display:inline-block;width: 50%;vertical-align: top;}
+		.news .l_side{padding:30px 15px 30px 60px;text-align: right;}
+		.news .r_side{text-align:left;position:relative;padding:30px 50px 30px 15px;}
+		.news .r_side h3{font-size:24px;margin-bottom:20px;}
+		.news .r_side p{font-size:16px;font-weight:300;text-align: left;line-height:1.5;}
+		.news .swiper-button-prev{left:0;color:#254E7C;}
+		.news .swiper-button-next{right:0;color:#254E7C;}
+		.news .swiper-pagination-bullet-active{background-color:#254E7C;}
+		.news .swiper-container-horizontal>.swiper-pagination-bullets{bottom:30px;}
+		.protect{position:relative;}
+		.protect:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(../resources/images/img_ptbg.jpg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
+		.protect .title{height:20%;}
+		.pt_list{max-width:1200px;margin:auto;height:80%;font-size:0;}
+		.protect .item{display:inline-block;width: 47%;margin-right:3%;margin-bottom:10px;padding:20px;border:1px solid #FFF0F0;background-color:#fff;}
+		.protect .item:nth-of-type(2n){margin-right:0;}
+		.protect .item .img_wrap{width:40%;display:inline-block;border-radius:3px;max-height:180px;overflow:hidden;vertical-align: top;}
+		.protect .item .txt{display:inline-block;width:60%;font-size:13px;padding-left:30px;font-weight:300;text-align:left;}
+		.protect .item .txt p{position:relative;font-weight:600;font-size:20px;color:#333;margin-bottom:8px;}
+		.protect .item .txt .info li{line-height:1.4;font-size:13px;font-weight:300;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;word-wrap:break-word; line-height: 1.3;max-height: 3.9em;}
+		.protect .item .txt .info li:last-child{margin-top:6px;}
+		.adopt .list{height:75%;font-size:0;}
+		.adopt .list>a{display:block;width:25%;float:left;height:50%;}
+		.adopt .list>a .img_bg{width:100%;height:100%;}
+		.review{position:relative;}
+		.review:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(../resources/images/img03.jpeg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
+		.review .rv_list{height:75%;max-width:1280px;margin:auto;font-size:0;}
+		.review .rv_list .item{padding:20px;background-color:#fff;width:24%;margin-right:1%;height:420px;display:inline-block;vertical-align: top;}
+		.review .rv_list .item:last-of-type{margin-right:0;}
+		.review .rv_list .item .txt{margin-top:30px;text-align: left;}
+		.review .rv_list .txt p{font-size:20px;margin-bottom:10px;}
+		.rv_list .item .txt .info li{line-height:1.4;font-size:14px;font-weight:300;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;word-wrap:break-word; line-height: 1.3;max-height: 3.9em;}
+		.rv_list .item .txt .info li:last-child{margin-top:10px;font-size:15px;}
+		header{position:fixed;top:0;right:0;z-index:9999;}
+		header .nav{width:450px;background-color:rgba(255, 255, 255, 0.95);padding:180px 50px;position:fixed;top:0;right:-500px;height:100vh;transition:all .4s ease-in;}
+		header .nav.open{right:0;}
+		.btn_nav{position: fixed;top: 30px;right: 30px;border-radius: 50%;width: 60px;height: 60px;background-color: #5C969E;font-size: 11px;color: #fff;font-weight: 300;transition:all .3s ease;z-index:1;transition:all .3s ease;border:none;}
+		.btn_nav:hover{transform:rotate(30deg);}
+		.btn_nav.on{background-color:#254E7C;}
+		.menu>ul>li{margin-bottom:30px;}
+		.menu>ul>li>a{display:inline-block;font-size:36px;font-weight:600;position:relative;}
+		.menu>ul>li>a:after{display: block;width: 100%;height: 8px;background-color: #5C969E;position: relative;top: -8px;z-index: -1;opacity: .4;content: '';transition:all .3s ease;}
+		.submenu{display:none;}
+		.submenu li{padding-left:20px;margin-top:10px;}
+		.submenu li a{font-size:18px;}
+		.submenu li a:hover{color:#5C969E;font-weight:600;}
+	</style>
+</head>
+<body>
+	<header>
+		<h1 class="logo"><a href="#"><img src="../../resources/images/login_logo6.png"></a></h1>
+		<button type="button" class="btn_nav">MENU</button>
+		<div class="nav">
+			<div class="rnb">
+				<div class="menu">
+					<ul>
+						<li class="has">
+							<a href="#">입양</a>
+							<ul class="submenu">
+								<li><a href="#">입양동물</a></li>
+								<li><a href="#">입양후기</a></li>
+							</ul>
+						</li>
+						<li><a href="#">후원</a></li>
+						<li><a href="#">임시보호</a></li>
+						<li class="has">
+							<a href="#">뉴스레터</a>
+							<ul class="submenu">
+								<li><a href="#">뉴스</a></li>
+								<li><a href="#">공지사항</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="fullpage">
+		<div class="section main_visual active" id="section0">
+			<div class="txt_box">
+				<h2><em><b>NEW</b> <img src="../resources/images/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
+				<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p>
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="background:url(../resources/images/main_img02.png) 50% 50% no-repeat;background-size:cover;"></div>
+					<div class="swiper-slide" style="background:url(../resources/images/main_img03.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+					<div class="swiper-slide" style="background:url(../resources/images/main_img04.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+					<div class="swiper-slide" style="background:url(../resources/images/main_img05.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+					<div class="swiper-slide" style="background:url(../resources/images/main_img06.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="section" id="section1">
+			<div class="title">
+				<h2>우리 함께해요</h2>
+				<p>인권을 넘어 생명권으로!</p>
+			</div>
+			<ul class="list">
+				<li class="item">
+					<a href="#">
+						<div class="img_wrap" style="background:url(../resources/images/img_adopt.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+						<div class="txt">
+							<span>ADOPT</span>
+							<h3>입양하기</h3>
+						</div>
+					</a>
+				</li>
+				<li class="item">
+					<a href="#">
+						<div class="img_wrap" style="background:url(../resources/images/img_sponsor.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+						<div class="txt">
+							<span>SPONSOR</span>
+							<h3>후원하기</h3>
+						</div>
+					</a>
+				</li>
+				<li class="item">
+					<a href="#">
+						<div class="img_wrap" style="background:url(../resources/images/img_lost.jpg) 50% 50% no-repeat;background-size:cover;"></div>
+						<div class="txt">
+							<span>PROTECT</span>
+							<h3>임시보호</h3>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="section news" id="section2">
+			<div class="title">
+				<h2>뉴스레터</h2>
+				<p>뉴월의 다양한 활동과 소식을 담은 뉴스레터를 보내드립니다.</p>
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="l_side">
+							<div class="img_wrap">
+								<a href="#">
+									<img src="../resources/images/img_news02.png">
+								</a>
+							</div>
+							<!-- https://www.animals.or.kr/campaign/friend/56725 -->
+						</div>
+						<div class="r_side">
+							<div class="txt">
+								<h3>보상 노린 '동물 알박기', 재개발 지역 동물을 고통으로 내몰고 있습니다</h3>
+								<p>
+									노후한 시설을 정비하고 개선하기 위해 이루어지는 재개발 공사. 사람들에게는 깨끗하고 편리한 주거 환경을 제공하기 위한 과정이지만, 그 이면에는 많은 동물들의 고통과 희생이 뒤따릅니다. 하루 아침에 영역에서 쫓겨나 갈 곳을 잃어버리는 길고양이, 가족이 이사를 가며 버려지는 유기동물, 사람들에게 위험할지 모른다는 이유로 마구잡이식 포획의 대상이 되어버린 떠돌이개 등. 이렇듯 인간의 편의를 위한 재개발 공사로 인해 발생하는 여러 동물 문제 중 하나로 ‘동물 알박기’가 있습니다. 
+									<br><br>‘동물 알박기’란 보상금을 위해 공사 예정 지역에 동물을 데려다놓고 사육하는 행태를 뜻합니다. 이러한 이유로 재개발 지역에 방치된 동물들은 어떠한 보살핌도 받지 못한 채 고통스러운 삶을 살아갑니다. 현행법상 축산보상은 영업손실보상을 준용해 휴업손실액, 시설이전비, 가축운반비 등을 보상하는데, 기준마리수 이하인 경우 시설 및 가축 이전비만 지급합니다. 이 때문에 휴업손실액을 보상받기 위해 많은 수의 개들을 데려다놓고 보상금을 받을 때까지 방치하는 ‘동물 알박기’ 행태가 이루어지고 있습니다. 지난해 말 동물자유연대가 구조한 파주시 동패동 뜬장 사육견들 역시 알박기로 이용되던 개들이었습니다. 
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="l_side">
+							<div class="img_wrap">
+								<a href="#">
+									<img src="../resources/images/img_news03.png">
+								</a>
+							</div>
+							<!-- https://www.animals.or.kr/campaign/friend/56535 -->
+						</div>
+						<div class="r_side">
+							<div class="txt">
+								<h3>그 많은 유기동물들은 어떻게 되는 걸까??</h3>
+								<p>
+									유실·유기동물은 발생은 매년 10만 건이 넘고, 최근 5년간 57만 여건이 발생 했습니다. 동물보호법에 따라 유실·유기동물은 지자체 동물보호센터에 입소하게 됩니다. 그렇다면 지자체에 입소한 동물들은 어떻게 되었을까요? 과연 새로운 가족을 만나 행복한 제2의 삶을 살고 있을까요?<br><br>
+									많은 이들의 바람과는 달리 지자체 동물보호센터에 입소하는 동물의 절반 정도는 다시 보호소 밖을 보지 못한 채 죽음을 맞이합니다. 지난 5년간 발생한 유실·유기57만여 건 중 약 절반 정도인 49.3%(자연사 26.9% + 안락사 22.4%)는 보호소 내에서 죽음을 맞이했습니다. 본래 소유자등 에게 돌아간 건은 13.2%였으며, 31%정도만 새로운 가정으로 입양되었습니다
+									<br><br>이렇게 보호소 내에서 죽음을 맞이하는 비율(자연사+안락사)은 2016년 47.3%에서 2019년 52.5%로 매년 증가해왔습니다. 2020년에는 46.7%로 감소했지만, 자료가 1월 기준이라는 점을 감안하면 보호중인 건(8.9%)에서 폐사와 안락사가 진행된다면 지난해와 비슷하거나 소폭 낮아진 수준이 될 것으로 예상됩니다.<br>
+									입양 비율은 2019년까지 점진적으로 감소하다가, 2020년 30.7%로 소폭 반등했습니다. 입양 건수는 매년 점진적으로 증가해왔습니다
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="l_side">
+							<div class="img_wrap">
+								<a href="#">
+									<img src="../resources/images/img_news04.png">
+								</a>
+							</div>
+							<!-- https://www.animals.or.kr/campaign/cat/56532 -->
+						</div>
+						<div class="r_side">
+							<div class="txt">
+								<h3>[사건 그 후] 파주 주택단지 사건은 학대가 아닌 것으로 밝혀졌습니다</h3>
+								<p>
+									파주 주택단지에 고양이 6마리와 비둘기 1마리, 총 7마리의 동물들이 연달아 사체로 발견된 끔찍한 사건이 있었습니다. 동물자유연대는 제보를 받은 후 동물 학대를 의심하고 파주 경찰서로 고발장을 제출함과 동시에 독극물에 의한 살해인지 확인하기 위해 사체를 인계 받아 농림축산검역본부로 부검을 의뢰했습니다. <br><br>
+									다행히도 부검 결과 사체에서 독극물은 발견되지 않았습니다. 고양이에게 치명적인 전염병 바이러스가 검출되면서 고양이들의 사인은 질병에 의한 것으로 판정이 났습니다. 가족 단위, 혹은 함께 공동 생활을 하던 고양이들이었기에 빠르게 전염병이 퍼진 듯 합니다. <br><br>
+									처음 사건을 인지하고 고발장을 제출했을 때 이례적으로 파주경찰서에서는 사건대응팀을 따로 꾸려 팀원 전체가 출동해 현장조사를 실시했으며, 독극물 검출을 위해 따로 성분검사까지 의뢰했습니다. 또한 해당 주택단지 관리사무소 역시 주민들에게 동물학대는 범죄라는 내용의 방송을 주기적으로 내보내는 등 동물자유연대와 경찰 조사에 성실히 협조해주셨습니다. 
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+
+		<div class="section protect" id="section3">
+			<div class="title">
+				<h2>유실동물 임시보호</h2>
+				<p>보호자들이 임시보호중인 유실동물들 입니다. 도움의 손길을 나눠주세요.</p>
+			</div>
+			<div class="pt_list">
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img00.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img02.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img03.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img04.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div> 
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img03.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img04.jpeg"></div>
+						<div class="txt">
+							<p class="name">동물이름이 들어갑니다.</p>
+							<ul class="info">
+								<li>발견날짜 : 2020-01-01</li>
+								<li>발견장소 : 서울시 종로구 ....</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div> 
+			</div>
+		</div>
+		<div class="section adopt" id="section4">
+			<div class="title">
+				<h2>가족이 되어주세요</h2>
+				<p>가족을 기다리는 동물들, 사지말고 입양하세요.</p>
+			</div>
+			<div class="list">
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img00.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img01.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img02.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img03.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img04.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img05.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img06.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+				<a href="#">
+					<div class="img_bg" style="background:url(../resources/images/img07.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				</a>
+			</div>
+		</div>
+		<div class="section review" id="section5">
+			<div class="title">
+				<h2>입양후기를 만나보세요!</h2>
+				<p>뉴월을 통해 입양하신 분들은 누구나! 입양후기를 보실 수 있습니다.</p>
+			</div>
+			<div class="rv_list">
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img00.jpeg"></div>
+						<div class="txt">
+							<p class="name">제목이 들어갑니다.</p>
+							<ul class="info">
+								<li>등록일 : 2020-01-01</li>
+								<li>조회수 : 0 / 좋아요 : 0</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img00.jpeg"></div>
+						<div class="txt">
+							<p class="name">제목이 들어갑니다.</p>
+							<ul class="info">
+								<li>등록일 : 2020-01-01</li>
+								<li>조회수 : 0 / 좋아요 : 0</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img00.jpeg"></div>
+						<div class="txt">
+							<p class="name">제목이 들어갑니다.</p>
+							<ul class="info">
+								<li>등록일 : 2020-01-01</li>
+								<li>조회수 : 0 / 좋아요 : 0</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="item">
+					<a href="#">
+						<div class="img_wrap">
+							<img src="../resources/images/img00.jpeg"></div>
+						<div class="txt">
+							<p class="name">제목이 들어갑니다.</p>
+							<ul class="info">
+								<li>등록일 : 2020-01-01</li>
+								<li>조회수 : 0 / 좋아요 : 0</li>
+								<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	$(function(){
+		$('#fullpage').fullpage({
+			navigation: true,
+			navigationPosition: 'right',
+		});
+	
+		const mainSwiper = new Swiper('.main_visual .swiper-container', {
+			loop: true,
+			effect: "fade",
+			speed: 1000,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+			},
+		});
+	
+		const newsSwiper = new Swiper('.news .swiper-container', {
+			loop: true,
+			// effect: "fade",
+			speed: 1000,
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+			},
+		});
+	
+		$('.btn_nav').on('click',function(){
+			$(this).toggleClass('on');
+			if($(this).hasClass('on')){
+				$(this).text('CLOSE');
+			}else{
+				$(this).text('MENU');
+			}
+			$('.nav').toggleClass('open');
+		});
+	
+		$(".nav .has").on("click", function(){
+			$(this).toggleClass("open");
+			$(this).siblings().removeClass('open');
+			$(this).children('.submenu').slideToggle();
+			$(this).siblings().children('.submenu').slideUp();
+		});
+	})
+	</script>
+</body>
+
+</html>

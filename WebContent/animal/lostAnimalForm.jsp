@@ -80,6 +80,7 @@
                         <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview" />
                    </div>
 			<input type="hidden" name="addResult" id="hiddenInput">	
+			<input type="hidden" name="lostWriter" value="${sessionScope.loginInfo.user_id}"> 
 			<button type="submit" class="btn_m btn_primary">등록</button>	
 			</form>
 				</section>

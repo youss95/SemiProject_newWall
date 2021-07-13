@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 <style>
-
+.modal-body {}
+#deleteDetail:hover {background-color:#878787;cursor:pointer;}
+#updateDetail:hover {background-color:#878787;cursor:pointer;}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectDetail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,6 +18,16 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<script>
+    $(function(){
+        $("#deleteDetail").on("click",function(){
+            location.href="${pageContext.request.contextPath}/protectDelete.lost?protectNo=${protectDetail.protectNo}";
+        })
+        $("#updateDetail").on("click",function(){
+            location.href="${pageContext.request.contextPath}/protectUpdateForm.lost?protectNo=${protectDetail.protectNo}";
+        })
+    })
+</script>
 </head>
 <body>
 <%@ include file="../layout/jsp/header.jsp" %>
@@ -31,7 +43,11 @@
 						<div id="status">작성일: ${protectDetail.createDate}
 							&nbsp;&nbsp; 조회수:${protectDetail.protectViewCount}</div>
 							<!--동물이름과 후원버튼   -->
-						<div id="animalName">${protectDetail.protectName} <span style="color: violet; margin-left:55px; font-size:20px;"><a href="${pageContext.request.contextPath}/protectInput.sp?protect_no=${protectDetail.protectNo}&protect_name=${protectDetail.protectName}">후원&nbsp;<i class="fas fa-hand-holding-heart"></i></a></span>    </div>
+						<div id="animalName">${protectDetail.protectName}
+						<c:if test="${sessionScope.loginInfo != null}">
+						<span><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-cog"></i></a></span>
+						</c:if>
+						 <span style="color: violet; margin-left:55px; font-size:20px;"><a href="${pageContext.request.contextPath}/protectInput.sp?protect_no=${protectDetail.protectNo}&protect_name=${protectDetail.protectName}">후원&nbsp;<i class="fas fa-hand-holding-heart"></i></a></span>    </div>
 
 						<ul class="list-info">
 							<li>
@@ -113,11 +129,11 @@
    <li class="page-item  "><a class="page-link"     onclick="alert('이전 페이지가 없습니다.');">Previous</a></li>
     </c:when>
     <c:otherwise>
-     <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${startNum-1}">Previous</a></li>
+     <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${param.page-1}">Previous</a></li>
      </c:otherwise>
     </c:choose>
-    <c:forEach var="i" begin="${starNum}" end="${lastPage-1}" step="1">
-    <li class="page-item"><a class="page-link" href="">${i+1}</a></li>
+    <c:forEach var="i" begin="${starNum+1}" end="${lastPage}" step="1">
+    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${i+1}">${i}</a></li>
    </c:forEach>
    
    <c:choose>
@@ -126,7 +142,7 @@
    		<li class="page-item  "><a class="page-link"     onclick="alert('마지막 페이지 입니다.');">Next</a></li>
    	</c:when>
    	<c:otherwise>
-   	 <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${startNum+1}">Next</a></li>
+   	 <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${param.page+1}">Next</a></li>
    	</c:otherwise>
     </c:choose>
   </ul>
@@ -140,7 +156,20 @@
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
  <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
-
+ <!-- 상세페이지 수정 삭제 모달 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     
+      <div class="modal-body text-center  p-0" style="height:300px;">
+     <div id="deleteDetail" style="border-bottom:1px solid black;height:50%;line-height:150px;font-size:18px;">삭제&nbsp;<i class="fas fa-minus-circle"></i></div>
+     <div id="updateDetail" style="height:50%;line-height:150px;font-size:18px;">수정&nbsp;<i class="fas fa-edit"></i></div>
+      </div>
+     
+      
+    </div>
+  </div>
+</div>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/protectDetail.js"></script> 
 	<script>

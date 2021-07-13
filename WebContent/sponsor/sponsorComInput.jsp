@@ -850,7 +850,7 @@
 			    }
 			}); 
 		 
-             //성인
+             //성인 keyup 로 바꾸기
 		  $("#sp_name_01").focusout(function(){
 			  if (!(nameReg.test($(this).val()))) {
 				  $("#sp_name_01_reg").css('display', 'inline-block');

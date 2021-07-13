@@ -94,7 +94,7 @@ public class NewsCommenstController extends HttpServlet {
 				
 				int result = dao.delete(seq);
 				
-				response.sendRedirect("newsView.news?news_seq="+parent);
+				response.sendRedirect("newsInfoView.newsAdm?news_seq="+parent);
 			
 			}else if(url.contentEquals("/modifyReply.necmt")){
 				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
@@ -117,7 +117,7 @@ public class NewsCommenstController extends HttpServlet {
 				
 				dao.modify(seq, comments);
 				
-				response.sendRedirect("newsView.news?news_seq="+parent);
+				response.sendRedirect("newsInfoView.newsAdm?news_seq="+parent);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

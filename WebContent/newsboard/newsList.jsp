@@ -32,60 +32,64 @@
 		<div class="container">
 			<div class="contents">
 				<section class="news_list">
-					<form action="${pageContext.request.contextPath}/newsBoard.news" method="get">
-						<div class="search">
-							<input type="hidden" name="cpage" value=1> 
-								<select	name="category">
-								<option value="news_title">제목</option>
-								<option value="news_writer">작성자</option>
-							    </select> 
-							<input type="text" name="keyword" placeholder="검색을 입력하세요.">
-							<button class="btn_s btn_line" id="search">검색</button>
-						</div>
-					</form>
-					<div class="list_wrap">
-						<c:forEach var="newsAll" items="${newsAll}">
-							<div class="item">
-								<a href="${pageContext.request.contextPath}/newsView.news?news_seq=${newsAll.news_seq}">
-									<div class="img_wrap">
-<%-- 										<img src="${pageContext.request.contextPath}/resources/images/bannerImg.png"> --%>
-											<img src="${pageContext.request.contextPath}/upload/news/${newsAll.news_photo}">
-									</div>
-									<div class="txt">
-										<ul>
-											<li class="date">등록일 : ${newsAll.news_reg_date}</li>
-											<li class="view">조회수 : ${newsAll.news_view}</li>
-										</ul>
-										<h2>${newsAll.news_title}</h2>
-										<p>${newsAll.news_sub_contents}</p>
-									</div>
-								</a>
+					<div class="board_title">
+						<strong>뉴스</strong>
+						<form action="${pageContext.request.contextPath}/newsBoard.news" method="get" class="news_search">
+							<div class="search">
+								<input type="hidden" name="cpage" value=1> <select
+									name="category">
+									<option value="news_title">제목</option>
+									<option value="news_writer">작성자</option>
+								</select> <input type="text" name="keyword" placeholder="검색을 입력하세요.">
+								<button class="btn_s btn_line" id="search">검색</button>
 							</div>
-						</c:forEach>
-						<div class="board_page">
-<!-- 							<div class="bt_wrap"> -->
-<!-- 								<button class="writeBtn"> -->
-<!-- 									<i class="far fa-edit"></i>글쓰기 -->
-<!-- 								</button> -->
-<!-- 							</div> -->
-							<c:forEach var="i" items="${navi}" varStatus="s">
-								<c:choose>
-									<c:when test="${i == '>'}">
-										<a
-											href="${pageContext.request.contextPath}/newsBoard.news?cpage=${navi[s.index-1]+1}&category=${category}&keyword=${keyword}">${i}</a>
-									</c:when>
-									<c:when test="${i == '<'}">
-										<a
-											href="${pageContext.request.contextPath}/newsBoard.news?cpage=${navi[s.index+1]-1}&category=${category}&keyword=${keyword}">${i}</a>
-									</c:when>
-									<c:otherwise>
-										<a
-											href="${pageContext.request.contextPath}/newsBoard.news?cpage=${i}&category=${category}&keyword=${keyword}">${i}</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-						</div>
+						</form>
 					</div>
+					<div class="list_wrap">
+								<c:forEach var="newsAll" items="${newsAll}">
+									<div class="item">
+										<a
+											href="${pageContext.request.contextPath}/newsView.news?news_seq=${newsAll.news_seq}">
+											<div class="img_wrap">
+												<%-- <img src="${pageContext.request.contextPath}/resources/images/bannerImg.png"> --%>
+												<img
+													src="${pageContext.request.contextPath}/upload/news/${newsAll.news_photo}">
+											</div>
+											<div class="txt">
+												<ul>
+													<li class="date">등록일 : ${newsAll.news_reg_date}</li>
+													<li class="view">조회수 : ${newsAll.news_view}</li>
+												</ul>
+												<h2>${newsAll.news_title}</h2>
+												<p>${newsAll.news_sub_contents}</p>
+											</div>
+										</a>
+									</div>
+								</c:forEach>
+								<div class="board_page">
+									<!-- 							<div class="bt_wrap"> -->
+									<!-- 								<button class="writeBtn"> -->
+									<!-- 									<i class="far fa-edit"></i>글쓰기 -->
+									<!-- 								</button> -->
+									<!-- 							</div> -->
+									<c:forEach var="i" items="${navi}" varStatus="s">
+										<c:choose>
+											<c:when test="${i == '>'}">
+												<a
+													href="${pageContext.request.contextPath}/newsBoard.news?cpage=${navi[s.index-1]+1}&category=${category}&keyword=${keyword}">${i}</a>
+											</c:when>
+											<c:when test="${i == '<'}">
+												<a
+													href="${pageContext.request.contextPath}/newsBoard.news?cpage=${navi[s.index+1]-1}&category=${category}&keyword=${keyword}">${i}</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													href="${pageContext.request.contextPath}/newsBoard.news?cpage=${i}&category=${category}&keyword=${keyword}">${i}</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</div>
+							</div>
 				</section>
 			</div>
 		</div>

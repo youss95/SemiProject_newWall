@@ -73,6 +73,7 @@ public class AnimalsController extends HttpServlet {
 					String lostContent = multi.getParameter("lostContent");
 					String lostAddr = multi.getParameter("addResult");
 					String lostCategory = multi.getParameter("lostCategory");
+					String lostWriter = multi.getParameter("lostWriter");
 					
 					Enumeration files = multi.getFileNames();
 					String str = (String)files.nextElement();
@@ -87,6 +88,7 @@ public class AnimalsController extends HttpServlet {
 					dto.setLostContent(lostContent);
 					dto.setLostCategory(lostCategory);
 					dto.setLostAddr(lostAddr);
+					dto.setLostWriter(lostWriter);
 					dto.setFileRealName(lostFileRealName);
 					System.out.println(dto.toString());
 					int result = dao.LostAnimalFormWrite(dto);
@@ -107,7 +109,7 @@ public class AnimalsController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else if(url.equals("/lostAnimalMap.lost")) {
-				
+				String lostWriter = request.getParameter("lostWriter");
 				List<LostAnimalDTO> list = dao.showMap();
 				AnimalMapCountDTO dto = new AnimalMapCountDTO();
 				int today = dao.todayCount();
@@ -165,7 +167,7 @@ public class AnimalsController extends HttpServlet {
 					  response.getWriter();
 					  
 					  out.print("<script>"); out.print("alert('성공');");
-					  out.print("window.location.href='protectList.lost';");
+					  out.print("window.location.href='protectList.lost?page=1';");
 					  out.print("</script>"); out.flush(); }
 					 
 				}catch(Exception e) {
@@ -204,8 +206,8 @@ public class AnimalsController extends HttpServlet {
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
 				int page = Integer.parseInt(request.getParameter("page"));
 				int result = dao.getViewCount(protectNo);
-				int boardCount = dao.getAllCount();
-				
+				int boardCount = dao.getAllReplyCount(protectNo);
+				System.out.println("boardcount"+boardCount);
 				List<ProtectReplyDTO> list = dao.getReplyList(protectNo,page);
 				int lastPage = (int)Math.ceil(boardCount/10.0);
 				if(result>0) {
@@ -237,6 +239,8 @@ public class AnimalsController extends HttpServlet {
 				dto = dao.findById(boardNo);
 				String data = g.toJson(dto);
 				if(result==1) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
 					response.getWriter().append(data);
 				
 				}
@@ -270,11 +274,158 @@ public class AnimalsController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("animal/lostMapList.jsp");
 				dis.forward(request, response);
 				
+			}else if(url.equals("/protectUpdateForm.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				ProtectDetailDTO dto = dao.getDetail(protectNo);
+				request.setAttribute("protectNo", protectNo);
+				request.setAttribute("protectDetail", dto);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/protectUpdateForm.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/protectUpdate.lost")) {
+				
+				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
+				System.out.println(directory);
+				int maxSize = 1024*1024*100;
+				
+				String encoding = "UTF-8";
+				try {
+					MultipartRequest multi =
+							new MultipartRequest(request, directory, maxSize, encoding,
+									new DefaultFileRenamePolicy());
+					
+					int protectNo = Integer.parseInt(multi.getParameter("protectNo"));
+					System.out.println(protectNo);
+					String protectName = multi.getParameter("protectName");
+					System.out.println(protectName);
+					String protectKind = multi.getParameter("protectKind");
+					String protectGender = multi.getParameter("protectGender");
+					String protectAddr = multi.getParameter("addResult");
+					String protectFindDate = multi.getParameter("protectFindDate");
+					String protectContent = multi.getParameter("protectContent");
+					
+					
+					
+					Enumeration files = multi.getFileNames();
+					String str = (String)files.nextElement();
+					String protectImage1 = multi.getFilesystemName(str);
+					
+					
+					String str2 = (String)files.nextElement();
+					String protectImage2 = multi.getFilesystemName(str2);
+					
+					
+					  ProtectionDTO dto = new
+					  ProtectionDTO(protectName,protectKind,protectFindDate,protectAddr,
+					  protectContent, protectGender,protectImage1,protectImage2);
+					 
+					System.out.println(dto.toString());
+					int result = dao.protectUpdate(dto,protectNo);
+					System.out.println();
+					  if(result >0) { response.setCharacterEncoding("UTF-8");
+					
+					  response.sendRedirect("protectDetail.lost?page=1&protectNo="+protectNo);
+					
+				 }
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				}else if(url.equals("/protectDelete.lost")) {
+				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
+				int result = dao.protectDelete(protectNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='protectList.lost?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
+			}else if(url.equals("/lostDelete.lost")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				int result = dao.lostDelete(lostNo);
+				if(result>0) {
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+
+					out.print("<script>");
+					out.print("alert('삭제 성공');");
+					out.print("window.location.href='lostMapList.lost?page=1';"); 
+					out.print("</script>");
+					out.flush();
+				}
+			}else if(url.equals("/lostUpdateForm.lost")) {
+				int lostNo = Integer.parseInt(request.getParameter("lostNo"));
+				LostAnimalDTO dto = dao.lostList(lostNo);
+				request.setAttribute("lostNo", lostNo);
+				request.setAttribute("lostDetail", dto);
+				RequestDispatcher dis = request.getRequestDispatcher("animal/lostAnimalUpdateForm.jsp");
+				dis.forward(request, response);
+			}else if(url.equals("/lostUpdate.lost")) {
+				String directory = request.getServletContext().getRealPath("/upload/lostAnimal");
+				System.out.println(directory);
+				int maxSize = 1024*1024*100;
+				
+				String encoding = "UTF-8";
+				try {
+					MultipartRequest multi =
+							new MultipartRequest(request, directory, maxSize, encoding,
+									new DefaultFileRenamePolicy());
+					
+					int lostNo = Integer.parseInt(multi.getParameter("lostNo"));
+					
+					String lostName = multi.getParameter("lostName");
+					System.out.println(lostName);
+					String lostCategory = multi.getParameter("lostCategory");
+					int lostAge = Integer.parseInt(multi.getParameter("lostAge"));
+					String lostKind = multi.getParameter("lostKind");
+					String lostGender = multi.getParameter("lostGender");
+					String lostAddr = multi.getParameter("addResult");
+					String lostDate = multi.getParameter("lostDate");
+					String lostContent = multi.getParameter("lostContent");
+					String lostWriter = multi.getParameter("lostWriter");
+					
+					Enumeration files = multi.getFileNames();
+					String str = (String)files.nextElement();
+					String lostFileRealName = multi.getFilesystemName(str); //실제에 서버에 업로드가된 네임
+					
+					LostAnimalDTO dto = new LostAnimalDTO();
+					dto.setLostName(lostName);
+					dto.setLostAge(lostAge);
+					dto.setLostKind(lostKind);
+					dto.setLostGender(lostGender);
+					dto.setLostDate(lostDate);
+					dto.setLostContent(lostContent);
+					dto.setLostCategory(lostCategory);
+					dto.setLostAddr(lostAddr);
+					dto.setLostWriter(lostWriter);
+					dto.setFileRealName(lostFileRealName);
+					 
+					System.out.println(dto.toString());
+					int result = dao.lostUpdate(dto,lostNo);
+					System.out.println();
+					  if(result >0) { response.setCharacterEncoding("UTF-8");
+					
+					  response.sendRedirect("lostMapList.lost?page=1");
+					
+				 }
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-
 }
+		
+	
+
+		
+

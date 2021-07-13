@@ -15,6 +15,8 @@ import com.kh.config.PageConfig;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.ReviewDTO;
+//import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class AdoptionDAO {
 
@@ -36,6 +38,7 @@ public class AdoptionDAO {
 		return ds.getConnection();
 	}
 
+	//adoption
 	public List<AnimalDTO> getAnimalList() throws Exception{
 		String sql = "select * from animal";
 
@@ -69,6 +72,7 @@ public class AdoptionDAO {
 		}
 	}
 
+	//adoption
 	public List<AnimalDTO> getPageList(int startNum, int endNum, AnimalDTO dto) throws Exception{
 		String an_category = "an_category";
 		String an_gender = "an_gender";
@@ -169,7 +173,7 @@ public class AdoptionDAO {
 
 	}
 
-
+	//adoption
 	public List<AnimalDTO> getPageList(int startNum, int endNum) throws Exception{
 
 		String sql = "select * from (select row_number() over(order by code_seq desc) row_number, code_seq, an_name, an_category, an_gender, an_kind, an_age, an_weight, an_character, an_date, an_photo, an_neutering from animal) where row_number between ? and ?";
@@ -210,7 +214,7 @@ public class AdoptionDAO {
 		}
 	}
 
-
+	//adoption
 	private int getRecordCount(AnimalDTO dto) throws Exception{
 
 		String sql = null;
@@ -292,6 +296,7 @@ public class AdoptionDAO {
 
 	}
 
+	//adoption
 	private int getRecordCount() throws Exception{
 
 		String sql = "select count(*) from animal";
@@ -306,6 +311,7 @@ public class AdoptionDAO {
 
 	}
 
+	//adoption
 	public List<String> getPageNavi(int currentPage, AnimalDTO dto) throws Exception{ 
 		int recordTotalCount = this.getRecordCount(dto); 
 		int recordCountPerPage = PageConfig.ADOPT_RECORD_COUNT_PER_PAGE; 
@@ -346,8 +352,8 @@ public class AdoptionDAO {
 
 		return pageNavi;
 	}
-	
-	
+
+	//adoption
 	public List<String> getPageNavi(int currentPage) throws Exception{ 
 		int recordTotalCount = this.getRecordCount();
 		int recordCountPerPage = PageConfig.ADOPT_RECORD_COUNT_PER_PAGE; 
@@ -389,9 +395,9 @@ public class AdoptionDAO {
 
 		return pageNavi;
 	}
-	
 
 
+	//adoption
 	public AnimalDTO getAnimalInfo(String code_seq) throws Exception{
 		String sql = "select * from animal where code_seq = ?";
 
@@ -424,7 +430,7 @@ public class AdoptionDAO {
 		}
 	}
 
-
+	//adoption
 	public List<AnimalFilesDTO> getAnimalFiles(String code_seq) throws Exception{
 		String sql = "select * from animal_photos where code_seq = ?";
 
@@ -455,11 +461,11 @@ public class AdoptionDAO {
 			}
 		}
 	}
-	
-	
+
+	//adoption
 	public String getAnimalName(String code_seq) throws Exception{
 		String sql = "select an_name from animal where code_seq = ?";
-		
+
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -473,12 +479,13 @@ public class AdoptionDAO {
 				return rs.getNString("an_name");
 			}
 		}
-		
+
 	}
-	
+
+	//adoption
 	public int insertRegForm(AdoptionDTO dto) throws Exception{
 		String sql = "insert into adoption values(adopt_seq.nextval,?, sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
+
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -510,13 +517,363 @@ public class AdoptionDAO {
 			pstat.setString(25, dto.getQ14_neutered_arg());
 			pstat.setString(26, dto.getQ15_visit_agr());
 			pstat.setString(27, dto.getQ16_adopt_arg());
-			
+
 			int result = pstat.executeUpdate();
 			return result;
 		}
 	}
 
-	
+	// review	
+	public int insertReview(ReviewDTO dto) throws Exception{
+		String sql = "insert into review values(review_seq.nextval, ?, ?, ?, ?, ?, sysdate, 0, 0)";
 
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, dto.getReview_title());
+			pstat.setString(2, dto.getReview_writer());
+			pstat.setString(3, dto.getReview_introduce());
+			pstat.setString(4, dto.getReview_thumbnail());
+			pstat.setString(5, dto.getReview_contents());
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	//review
+	public List<ReviewDTO> getAllReview() throws Exception{
+		String sql = "select * from review";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+
+			while(rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+
+				dto.setReview_seq(rs.getInt("review_seq"));
+				dto.setReview_title(rs.getString("review_title"));
+				dto.setReview_introduce(rs.getString("review_introduce"));
+				dto.setReview_thumbnail(rs.getString("review_thumbnail"));
+				dto.setReview_contents(rs.getString("review_contents"));
+				dto.setReview_writer(rs.getString("review_writer"));
+				dto.setReg_date(rs.getDate("reg_date"));
+				dto.setReview_like(rs.getInt("review_like"));
+				dto.setReview_view(rs.getInt("review_view"));
+
+				list.add(dto);
+			}
+
+			return list;
+		}
+	}
+
+	//review
+	public ReviewDTO getReviewContents(int review_seq) throws Exception{
+		String sql = "select * from review where review_seq = ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+
+				){
+			pstat.setInt(1, review_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				ReviewDTO dto = new ReviewDTO();
+
+				if(rs.next()) {
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setReview_title(rs.getString("review_title"));
+					dto.setReview_introduce(rs.getString("review_introduce"));
+					dto.setReview_thumbnail(rs.getString("review_thumbnail"));
+					dto.setReview_contents(rs.getString("review_contents"));
+					dto.setReview_writer(rs.getString("review_writer"));
+					dto.setReg_date(rs.getDate("reg_date"));
+					dto.setReview_like(rs.getInt("review_like"));
+					dto.setReview_view(rs.getInt("review_view"));
+
+					return dto;
+				}
+				return null;
+			}
+
+		}
+	}
+
+	public int viewCount(int review_seq) throws Exception{
+		String sql = "update review set review_view = review_view+1 where review_seq = ?";
+		try(
+				Connection con= this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){			
+			pstat.setInt(1, review_seq);
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	//review
+	public int deleteReview(int review_seq) throws Exception{
+		String sql = "delete from review where review_seq = ?";
+		try(
+				Connection con= this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){			
+			pstat.setInt(1, review_seq);
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+
+	}
+
+	// review
+	public String getImgName(int review_seq) throws Exception{
+
+		String sql = "select review_thumbnail from review where review_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	// review
+	public String getReviewEdit(int review_seq) throws Exception{
+
+		String sql = "select review_contents from review where review_seq = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getString(1);
+			}
+		}
+
+	}
+
+	public int modifyReview(ReviewDTO dto) throws Exception{
+		String sql = null;
+		boolean existPhoto = false;
+		if(dto.getReview_thumbnail() == null) {
+			sql = "update review set review_title=?, review_writer=?, review_introduce=?, review_contents=? where review_seq=?";			
+		}else {
+			existPhoto = true;
+			sql = "update review set review_title=?, review_writer=?, review_introduce=?, review_contents=?, review_thumbnail=? where review_seq=?";
+		}
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			if(!existPhoto) {
+				pstat.setNString(1, dto.getReview_title());
+				pstat.setNString(2, dto.getReview_writer());
+				pstat.setNString(3, dto.getReview_introduce());
+				pstat.setNString(4, dto.getReview_contents());
+				pstat.setInt(5, dto.getReview_seq());
+			}else {
+				pstat.setNString(1, dto.getReview_title());
+				pstat.setNString(2, dto.getReview_writer());
+				pstat.setNString(3, dto.getReview_introduce());
+				pstat.setNString(4, dto.getReview_contents());
+				pstat.setNString(5, dto.getReview_thumbnail());
+				pstat.setInt(6, dto.getReview_seq());
+			}
+			int result = pstat.executeUpdate();
+			System.out.println(sql);
+			return result;
+		}
+	}
+
+
+	// review
+	public List<String> getPageNavi(int currentPage, String category, String contents) throws Exception{ 
+	
+		int recordTotalCount = this.getReviewRecordCount(category, contents); 
+
+		
+		int recordCountPerPage = PageConfig.REVIEW_RECORD_COUNT_PER_PAGE; 
+		int naviCountPerPage = PageConfig.ADOPT_NAVI_COUNT_PER_PAGE; 
+
+		int pageTotalCount = 0; 
+
+		if((recordTotalCount % recordCountPerPage) > 0) { 
+			pageTotalCount =recordTotalCount / recordCountPerPage + 1; 
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage; 
+		}
+
+		if(currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}else if(currentPage < 1) {
+			currentPage = 1;
+		}
+
+		int startNavi = (currentPage-1) / naviCountPerPage * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1; 
+
+		if(endNavi > pageTotalCount) {endNavi = pageTotalCount;} 
+
+		boolean needPrev = true; 
+		boolean needNext = true; 
+
+		if(startNavi == 1) {needPrev = false;} 
+		if(endNavi == pageTotalCount) {needNext = false;}
+
+
+		List<String> pageNavi = new ArrayList<String>(); 
+		if(needPrev) {pageNavi.add("<");}
+		for(int i = startNavi; i<= endNavi; i++) {			
+			pageNavi.add(String.valueOf(i));
+		}
+		if(needNext) {pageNavi.add(">");}
+
+		return pageNavi;
+	}
+
+	//review
+	private int getReviewRecordCount(String category, String contents) throws Exception{
+
+		String sql = null;
+
+		if((category == null || category.contentEquals(""))) { // 초기로드
+			sql = "select count(*) from review";
+		}else {
+			if(category.contentEquals("title")) {
+				sql = "select count(*) from review where review_title like '%"+ contents + "%'";
+			}else if(category.contentEquals("writer")) {
+				sql = "select count(*) from review where review_writer like '%"+ contents + "%'";
+			}else if(category.contentEquals("introduce")) {
+				sql = "select count(*) from review where review_introduce like '%"+ contents + "%'";
+			}else if(category.contentEquals("contents")) {
+				sql = "select count(*) from review where review_contents like '%"+ contents + "%'";
+			}
+		}
+		
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getInt(1);
+		}
+
+	}
+	
+	//review
+	public List<ReviewDTO> getReviewPageList(int startNum, int endNum) throws Exception{
+
+		String sql = "select * from (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, review_thumbnail, review_view, review_like, reg_date from review) where row_number between ? and ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+
+			pstat.setInt(1, startNum);
+			pstat.setInt(2, endNum);
+
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+
+				List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+				while(rs.next()) {
+					
+					ReviewDTO dto = new ReviewDTO();
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setReview_title(rs.getNString("review_title"));
+					dto.setReview_writer(rs.getNString("review_writer"));
+					dto.setReview_introduce(rs.getNString("review_introduce"));
+					dto.setReview_contents(rs.getNString("review_contents"));
+					dto.setReview_view(rs.getInt("review_view"));
+					dto.setReg_date(rs.getDate("reg_date"));
+					dto.setReview_like(rs.getInt("review_like"));
+					dto.setReview_thumbnail(rs.getNString("review_thumbnail"));
+
+					list.add(dto);
+				}
+				return list;
+
+			}
+
+		}
+	}
+	
+	
+	public List<ReviewDTO> getReviewPageList(int startNum, int endNum, String category, String contents) throws Exception{
+		String sql = null;
+
+		if((category == null || category.contentEquals(""))) { // 초기로드
+			sql = "select count(*) from review";
+		}else {
+			sql = "select * from  (select row_number() over(order by review_seq desc) row_number, review_seq, review_writer, review_title, review_introduce, review_contents, reg_date, review_thumbnail, review_view, review_like from review where";
+			if(category.contentEquals("title")) {
+				sql += "review_title like '%" + contents +"%') where row_number between ? and ?";
+			}else if(category.contentEquals("writer")) {
+				sql += "review_writer like '%" + contents +"%') where row_number between ? and ?";
+			}else if(category.contentEquals("introduce")) {
+				sql += "review_introduce like '%" + contents +"%') where row_number between ? and ?";
+			}else if(category.contentEquals("contents")) {
+				sql += "review_contents like '%" + contents +"%') where row_number between ? and ?";
+			}
+		}
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+
+			pstat.setInt(1, startNum);
+			pstat.setInt(2, endNum);
+
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+
+				List<ReviewDTO> list = new ArrayList<ReviewDTO>();
+				while(rs.next()) {
+					ReviewDTO dto = new ReviewDTO();
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setReview_title(rs.getNString("review_title"));
+					dto.setReview_writer(rs.getNString("review_writer"));
+					dto.setReview_introduce(rs.getNString("review_introduce"));
+					dto.setReview_contents(rs.getNString("review_contents"));
+					dto.setReview_view(rs.getInt("review_view"));
+					dto.setReg_date(rs.getDate("reg_date"));
+					dto.setReview_like(rs.getInt("review_like"));
+					dto.setReview_thumbnail(rs.getNString("review_thumbnail"));
+
+					list.add(dto);
+				}
+				return list;
+			}
+
+		}
+
+	}
 
 }

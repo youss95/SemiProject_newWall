@@ -11,7 +11,7 @@
 				<ul class="s_menu clear adopt">
 					<li><a
 						href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양하기</a></li>
-					<li><a href="#">입양 후기</a></li>
+					<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양 후기</a></li>
 				</ul></li>
 			<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원하기</a></li>
 			<li class="has"><a href="#">실종/보호</a>
