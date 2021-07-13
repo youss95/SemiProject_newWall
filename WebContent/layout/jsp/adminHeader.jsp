@@ -15,9 +15,11 @@
 			<li class="depth1"><a href="#">게시판 관리<i
 					class="fas fa-chevron-right"></i></a>
 				<ul>
-					<li class="depth2"><a href="#">회원작성 글</a></li>
+
+					<li class="depth2"><a href="${pageContext.request.contextPath}/protectAnimal.adm?page=1">회원작성 글</a></li>
 					<li class="depth2"><a href="${pageContext.request.contextPath}/newsInfo.newsAdm?cpage=1">뉴스</a></li>
 					<li class="depth2"><a href="${pageContext.request.contextPath}/noticeInfo.sumAdm?cpage=1">공지사항</a></li>
+
 				</ul></li>
 			<li class="depth1"><a href="#">입양<i
 					class="fas fa-chevron-right"></i></a>
