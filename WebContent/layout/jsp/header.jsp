@@ -14,7 +14,7 @@
 					<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양 후기</a></li>
 				</ul></li>
 			<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원하기</a></li>
-			<li class="has"><a href="#">실종/보호</a>
+			<li class="has"><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a>
 				<ul class="s_menu clear help">
 					<li><a
 						href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종
@@ -24,8 +24,8 @@
 				</ul></li>
 			<li class="has"><a href="#">뉴스레터</a>
 				<ul class="s_menu clear news">
-					<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
 					<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">소식</a></li>
+					<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
 				</ul></li>
 			<!-- <li><a href="#">봉사활동</a></li> 보류 -->
 		</ul>
