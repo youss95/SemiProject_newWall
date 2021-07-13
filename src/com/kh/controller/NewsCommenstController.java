@@ -60,6 +60,24 @@ public class NewsCommenstController extends HttpServlet {
 				request.setAttribute("necmtlist", list);
 				response.sendRedirect("newsView.news?news_seq="+parent);
 				
+			}else if (url.contentEquals("/newsAdminWrite.necmt")) {
+				String writer = "admin";
+
+				String comments = request.getParameter("nrp_contents");
+				comments = XSSFilter(comments);			
+				System.out.println(comments);
+				
+				String parent = request.getParameter("parent");
+				System.out.println(parent);
+								
+				dto = new NewsCommentsDTO(0,writer,comments,null,parent);
+				dao.insert(dto);
+				
+				List<NewsCommentsDTO> list = dao.commentsAll(parent);
+								
+				request.setAttribute("necmtlist", list);
+				response.sendRedirect("newsInfoView.newsAdm?news_seq="+parent);
+				
 			}else if(url.contentEquals("/nedelete.necmt")){
 				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
 				
@@ -68,6 +86,15 @@ public class NewsCommenstController extends HttpServlet {
 				int result = dao.delete(seq);
 				
 				response.sendRedirect("newsView.news?news_seq="+parent);
+			
+			}else if(url.contentEquals("/neAdmindelete.necmt")){
+				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
+				
+				String parent = request.getParameter("nrp_parent");
+				
+				int result = dao.delete(seq);
+				
+				response.sendRedirect("newsInfoView.newsAdm?news_seq="+parent);
 			
 			}else if(url.contentEquals("/modifyReply.necmt")){
 				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
@@ -80,6 +107,17 @@ public class NewsCommenstController extends HttpServlet {
 				dao.modify(seq, comments);
 				
 				response.sendRedirect("newsView.news?news_seq="+parent);
+			}else if(url.contentEquals("/modifyAdminReply.necmt")){
+				int seq = Integer.parseInt(request.getParameter("nrp_seq"));
+				
+				String comments = request.getParameter("hiddenCon");
+				comments = XSSFilter(comments);
+				
+				String parent = request.getParameter("nrp_parent");
+				
+				dao.modify(seq, comments);
+				
+				response.sendRedirect("newsInfoView.newsAdm?news_seq="+parent);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

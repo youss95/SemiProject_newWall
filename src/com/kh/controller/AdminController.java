@@ -20,15 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
 import com.kh.config.SponsorConfig;
 import com.kh.dao.AdminDAO;
 import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
+import com.kh.dao.NoticeDAO;
+import com.kh.dao.NoticeFileDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
+import com.kh.dto.NoticeDTO;
+import com.kh.dto.NoticeFileDTO;
 import com.kh.dto.SponsorDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -63,6 +68,7 @@ public class AdminController extends HttpServlet {
 		return d;
 	}
 
+
 	private List<String> getImgSrc(String str) {
 		Pattern nonValidPattern = Pattern
 				.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
@@ -74,6 +80,7 @@ public class AdminController extends HttpServlet {
 		}
 		return result;
 	}
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
