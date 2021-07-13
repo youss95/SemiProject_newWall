@@ -207,6 +207,7 @@ public class AdminNewsController extends HttpServlet {
 			if (delTargets != null) { // 삭제할 항목이 null이 아닌경우
 				for (String target : delTargets) {
 					String sysName = fdao.getSysName(Integer.parseInt(target));
+					sysName = Normalizer.normalize(sysName, Form.NFC);
 					File targetFile = new File(filesPath + "/" + sysName);
 					boolean result = targetFile.delete();
 					if (result) {
@@ -221,9 +222,8 @@ public class AdminNewsController extends HttpServlet {
 //			String originFile = multi.getFilesystemName("originFile");
 
 			String oriName = multi.getOriginalFileName("news_photo");
-			oriName = Normalizer.normalize(oriName, Form.NFC);
 			String sysName = multi.getFilesystemName("news_photo");
-			sysName = Normalizer.normalize(sysName, Form.NFC);
+
 			
 			if(oriName != null) {
 				fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
