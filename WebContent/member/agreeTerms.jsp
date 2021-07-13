@@ -7,6 +7,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -14,6 +18,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/agreeTerms.css">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>회원가입 약관동의</title>
