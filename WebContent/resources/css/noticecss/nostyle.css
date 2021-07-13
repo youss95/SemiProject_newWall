@@ -108,7 +108,7 @@ a {
 
 .reply-container .ntrp_contents {
 	float: left;
-	width: 60%;
+	width: 50%;
 	line-height: 35px;
 }
 
@@ -132,8 +132,13 @@ a {
 
 
 .comments-row{
+	width:90%;
 	overflow: hidden;
 	border-radius:5px;
+}
+
+.replyFrm{
+	width:91%;
 }
 
 .comments-row textarea{
@@ -262,7 +267,8 @@ a {
 /* } */
 
 .board_view {
-    width: 100%;
+    width: 98%;
+    margin : auto;
     border-top: 2px solid #000;
 }
 

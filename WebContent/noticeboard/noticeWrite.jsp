@@ -65,7 +65,7 @@
 								</div>
 								<div class="bt_wrap">
 									<button class="btn_m btn_primary" type="submit">등록</button>
-									<button class="btn_m btn_white" type="button">취소</button>
+									<button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
 								</div>
 							</div>
 						</form>
