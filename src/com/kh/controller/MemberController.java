@@ -54,12 +54,11 @@ public class MemberController extends HttpServlet {
 				String contact3 = request.getParameter("contact3");
 
 				String contact = contact1+contact2+contact3;
-				char status = request.getParameter("status").charAt(0);
 				String postCode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
 
-				int result = dao.insert(new MemberDTO(user_id,user_password,email,name,birthDay,contact,status,postCode,address1,address2));
+				int result = dao.insert(new MemberDTO(user_id,user_password,email,name,birthDay,contact,'N',postCode,address1,address2));
 				// 축하페이지가 따로 있다면 : response.sendRedirect("축하페이지");
 				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/myPage.mem")) {
@@ -78,9 +77,6 @@ public class MemberController extends HttpServlet {
 				int result = dao.modify(column, value,user_id);
 				System.out.println(result);
 				response.getWriter().append(value);
-			}else if(url.contentEquals("/memberOut.mem")) { 
-				//----------------------------------------------------------------------------------------- 회원탈퇴 페이지로
-				response.sendRedirect("member/memberOut.jsp");
 			}else if(url.contentEquals("/memberOutProc.mem")) {
 				//----------------------------------------------------------------------------------------- 회원탈퇴 요청 처리
 				int result = dao.delete(((MemberDTO)session.getAttribute("loginInfo")).getUser_id());
@@ -113,6 +109,10 @@ public class MemberController extends HttpServlet {
 				String id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				String pw = EncryptUtils.getSHA512(request.getParameter("newpw"));
 				int result = dao.changePw(id,pw);
+			}else if(url.contentEquals("/idDuplCheck.mem")) {
+				String id = request.getParameter("user_id");
+				boolean result = dao.isIdAvailable(id);
+				response.getWriter().append(String.valueOf(result));
 			}
 
 		}catch(Exception e) {

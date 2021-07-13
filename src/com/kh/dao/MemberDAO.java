@@ -28,6 +28,18 @@ public class MemberDAO {
 	}
 	private MemberDAO() {}
 	
+	
+	public boolean isIdAvailable(String id) throws Exception{
+		String sql = "select * from member where user_id =?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			try(ResultSet rs = pstat.executeQuery()){
+				return !rs.next();
+			}
+		}
+	}
+	
 	public boolean isLoginOk(String id, String pw) throws Exception {
 		String sql = "select * from member where user_id=? and user_password=?";
 		try(Connection con = this.getConnection();
