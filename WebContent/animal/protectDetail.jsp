@@ -119,7 +119,7 @@
 						<!-- 댓글 리스트 끝-->
 					</div>
 				</div>
-<c:set var="startNum" value="${param.page-(param.page-1)%5}"></c:set>
+
 
 
 <nav aria-label="Page navigation example ">
@@ -132,8 +132,8 @@
      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${param.page-1}">Previous</a></li>
      </c:otherwise>
     </c:choose>
-    <c:forEach var="i" begin="${starNum+1}" end="${lastPage}" step="1">
-    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${i+1}">${i}</a></li>
+    <c:forEach var="i" begin="${startNum}" end="${lastNum}" step="1">
+    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${param.protectNo}&page=${i}">${i}</a></li>
    </c:forEach>
    
    <c:choose>

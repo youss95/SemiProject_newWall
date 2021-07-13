@@ -10,13 +10,8 @@ let page=1;
 			console.log('resp:', resp)
 	resp.map((res)=>{
 
-
-
-
 		let item = `
-		
-  
-   
+
         <div class="card shadow-soft">
             <img src="/NewWall/upload/lostAnimal/${res.protectFileRealName1}">
             <div class="card-body">
@@ -56,8 +51,9 @@ item+=`<br>`
 		console.log(checkNum)
 		if(checkNum < 1 && checkNum > -1){
 			page++;
-			setTimeout(function() {
+			
  			 listLoad();
-			}, 50);
+	
+			
 		}
 	})
