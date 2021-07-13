@@ -16,7 +16,7 @@ import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.ReviewDTO;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+//import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class AdoptionDAO {
 

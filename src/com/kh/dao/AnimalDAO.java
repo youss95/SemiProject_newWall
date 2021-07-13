@@ -30,7 +30,7 @@ public class AnimalDAO {
 	private AnimalDAO(){}
 	
 	public int LostAnimalFormWrite(LostAnimalDTO dto) throws Exception {
-		String sql ="insert into lost_animal values(lostAnimal_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate)";
+		String sql ="insert into lost_animal values(lostAnimal_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,?)";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql); ){
 			pstmt.setString(1,dto.getLostName());
 			pstmt.setInt(2, dto.getLostAge());
@@ -41,6 +41,7 @@ public class AnimalDAO {
 			pstmt.setString(7, dto.getFileRealName());
 			pstmt.setString(8, dto.getLostContent());
 			pstmt.setString(9, dto.getLostGender());
+			pstmt.setString(10, dto.getLostWriter());
 			int result = pstmt.executeUpdate();
 			con.setAutoCommit(false);
 			con.commit();
@@ -71,7 +72,8 @@ public class AnimalDAO {
 					String lostContent = rs.getString("lost_content");
 					String lostGender = rs.getString("lost_gender");
 					Date createDate = rs.getDate("lost_createDate");
-					dto = new LostAnimalDTO(lostNo,lostName,lostAge,lostKind,lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+					String lostWriter = rs.getString("lost_writer");
+					dto = new LostAnimalDTO(lostNo,lostName,lostAge,lostKind,lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender,lostWriter);
 					list.add(dto);
 				}
 				con.close();
@@ -271,7 +273,7 @@ public class AnimalDAO {
 	//맵 리스트
 	public List<LostAnimalDTO> mapList(int page) throws Exception	{
 		List<LostAnimalDTO> list = new ArrayList<>();
-		String sql = "select * from (select row_number() over(order by lost_no desc) rnum,lost_no,lost_name,lost_age,lost_kind,lost_category,lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content, lost_gender from lost_animal) where rnum between ? and ?";
+		String sql = "select * from (select row_number() over(order by lost_no desc) rnum,lost_no,lost_name,lost_age,lost_kind,lost_category,lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content, lost_gender, lost_writer from lost_animal) where rnum between ? and ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, (page-1)*6+1);
 			pstmt.setInt(2, page*6 );
@@ -289,8 +291,9 @@ public class AnimalDAO {
 					String fileRealName = rs.getString("lost_fileRealName");
 					String lostContent = rs.getString("lost_content");
 					String lostGender = rs.getString("lost_gender");
+					String lostWriter = rs.getString("lost_writer");
 					dto = new LostAnimalDTO(lostNo,lostName,lostAge,lostKind,
-							lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender);
+							lostCategory,lostDate,createDate,lostAddr,fileRealName,lostContent,lostGender,lostWriter);
 					list.add(dto);
 				}
 				con.close();
@@ -348,6 +351,69 @@ public class AnimalDAO {
 		String sql = "delete from protect_animal where protect_no = ?";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, protectNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
+	public int lostDelete(int lostNo) throws Exception {
+		String sql = "delete from lost_animal where lost_no = ?";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, lostNo);
+			int result = pstmt.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			con.close();
+			return result;
+		}
+	}
+	
+	public LostAnimalDTO lostList(int lostNo) throws Exception{
+		String sql = "select * from lost_animal where lost_no=?";
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, lostNo);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					LostAnimalDTO dto;
+					int lost_no = rs.getInt(1);
+					String lost_name = rs.getString(2);
+					int lost_age = rs.getInt(3);
+					String lost_kind = rs.getString(4);
+					String lost_category = rs.getString(5);
+					String lost_date = rs.getString(6);
+					String lost_addr = rs.getString(7);
+					String lost_fileRealName = rs.getString(8);
+					String lost_content = rs.getString(9);
+					String lost_gender = rs.getString(10);
+					Date lost_createDate = rs.getDate(11);
+					String lost_writer = rs.getString(12);
+					dto = new LostAnimalDTO(lost_no,lost_name,lost_age,lost_kind,lost_category,
+							lost_date,lost_createDate,lost_addr,lost_fileRealName,lost_content,lost_gender,
+							lost_writer);
+					con.close();
+					return dto;
+				}
+				
+			}
+		}
+		return null;
+	}
+	
+	public int lostUpdate(LostAnimalDTO dto , int lostNo) throws Exception {
+		String sql ="update lost_animal set lost_name= ?, lost_age=?, lost_kind=?, lost_category=?, lost_date=?, lost_addr=?, lost_fileRealName=? , lost_content=?, lost_gender=? where lost_no="+lostNo;
+		try(Connection con =Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, dto.getLostName());
+			pstmt.setInt(2, dto.getLostAge());
+			pstmt.setString(3, dto.getLostKind());
+			pstmt.setString(4, dto.getLostCategory());
+			pstmt.setString(5, dto.getLostDate());
+			pstmt.setString(6, dto.getLostAddr());
+			pstmt.setString(7, dto.getFileRealName());
+			pstmt.setString(8, dto.getLostContent());
+			pstmt.setString(9, dto.getLostGender());
 			int result = pstmt.executeUpdate();
 			con.setAutoCommit(false);
 			con.commit();

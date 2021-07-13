@@ -6,10 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <%@ include file="../layout/jsp/commonModal.jsp" %>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <style>
   .card{float:left;margin:10px;}
-  .wrap{overflow:hidden;}
+  .wrap{overflow:hidden;margin-left:28px;}
   .progress{height:40px; border-radius:30px;}
   </style>
 </head>
@@ -19,10 +24,18 @@
 			<div class="contents">
 				<section class="lostList">
 				<div class="wrap">
+				<h2 style="font-size:29px;">실종 동물</h2>
 				<c:forEach var="maplist" items="${mapList}">
 				<div style="width:500px;" class="card">
 				
-  <h2 class="card-header" style="font-size:20px;"><span style="padding:6px;background-color:orange;border-radius:5px;">실종</span>&nbsp; ${maplist.lostName}</h2>
+  <h2 class="card-header" style="font-size:20px;"><span style="padding:6px;background-color:orange;border-radius:5px;">실종</span>&nbsp; ${maplist.lostName}
+  <span style="float:right;">
+  <c:if test="${sessionScope.loginInfo != null}">
+  	<a href="${pageContext.request.contextPath}/lostDelete.lost?lostNo=${maplist.lostNo}"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;&nbsp;
+  	<a href="${pageContext.request.contextPath}/lostUpdateForm.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
+  	</c:if>
+  </span>
+  </h2>
   <div class="card-body">
     <span style="font-size:15px;" class="card-title">
     <c:if test="${maplist.lostGender == 'F' }">
@@ -76,7 +89,7 @@
 	<!-- 진행바 -->
 <div class="progress col-md-12 m-2">
 	
-		<div class="progress-bar" style="width: ${currentPercent}%" ></div>
+		<div class="progress-bar" style="width: ${currentPercent}%; font-size:20px;" >${currentPercent}%</div>
 	</div>
 
 				</section>
@@ -85,5 +98,6 @@
 <footer class="footer">
 		<p>Copyright &copy; Kh semi project by group 2</p>
 	</footer>
+	<%@ include file="../layout/jsp/modal.jsp"%>
 </body>
 </html>

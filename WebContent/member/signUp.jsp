@@ -65,7 +65,16 @@
 	font-weight: 600;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
-	border-bottom: 2px solid #FFA5A5;
+    /*  border-bottom: 2px solid #FFA5A5;   */
+}
+#sp_com_input .su_persnal_info .su_ti_o {
+	/*  margin: 10px;
+            width: 500px; */
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+border-bottom: 2px solid #FFA5A5; 
 }
 
 #sp_com_input .su_persnal_info .su_s_ip {
@@ -105,6 +114,11 @@
 
 #sp_com_input .su_persnal_info .su_m_ip {
 	width: 300px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+#sp_com_input .su_persnal_info .su_sss_ip {
+	width: 80px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
@@ -158,51 +172,63 @@
 							<!-- <h3>개인 정보</h3> -->
 							<div class="su_persnal_info">
 								<dl>
-									<dt class="su_ti su_id">아이디</dt>
+									<dt class="su_ti su_ti_b su_ti_o su_id">NEW-WAL</dt>
+									<dt class="su_ti">아이디</dt>
 									<dd>
-										<input type="text" class="inpform su_s_ip" name="" id=""
+										<input type="text" class="inpform su_s_ip" name="user_id" id="signup_user_id" maxlength=16 required
 											placeholder="이름을 입력해주세요.">
-										<button class="btn_m btn_light su_btn_detail">중복확인</button>
+										<button type="button" id="idCheck" class="btn_m btn_light su_btn_detail">중복확인</button>
+										<span class="su_pw_ck" id="duplCheckResult"
+											>일치여부 확인 메세지 </span>
 									</dd>
 								</dl>
 								<dl>
-									<dt class="su_ti">비밀번호</dt>
+									<dt class="su_ti ">비밀번호</dt>
 									<dd>
-										<input type="text" class="inpform su_m_ip" name="" id=""
-											placeholder="비밀번호"> <span class="su_pw_sub">-영문대문자,
+										<input type="password" class="inpform su_m_ip"  name="user_password" id="user_password"
+											placeholder="비밀번호" maxlength=16 required> <span class="su_pw_sub">-영문대문자,
 											영문소문자, 숫자 포함하여 8-12 글자 ***이거는우리정규식에맞게<br>
 										</span>
 									</dd>
 									<dd>
-										<input type="text" class="inpform su_m_ip" name="" id=""
-											placeholder="비밀번호 확인"> <span class="su_pw_ck">
+										<input type="password" class="inpform su_m_ip" name="pwdCheck" id="pwdCheck"
+											placeholder="비밀번호 확인" maxlength=16 required> <span class="su_pw_ck">
 											일치여부 확인 메세지 </span>
 									</dd>
 								</dl>
 								<dl>
+									<dt class="su_ti su_ti_b su_ti_o ">회원정보 입력</dt>
 									<dt class="su_ti">이름</dt>
 									<dd>
-										<input type="text" class="inpform su_s_ip" name="" id="">
+										<input type="text" class="inpform su_s_ip" name="name" id="name" maxlength=20 required>
 									</dd>
 								</dl>
 								<dl>
-									<dt class="su_ti">이메일주소</dt>
+									<dt class="su_ti su_ti_n">이메일주소</dt>
 									<dd>
-										<input type="text" class="inpform su_m_ip" name="" id=""
-											placeholder="example@naver.com">
+										<input type="text" class="inpform su_s_ip"  name="email" id="email"
+											placeholder="email ID"  maxlength=16>@
+											<select name="email2" id="emailSuffix" class="inpform su_s_ip">
+											<option value="@gmail.com">gmail.com</option>
+											<option value="@naver.com">naver.com</option>
+											<option value="@daum.net">daum.net</option>
+											<option value="@nate.com">nate.com</option>
+											<option value="">직접입력</option>
+									</select> 
+									<button type="button" id="check" class="btn_m btn_light su_btn_detail">이메일 인증</button>
 									</dd>
 								</dl>
 								<dl>
-									<dt class="su_ti ">생년월일</dt>
+									<dt class="su_ti su_ti_n">생년월일</dt>
 									<dd class="su_birthday_con">
 
 										<div class="su_birthday">
-											<input type="number" class="inpform  su_s_ip" id="" name=""
+											<input type="number" class="inpform  su_s_ip" id="birthday_yy" name="birthday_yy" required
 												placeholder="1999">
 										</div>
 										<span class="su_birthday su_birthday_text">년</span>
 										<div class="inp_slct su_s_ip su_birthday">
-											<select name="" class=" " id="" required>
+											<select  id="birthday_mm" name="birthday_mm" required>
 												<option value="">선택</option>
 												<option value="01">1</option>
 												<option value="02">2</option>
@@ -220,7 +246,7 @@
 										</div>
 										<span class="su_birthday su_birthday_text">월</span>
 										<div class="inp_slct su_s_ip su_birthday">
-											<select name="" class=" " id="" required>
+											<select id="birthday_dd" class="inpform" name="birthday_dd" required>
 												<option value="">선택</option>
 												<option value="01">1</option>
 												<option value="02">2</option>
@@ -260,32 +286,38 @@
 									</dd>
 								</dl>
 								<dl>
-									<dt class="su_ti">연락처</dt>
+									<dt class="su_ti  su_ti_n">연락처</dt>
 									<dd>
-										<input type="text" class="inpform su_m_ip" name="" id=""
-											placeholder="01012341234">
+										<select class="inpform su_sss_ip" name="contact1" id="contact1">
+											<option value="">선택</option>
+											<option value="010">010</option>
+											<option value="011">011</option>
+											<option value="019">019</option>
+									</select> - <input type="text" class="inpform su_sss_ip" name="contact2"
+										id="contact2" maxlength=4> - <input type="text"
+										name="contact3" id="contact3" class="inpform su_sss_ip" maxlength=4>
 									</dd>
 								</dl>
 								<dl>
-									<dt class="su_ti">주소</dt>
+									<dt class="su_ti su_ti_o  su_ti_b">주소</dt>
 									<dd>
 										<div class="sp_address">
 											<div>
 												<h3 class="ad_h3 su_address">우편번호</h3>
-												<input type="text" id="sp_postcode" name="sp_postcode"
-													class="inpform  su_s_ip su_address" required>
-												<button class="btn_m btn_default su_btn_detail"
-													id="sp_search" type="button">우편번호 찾기</button>
+												<input type="text" " name="postcode" id="postcode"
+													class="inpform  su_s_ip su_address"  maxlength=5 required>
+												<button type="button" id="searchAddr" class="btn_m btn_default su_btn_detail"
+													 >우편번호검색</button>
 											</div>
 											<div>
 												<h3 class="ad_h3 su_address">도로명 주소</h3>
-												<input type="text" id="sp_address1" name="sp_address1"
-													class="inpform su_address su_l_ip" required>
+												<input type="text"name="address1" id="address1"
+													class="inpform su_address su_l_ip"" placeholder="도로명/지번" maxlength=100 required>
 											</div>
 											<div>
 												<h3 class="ad_h3 su_address">상세 주소</h3>
-												<input type="text" id="sp_address2" name="sp_address2"
-													class="inpform su_address su_l_ip" required>
+												<input type="text" name="address2" id="address2"
+													class="inpform su_address su_l_ip" maxlength=100 required>
 											</div>
 										</div>
 									</dd>
@@ -295,10 +327,10 @@
 							</div>
 
 							<div class="btn_wrap">
-								<input type="hidden" name="" value=""> <input
-									type="hidden" name="" value="">
-								<button type="button"
-									class="btn_m btn_primary su_btn_detail_big" id="">회원가입하기</button>
+								<!-- <input type="hidden" name="" value=""> <input
+									type="hidden" name="" value=""> -->
+								<button  id="join" 
+									class="btn_m btn_primary su_btn_detail_big">회원가입하기</button>
 							</div>
 						</form>
 
@@ -312,7 +344,125 @@
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
 	<script>
+	$(function() {
+		let now = new Date();
+		let year = now.getFullYear();
+		for (let i = year; i >= 1900; i--) {
+			$('#birthday_yy').append(
+					'<option value="' + i + '">' + i + '</option>');
+		}
 
+		let idFlag = false;
+		$("#signup_user_id").on("input", function() {
+			idFlag = false;
+		})
+
+		$("#signupForm")
+				.on(
+						"submit",
+						function() {
+							let idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+							let user_id = $("#signup_user_id").val();
+							if (!idReg.test(user_id)) {
+								alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+								return false;
+							}
+
+							let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+							let pw = $("#user_password").val();
+							if (!pwReg.test(pwReg)) {
+								alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+								return false;
+							}
+
+							let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+							let email = $("#email").val()
+									+ "@"
+									+ $("#emailSuffix option:selected")
+											.val();
+
+							if (!emailReg.test(email)) {
+								alert("이메일 형식을 다시 확인해주세요.");
+								return false;
+							}
+
+							let nameReg = /^[가-힣]{2,4}$/;
+							let name = $("#name").val();
+							if (!nameReg.test(name)) {
+								alert("이름은 한글 2 글자 이상 4글자 미만으로 입력해야 합니다.");
+								return false;
+							}
+
+							let phoneReg = /^\d{3}\d{3,4}\d{4}$/;
+							let phone = $("#contact1 option:selected")
+									.val()
+									+ $("#contact2").val()
+									+ $("#contact3").val();
+
+							if (!phoneReg.test(phone)) {
+								alert("핸드폰 번호를 다시 확인해주세요.");
+								return false;
+							}
+
+							if ($("#birthday_yy option:selected").val() == "년"
+									|| $("#birthday_mm option:selected")
+											.val() == "월"
+									|| $("#birthday_dd option:selected")
+											.val() == "일") {
+								alert("생년월일을 선택하세요.")
+								return false;
+							}
+
+							if (!idFlag) {
+								alert("ID 중복체크를 진행하세요.")
+								return false;
+							}
+						})
+
+		$("#idCheck").on("click", function() {
+			if ($("#signup_user_id").val() == "") {
+				alert("ID를 입력하세요.")
+				return;
+			}
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/idDuplCheck.mem",
+				data : {
+					user_id : $("#signup_user_id").val()
+				}
+			}).done(function(resp) {
+				if (resp == "true") {
+					$("#duplCheckResult").css("color", "dodgerblue");
+					$("#duplCheckResult").text("사용 가능한 ID 입니다.");
+					idFlag = true;
+				} else {
+					$("#duplCheckResult").css("color", "crimson");
+					$("#duplCheckResult").text("이미 사용중인 ID 입니다.");
+				}
+
+			})
+		})
+
+		$("#searchAddr")
+				.on(
+						"click",
+						function() {
+							new daum.Postcode(
+									{
+										oncomplete : function(data) {
+											var roadAddr = data.roadAddress; // 도로명 주소 변수
+
+											document
+													.getElementById('postcode').value = data.zonecode;
+											document
+													.getElementById("address1").value = roadAddr;
+											document
+													.getElementById("address2").value = data.jibunAddress;
+										}
+									}).open();
+						})
+
+	})
 	
 </script>
 </body>

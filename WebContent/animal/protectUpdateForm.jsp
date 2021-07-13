@@ -74,7 +74,7 @@
                         <img src="${pageContext.request.contextPath}/upload/lostAnimal/${protectDetail.protectFileRealName1}" alt="" id="imageUploadPreview" />               
                    </div>			
 				 <div class="box"> 
-				 이미지: <input type="file" name="protectImage2" onChange="imageChoose2(this)">	           
+				 이미지: <input type="file" name="protectImage2" onChange="imageChoose2(this)" }>	           
                         <img src="${pageContext.request.contextPath}/upload/lostAnimal/${protectDetail.protectFileRealName2}" alt="" id="imageUploadPreview2" />          
                    </div>             	
                    </div>

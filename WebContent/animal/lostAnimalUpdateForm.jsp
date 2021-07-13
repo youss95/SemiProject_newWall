@@ -14,33 +14,68 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/lostAnimal.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${lostDetail.lostNo}" method="post" enctype="multipart/form-data">
 				<div id="mainTitle">실종 신고</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
-				<input type="text" name="lostName" class="inpform" >
+				<input type="text" name="lostName" class="inpform" value=${lostDetail.lostName }>
 				<span id="cate">구분: </span>
-				<div class="rd_group">
+			
+			
+				<div class="rd_group" style="display:inline">
+				<c:if test="${lostDetail.lostCategory == 'dog'}">
+				<div class="inp_rd">
+											<input type="radio" id="rd1" name="lostCategory" value="dog" checked>
+											<label for="rd1">개</label>
+										</div>
+				</c:if>
+				<c:if test="${lostDetail.lostCategory != 'dog'}">
 										<div class="inp_rd">
 											<input type="radio" id="rd1" name="lostCategory" value="dog" >
 											<label for="rd1">개</label>
 										</div>
+										</c:if>
+										
+										<c:if test="${lostDetail.lostCategory != 'cat'}">
 										<div class="inp_rd">
 											<input type="radio" id="rd2" name="lostCategory" value="cat">
 											<label for="rd2">고양이</label>
 										</div>
+										</c:if>
+										<c:if test="${lostDetail.lostCategory == 'cat'}">
+										<div class="inp_rd">
+											<input type="radio" id="rd2" name="lostCategory" value="cat" checked>
+											<label for="rd2">고양이</label>
+										</div>
+										</c:if>
 									</div>
+									
 				</div>
 				<div id="animalDetail">
-				<span>나이:</span><input type="text" name="lostAge" class="inpform toMargin" >
-				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin">
+				<span>나이:</span><input type="text" name="lostAge" class="inpform toMargin" value=${lostDetail.lostAge} required>
+				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin" value=${lostDetail.lostKind }>
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct">
 										<select name="lostGender" id="lostGender">
 											<option value="">선택</option>
+											<c:choose>
+											<c:when test="${lostDetail.lostGender == 'F' }">
+											<option value="F" selected>암컷</option>
+											</c:when>
+											<c:otherwise>
 											<option value="F">암컷</option>
+											</c:otherwise>
+											</c:choose>
+											<c:choose>
+											<c:when test="${lostDetail.lostGender == 'M' }">
+											<option value="M" selected>숫컷</option>
+											</c:when>
+											<c:otherwise>
 											<option value="M">숫컷</option>
+											</c:otherwise>
+											</c:choose>
+											
 										</select>
 									</div>
 				</div>
@@ -48,10 +83,10 @@
 				
 				<div class="animalInfo">기본 정보</div>
 				<div id="lostDateId">
-				<span id="lostDates">실종 날짜:</span><input type="date" id="lostDate" name="lostDate" class="inpform toMargin" min="2021-01-01"></div>
+				<span id="lostDates">실종 날짜:</span><input type="date" id="lostDate" name="lostDate" class="inpform toMargin" min="2021-01-01" required></div>
 				<div id="contentArea">	
 				<div id="content">내용</div>
-				<textarea class="txtareaform" name="lostContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)"></textarea>
+				<textarea class="txtareaform" name="lostContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)">${lostDetail.lostContent }</textarea>
 				</div>
 				
 				
@@ -74,10 +109,10 @@
 			</div>
 			
 			<div id="animalImage">
-				이미지: <input type="file" name="animalImage" onChange="imageChoose(this)">
+				이미지: <input type="file" name="animalImage" onChange="imageChoose(this)" required>
 				</div> 
 				   <div class="upload-img">
-                        <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview" />
+                        <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview"  />
                    </div>
 			<input type="hidden" name="addResult" id="hiddenInput">	
 			<input type="hidden" name="lostWriter" value="${sessionScope.loginInfo.user_id}"> 
@@ -93,5 +128,6 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+	
 </body>
 </html>
