@@ -43,8 +43,12 @@
 						</div>
 						<div class="btn_wrap">
 							<a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1" class="btn_m btn_line btn_list">목록으로</a>
-							<button type="button" class="btn_m btn_white" id="btn_del">삭제</button>
-							<a href="${pageContext.request.contextPath}/reviewModifyView.apt?review_seq=${rv.review_seq}" class="btn_m btn_default" id="btn_modi">수정</a>
+							<c:choose>
+								<c:when test="${loginInfo.user_id ==  rv.review_writer}">
+									<button type="button" class="btn_m btn_white" id="btn_del">삭제</button>
+									<a href="${pageContext.request.contextPath}/reviewModifyView.apt?review_seq=${rv.review_seq}" class="btn_m btn_default" id="btn_modi">수정</a>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</section>

@@ -95,10 +95,13 @@ public class AdoptController extends HttpServlet {
 				
 				AnimalDTO info = adoptdao.getAnimalInfo(code_seq);
 				List<AnimalFilesDTO> files = adoptdao.getAnimalFiles(code_seq);
+				int status = adoptdao.getAnimalAdoptionStatus(code_seq);
 				
 				request.setAttribute("info", info);
 				request.setAttribute("files", files);
+				request.setAttribute("status", status);
 				request.getRequestDispatcher("adopt/adoptDetail.jsp").forward(request, response);
+				
 				
 			}else if(url.contentEquals("/adoptRegForm.apt")) { 
 				System.out.println("입양신청");		
@@ -166,7 +169,6 @@ public class AdoptController extends HttpServlet {
 					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				}
 				
-//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				String filesPath = request.getServletContext().getRealPath("/upload/review");
 				File filesFolder = new File(filesPath);
 				if(!filesFolder.exists()) filesFolder.mkdir();
@@ -193,9 +195,6 @@ public class AdoptController extends HttpServlet {
 					String user_id = session_chk.getUser_id();
 					adopt_chk = adoptdao.getAdoptionRecord(user_id);
 				}
-				
-//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
-//				int adopt_chk = adoptdao.getAdoptionRecord(user_id);
 				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");

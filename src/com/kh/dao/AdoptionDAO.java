@@ -986,4 +986,23 @@ public class AdoptionDAO {
 		}
 	}
 	
+	//adoption
+	public int getAnimalAdoptionStatus(String code_seq) throws Exception{
+		String sql = "select count(*) from adoption where code_seq = ? and ad_status='완료'";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, code_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+
+	}
+	
 }
