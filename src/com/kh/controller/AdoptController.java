@@ -58,8 +58,9 @@ public class AdoptController extends HttpServlet {
 		try {
 			if(url.contentEquals("/adoptList.apt")) {
 				System.out.println("입양 동물 리스트");
-				
+
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
+				String loadchk = request.getParameter("loadchk");
 				String category = request.getParameter("category");
 				String gender = request.getParameter("gender");
 				String weight = request.getParameter("weight");
@@ -70,24 +71,38 @@ public class AdoptController extends HttpServlet {
 				int startNum = endNum - (PageConfig.ADOPT_RECORD_COUNT_PER_PAGE - 1);
 				
 				AnimalDTO filter = new AnimalDTO(name, category, gender, age, weight, character);
+				
+				System.out.println("loadchk : " + loadchk);
+				System.out.println("name : " + filter.getAn_name());
+				System.out.println("category : " + filter.getAn_category());
+				System.out.println("gender : " + filter.getAn_gender());
+				System.out.println("age : " + filter.getAn_age_range());
+				System.out.println("weight : " + filter.getAn_weight_range());
+				System.out.println("character : " + filter.getAn_character());
+				System.out.println("==============");
+			
+				
+				
 				List<AnimalDTO> list;
 				List<String> pageNavi = adoptdao.getPageNavi(cpage, filter);
-				if(category == null || category.contentEquals("")) { //검색조건없이 초기로드
+				if(loadchk == null) { //검색조건없이 초기로드
+					System.out.println("초기로드");
 					list = adoptdao.getPageList(startNum, endNum);
 				}else{ // 검색 값이 있을 경우
+					System.out.println("검색");
+
 					list = adoptdao.getPageList(startNum, endNum, filter);
 				}
 				
 				request.setAttribute("list", list);
 				request.setAttribute("navi", pageNavi);
-				request.setAttribute("h_category", category);
-				request.setAttribute("h_gender", gender);
-				request.setAttribute("h_weight", weight);
-				request.setAttribute("h_age", age);
-				request.setAttribute("h_character", character);
+//				request.setAttribute("h_category", category);
+//				request.setAttribute("h_gender", gender);
+//				request.setAttribute("h_weight", weight);
+//				request.setAttribute("h_age", age);
+//				request.setAttribute("h_character", character);
 				request.setAttribute("an_name", name);
 				request.getRequestDispatcher("adopt/adoptList.jsp").forward(request, response);
-				
 			}else if(url.contentEquals("/adoptDetail.apt")) {
 				System.out.println("상세");
 				
