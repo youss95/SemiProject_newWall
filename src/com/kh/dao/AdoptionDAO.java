@@ -824,7 +824,7 @@ public class AdoptionDAO {
 		}
 	}
 
-
+	//review
 	public List<ReviewDTO> getReviewPageList(int startNum, int endNum, String category, String contents) throws Exception{
 		String sql = null;
 
@@ -877,7 +877,8 @@ public class AdoptionDAO {
 		}
 
 	}
-
+		
+	//adoption
 	public int getAdoptionRecord(String user_id) throws Exception{
 		String sql = "select count(*) from adoption where user_id = ? and ad_status='완료' ";;
 
@@ -895,4 +896,101 @@ public class AdoptionDAO {
 		}
 
 	}
+	
+	//review
+	public int inserReviewtLike(int review_seq, String user_id) throws Exception{
+		String sql = "insert into review_like values(?, ?)";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			pstat.setString(2, user_id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+	
+	//review
+	public int reviewLikeChk(int review_seq, String user_id) throws Exception{
+		String sql = "select count(*) from review_like where review_seq= ? and user_id = ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			pstat.setString(2, user_id);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+
+	}
+	
+	//review
+	public int deleteReviewtLike(int review_seq, String user_id) throws Exception{
+		String sql = "delete from review_like where review_seq=? and user_id = ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			pstat.setString(2, user_id);
+
+			int result = pstat.executeUpdate();
+			return result;
+			
+		}
+	}
+	
+	//review
+	public int getReviewLikeCount(int review_seq) throws Exception{
+		String sql = "select count(*) from review_like where review_seq = ?";
+
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, review_seq);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				rs.next();
+				return rs.getInt(1);
+			}
+		}
+
+	}
+	
+	//review
+	public int updateReviewtLike(int review_seq, int num) throws Exception{
+		
+		String sql = "update review set review_like=? where review_seq=?";
+		System.out.println(sql);
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setInt(1, num);
+			pstat.setInt(2, review_seq);
+
+			int result = pstat.executeUpdate();
+			return result;
+			
+		}
+	}
+	
+	
+//	해당글 좋아요 갯수
+//	select count(*) from review_like where review_seq = 3;
+	
+// 세션에 있는 아이디가 좋아요를 눌렀는지 체크
+//select user_id from review_like where review_seq=3;
+	
 }

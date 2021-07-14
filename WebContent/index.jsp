@@ -31,7 +31,7 @@
 			<div class="menu">
 				<ul>
 					<li class="has">
-						<a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양</a>
+						<a href="#">입양</a>
 						<ul class="submenu">
 							<li><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양동물</a></li>
 							<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양후기</a></li>
