@@ -112,16 +112,19 @@ public class AdminNewsController extends HttpServlet {
 			String contents = multi.getParameter("news_contents");//뉴스 내용
 			
 			String photo = multi.getFilesystemName("news_photo");//포토
+			photo = Normalizer.normalize(photo, Form.NFC);
+			System.out.println(photo);
 			
 			String oriName = multi.getOriginalFileName("news_photo");
 			oriName = Normalizer.normalize(oriName, Form.NFC);
+			System.out.println(oriName);
+			
 			String sysName = multi.getFilesystemName("news_photo");
 			sysName = Normalizer.normalize(sysName, Form.NFC);
+			System.out.println(sysName);
 			
 			fdao.insert(new NoticeFileDTO(0,oriName, sysName, null, seq));
-			
-			System.out.println(photo);
-		 
+					 
 			
 			int result = nedao.newNews(new NewsDTO(seq,title,subContents,contents,photo,writer,null,0));
 			
@@ -129,22 +132,22 @@ public class AdminNewsController extends HttpServlet {
 			
 		}else if (url.contentEquals("/newsuploadImg.newsAdm")) {
 			//관리자 뉴스 썸머노트 이미지 업로드
-			response.setCharacterEncoding("utf8");
-			response.setContentType("text/html;charset=utf8");
 
 			String realPath = request.getServletContext().getRealPath("upload/news");
 			File filesPath = new File(realPath);
-			System.out.println(realPath);
+			System.out.println("썸머 : " + realPath);
 
 			if(!filesPath.exists()) {filesPath.mkdir();}
 			MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
 
 			String sysName = multi.getFilesystemName("file");
-			//				sysName = URLEncoder.encode(sysName,"euc-kr");
+			sysName = Normalizer.normalize(sysName, Form.NFC);
+			System.out.println("썸머 : " + sysName);
+			//				sysName = URLEncoder.encode(sysName,"euc-kr");;
 
 			String returnPath = "/upload/news/" + sysName;
-
-			System.out.println("returnPath : " + returnPath);
+			System.out.println("썸머 : " + returnPath);
+			
 			response.getWriter().append(returnPath);
 			
 		}else if(url.contentEquals("/newsInfoView.newsAdm")) {
@@ -171,7 +174,7 @@ public class AdminNewsController extends HttpServlet {
 			
 			nedao.delete(seq);
 			
-			response.sendRedirect("newsInfo.sumAdm?cpage=1");
+			response.sendRedirect("newsInfo.newsAdm?cpage=1");
 		
 		}else if(url.contentEquals("/newsModify.newsAdm")) {
 			//뉴스값 받아서 보내기
@@ -219,22 +222,30 @@ public class AdminNewsController extends HttpServlet {
 			String photo;
 			photo = multi.getFilesystemName("news_photo");//포토
 			
+			
+			System.out.println(photo);
+			
 //			String originFile = multi.getFilesystemName("originFile");
-
+			
 			String oriName = multi.getOriginalFileName("news_photo");
 			String sysName = multi.getFilesystemName("news_photo");
-
-			
-			if(oriName != null) {
-				fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
-			}
 			
 			if(photo == null) {
 				photo = multi.getParameter("originFile");
 				System.out.println(photo);
 //				photo = multi.getFilesystemName("originFile");
 //				photo = multi.getOriginalFileName("originFile");
+			}else if (photo != null) {
+				photo = Normalizer.normalize(photo, Form.NFC);
+				oriName = Normalizer.normalize(oriName, Form.NFC);
+				sysName = Normalizer.normalize(sysName, Form.NFC);
 			}
+						
+			if(oriName != null) {
+				fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
+			}
+			
+			
 			
 			
 			int result = nedao.modify(seq, title, subcontents, contents, photo);

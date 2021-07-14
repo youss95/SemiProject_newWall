@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
+	
 </head>
 <body>
 	<div class="wrap">
