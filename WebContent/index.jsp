@@ -16,36 +16,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.fullPage.js"></script>
-
 <style>
 .protect:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(${pageContext.request.contextPath}/resources/images/main/img_ptbg.jpg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
 .review:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(${pageContext.request.contextPath}/resources/images/main/img03.jpeg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
 </style>
-<!-- <script type="text/javascript">
-
-//유실동물 임시보호 불러오기
-window.onload = function(){
-	$.ajax({
-		url:"${pageContext.request.contextPath}/protectListIndex.lost?page=1",
-		type:"GET",
-		dataType:"json"
-	}).done(function(resp){
-		console.log(resp)
-		 let aniName = document.querySelectorAll(".name");
-		let aniGender = document.querySelectorAll(".pgender");
-		let aniKind = document.querySelectorAll(".pkind");
-		let aniAddr = document.querySelectorAll(".paddr");
-		let aniImg = document.querySelectorAll(".pimg");
-		  for(let i=0; i<aniName.length; i++){
-			  aniName[i].append(resp[i].protectName)
-			  aniGender[i].append(resp[i].protectGender)
-			  aniKind[i].append(resp[i].protectKind)
-			  aniAddr[i].append(resp[i].protectAddr)
-			  aniImg[i].src = "${pageContext.request.contextPath}/upload/lostAnimal/"+resp[i].protectFileRealName1
-		  }
-	})
-}
-</script> -->
 </head>
 
 <body>
@@ -86,7 +60,7 @@ window.onload = function(){
 </header>
 
 <div id="fullpage">
-	<div class="section main_visual" id="section0">
+	<div class="section main_visua activel" id="section0">
 		<div class="txt_box">
 <%-- 			<h2><em><b>NEW</b> <img src="${pageContext.request.contextPath}/resources/images/main/logo_none_text.png"> WAL</em>은 <br>사지않고 입양하는 문화를 만듭니다.</h2>
 			<p>우리 동물들의 인생에 따뜻한 봄바람을 불어주세요.</p> --%>
@@ -333,7 +307,7 @@ window.onload = function(){
 			</a> --%>
 		</div>
 	</div>
-	<div class="section review active" id="section5">
+	<div class="section review" id="section5">
 		<div class="title">
 			<h2>입양후기를 만나보세요!</h2>
 			<p>뉴월을 통해 입양하신 분들은 누구나! 입양후기를 보실 수 있습니다.</p>
