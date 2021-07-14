@@ -81,9 +81,8 @@
 							<a href="${pageContext.request.contextPath}/newsDelete.newsAdm?news_seq=${newsView.news_seq}" class="btn_s btn_default" id="newsdelete">삭제</a>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/newsAdminWrite.necmt"
-						method="post">
-						<div id="nrp-comments" class="nrp-comments" style="margin-left:100px;">
+					<form action="${pageContext.request.contextPath}/newsAdminWrite.necmt" method="post" class="news_contents">
+						<div id="nrp-comments" class="nrp-comments">
 							<div class="comments-row">
 								<textarea id="nrp_contents" name="nrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
