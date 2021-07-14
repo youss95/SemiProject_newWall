@@ -67,6 +67,9 @@ section>.title>h2:after {
 .sp_com_input {
 	overflow: hidden;
 }
+.sp_com_input .directname{
+	width: 30%;
+}
 
 /* 각 항목 사이 공간 띄우기 */
 .sp_com_input .spp_category {
@@ -574,7 +577,7 @@ dl.member_chk dd {
 											</h3>
 											<div class="birth_wrap">
 												<div class="">
-													<input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y" placeholder="1999">
+													<input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y" placeholder="2008">
 													<span>년</span>
 												</div>
 												<div>
