@@ -16,12 +16,13 @@ public class ReviewDTO {
 	
 	public ReviewDTO() {}
 	
-	public ReviewDTO(String review_title, String review_writer, String review_introduce, String review_contents) {
+	public ReviewDTO(int review_seq, String review_title, String review_writer, String review_introduce, Date reg_date) {
 		super();
+		this.review_seq = review_seq;
 		this.review_title = review_title;
 		this.review_writer = review_writer;
 		this.review_introduce = review_introduce;
-		this.review_contents = review_contents;
+		this.reg_date = reg_date;
 	}
 	
 	public ReviewDTO(int review_seq, String review_title, String review_writer, String review_introduce,
