@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
 </head>
 <body>
@@ -27,13 +26,14 @@
 								<ul class="utils">
 									<li>작성자 : <span>${rv.review_writer}</span></li>
 									<li>작성일 : <span>${rv.reg_date}</span></li>
-	 								<li>좋아요 : <span>${rv.review_like}</span></li>
+	 								<li id="rv_like">좋아요 : <span></span></li>
 									<li>조회수 : <span>${rv.review_view}</span></li>
 								</ul>
 								<div class="v_like">
-									<a href="javascript:;" class="btn_like">
-										<i class="far fa-heart off"></i>
-										<i class="fas fa-heart on"></i>
+									<a href="javascript:;" id="btn_like">
+										<i class="far fa-heart" id="h_off"></i>
+										<i class="fas fa-heart" id="h_on"></i>
+										<input type="hidden" id="rv_seq" name="rv_seq" value="${rv.review_seq}">
 									</a>
 								</div>
 							</div>
@@ -43,8 +43,12 @@
 						</div>
 						<div class="btn_wrap">
 							<a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1" class="btn_m btn_line btn_list">목록으로</a>
-							<button type="button" class="btn_m btn_white" id="btn_del">삭제</button>
-							<a href="${pageContext.request.contextPath}/reviewModifyView.apt?review_seq=${rv.review_seq}" class="btn_m btn_default" id="btn_modi">수정</a>
+							<c:choose>
+								<c:when test="${loginInfo.user_id ==  rv.review_writer}">
+									<button type="button" class="btn_m btn_white" id="btn_del">삭제</button>
+									<a href="${pageContext.request.contextPath}/reviewModifyView.apt?review_seq=${rv.review_seq}" class="btn_m btn_default" id="btn_modi">수정</a>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</section>
@@ -52,18 +56,67 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 	<script>
 		function goBack(){
 			window.history.back();
 		}
 		
-		$("#btn_del").on("click", function () {
-			let result = confirm("정말 삭제 하시겠습니까?");
-			if (result) {
-				location.href = "${pageContext.request.contextPath}/reviewDelete.apt?review_seq=${rv.review_seq}";
-			}
-		});
-		
+		$(function(){
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/likeStatus.apt",
+				type: "get",
+				dataType: "json",
+				data : {
+					"rv_seq" : $('#rv_seq').val()
+				}
+			}).done(function(resp){
+				if(resp[0] > 0){
+					$("#h_off").hide();
+					$("#h_on").show();
+				}else if(resp[0] == 0){
+					$("#h_off").show();
+					$("#h_on").hide();
+				}
+				
+				$("#rv_like span").text(resp[1]);
+			})	
+				
+			
+			$("#btn_del").on("click", function () {
+				let result = confirm("정말 삭제 하시겠습니까?");
+				if (result) {
+					location.href = "${pageContext.request.contextPath}/reviewDelete.apt?review_seq=${rv.review_seq}";
+				}
+			});
+			
+			$('#btn_like').on('click',function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/reviewLike.apt",
+					type: "get",
+					dataType: "json",
+					data : {
+						"rv_seq" : $('#rv_seq').val()
+					}
+				}).done(function(resp){
+					if(resp == 0){
+						alert('로그인 또는 회원가입을 해주세요!')
+					}else{
+						let like = $("#rv_like span"); 
+						like.text(resp[0]);
+						console.log(resp[0]);
+						if(resp[1] == "insert"){
+							$("#h_off").hide();
+							$("#h_on").show();
+						}else if(resp[1] == "delete"){
+							$("#h_off").show();
+							$("#h_on").hide();
+						}
+					}
+				})
+			})
+		})
 	</script>
 	
 </body>

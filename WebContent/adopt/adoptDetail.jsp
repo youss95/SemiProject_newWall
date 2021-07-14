@@ -50,7 +50,8 @@
 							<dd>${info.an_character}</dd>
 						</dl>
 						<div class="btn_wrap">
-							<a href="${pageContext.request.contextPath}/adoptRegForm.apt?code_seq=${info.code_seq}" class="btn_m btn_primary">입양하기</a>
+							<input type="hidden" name="status" id="status" value="${status}">
+							<a href="${pageContext.request.contextPath}/adoptRegForm.apt?code_seq=${info.code_seq}" class="btn_m btn_primary" id="btn_adopt">입양하기</a>
 							<a href="${pageContext.request.contextPath}/directInput.sp?code_seq=${info.code_seq}" class="btn_m btn_line">후원하기</a>
 						</div>
 					</div>
@@ -70,17 +71,27 @@
 <jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
 
 <script>
-	const swiper = new Swiper('.animal_info .swiper-container', {
-		loop: true,
-		pagination: {
-			el: '.swiper-pagination',
-			clickable: true,
-		},
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
+	$(function(){
+		const swiper = new Swiper('.animal_info .swiper-container', {
+			loop: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			}
+		});
+		
+		let status = $("#status").val();
+		console.log(status)
+		if(status >0 ){
+			$("#btn_adopt").text("입양 완료").bind('click', false);
+
 		}
-	});
+		
+	})
 </script>
 </body>
 </html>

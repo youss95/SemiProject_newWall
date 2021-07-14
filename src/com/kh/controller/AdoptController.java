@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
 import com.kh.dao.AdoptionDAO;
@@ -94,10 +95,13 @@ public class AdoptController extends HttpServlet {
 				
 				AnimalDTO info = adoptdao.getAnimalInfo(code_seq);
 				List<AnimalFilesDTO> files = adoptdao.getAnimalFiles(code_seq);
+				int status = adoptdao.getAnimalAdoptionStatus(code_seq);
 				
 				request.setAttribute("info", info);
 				request.setAttribute("files", files);
+				request.setAttribute("status", status);
 				request.getRequestDispatcher("adopt/adoptDetail.jsp").forward(request, response);
+				
 				
 			}else if(url.contentEquals("/adoptRegForm.apt")) { 
 				System.out.println("입양신청");		
@@ -117,7 +121,7 @@ public class AdoptController extends HttpServlet {
 				if(session_chk == null && user_id == null) { 
 					user_id = "비회원";
 				}else {
-					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+					user_id = (session_chk).getUser_id();
 				}
 				System.out.println("user_id : " + user_id);
 				String code_seq = request.getParameter("code_seq");
@@ -165,7 +169,6 @@ public class AdoptController extends HttpServlet {
 					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				}
 				
-//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				String filesPath = request.getServletContext().getRealPath("/upload/review");
 				File filesFolder = new File(filesPath);
 				if(!filesFolder.exists()) filesFolder.mkdir();
@@ -193,9 +196,6 @@ public class AdoptController extends HttpServlet {
 					adopt_chk = adoptdao.getAdoptionRecord(user_id);
 				}
 				
-//				String user_id=((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
-//				int adopt_chk = adoptdao.getAdoptionRecord(user_id);
-				
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
 				String category = request.getParameter("category");
 				String contents = request.getParameter("inp_contents");
@@ -222,12 +222,12 @@ public class AdoptController extends HttpServlet {
 				request.getRequestDispatcher("adopt/reviewList.jsp").forward(request, response);
 				
 			}else if(url.contentEquals("/reviewDetail.apt")) {
+				System.out.println("리뷰 상세페이지");
 				String user_id = null;
 				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
 				if(session_chk != null) { 
-					user_id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+					user_id = (session_chk).getUser_id();
 				}
-				System.out.println("리뷰 상세페이지");
 				int review_seq = Integer.parseInt(request.getParameter("review_seq"));
 				adoptdao.viewCount(review_seq);
 				ReviewDTO review = adoptdao.getReviewContents(review_seq);
@@ -237,12 +237,65 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/reviewLike.apt")) {
 
-				// review_seq 랑 user_id랑 count해서 좋아요 업데이트.
-				// 좋아요 하트 누르면 table에 insert
-				// 데이터가 있으면 하트불들어오고 데이터 없으면 불끄기
-				// review_seq랑 user_id랑 비교해서 불끌때 데이터 삭제해주기 
-				// 테이블 외래키 설정
+				response.setContentType("text/html;charset=utf-8");
 				
+				int rv_seq = Integer.parseInt(request.getParameter("rv_seq"));
+				Gson g = new Gson();
+				
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+
+				if(session_chk != null) {  // 로그인 되어있을 경우
+					user_id = (session_chk).getUser_id();
+					
+					String rstxt = null;
+					ArrayList<String> val = new ArrayList<String>();
+					int chk = adoptdao.reviewLikeChk(rv_seq, user_id);// 같은글에 눌러져있으면 delete 없으면 insert
+					int num = 0;
+					if(chk > 0) { 
+						int rs = adoptdao.deleteReviewtLike(rv_seq, user_id);
+						rstxt = "delete";
+						System.out.println("삭제완료 : " + rs);
+					}else {
+						int rs = adoptdao.inserReviewtLike(rv_seq, user_id);
+						rstxt = "insert";						
+						System.out.println("등록완료 : " + rs);
+					}
+					int cnt = adoptdao.getReviewLikeCount(rv_seq);
+					int rsv = adoptdao.updateReviewtLike(rv_seq,cnt);
+					
+					
+					val.add(String.valueOf(cnt));
+					val.add(rstxt);
+					String result = g.toJson(val);
+					response.getWriter().append(result);
+					System.out.println(result);
+				}else {
+					int info = 0;
+					String result = g.toJson(info);
+					response.getWriter().append(result);
+				}
+				
+			}else if(url.contentEquals("/likeStatus.apt")) {
+				response.setContentType("text/html;charset=utf-8");
+				
+				int rv_seq = Integer.parseInt(request.getParameter("rv_seq"));
+				Gson g = new Gson();
+				
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				ArrayList<Integer> val = new ArrayList<Integer>();
+				int cnt = 0;
+				if(session_chk != null) {  // 로그인 되어있을 경우
+					user_id = (session_chk).getUser_id();
+					int chk = adoptdao.reviewLikeChk(rv_seq, user_id);// 눌렀던 글이면 불들어오게
+					if(chk > 0) {cnt = chk;}
+				}
+				int num = adoptdao.getReviewLikeCount(rv_seq);
+				val.add(cnt);
+				val.add(num);
+				String result = g.toJson(val);
+				response.getWriter().append(result);
 				
 			}else if(url.contentEquals("/reviewDelete.apt")) {
 				System.out.println("리뷰 삭제");
@@ -268,7 +321,7 @@ public class AdoptController extends HttpServlet {
 				}
 				int result = adoptdao.deleteReview(review_seq);
 				
-				response.sendRedirect(ctxPath+"/reviewList.apt");	
+				response.sendRedirect(ctxPath+"/reviewList.apt?cpage=1");	
 				
 			}else if(url.contentEquals("/reviewModifyView.apt")) {
 				int review_seq = Integer.parseInt(request.getParameter("review_seq"));
@@ -300,7 +353,6 @@ public class AdoptController extends HttpServlet {
 				response.sendRedirect(ctxPath+"/reviewList.apt");
 				
 			}
-			
 			
 			
 		}catch(Exception e) {
