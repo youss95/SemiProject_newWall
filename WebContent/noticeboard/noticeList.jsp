@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뉴월</title>
 
+<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
 <link rel="stylesheet"

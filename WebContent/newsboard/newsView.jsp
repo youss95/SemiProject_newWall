@@ -5,16 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뉴월</title>
+<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
-<script	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
 <script>
  $(function(){
@@ -83,14 +79,13 @@
 							<%--</c:if> --%>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/newsWrite.necmt"
-						method="post">
+					<form action="${pageContext.request.contextPath}/newsWrite.necmt" method="post">
+					<input type="hidden" value="${loginInfo.user_id}" name="user_id">
 						<div id="nrp-comments" class="nrp-comments">
 							<div class="comments-row">
 								<textarea id="nrp_contents" name="nrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
-								<input type="hidden" value="${newsView.news_seq}"
-									name=parent>
+								<input type="hidden" value="${newsView.news_seq}" name=parent>
 								<button class="writeBtn" type="submit">
 									<i class="far fa-edit"></i>등록
 								</button>
@@ -104,10 +99,10 @@
 									<div class="nrp_writer">${i.nrp_writer}</div>
 									<div class="nrp_contents">${i.nrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.nrp_contents}"></div>
 									<div class="nrp_reg_date">${i.nrp_reg_date}</div>
-									<%-- <c:if test="${i.writer == login.id }"> --%>
+									<c:if test="${i.nrp_writer == loginInfo.user_id }">
 									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
 									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
-									<%-- </c:if> --%>
+									</c:if>
 									<input type="hidden" name="nrp_seq" value="${i.nrp_seq}"> 
 									<input type="hidden" name="nrp_parent" value="${i.nrp_parent}">
 								</div>

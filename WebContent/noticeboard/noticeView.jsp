@@ -5,16 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<title>뉴월</title>
+
+<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/all.min.css">
 
 <script>
  $(function(){
@@ -95,8 +94,8 @@
 							</div>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/nowrite.nocmt"
-						method="post">
+					<form action="${pageContext.request.contextPath}/nowrite.nocmt"	method="post">
+					<input type="hidden" name="writer" value="${loginInfo.user_id}">
 						<div id="ntrp-comments" class="ntrp-comments">
 							<div class="comments-row">
 								<textarea id="ntrp_contents" name="ntrp_contents"
@@ -116,10 +115,10 @@
 									<div class="ntrp_writer">${i.ntrp_writer}</div>
 									<div class="ntrp_contents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.ntrp_contents}"></div>
 									<div class="ntrp_reg_date">${i.ntrp_reg_date}</div>
-									<%-- <c:if test="${i.writer == login.id }"> --%>
+									<c:if test="${i.ntrp_writer == loginInfo.user_id }">
 									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
 									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
-									<%-- </c:if> --%>
+									</c:if>
 									<input type="hidden" name="ntrp_seq" value="${i.ntrp_seq}"> 
 									<input type="hidden" name="ntrp_parent" value="${i.ntrp_parent}">
 								</div>
