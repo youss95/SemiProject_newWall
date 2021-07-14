@@ -197,6 +197,19 @@ public class AnimalsController extends HttpServlet {
 					 
 					 
 				
+			}else if(url.equals("/protectListIndex.lost")) {
+				//Gson g = new Gson();
+				Gson g = new Gson();
+				int page = Integer.parseInt(request.getParameter("page"));
+				int count = PageConfig.PROTECT_COUNT_PER_PAGE;
+				System.out.println(page);
+				List<ProtectBoardDTO> list = AnimalDAO.getList(page,count);
+				String result = g.toJson(list);
+				System.out.println("result" + result);
+				response.setContentType("text/html; charset=UTF-8");
+				
+				response.getWriter().append(result);
+				System.out.println(list.toString());
 			}else if(url.equals("/proList.lost")) {
 				Gson g = new Gson();
 				int page = Integer.parseInt(request.getParameter("page"));

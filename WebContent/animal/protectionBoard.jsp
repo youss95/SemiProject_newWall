@@ -55,7 +55,7 @@
 	<div class="img">
       <div class="content">
       
-       <div>임시보호동물 소개</div>
+       <div>임시보호 동물</div>
 
        
        <div class="gosp">
@@ -70,7 +70,7 @@
 		
 				<section class="protectBoard">
 				
-
+<span style="color:#9d9d9d;font-size:28px;">임시보호 동물</span>
 
 
 				 <div class="cont">

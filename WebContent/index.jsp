@@ -16,10 +16,36 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/swiper-bundle.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.fullPage.js"></script>
+
 <style>
 .protect:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(${pageContext.request.contextPath}/resources/images/main/img_ptbg.jpg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
 .review:after{display:block;content:'';width:100%;height:100%;position:absolute;top:0;left:0;background:url(${pageContext.request.contextPath}/resources/images/main/img03.jpeg) 50% 50% no-repeat;background-size:cover;z-index:-1;opacity:.1;}
 </style>
+<script type="text/javascript">
+
+//유실동물 임시보호 불러오기
+window.onload = function(){
+	$.ajax({
+		url:"${pageContext.request.contextPath}/protectListIndex.lost?page=1",
+		type:"GET",
+		dataType:"json"
+	}).done(function(resp){
+		console.log(resp)
+		 let aniName = document.querySelectorAll(".name");
+		let aniGender = document.querySelectorAll(".pgender");
+		let aniKind = document.querySelectorAll(".pkind");
+		let aniAddr = document.querySelectorAll(".paddr");
+		let aniImg = document.querySelectorAll(".pimg");
+		  for(let i=0; i<aniName.length; i++){
+			  aniName[i].append(resp[i].protectName)
+			  aniGender[i].append(resp[i].protectGender)
+			  aniKind[i].append(resp[i].protectKind)
+			  aniAddr[i].append(resp[i].protectAddr)
+			  aniImg[i].src = "${pageContext.request.contextPath}/upload/lostAnimal/"+resp[i].protectFileRealName1
+		  }
+	})
+}
+</script>
 </head>
 
 <body>
@@ -191,17 +217,18 @@
 			<h2>유실동물 임시보호</h2>
 			<p>보호자들이 임시보호중인 유실동물들 입니다. 도움의 손길을 나눠주세요.</p>
 		</div>
+		<br>
 		<div class="pt_list">
 			<div class="item">
 				<a href="#">
 					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img00.jpeg"></div>
+						<img src="${pageContext.request.contextPath}/resources/images/main/img00.jpeg" class="pimg"></div>
 					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
+						<p class="name"></p>
 						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							<li class="pgender"><span>성별: </span> </li>
+							<li class="pkind"><span>품종 :</span> </li>
+							<li class="paddr"><span>발견장소 :</span> </li>
 						</ul>
 					</div>
 				</a>
@@ -209,13 +236,14 @@
 			<div class="item">
 				<a href="#">
 					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img02.jpeg"></div>
+						<img src="${pageContext.request.contextPath}/resources/images/main/img02.jpeg" class="pimg"></div>
 					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
+						<p class="name"></p>
 						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							<li class="pgender"><span>성별: </span> </li>
+							<li class="pkind"><span>품종 :</span></li>
+							<li class="paddr"><span>발견장소 :</span> </li>
+							
 						</ul>
 					</div>
 				</a>
@@ -223,13 +251,13 @@
 			<div class="item">
 				<a href="#">
 					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img03.jpeg"></div>
+						<img src="${pageContext.request.contextPath}/resources/images/main/img03.jpeg" class="pimg"></div>
 					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
+						<p class="name"></p>
 						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							<li class="pgender"><span>성별: </span> </li>
+							<li class="pkind"><span>품종 :</span> </li>
+							<li class="paddr"><span>발견장소 :</span> </li>
 						</ul>
 					</div>
 				</a>
@@ -237,45 +265,19 @@
 			<div class="item">
 				<a href="#">
 					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img04.jpeg"></div>
+						<img src="${pageContext.request.contextPath}/resources/images/main/img04.jpeg" class="pimg"></div>
 					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
+						<p class="name"></p>
 						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
+							<li class="pgender"><span>성별: </span> </li>
+							<li class="pkind"><span>품종 :</span> </li>
+							<li class="paddr"><span>발견장소 :</span> </li>
 						</ul>
 					</div>
 				</a>
 			</div> 
-			<div class="item">
-				<a href="#">
-					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img03.jpeg"></div>
-					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
-						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
-						</ul>
-					</div>
-				</a>
-			</div>
-			<div class="item">
-				<a href="#">
-					<div class="img_wrap">
-						<img src="${pageContext.request.contextPath}/resources/images/main/img04.jpeg"></div>
-					<div class="txt">
-						<p class="name">동물이름이 들어갑니다.</p>
-						<ul class="info">
-							<li>발견날짜 : 2020-01-01</li>
-							<li>발견장소 : 서울시 종로구 ....</li>
-							<li>내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.내용이들어갑니다.</li>
-						</ul>
-					</div>
-				</a>
-			</div> 
+			
+			
 		</div>
 	</div>
 	<div class="section adopt" id="section4">
@@ -400,6 +402,7 @@
 <%@ include file="layout/jsp/modal.jsp"%>
 <script>
 	$(function(){
+		
 		$('#fullpage').fullpage({
 			navigation: true,
 			navigationPosition: 'right',
