@@ -91,10 +91,9 @@
 						
 							</div>
 						</div>
-					</div>
 					<form action="${pageContext.request.contextPath}/noadminwrite.nocmt"
 						method="post">
-						<div id="ntrp-comments" class="ntrp-comments" style="margin-left:20px;">
+						<div id="ntrp-comments" class="ntrp-comments" style="margin-left:100px; margin-top:50px;">
 							<div class="comments-row">
 								<textarea id="ntrp_contents" name="ntrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
@@ -106,7 +105,7 @@
 							</div>
 						</div>
 					</form>
-					<form id="replyFrm" class="replyFrm">
+					<form id="replyFrm" class="replyFrm" style="margin-left:50px;" >
 						<div class="reply-container">
 							<c:forEach var="i" items="${nocmtlist}">
 								<div class="reply">
@@ -124,7 +123,6 @@
 						</div>
 					</form>
 				</section>
-				
 			</div>
 		</div>
 	</div>

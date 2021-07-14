@@ -9,18 +9,20 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>관리자페이지</title>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/summernote-bs4.min.js"></script>
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/all.min.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-bs4.min.css">
+	
 <script>
 	$(function(){	
 		$('#summernote').summernote({

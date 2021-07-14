@@ -113,6 +113,7 @@ public class AdminNewsController extends HttpServlet {
 			
 			String photo = multi.getFilesystemName("news_photo");//포토
 			
+			
 			String oriName = multi.getOriginalFileName("news_photo");
 			oriName = Normalizer.normalize(oriName, Form.NFC);
 			String sysName = multi.getFilesystemName("news_photo");
@@ -140,7 +141,8 @@ public class AdminNewsController extends HttpServlet {
 			MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
 
 			String sysName = multi.getFilesystemName("file");
-			//				sysName = URLEncoder.encode(sysName,"euc-kr");
+			sysName = Normalizer.normalize(sysName, Form.NFC);
+			//				sysName = URLEncoder.encode(sysName,"euc-kr");;
 
 			String returnPath = "/upload/news/" + sysName;
 
@@ -171,7 +173,7 @@ public class AdminNewsController extends HttpServlet {
 			
 			nedao.delete(seq);
 			
-			response.sendRedirect("newsInfo.sumAdm?cpage=1");
+			response.sendRedirect("newsInfo.newsAdm?cpage=1");
 		
 		}else if(url.contentEquals("/newsModify.newsAdm")) {
 			//뉴스값 받아서 보내기
@@ -218,12 +220,19 @@ public class AdminNewsController extends HttpServlet {
 											
 			String photo;
 			photo = multi.getFilesystemName("news_photo");//포토
+			photo = Normalizer.normalize(photo, Form.NFC);
+			
+			System.out.println(photo);
 			
 //			String originFile = multi.getFilesystemName("originFile");
-
+			
 			String oriName = multi.getOriginalFileName("news_photo");
+			oriName = Normalizer.normalize(oriName, Form.NFC);
 			String sysName = multi.getFilesystemName("news_photo");
-
+			sysName = Normalizer.normalize(sysName, Form.NFC);
+			
+			System.out.println(oriName);
+			System.out.println(sysName);
 			
 			if(oriName != null) {
 				fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));

@@ -9,8 +9,10 @@
 <jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/fontawesome.min.css">
 
 <script>
  $(function(){
