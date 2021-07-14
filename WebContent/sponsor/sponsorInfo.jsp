@@ -7,22 +7,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
@@ -30,58 +22,47 @@
 * {
 	box-sizing: border-box;
 }
-
 .sp_if .sp_title {
 	font-size: 30px;
 	font-weight: bold;
 	/* margin-top: 60px; */
 }
-
 .sp_if .sp_body {
 	margin-top: 100px;
 	overflow: hidden;
 	/* 이거해줘야 각각 플루트 래프트 들어가도 엉키지 않음  */
 }
-
 .sp_if .sp_company_title {
 	font-size: 23px;
 	font-weight: 600;
 }
-
 .sp_if .sp_company_bg {
 	background-color: #D6E6F2;
 	height: 100px;
 	line-height: 50px;
 	padding-left: 1%;
 }
-
 .sp_if .sp_company .com_img2 {
 	display: none;
 }
-
 .sp_if .sp_company:hover .com_img2 {
 	display: block;
 	transition-duration: 1s;
 }
-
 .sp_if .sp_company:hover .com_img1 {
 	display: none;
 	transition-duration: 1s;
 	/* 바꾸긴했는데 천천히는 안먹음 */
 }
-
 .sp_if .sp_company:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_company img {
 	opacity: 0.9;
 }
-
 .sp_if .sp_company {
 	cursor: pointer;
 }
-
 .sp_if .sp_info02_con {
 	margin-top: 100px;
 	/* margin: auto; */
@@ -93,38 +74,31 @@
 	width: 100%;
 	margin-bottom: 150px;
 }
-
 .sp_if .sp_info02_pic img {
 	width: 100px;
 	align-content: center;
 }
-
 .sp_if .sp_info02_pic h4 {
 	width: 300px;
 }
-
 .sp_if .sp_info02_pic {
 	float: left;
 	margin: auto;
 }
-
 .sp_if .sp_info02_pic * {
 	text-align: center;
 }
-
 .sp_info02_pic h3 {
 	font-weight: bold;
 	margin-bottom: 10px;
 }
-
 .sp_if .sp_info00_pic {
 	float: left;
+    margin: 1%;
 }
-
 .sp_if .sp_info00_pic h3 {
 	width: 400px;
 }
-
 .sp_if .sp_info00_con {
 	float: left;
 	width: 100%;
@@ -134,27 +108,22 @@
 	margin-left: 13%;
 	/* margin-right:15%; */
 }
-
 .sp_if .sp_info01_con {
 	float: left;
 	margin-top: 100px;
 	width: 100%;
 }
-
 .sp_if .sp_info00_pic2 {
 	margin-top: 25px;
 	margin-bottom: 25px;
 }
-
 .sp_if .sp_info01 {
 	line-height: 25px;
 	/* 이거 밑에 맨트 가운데로 하고싶어서 눈대중으로 한건데 나중에 방법 찾기 */
 	margin-left: 20%;
 	margin-right: 15%;
-
 	/* margin-top: 100px; */
 }
-
 .sp_if .sp_one_one {
 	width: 50%;
 	padding-right: 0.5%;
@@ -162,11 +131,9 @@
 	float: left;
 	cursor: pointer;
 }
-
 .sp_if .sp_one_one .sp_img_con {
 	overflow: hidden;
 }
-
 .sp_if .sp_guardi {
 	width: 50%;
 	padding-left: 0.5%;
@@ -174,30 +141,24 @@
 	float: left;
 	cursor: pointer;
 }
-
 .sp_if .sp_guardi .sp_img_con {
 	overflow: hidden;
 }
-
 .sp_if .sp_one_one:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_one_one:hover .com_img1 {
 	transform: scale(1.1);
 	transition-duration: 1s;
 }
-
 .sp_if .sp_guardi:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_guardi:hover .com_img1 {
 	transform: scale(1.1);
 	transition-duration: 1s;
 }
 </style>
-
 </head>
 <body>
 	<div class="wrap">
