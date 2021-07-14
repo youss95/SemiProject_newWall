@@ -94,7 +94,7 @@
 					</div>
 					<form action="${pageContext.request.contextPath}/noadminwrite.nocmt"
 						method="post">
-						<div id="ntrp-comments" class="ntrp-comments">
+						<div id="ntrp-comments" class="ntrp-comments" style="margin-left:20px;">
 							<div class="comments-row">
 								<textarea id="ntrp_contents" name="ntrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>

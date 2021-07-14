@@ -59,7 +59,7 @@
 
        
        <div class="gosp">
-       <a href=""><span >후원하러 가기 >></span></a>
+       <a href="${pageContext.request.contextPath}/sponsor.sp"><span >후원하러 가기 >></span></a>
        </div>
       </div>
       <div class="img-cover"></div>

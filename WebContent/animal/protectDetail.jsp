@@ -14,10 +14,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animal/protectDetail.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(function(){
         $("#deleteDetail").on("click",function(){
@@ -80,11 +84,14 @@
 				<div class="">
 					<div class="replytitle">댓글</div>
 					<div class="panel-body">
+					<div id="replyArea" style="display:flex;justify-content:space-between">
 						<textarea id="content" id="reply__write__form" class="txtareaform"
 							placeholder="write a comment..." rows="2"></textarea>
+							<button id="btnWrite" class="btn_m btn_primary" ><i class="fas fa-reply"></i></button>
+							</div>
 						<br>
 						<button id="btnSub" class="btn_m btn_primary">댓글숨기기</button>
-						<button id="btnWrite" class="btn_m btn_primary">댓글쓰기</button>
+						
 
 
 
@@ -200,7 +207,12 @@
 			data:data,
 			dataType:"json"		
 		}).done(function(result){
-			alert("댓글 작성 완료!")
+			Swal.fire({
+				  icon: 'success',
+				  title: '댓글작성 완료',
+			
+				
+				})
 			addReply(result)
 			$('#content').val('');		
 		});
@@ -214,16 +226,51 @@
 			</c:if>
 		}
 	function deleteReply(id){
+		const swalWithBootstrapButtons = Swal.mixin({
+			  customClass: {
+			    confirmButton: 'btn btn-success',
+			    cancelButton: 'btn btn-danger'
+			  },
+			  buttonsStyling: false
+			})
+
+			swalWithBootstrapButtons.fire({
+			  title: '삭제를 하시겠습니까?',
+			  text: "다시 되돌릴 수 없습니다.",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: '삭제',
+			  cancelButtonText: '취소',
+			  reverseButtons: true
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $.ajax({
+						type :"post",
+						url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
+						dataType : "json"
+					}).done(function(resp){ 
+						
+						
+						$("#reply-"+id).remove();
+					})
+			    swalWithBootstrapButtons.fire(
+			      '삭제 성공',
+			      '댓글이 삭제되었습니다.',
+			      'success'
+			    )
+			    
+			  } else if (
+			    /* Read more about handling dismissals below */
+			    result.dismiss === Swal.DismissReason.cancel
+			  ) {
+			    swalWithBootstrapButtons.fire(
+			      '삭제가 취소되었습니다.',
+			      '',
+			      'error'
+			    )
+			  }
+			})
 		
-		$.ajax({
-			type :"post",
-			url :"${pageContext.request.contextPath}/replyDel.lost?replyNo="+id,
-			dataType : "json"
-		}).done(function(resp){ 
-			
-			
-			$("#reply-"+id).remove();
-		})
 	}
 	 	
 	</script>

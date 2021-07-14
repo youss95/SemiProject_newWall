@@ -38,9 +38,16 @@
 						</ul>
 					</li>
 					<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원</a></li>
-					<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a></li>
 					<li class="has">
-						<a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스레터</a>
+						<a href="#">실종/보호</a>
+						<ul class="submenu">
+							<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종</a></li>
+							<li><a href="${pageContext.request.contextPath}/protectList.lost?page=1">임시보호</a></li>
+						</ul>
+					</li>
+					<%-- <li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a></li> --%>
+					<li class="has">
+						<a href="#">뉴스레터</a>
 						<ul class="submenu">
 							<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스</a></li>
 							<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>

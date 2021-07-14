@@ -58,10 +58,18 @@ public class MemberController extends HttpServlet {
 				String postCode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
+				
+				request.setAttribute("user_id", user_id);
+				request.setAttribute("name", name);
 
 				int result = dao.insert(new MemberDTO(user_id,user_password,email,name,birthDay,contact,'N',postCode,address1,address2));
-				// 축하페이지가 따로 있다면 : response.sendRedirect("축하페이지");
-				response.sendRedirect("index.jsp");
+				// 축하페이지가 따로 있다면 : response.sendRedirect("축하페이지"); 이프문 
+				if(result>0) {
+					request.getRequestDispatcher("member/joinSuccess.jsp").forward(request, response);	
+				}else {
+					//회원가입 실패시..
+					//response.sendRedirect("index.jsp");
+				}
 			}else if(url.contentEquals("/myPage.mem")) {
 				//----------------------------------------------------------------------------------------- 마이페이지 처리
 				//마이페이지 진입 시 마다 가장 최신 DB정보를 세션에 갱신
@@ -100,7 +108,7 @@ public class MemberController extends HttpServlet {
 				request.getSession().invalidate();
 				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/findAccount.mem")){
-				response.sendRedirect("member/findAccount.jsp");
+				response.sendRedirect("member/findIAccount.jsp");
 			}else if(url.contentEquals("/checkPw.mem")) {
 				String id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
 				String pw = EncryptUtils.getSHA512(request.getParameter("pw"));
@@ -117,7 +125,7 @@ public class MemberController extends HttpServlet {
 			}else if(url.contentEquals("/mailAuthReq.mem")) {
 				String email = request.getParameter("email");
 				String code = MailUtils.generateCertChar();
-				MailUtils.sendMail(email, code);
+				MailUtils.sendMail(email, "[뉴월] 이메일 인증번호 안내","이메일 인증 코드는<br>"+code+"<br>입니다. 가입페이지로 돌아가 입력해주세요.");
 				System.out.println(email + " : " + code);
 				request.getSession().setAttribute("mailAuthCode", code);
 				new Thread() {
@@ -138,6 +146,26 @@ public class MemberController extends HttpServlet {
 					response.getWriter().append("incorrect");
 				}else {
 					response.getWriter().append("expired");
+				}
+			}else if(url.contentEquals("/findID.mem")) {
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				
+				String id = dao.findIdByNameEmail(name,email);
+				response.getWriter().append(id);
+			}else if(url.contentEquals("/findPW.mem")) {
+				String id = request.getParameter("id");
+				String email = request.getParameter("email");
+				
+				boolean result = dao.isIdEmailAccepted(id,email);
+				String authCode = MailUtils.generateCertChar();
+				if(result) {
+					MailUtils.sendMail(email, "[뉴월] 임시 패스워드 발급", "발급된 임시 패스워드는 <br>" + authCode + "<br>입니다. 로그인 후 꼭 패스워드를 변경해 주세요.");
+					String tempPW = EncryptUtils.getSHA512(authCode);
+					dao.resetPW(id, tempPW);
+					response.getWriter().append("confirm");
+				}else {
+					response.getWriter().append("incorrect");
 				}
 			}
 		}catch(Exception e) {

@@ -3,12 +3,12 @@
 	50%{
 	opacity:0;
 	}
-}
+} 
 
 .lostSection{height:800px;}
 #countTitle{font-size:26px; font-weight:500;padding-bottom:25px;}
 #countss{float:right; padding:15px;}
-.mari{background-color:black; color:white; padding:1px 15px 1px 15px; animation: blink-effect 1s step-end infinite;animation-iteration-count:3;}
+.mari{background-color:black; color:white; padding:1px 15px 1px 15px; /* animation: blink-effect 1s step-end infinite;animation-iteration-count:3; */}
 #rightMari{float:right;}
 .counts{padding:15px;}
 #mainTitle{font-size:40px;color:#254E7C}
