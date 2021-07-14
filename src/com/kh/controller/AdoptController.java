@@ -238,11 +238,6 @@ public class AdoptController extends HttpServlet {
 				
 			}else if(url.contentEquals("/reviewLike.apt")) {
 
-				// review_seq 랑 user_id랑 count해서 좋아요 업데이트.
-				// 좋아요 하트 누르면 table에 insert
-				// 데이터가 있으면 하트불들어오고 데이터 없으면 불끄기
-				// review_seq랑 user_id랑 비교해서 불끌때 데이터 삭제해주기 
-				// 테이블 외래키 설정
 				response.setContentType("text/html;charset=utf-8");
 				
 				int rv_seq = Integer.parseInt(request.getParameter("rv_seq"));
@@ -359,7 +354,6 @@ public class AdoptController extends HttpServlet {
 				response.sendRedirect(ctxPath+"/reviewList.apt");
 				
 			}
-			
 			
 			
 		}catch(Exception e) {

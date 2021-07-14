@@ -986,11 +986,4 @@ public class AdoptionDAO {
 		}
 	}
 	
-	
-//	해당글 좋아요 갯수
-//	select count(*) from review_like where review_seq = 3;
-	
-// 세션에 있는 아이디가 좋아요를 눌렀는지 체크
-//select user_id from review_like where review_seq=3;
-	
 }

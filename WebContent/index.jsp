@@ -278,9 +278,30 @@
 		</div>
 		<div class="list">
 			<a href="#">
-				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img00.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				<div class="img_bg" style="background-size:cover;"></div>
 			</a>
 			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<%-- <a href="#">
 				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img01.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
 			</a>
 			<a href="#">
@@ -300,7 +321,7 @@
 			</a>
 			<a href="#">
 				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img07.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
-			</a>
+			</a> --%>
 		</div>
 	</div>
 	<div class="section review" id="section5">
@@ -425,6 +446,20 @@
 			$(this).children('.submenu').slideToggle();
 			$(this).siblings().children('.submenu').slideUp();
 		});
+		
+		// animal info
+		$.ajax({
+				url: "${pageContext.request.contextPath}/mainAnimals.main",
+				type: "get",
+				dataType: "json",
+			}).done(function(resp){
+				let lt = $(".adopt .list>a").length;
+				console.log(lt);
+				for(let i=0;i<lt;i++){
+					$(".adopt .list>a").eq(i).attr("href", "${pageContext.request.contextPath}/adoptDetail.apt?code_seq=" + resp[i].code_seq);
+ 					$(".adopt .list>a").eq(i).children('.img_bg').attr("style","background:url(./upload/animalInfo/" + resp[i].an_photo+ ") 50% 50% no-repeat;background-size:cover;");
+				}
+			})
 	})
 </script>
 </body>
