@@ -110,6 +110,33 @@ public class AnimalDAO {
 		return -1;
 	}
 	
+	public int dogCount() throws Exception {
+		String sql ="select count(*) from lost_animal where lost_category = 'dog'";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+		
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					int result = rs.getInt(1);
+					return result;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public int catCount() throws Exception {
+		String sql ="select count(*) from lost_animal where lost_category = 'cat'";
+		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					int result = rs.getInt(1);
+					return result;
+				}
+			}
+		}
+		return -1;
+	}
+	
 	public int protectWrite(ProtectionDTO dto,String protectWriter) throws Exception {
 		String sql ="insert into protect_animal values (protect_seq.nextval,?,?,?,?,?,?,?,?,0,sysdate,?)";
 		try(Connection con = Db.getCon(); PreparedStatement pstmt = con.prepareStatement(sql);){

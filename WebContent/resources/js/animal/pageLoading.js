@@ -4,7 +4,10 @@ function getContextPath() {
 	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 };
 var ctx = getContextPath();
-
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+console.log(ctx)
 	function listLoad(){
 		let loading = $('#loading');
 		$.ajax({
@@ -39,6 +42,7 @@ item+=`/protectDetail.lost?protectNo=${res.protectNo}&page=1>자세히보기<i c
                         </div>
         </div>`
 		loading.append(item);
+		sleep(1000);
 		})
 		}).fail(error=>{
 			console.log(error)
@@ -55,10 +59,11 @@ item+=`/protectDetail.lost?protectNo=${res.protectNo}&page=1>자세히보기<i c
 		let checkNum = $(window).scrollTop()-($(document).height()-$(window).height() )
 		console.log(checkNum)
 		if(checkNum < 1 && checkNum > -1){
+			
 			page++;
 			
  			 listLoad();
-	
+		
 			
 		}
 	})

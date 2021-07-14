@@ -43,14 +43,14 @@ public class NewsCommenstController extends HttpServlet {
 			NewsCommentsDAO dao = NewsCommentsDAO.getInstance();
 			
 			if (url.contentEquals("/newsWrite.necmt")) {
-				String writer = "admin";
+				System.out.println(request.getParameter("user_id"));
+				String writer = request.getParameter("user_id");
+				System.out.println(writer);
 
 				String comments = request.getParameter("nrp_contents");
-				comments = XSSFilter(comments);			
-				System.out.println(comments);
+				comments = XSSFilter(comments);		
 				
 				String parent = request.getParameter("parent");
-				System.out.println(parent);
 								
 				dto = new NewsCommentsDTO(0,writer,comments,null,parent);
 				dao.insert(dto);
@@ -61,14 +61,13 @@ public class NewsCommenstController extends HttpServlet {
 				response.sendRedirect("newsView.news?news_seq="+parent);
 				
 			}else if (url.contentEquals("/newsAdminWrite.necmt")) {
-				String writer = "admin";
+				String writer = request.getParameter("writer");
+				System.out.println(writer);
 
 				String comments = request.getParameter("nrp_contents");
-				comments = XSSFilter(comments);			
-				System.out.println(comments);
+				comments = XSSFilter(comments);		
 				
 				String parent = request.getParameter("parent");
-				System.out.println(parent);
 								
 				dto = new NewsCommentsDTO(0,writer,comments,null,parent);
 				dao.insert(dto);

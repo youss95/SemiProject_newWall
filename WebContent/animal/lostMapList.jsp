@@ -13,8 +13,42 @@
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <style>
+  body{
+  background-color:#f3f7f9}
   .card{float:left;margin:10px;}
-  .wrap{overflow:hidden;margin-left:28px;}
+ .lostList li,ul {
+        list-style: none;
+        padding: 0;
+      
+      }
+      .ucontainer {
+    
+        display: flex;
+        gap: 1em;
+        min-height: 100vh;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .wrapper {
+    
+        overflow: hidden;
+        width: 300px;
+        height:500px;
+        margin-left:25px;
+      }
+      .lostList{
+      margin:0 auto;
+      }
+       #body {
+        height: 100%;
+        width: 1024px;
+        margin: 0 auto;
+      }
+      .ucontainer li{
+      color:#0075d8;
+     font-weight: 600;
+     font-size:20px;
+      }
   .progress{height:40px; border-radius:30px;}
   </style>
 </head>
@@ -23,43 +57,40 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostList">
+				<div id="body">
 				<div class="wrap">
-				<h2 style="font-size:29px;">실종 동물</h2>
-				<c:forEach var="maplist" items="${mapList}">
-				<div style="width:500px;" class="card">
-				
-  <h2 class="card-header" style="font-size:20px;"><span style="padding:6px;background-color:orange;border-radius:5px;">실종</span>&nbsp; ${maplist.lostName}
-  <span style="float:right;">
-  <c:if test="${sessionScope.loginInfo != null}">
+				<h2 style="font-size:29px;color:#9d9d9d">실종 동물</h2><br><br>
+				 <ul class="ucontainer">
+				 <c:forEach var="maplist" items="${mapList}">
+				   <li class="wrapper"><img style="width:100%;height:200px;" src="${pageContext.request.contextPath}/upload/lostAnimal/${maplist.fileRealName}" /><p>
+				   <c:if test="${sessionScope.loginInfo != null}">
   	<a href="${pageContext.request.contextPath}/lostDelete.lost?lostNo=${maplist.lostNo}"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;&nbsp;
   	<a href="${pageContext.request.contextPath}/lostUpdateForm.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
   	</c:if>
-  </span>
-  </h2>
-  <div class="card-body">
-    <span style="font-size:15px;" class="card-title">
-    <c:if test="${maplist.lostGender == 'F' }">
+  	 <c:if test="${maplist.lostGender == 'F' }">
     암컷
     </c:if>
      <c:if test="${maplist.lostGender == 'M' }">
    수컷
     </c:if>
    /${maplist.lostAge}살/${maplist.lostKind}/
-  <c:if test="${maplist.lostCategory == 'dog' }">
+   <c:if test="${maplist.lostCategory == 'dog' }">
     강아지
     </c:if>
     <c:if test="${maplist.lostCategory == 'cat' }">
     고양이
     </c:if> 
-   </span>
-   <div>장소: ${maplist.lostAddr}</div>
+  	</p>
+  	<div>장소: ${maplist.lostAddr}</div>
    <div>아이디: ${maplist.lostAddr}</div>
-    <p class="card-text">기타내용:${maplist.lostContent}</p>
-   <img style="width:150px;height:150px;" src="${pageContext.request.contextPath}/upload/lostAnimal/${maplist.fileRealName}">
-  </div>
-</div>
+    <div class="card-text">기타내용:${maplist.lostContent}</div>
+  	</li>
+				   </c:forEach>
+				 </ul>
+				</div>
+				
 
-</c:forEach>
+
 </div>
 
 
