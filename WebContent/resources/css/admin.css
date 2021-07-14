@@ -31,7 +31,8 @@ em.t_red{font-weight: 700 !important;}
 .t_link{color: #254E7C !important;}
 .t_link:hover{text-decoration: underline;}
 .desc_txt{display:inline-block;margin-left:15px;font-size:14px;color:#888dac;line-height:21px;vertical-align: middle;}
-
+.shadow-sm{box-shadow :0 .125rem .25rem rgba(0,0,0,.075)!important}
+.rounded {border-radius: .25rem!important;}
 /* 색상별 버튼 */
 /* btn */
 .btn_m{display: inline-block;position: relative;min-height: 40px; padding: 11px 30px;text-align: center;cursor:pointer;outline:none;vertical-align: middle;border-radius: 5px;transition: all 0.1s ease-out;}
