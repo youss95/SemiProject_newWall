@@ -19,11 +19,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 <style>
-section>.title>h2:after {
-	background-color: #254E7C;
-	opacity: .4;
-}
-
 * {
 	box-sizing: border-box;
 }
@@ -33,7 +28,9 @@ section>.title>h2:after {
 	/* margin-top: 60px; */
 }
 .sp_if .sp_body {
+	margin-top: 100px;
 	overflow: hidden;
+	/* 이거해줘야 각각 플루트 래프트 들어가도 엉키지 않음  */
 }
 .sp_if .sp_company_title {
 	font-size: 23px;
@@ -41,28 +38,19 @@ section>.title>h2:after {
 }
 .sp_if .sp_company_bg {
 	background-color: #D6E6F2;
+	height: 100px;
 	line-height: 50px;
-	padding:30px;
-	transition-duration: .3s;
-}
-
-.sp_if .sp_company .img_wrap{
-	position:relative;
-	height:450px;
-}
-.sp_if .sp_company .img_wrap>img{
-	position:absolute;top:0;left:0;
+	padding-left: 1%;
 }
 .sp_if .sp_company .com_img2 {
-	
-	opacity:0;
-	transition-duration: 1s;
+	display: none;
 }
 .sp_if .sp_company:hover .com_img2 {
-	opacity:1;
+	display: block;
+	transition-duration: 1s;
 }
 .sp_if .sp_company:hover .com_img1 {
-	opacity:0;
+	display: none;
 	transition-duration: 1s;
 	/* 바꾸긴했는데 천천히는 안먹음 */
 }
@@ -76,10 +64,15 @@ section>.title>h2:after {
 	cursor: pointer;
 }
 .sp_if .sp_info02_con {
-	overflow:hidden;
+	margin-top: 100px;
+	/* margin: auto; */
+	/* 이거 밑에 맨트 가운데로 하고싶어서 눈대중으로 한건데 나중에 방법 찾기 */
+	margin-left: 9%;
+	margin-right: 9%;
 	text-align: center;
-	width:900px;
-	margin:100px auto 0;
+	float: left;
+	width: 100%;
+	margin-bottom: 150px;
 }
 .sp_if .sp_info02_pic img {
 	width: 100px;
@@ -87,11 +80,6 @@ section>.title>h2:after {
 }
 .sp_if .sp_info02_pic h4 {
 	width: 300px;
-    font-size: 16px;
-    font-weight: 300;
-    padding: 20px;
-    line-height: 1.6;
-    word-break: keep-all;
 }
 .sp_if .sp_info02_pic {
 	float: left;
@@ -102,37 +90,39 @@ section>.title>h2:after {
 }
 .sp_info02_pic h3 {
 	font-weight: bold;
-	margin: 20px 0 10px;
-	font-size:18px;
+	margin-bottom: 10px;
 }
 .sp_if .sp_info00_pic {
-	float:left;
-	width:50%;
-	padding:100px 50px;
+	float: left;
+    margin: 1%;
 }
 .sp_if .sp_info00_pic h3 {
-	margin-top: 40px;
-	font-size:24px;
-	font-weight:300;
-	line-height:1.5;
-	word-break:keep-all;
+	width: 400px;
 }
 .sp_if .sp_info00_con {
+	float: left;
 	width: 100%;
 	text-align: center;
-	overflow:hidden
+	margin-top: 100px;
+	/* 이거 밑에 맨트 가운데로 하고싶어서 눈대중으로 한건데 나중에 방법 찾기 */
+	margin-left: 13%;
+	/* margin-right:15%; */
 }
 .sp_if .sp_info01_con {
+	float: left;
+	margin-top: 100px;
 	width: 100%;
-	text-align:center;
 }
 .sp_if .sp_info00_pic2 {
 	margin-top: 25px;
+	margin-bottom: 25px;
 }
 .sp_if .sp_info01 {
 	line-height: 25px;
-	text-align:left;
-	display:inline-block;
+	/* 이거 밑에 맨트 가운데로 하고싶어서 눈대중으로 한건데 나중에 방법 찾기 */
+	margin-left: 20%;
+	margin-right: 15%;
+	/* margin-top: 100px; */
 }
 .sp_if .sp_one_one {
 	width: 50%;
@@ -176,23 +166,26 @@ section>.title>h2:after {
 		<div class="container">
 			<div class="contents">
 				<section class="sp_if">
-					<div class="title">
-						<h2>후원신청</h2>
-						<p>믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</p>
-					</div>
+					<!-- 하이 여기는 서브입니다 -->
 					<div class="sp_con">
+						<div class="sp_title_con">
+							<h1 class="sp_title">후원하기</h1>
+							<h2 class="sp_subtitle">믿을 수 있는 NEW-WAL과 함께 새로운 세상을 맞이해주세요</h2>
+						</div>
 						<div class="sp_body">
 
 							<div class="sp_company" id="sp_company">
 								<div class="sp_company_bg">
+									<!-- 기능 만들고 호버하면 설명뒤 색 진해지고 사진 바뀌는 효과 넣기 -->
 									<h2 class="sp_company_title">비영리 단체 NEW-WAL에게 후원</h2>
 									<h3 class="sp_company_sub">동물과 사람이 함께 행복한 삶을 위해 세상을 바꾸는
 										노력을 함께 해주세요</h3>
 								</div>
-								<div class="img_wrap">
-									<img class="com_img1" src="../resources/images/sp_img/sp_company_01_1900_700.jpg" alt=""> 
-									<img class="com_img2" src="../resources/images/sp_img/sp_company02_1900_700.png" alt="">
-								</div>
+								<img class="com_img1"
+									src="../resources/images/sp_img/sp_company_01_1900_700.jpg"
+									alt=""> <img class="com_img2"
+									src="../resources/images/sp_img/sp_company02_1900_700.png"
+									alt="">
 							</div>
 							<div>
 								<div class="sp_one_one">
@@ -230,7 +223,8 @@ section>.title>h2:after {
 								<div class="sp_info00_pic">
 									<img class="sp_info00_pic2"
 										src="../resources/images/sp_img/sp_pr02.png" alt="">
-									<h3>동물단체 중 유일하게 비영리단체 투명성 평가에서 만점을 받았습니다.<br>(한국가이드스타 2015, 2017, 2020)</h3>
+									<h3>동물단체 중 유일하게 비영리단체 투명성 평가에서 만점을 받았습니다. (한국가이드스타 2015,
+										2017, 2020)</h3>
 								</div>
 
 							</div>
