@@ -29,10 +29,15 @@ margin-top:100px;
 				<section class="lostSection">
 				<div id="countTitle">NewWal's 유기동물 통계</div>
 				<div id="lost">
-				<div class="counts" style="display:inline-block;">Today</div><div id="countss" style="display:inline-block;">Total</div>
+				<div class="counts" style="display:inline-block;">Today</div>
+				<div class="counts" style="display:inline-block;margin-left:170px;"><i class="fas fa-dog"></i></div>
+				<div class="counts" style="display:inline-block;margin-left:100px;"><i class="fas fa-cat"></i></div>
+				<div id="countss" style="display:inline-block;">Total</div>
 				<br>
-				<div style="display:inline-block;"><span class="mari">${counts.todayCount}</span>&nbsp;마리</div>
-				<div id="rightMari" style="display:inline-block;"><span class="mari" >${counts.totalCount}</span>&nbsp;마리</div>
+				<div style="display:inline-block;"><span class="mari" data-rate="${counts.todayCount}">0</span>&nbsp;마리</div>
+				<div id="dogMari" style="display:inline-block; margin-left:180px;"><span class="mari" data-rate="${counts.dogCount}">0</span>&nbsp;마리</div>
+				<div id="catMari" style="display:inline-block; margin-left:70px;"><span class="mari" data-rate="${counts.catCount}">0</span>&nbsp;마리</div>
+				<div id="rightMari" style="display:inline-block;"><span class="mari" data-rate="${counts.totalCount}" >${counts.totalCount}</span>&nbsp;마리</div>
 				</div>
 				<div class="map_wrap">
 				<div id="map"
@@ -70,6 +75,38 @@ margin-top:100px;
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
 	
 	<script>
+	 let numAni = document.querySelectorAll(".mari");
+
+     function changeNum(index) {
+       let num = 0;
+       let targetNum = numAni[index].getAttribute("data-rate");
+       let duration = 200;
+
+       let timer = setInterval(function () {
+    	        if(targetNum > 5){
+        	duration = 50;
+        }
+         if (num == targetNum || targetNum == 0) {
+        	
+           clearInterval(timer);
+           if(numAni[3].getAttribute("data-rate") == num){
+        	   for(let i =0; i<numAni.length; i++){
+        		   numAni[i].style.animation =" blink-effect 1s step-end 3";
+               }
+        	 
+           }
+           
+         }else{
+        	 ++num;
+             numAni[index].innerHTML = num ;
+         }
+       }, duration);
+     }
+     for (let i = 0; i < numAni.length; i++) {
+       changeNum(i);
+     }
+	
+	
 function writeAdd(){
 
 }

@@ -114,10 +114,15 @@ public class AnimalsController extends HttpServlet {
 				AnimalMapCountDTO dto = new AnimalMapCountDTO();
 				int today = dao.todayCount();
 				int total = dao.totalCount();
+				int dogCount = dao.dogCount();
+				int catCount = dao.catCount();
 				System.out.println("오늘" +today);
 				System.out.println("총" +total);
+				System.out.println("개"+dogCount);
 				dto.setTodayCount(today);
 				dto.setTotalCount(total);
+				dto.setDogCount(dogCount);
+				dto.setCatCount(catCount);
 				request.setAttribute("counts", dto);
 				if(list != null) {
 					request.setAttribute("mapList", list);
