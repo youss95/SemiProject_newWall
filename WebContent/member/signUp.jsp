@@ -382,7 +382,6 @@
 		})
 		
 		$("#mailAuth").on("click",function(){
-			$("#mailAuth").attr("disabled","disabled");
 			let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 			let email = $("#email").val() + "@" + $("#email2").val();
 
@@ -390,10 +389,11 @@
 				alert("이메일 형식을 다시 확인해주세요.");
 				return false;
 			}
+			$("#mailAuth").attr("disabled","disabled");
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/mailAuthReq.mem",
-				data:{email:$("#email").val()+"@"+$("#email2").val()}
+				data:{email:email}
 			}).done(function(resp){
 				
 				let authDiv = $("<div>");

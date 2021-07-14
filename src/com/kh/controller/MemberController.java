@@ -147,6 +147,19 @@ public class MemberController extends HttpServlet {
 				}else {
 					response.getWriter().append("expired");
 				}
+			}else if(url.contentEquals("/mailReAuthProc.mem")) {
+				String id = ((MemberDTO)session.getAttribute("loginInfo")).getUser_id();
+				String code = request.getParameter("code");
+				String email = request.getParameter("email");
+				String authCode = (String)request.getSession().getAttribute("mailAuthCode");
+				if(authCode.contentEquals(code)) {
+					response.getWriter().append("authorized");
+					dao.changeEmail(id,email);
+				}else if(!authCode.contentEquals(code)) {
+					response.getWriter().append("incorrect");
+				}else {
+					response.getWriter().append("expired");
+				}
 			}else if(url.contentEquals("/findID.mem")) {
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");
@@ -168,12 +181,14 @@ public class MemberController extends HttpServlet {
 					response.getWriter().append("incorrect");
 				}
 			}
+			
+			
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");
 		}
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

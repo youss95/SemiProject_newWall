@@ -26,6 +26,17 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	private MemberDAO() {}
+	
+	public int changeEmail(String id, String email) throws Exception{
+		String sql = "update member set email=? where user_id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql)){
+			pstat.setNString(1, email);
+			pstat.setNString(2, id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
 
 	public int resetPW(String id, String tempPW) throws Exception{
 		String sql = "update member set user_password=? where user_id=?";
