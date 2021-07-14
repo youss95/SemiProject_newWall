@@ -216,7 +216,7 @@
 				let age = $("#anAge").val();
 	 			let ageRegex = /^[0-9]/;
 	 			if($("#anAge").val() == ""){
-					alert("나이를 입력해주세요!");
+					alert("나이를 확인해주세요!");
 					return false;
 				}
 	 	/* 		if(!ageRegex.test(age)){
@@ -227,7 +227,7 @@
 	 			let weight = $("#anWeight").val();
 	 			let weightRegex = /^[0-9]/;
 	 			if($("#anWeight").val() == ""){
-					alert("무게를 입력해주세요!");
+					alert("무게를 확인해주세요!");
 					return false;
 				}
 	 			/* if(!weightRegex.test(weight)){
