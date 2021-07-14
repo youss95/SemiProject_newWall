@@ -59,7 +59,8 @@
 
        
        <div class="gosp">
-       <a href="${pageContext.request.contextPath}/sponsor.sp"><span >후원하러 가기 >></span></a>
+       <span ><b>New-Wal</b>에서는 개인이 보호 중인 동물의 복지와 입양을<br> 활성화 하기 위해 노력합니다.</span><br><br>
+       <a href="${pageContext.request.contextPath}/animal/protectionForm.jsp">글쓰기&nbsp;&nbsp;&nbsp;<i class="fas fa-pen"></i></a>
        </div>
       </div>
       <div class="img-cover"></div>
@@ -76,7 +77,7 @@
 				 <div class="cont">
      <div class="row">
     <c:forEach var="p" items="${protectList}">
-        <div class="card shadow-soft">
+        <div class="card shadow-soft" style="padding:0px;">
             <img src="${pageContext.request.contextPath}/upload/lostAnimal/${p.protectFileRealName1}">
             <div class="card-body">
                 <h4>${p.protectName }</h4>
@@ -104,7 +105,7 @@
     
     </div>
 </div>
-<a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light" style="float:right;">글쓰기</a>
+<%-- <a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light" style="float:right;">글쓰기</a> --%>
 				</section>
 			</div>
 		</div>
