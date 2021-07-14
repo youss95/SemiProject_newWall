@@ -25,7 +25,7 @@ public class MailUtils {
 		return buf.toString();
 	}
 
-	public static void sendMail(String email,String authCode) throws Exception {
+	public static void sendMail(String email,String title, String contents) throws Exception {
 		// 자바 메일 
 		String host = "smtp.gmail.com";
 		String manager = "initmanager6"; // 관리자 이메일 아이디
@@ -45,11 +45,10 @@ public class MailUtils {
 			}
 		});		
 	
-		String contents= authCode;
 		MimeMessage msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress(manager));
 		msg.setRecipients(Message.RecipientType.TO, to);
-		msg.setSubject("[뉴월] 인증번호 안내"); // 메일 타이틀
+		msg.setSubject(title); // 메일 타이틀
 		msg.setContent(contents, "text/html;charset=UTF-8");
 		Transport.send(msg); // 메일 전송
 	}
