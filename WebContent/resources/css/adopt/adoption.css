@@ -72,11 +72,11 @@
 .adoptRegForm .terms ol li{font-size:14px;line-height:1.6;list-style: decimal;}
 .adoptRegForm .btn_wrap{text-align: right;}
 /* title common */
-.title{text-align: center;margin:40px auto 60px}
-.title>h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin-bottom:15px;}
-.title>h2:after{display:block;width:100%;height:8px;background-color:#5C969E;position: relative;top: -6px;z-index: -1;opacity: .8;content:'';}
-.title>p{font-size:13px;font-weight:300;}
-.title>p em{font-weight:600;}
+/* section>.title{text-align: center;margin:40px auto 60px}
+section>.title>h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin:0 auto 15px;}
+section>.title>h2:after{display:block;width:100%;height:8px;background-color:#5C969E;position: relative;top: -6px;z-index: -1;opacity: .8;content:'';}
+section>.title>p{font-size:13px;font-weight:300;}
+section>.title>p em{font-weight:600;} */
 /* review */
 .review_list .list_wrap{font-size:0;}
 .review_list .list_wrap .item{display:inline-block;width:calc(50% - 20px);margin-right:40px;margin-bottom:40px;overflow:hidden;background-color:#cfe9ec50;vertical-align:top;}
