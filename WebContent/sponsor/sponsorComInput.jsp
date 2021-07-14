@@ -496,7 +496,7 @@ dl.member_chk dd{margin-bottom:30px;}
 	                                         <h3>생년월일<span>(본인)</span></h3>
 	                                         <div class="birth_wrap">
 	                                         	<div class="">
-	                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y"  placeholder="1999">
+	                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y"  placeholder="2008">
 	                                                <span>년</span>
 	                                            </div>
 		                                         <div>
