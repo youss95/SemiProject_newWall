@@ -301,15 +301,7 @@
 						"p_seq" : $("#p_seq").val(),
 					}
 				}).done(function(resp){
-					console.log(resp[1]);
-					/* let seq = $('.ad_seq').text();
-					if(seq == resp[1]){
-						
-					}
-
- */
-					
-
+//					console.log(resp[1]);
 				})
 			})
 			

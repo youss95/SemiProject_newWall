@@ -31,16 +31,23 @@
 			<div class="menu">
 				<ul>
 					<li class="has">
-						<a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양</a>
+						<a href="#">입양</a>
 						<ul class="submenu">
 							<li><a href="${pageContext.request.contextPath}/adoptList.apt?cpage=1">입양동물</a></li>
 							<li><a href="${pageContext.request.contextPath}/reviewList.apt?cpage=1">입양후기</a></li>
 						</ul>
 					</li>
 					<li><a href="${pageContext.request.contextPath}/sponsor.sp">후원</a></li>
-					<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a></li>
 					<li class="has">
-						<a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스레터</a>
+						<a href="#">실종/보호</a>
+						<ul class="submenu">
+							<li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종</a></li>
+							<li><a href="${pageContext.request.contextPath}/protectList.lost?page=1">임시보호</a></li>
+						</ul>
+					</li>
+					<%-- <li><a href="${pageContext.request.contextPath}/lostAnimalMap.lost">실종/보호</a></li> --%>
+					<li class="has">
+						<a href="#">뉴스레터</a>
 						<ul class="submenu">
 							<li><a href="${pageContext.request.contextPath}/newsBoard.news?cpage=1">뉴스</a></li>
 							<li><a href="${pageContext.request.contextPath}/noticeBoard.notice?cpage=1">공지사항</a></li>
@@ -278,9 +285,30 @@
 		</div>
 		<div class="list">
 			<a href="#">
-				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img00.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
+				<div class="img_bg" style="background-size:cover;"></div>
 			</a>
 			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<a href="#">
+				<div class="img_bg" style="background-size:cover;"></div>
+			</a>
+			<%-- <a href="#">
 				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img01.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
 			</a>
 			<a href="#">
@@ -300,7 +328,7 @@
 			</a>
 			<a href="#">
 				<div class="img_bg" style="background:url(${pageContext.request.contextPath}/resources/images/main/img07.jpeg) 50% 50% no-repeat;background-size:cover;"></div>
-			</a>
+			</a> --%>
 		</div>
 	</div>
 	<div class="section review" id="section5">
@@ -425,6 +453,20 @@
 			$(this).children('.submenu').slideToggle();
 			$(this).siblings().children('.submenu').slideUp();
 		});
+		
+		// animal info
+		$.ajax({
+				url: "${pageContext.request.contextPath}/mainAnimals.main",
+				type: "get",
+				dataType: "json",
+			}).done(function(resp){
+				let lt = $(".adopt .list>a").length;
+				console.log(lt);
+				for(let i=0;i<lt;i++){
+					$(".adopt .list>a").eq(i).attr("href", "${pageContext.request.contextPath}/adoptDetail.apt?code_seq=" + resp[i].code_seq);
+ 					$(".adopt .list>a").eq(i).children('.img_bg').attr("style","background:url(./upload/animalInfo/" + resp[i].an_photo+ ") 50% 50% no-repeat;background-size:cover;");
+				}
+			})
 	})
 </script>
 </body>

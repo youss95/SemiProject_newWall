@@ -98,6 +98,7 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 	<script>
 		$(function(){
 			$('#btn_write').on('click', function(){

@@ -58,10 +58,18 @@ public class MemberController extends HttpServlet {
 				String postCode = request.getParameter("postcode");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
+				
+				request.setAttribute("user_id", user_id);
+				request.setAttribute("name", name);
 
 				int result = dao.insert(new MemberDTO(user_id,user_password,email,name,birthDay,contact,'N',postCode,address1,address2));
-				// 축하페이지가 따로 있다면 : response.sendRedirect("축하페이지");
-				response.sendRedirect("index.jsp");
+				// 축하페이지가 따로 있다면 : response.sendRedirect("축하페이지"); 이프문 
+				if(result>0) {
+					request.getRequestDispatcher("member/joinSuccess.jsp").forward(request, response);	
+				}else {
+					//회원가입 실패시..
+					//response.sendRedirect("index.jsp");
+				}
 			}else if(url.contentEquals("/myPage.mem")) {
 				//----------------------------------------------------------------------------------------- 마이페이지 처리
 				//마이페이지 진입 시 마다 가장 최신 DB정보를 세션에 갱신
