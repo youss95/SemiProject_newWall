@@ -29,10 +29,6 @@ public class MainController extends HttpServlet {
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
 
-		System.out.println("requestURI : " + requestURI);
-		System.out.println("ctxPath : " + ctxPath);
-		System.out.println("url : " + url);
-
 		MainDAO dao = MainDAO.getInstance();
 
 		try {
@@ -41,7 +37,6 @@ public class MainController extends HttpServlet {
 				
 				Gson g = new Gson();
 				List<AnimalDTO> list = dao.getMainAnimalsImg();
-				System.out.println(list);
 				String result = g.toJson(list);
 				response.getWriter().append(result);
 			}else if(url.contentEquals("/mainReviews.main")) {
@@ -50,7 +45,6 @@ public class MainController extends HttpServlet {
 				
 				Gson g = new Gson();
 				List<ReviewDTO> list = dao.getMainReviews();
-				System.out.println(list);
 				String result = g.toJson(list);
 				response.getWriter().append(result);
 			}
