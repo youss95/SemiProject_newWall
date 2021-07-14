@@ -11,18 +11,14 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-
-
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
 	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
 <style>
 * {
 	box-sizing: border-box;
 }
-
 .sp_pay_section .sp_pay_con {
 	width: 550px;
 	/* height: 1000px; */
@@ -33,26 +29,22 @@
 	box-shadow: 5px 5px 5px 5px #D6E6F2;
 	overflow: hidden;
 }
-
 .sp_pay_section .sp_pay_con .sp_pay_cal {
 	width: 30%;
 	float: left;
 	/* display: none; */
 	/* margin-left: ; */
 }
-
 .sp_pay_section .sp_pay_con .sp_inp_ck {
 	width: 60%;
 	float: left;
 	/* display: none; */
 }
-
 .sp_pay_section .sp_pay_con .sp_pay_incon {
 	width: 100%;
 	padding: 3%;
 	float: left;
 }
-
 .sp_pay_section .sp_pay_con .sp_pay_btncon {
 	width: 100%;
 	padding: 3%;
@@ -60,7 +52,6 @@
 	float: left;
 	text-align: center;
 }
-
 .sp_pay_section .sp_pay_con .sp_pay_btncon .btn_sp_pay {
 	width: 40%;
 	height: 50px;
@@ -75,7 +66,6 @@
 	margin: 2%;
 	font-weight: 600; 
 }
-
 .sp_pay_section .sp_pay_con .sp_pay_title {
 	width: 100%;
 	font-size: 30px;
@@ -84,22 +74,17 @@
 	padding-bottom: 20px;
 	font-weight: 600; 
 }
-/*  */
 .sp_pay_section .sp_dp_none {
 	display: none;
 }
-
-
 </style>
 </head>
 <body>
 	<div class="wrap">
-		
 		<div class="container">
 			<div class="contents">
 				<section class="sp_pay_section">
 					<!-- 하이 여기는 서브입니다 -->
-
 					<div class="sp_pay_con">
 						<div class="sp_pay_incon">
 							<h2 class="sp_pay_title">입력 정보 확인</h2>
@@ -184,9 +169,7 @@
 							<button type="button" class="btn_m btn_light btn_sp_info">후원메인으로</button>
 							<button type="button" id="check_module" class="btn_m btn_default btn_sp_pay">결제하기</button>
 						</div>
-
 					</div>
-
 					<script>
 						if ('${sponsor.sponsor_agecheck}' == 'N') {
 							$('.sp_age_down_set').css('display', 'none');
@@ -304,11 +287,6 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-
-
-	<%-- <script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>  --%>
-
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </body>
 </html>
