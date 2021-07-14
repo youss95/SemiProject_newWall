@@ -104,7 +104,7 @@
     
     </div>
 </div>
-<a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light">글쓰기</a>
+<a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" class="btn_m btn_light" style="float:right;">글쓰기</a>
 				</section>
 			</div>
 		</div>

@@ -28,6 +28,8 @@ margin-top:100px;
 			<div class="contents">
 				<section class="lostSection">
 				<div id="countTitle">NewWal's 유기동물 통계</div>
+				
+
 				<div id="lost">
 				<div class="counts" style="display:inline-block;">Today</div>
 				<div class="counts" style="display:inline-block;margin-left:170px;"><i class="fas fa-dog"></i></div>
@@ -73,8 +75,11 @@ margin-top:100px;
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+
 	
 	<script>
+	
+	
 	 let numAni = document.querySelectorAll(".mari");
 
      function changeNum(index) {
