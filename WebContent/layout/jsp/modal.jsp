@@ -15,29 +15,43 @@
 					id="popup-logo">
 			</div>
 
-			<form action="${pageContext.request.contextPath}/loginProc.mem">
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="user-id" class="col-form-label"></label> <input
-							type="text" class="form-control" id="user_id" name="user_id"
-							placeholder="Your ID">
-					</div>
-					<div class="form-group">
-						<label for="user-password" class="col-form-label"></label> <input
-							type="password" class="form-control" id="user_pw"
-							name="user_password" placeholder="Password">
-					</div>
-
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="user-id" class="col-form-label"></label> <input
+						type="text" class="form-control" id="user_id" name="user_id"
+						placeholder="Your ID">
 				</div>
-				<div class="modal-footer">
-					<button class="btn_m btn_default" data-dismiss="modal"
-						style="width: 125%; margin-bottom: 16px;">로그인</button>
-
-					<a href="${pageContext.request.contextPath}/findAccount.mem"><button
-							type="button" class="find" data-dismiss="modal" id="idPwHov">아이디/비밀번호
-							찾기</button></a>
+				<div class="form-group">
+					<label for="user-password" class="col-form-label"></label> <input
+						type="password" class="form-control" id="user_pw"
+						name="user_password" placeholder="Password">
 				</div>
-			</form>
+
+			</div>
+			<div class="modal-footer">
+				<button class="btn_m btn_default" data-dismiss="modal" id="btnLogin"
+					style="width: 125%; margin-bottom: 16px;">로그인</button>
+
+				<a href="${pageContext.request.contextPath}/findAccount.mem"><button
+						type="button" class="find" data-dismiss="modal" id="idPwHov">아이디/비밀번호
+						찾기</button></a>
+			</div>
+			<script>
+				$("#btnLogin").on("click",function(){
+					$.ajax({
+						url:"${pageContext.request.contextPath}/loginProc.mem",
+						data:{user_id:$("#user_id").val(),user_password:$("#user_pw").val()},
+					}).done(function(resp){
+						if(resp=="correct"){
+							location.reload();
+						}else{
+							alert("ID 또는 패스워드가 일치하지 않습니다.");
+							$("#user_id").val("");
+							$("#user_pw").val("");
+						}
+					})
+				})
+			</script>
 		</div>
 	</div>
 </div>
