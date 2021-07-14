@@ -83,7 +83,7 @@
 					</div>
 					<form action="${pageContext.request.contextPath}/newsAdminWrite.necmt"
 						method="post">
-						<div id="nrp-comments" class="nrp-comments">
+						<div id="nrp-comments" class="nrp-comments" style="margin-left:100px;">
 							<div class="comments-row">
 								<textarea id="nrp_contents" name="nrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 					</form>
-					<form id="replyFrm" class="replyFrm">
+					<form id="replyFrm" class="replyFrm" style="margin-left:50px;">
 						<div class="reply-container">
 							<c:forEach var="i" items="${necmtlist}">
 								<div class="reply">
