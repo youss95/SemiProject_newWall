@@ -7,12 +7,17 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+
 <style>
 * {
 	box-sizing: border-box;
@@ -170,6 +175,67 @@
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+#loadingModal div{border:none;color:white;}
+
+.loader {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.circular {
+	animation: rotate 2s linear infinite;
+	height: 200px;
+	position: relative;
+	width: 200px;
+}
+
+.path {
+	stroke-dasharray: 1, 400;
+	stroke-dashoffset: 0;
+	stroke: #b6463a;
+	animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+	stroke-linecap: round;
+}
+ @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 2, 400;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 178, 400;
+          stroke-dashoffset: -70;
+        }
+        100% {
+          stroke-dasharray: 178, 400;
+          stroke-dashoffset: -248;
+        }
+      }
+      @keyframes color {
+        100%,
+        0% {
+          stroke: red;
+        }
+        40% {
+          stroke: violet;
+        }
+        66% {
+          stroke: green;
+        }
+        80%,
+        90% {
+          stroke: yellow;
+        }
+      }
+
 </style>
 </head>
 <body>
@@ -200,7 +266,7 @@
 										<dt class="su_ti">이름</dt>
 										<dd>
 											<input type="text" class="inpform su_s_ip" name=""
-												id="" maxlength=16 required
+												id="nameForID" maxlength=16 required
 												placeholder="이름을 입력해주세요.">
 											<!-- <button type="button" id="idCheck" class="btn_m btn_light su_btn_detail">중복확인</button>
 										<span class="su_pw_ck" id="duplCheckResult"
@@ -213,34 +279,22 @@
 										<dt class="su_ti su_ti_n">이메일주소</dt>
 										<dd>
 											<input type="text" class="inpform su_s_ip" name=""
-												id="" placeholder="email ID" maxlength=16>&nbsp&nbsp@&nbsp&nbsp
-											<select name="email2" id="emailSuffix"
-												class="inpform su_s_ip">
-												<option value="@gmail.com">gmail.com</option>
-												<option value="@naver.com">naver.com</option>
-												<option value="@daum.net">daum.net</option>
-												<option value="@nate.com">nate.com</option>
-												<option value="">직접입력</option>
-											</select>
+												id="emailForID" placeholder="가입 시 사용한 Email" maxlength=50>
 											<!-- <button type="button" id="check" class="btn_m btn_light su_btn_detail">이메일 인증</button> -->
+										</dd>
+									</dl>
+									<dl class="id_find_m_con" id="divIdResultBox"
+										style="display: none;">
+										<dt class="su_ti su_ti_n">확인 결과</dt>
+										<dd>
+											<div id="divFindIDResult"
+												style="color: dodgerblue; line-height: 60px;"></div>
 										</dd>
 									</dl>
 									<dl>
 										<dd class="btn_id_find">
-											<button type="button" id="check"
+											<button type="button" id="btnFindID"
 												class="btn_m btn_light su_btn_detail">일치하는 회원정보 찾기</button>
-										</dd>
-									</dl>
-								</div>
-								<div class="mem_id_success">
-									<!-- 이거는 히든했다가 일치시 등장 없으면 얼럿 ?? -->
-									<h3 class="su_ti su_ti_b su_ti_o su_id">&nbsp&nbsp회원정보와
-										일치하는 아이디</h3>
-									<dl class="id_find_m_con">
-										<dt class="su_ti">아이디</dt>
-										<dd>
-											<input type="text" class="inpform su_s_ip su_s_ip_dis"
-												value="disabled" disabled>
 										</dd>
 									</dl>
 								</div>
@@ -250,22 +304,8 @@
 									<dl class="id_find_m_con">
 										<dt class="su_ti">아이디</dt>
 										<dd>
-											<input type="text" class="inpform su_s_ip" name="user_id"
-												id="signup_user_id" maxlength=16 required
-												placeholder="아이디를 입력해주세요.">
-											<!-- <button type="button" id="idCheck" class="btn_m btn_light su_btn_detail">중복확인</button>
-										<span class="su_pw_ck" id="duplCheckResult"
-											>일치여부 확인 메세지 </span> -->
-										</dd>
-									</dl>
-								</div>
-								<div>
-									<dl class="id_find_m_con">
-										<dt class="su_ti">이름</dt>
-										<dd>
-											<input type="text" class="inpform su_s_ip" name=""
-												id="" maxlength=16 required
-												placeholder="이름을 입력해주세요.">
+											<input type="text" class="inpform su_s_ip" id="idForPW"
+												maxlength=16 placeholder="아이디를 입력해주세요.">
 											<!-- <button type="button" id="idCheck" class="btn_m btn_light su_btn_detail">중복확인</button>
 										<span class="su_pw_ck" id="duplCheckResult"
 											>일치여부 확인 메세지 </span> -->
@@ -275,55 +315,15 @@
 								<div>
 									<dl class="id_find_m_con">
 										<dt class="su_ti su_ti_n">이메일주소</dt>
-
 										<dd>
-											<input type="text" class="inpform su_s_ip" name=""
-												id="" placeholder="email ID" maxlength=16>&nbsp&nbsp@&nbsp&nbsp
-											<select name="email2" id="emailSuffix"
-												class="inpform su_s_ip">
-												<option value="@gmail.com">gmail.com</option>
-												<option value="@naver.com">naver.com</option>
-												<option value="@daum.net">daum.net</option>
-												<option value="@nate.com">nate.com</option>
-												<option value="">직접입력</option>
-											</select>
-											<!-- <button type="button" id="check" class="btn_m btn_light su_btn_detail">이메일 인증</button> -->
+											<input type="text" class="inpform su_s_ip" id="emailForPW"
+												placeholder="가입 시 사용한 Email" maxlength=50>
 										</dd>
 									</dl>
 									<dl>
 										<dd class="btn_id_find">
-											<button type="button" id="check"
-												class="btn_m btn_light su_btn_detail">일치하는 회원정보 칮기</button>
-										</dd>
-									</dl>
-								</div>
-								<div class="mem_pw_success">
-									<!-- 이거는 히든했다가 일치시 등장 없으면 얼럿 ?? -->
-									<h3 class="su_ti su_ti_b su_ti_o su_id">&nbsp&nbsp비밀번호
-										변경하기</h3>
-									<dl class="id_find_m_con">
-										<dt class="su_ti ">비밀번호</dt>
-										<dd>
-											<input type="password" class="inpform su_m_ip"
-												name="user_password" id="user_password" placeholder="비밀번호"
-												maxlength=16 required> <span class="su_npw_sub"><br>영문대문자,
-												영문소문자, 숫자 포함하여 8-12 글자 ***이거는우리정규식에맞게<br> </span>
-										</dd>
-									</dl>
-									<dl class="id_find_m_con">
-										<dt class="su_ti ">비밀번호 확인</dt>
-										<dd>
-											<input type="password" class="inpform su_m_ip"
-												name="pwdCheck" id="pwdCheck" placeholder="비밀번호 확인"
-												maxlength=16 required> <span class="su_pw_ck">
-												일치여부 확인 메세지 </span>
-										</dd>
-									</dl>
-									<dl>
-										<dd class="pw_change_btn_con">
-											<button type="button" id=""
-												class="btn_m btn_light btn_pw_change">새로운 비밀번호로
-												변경하기</button>
+											<button type="button" id="btnFindPW"
+												class="btn_m btn_light su_btn_detail">패스워드 찾기</button>
 										</dd>
 									</dl>
 								</div>
@@ -335,8 +335,78 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+
+	<div class="modal fade" id="loadingModal" tabindex="-1"
+		aria-labelledby="loadingModalLabel" aria-hidden="true"
+		data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content" style="background-color:#00000000;">
+				<div class="modal-body" style="height:200px;">
+					<div class="loader">
+						<svg class="circular">
+	            <circle class="path" cx="100" cy="100" r="40" fill="none"
+								stroke-width="10" stroke-miterlimit="10"></circle></svg>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">요청을 처리 중 입니다. 잠시만 기다려주세요.</div>
+			</div>
+		</div>
+	</div>
+
 	<script>
-		
+		$("#btnFindID").on("click",function() {
+			let name = $("#nameForID").val();
+			let email = $("#emailForID").val();
+
+			if (name == "" || email == "") {
+				alert("이름 또는 이메일 주소를 확인하세요.")
+				return false;
+			}
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/findID.mem",
+				data : {
+					name : name,
+					email : email
+				}
+			}).done(function(resp) {
+				$("#divIdResultBox").css("display", "block");
+				if (resp != "none") {
+					$("#divFindIDResult").text(
+							"사용자님의 ID는 \"" + resp + "\" 입니다.")
+				} else {
+					$("#divFindIDResult").text(
+							"일치하는 회원 정보가 없습니다.");
+				}
+			})
+		})
+
+		$("#btnFindPW").on("click", function() {
+			let id = $("#idForPW").val();
+			let email = $("#emailForPW").val();
+
+			if (id == "" || email == "") {
+				alert("ID 또는 이메일 주소를 확인하세요.")
+				return false;
+			}
+
+			$("#loadingModal").modal({backdrop:'static', keyboard:false});
+			$.ajax({
+				url:"${pageContext.request.contextPath}/findPW.mem",
+				data:{id:id,email:email}
+			}).done(function(resp){
+				if(resp=="confirm"){
+					alert("이메일 주소로 임시 패스워드가 전송되었습니다.\n로그인 후 꼭 패스워드를 변경해주세요.");
+				}else{
+					alert("아이디 또는 이메일주소가 일치하지 않습니다.");
+				}
+			}).always(function(){
+				$("#loadingModal").modal("hide");
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').remove();
+			})
+
+		})
 	</script>
 </body>
 </html>

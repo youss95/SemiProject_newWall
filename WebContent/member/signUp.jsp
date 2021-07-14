@@ -10,6 +10,7 @@
 <jsp:include page="/layout/jsp/commonModal.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
@@ -464,7 +465,7 @@
 				return false;
 			}
 
-			let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 			let email = $("#email").val() + "@" + $("#email2").val();
 
 			if (!emailReg.test(email)) {

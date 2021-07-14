@@ -9,7 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
 import com.kh.dto.MemberDTO;
 
 
@@ -27,7 +26,45 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	private MemberDAO() {}
+
+	public int resetPW(String id, String tempPW) throws Exception{
+		String sql = "update member set user_password=? where user_id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql)){
+			pstat.setNString(1, tempPW);
+			pstat.setNString(2, id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+
+	public boolean isIdEmailAccepted(String id, String email) throws Exception{
+		String sql = "select user_id from member where user_id=? and email=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, id);
+			pstat.setNString(2, email);
+			try(ResultSet rs = pstat.executeQuery();){
+				return rs.next();
+			}
+		}
+	}
 	
+	public String findIdByNameEmail(String name, String email) throws Exception{
+		String sql = "select user_id from member where name=? and email=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, name);
+			pstat.setNString(2, email);
+			try(ResultSet rs = pstat.executeQuery();){
+				if(rs.next()) {
+					return rs.getNString(1);
+				}else {
+					return "none";
+				}
+			}
+		}
+	}
 	
 	public boolean isIdAvailable(String id) throws Exception{
 		String sql = "select * from member where user_id =?";
