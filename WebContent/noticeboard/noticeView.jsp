@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>뉴월</title>
 
-<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
 <link rel="stylesheet"
@@ -94,7 +93,8 @@
 							</div>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/nowrite.nocmt"	method="post">
+					<c:if test="${loginInfo.user_id != null}">
+					<form action="${pageContext.request.contextPath}/nowrite.nocmt"	method="post" >
 					<input type="hidden" name="writer" value="${loginInfo.user_id}">
 						<div id="ntrp-comments" class="ntrp-comments">
 							<div class="comments-row">
@@ -108,6 +108,7 @@
 							</div>
 						</div>
 					</form>
+					</c:if>
 					<form id="replyFrm" class="replyFrm">
 						<div class="reply-container">
 							<c:forEach var="i" items="${nocmtlist}">
@@ -130,11 +131,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 부트스트랩 JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 </body>
 </html>

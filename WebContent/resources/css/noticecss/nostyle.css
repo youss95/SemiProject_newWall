@@ -98,6 +98,8 @@ a {
 
 .ntrp-comments {
 	text-align: center;
+	margin-left:100px;
+	margin-top:50px;
 }
 
 .reply-container .ntrp_writer {
@@ -139,6 +141,7 @@ a {
 
 .replyFrm{
 	width:91%;
+	margin-left:50px;
 }
 
 .comments-row textarea{
