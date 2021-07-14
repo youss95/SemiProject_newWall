@@ -73,27 +73,32 @@ public class AdoptionDAO {
 	}
 
 	//adoption
+	
 	public List<AnimalDTO> getPageList(int startNum, int endNum, AnimalDTO dto) throws Exception{
-		String an_category = "an_category";
-		String an_gender = "an_gender";
+
+		String an_category = null;
+		String an_gender = null;
 		String an_weight = "an_weight";
 		String an_age = "an_age";
-		String an_character = "an_character";
-		String an_name = "an_name";
+		String an_character = null;
 		int start_age = 0;
 		int end_age = 100;
 		int start_weight = 0;
 		int end_weight = 100;
 
-		if(dto.getAn_category().contentEquals("all")) { // 카테고리 검색
+		if(dto.getAn_category().contentEquals("개") || dto.getAn_category().contentEquals("고양이")) { // 카테고리 검색
+			an_category = "an_category"; 
+		}else { 
 			an_category = "1";
 			dto.setAn_category("1");
 		}
-		if(dto.getAn_gender().contentEquals("all")) { // 성별 검색
+		if(dto.getAn_gender().contentEquals("암컷") || dto.getAn_gender().contentEquals("수컷")) { // 성별 검색
+			an_gender = "an_gender";
+		}else {
 			an_gender = "1";
 			dto.setAn_gender("1");
 		}
-		if(dto.getAn_weight_range().contentEquals("all")) { // 무게 검색
+		if(dto.getAn_weight_range().contentEquals("") || dto.getAn_weight_range() == null) { // 무게 검색
 			an_weight = "1";
 			dto.setAn_weight(1);
 		}else if(dto.getAn_weight_range().contentEquals("small")) {
@@ -105,7 +110,7 @@ public class AdoptionDAO {
 		}else if(dto.getAn_weight_range().contentEquals("big")) {
 			start_weight = 18;	
 		}
-		if(dto.getAn_age_range().contentEquals("all")) { // 나이 검색 
+		if(dto.getAn_age_range().contentEquals("") || dto.getAn_age_range() == null) { // 나이 검색 
 			an_age = "1";
 			dto.setAn_age(1);
 		}else if(dto.getAn_age_range().contentEquals("puppy")) {
@@ -120,13 +125,11 @@ public class AdoptionDAO {
 		}else if(dto.getAn_age_range().contentEquals("senior")) {
 			start_age = 9;			
 		}
-		if(dto.getAn_character().contentEquals("all")) { // 성격 검색
+		if(dto.getAn_character().contentEquals("얌전") || dto.getAn_character().contentEquals("보통") || dto.getAn_character().contentEquals("활발") || dto.getAn_character().contentEquals("매우활발")) { // 성격 검색
+			an_character = "an_character";
+		}else {
 			an_character = "1";
 			dto.setAn_character("1");
-		}
-		if(dto.getAn_name().contentEquals("") || dto.getAn_name() == null) { // 이름 검색
-			an_name = "1";
-			dto.setAn_name("1");
 		}
 
 		String sql = "select * from "
@@ -136,7 +139,9 @@ public class AdoptionDAO {
 				+ " and (" + an_weight + " between " + start_weight + " and "+ end_weight + ")"
 				+ " and (" + an_age + " between " + start_age + " and "+ end_age + ")"
 				+ " and " + an_character + " like '%" + dto.getAn_character() + "%'"
-				+ " and "+ an_name + " like '%" + dto.getAn_name() + "%' ) where row_number between ? and ?";
+				+ " and an_name like '%" + dto.getAn_name() + "%' ) where row_number between ? and ?";
+
+//		System.out.println("1111 : " +sql);
 
 		try(
 				Connection con = this.getConnection();
@@ -145,6 +150,9 @@ public class AdoptionDAO {
 
 			pstat.setInt(1, startNum);
 			pstat.setInt(2, endNum);
+
+			System.out.println("2222 : " +sql);
+			System.out.println("======여기는 dao 끝 ========");
 
 			try(
 					ResultSet rs = pstat.executeQuery();
@@ -172,6 +180,7 @@ public class AdoptionDAO {
 		}
 
 	}
+	
 
 	//adoption
 	public List<AnimalDTO> getPageList(int startNum, int endNum) throws Exception{
@@ -273,8 +282,8 @@ public class AdoptionDAO {
 				dto.setAn_character("1");
 			}
 			if(dto.getAn_name().contentEquals("") || dto.getAn_name() == null) { // 이름 검색
-				an_name = "1";
-				dto.setAn_name("1");
+//				an_name = "1";
+//				dto.setAn_name("1");
 			}
 
 			sql = "select count(*) from animal"
@@ -877,7 +886,7 @@ public class AdoptionDAO {
 		}
 
 	}
-		
+
 	//adoption
 	public int getAdoptionRecord(String user_id) throws Exception{
 		String sql = "select count(*) from adoption where user_id = ? and ad_status='완료' ";;
@@ -896,7 +905,7 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 	//review
 	public int inserReviewtLike(int review_seq, String user_id) throws Exception{
 		String sql = "insert into review_like values(?, ?)";
@@ -911,7 +920,7 @@ public class AdoptionDAO {
 			return result;
 		}
 	}
-	
+
 	//review
 	public int reviewLikeChk(int review_seq, String user_id) throws Exception{
 		String sql = "select count(*) from review_like where review_seq= ? and user_id = ?";
@@ -931,7 +940,7 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 	//review
 	public int deleteReviewtLike(int review_seq, String user_id) throws Exception{
 		String sql = "delete from review_like where review_seq=? and user_id = ?";
@@ -945,10 +954,10 @@ public class AdoptionDAO {
 
 			int result = pstat.executeUpdate();
 			return result;
-			
+
 		}
 	}
-	
+
 	//review
 	public int getReviewLikeCount(int review_seq) throws Exception{
 		String sql = "select count(*) from review_like where review_seq = ?";
@@ -967,10 +976,10 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 	//review
 	public int updateReviewtLike(int review_seq, int num) throws Exception{
-		
+
 		String sql = "update review set review_like=? where review_seq=?";
 		System.out.println(sql);
 		try(
@@ -982,10 +991,10 @@ public class AdoptionDAO {
 
 			int result = pstat.executeUpdate();
 			return result;
-			
+
 		}
 	}
-	
+
 	//adoption
 	public int getAnimalAdoptionStatus(String code_seq) throws Exception{
 		String sql = "select count(*) from adoption where code_seq = ? and ad_status='완료'";
@@ -1004,5 +1013,5 @@ public class AdoptionDAO {
 		}
 
 	}
-	
+
 }

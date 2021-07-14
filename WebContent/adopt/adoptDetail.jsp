@@ -6,12 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
+<jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adopt/adoption.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -69,7 +67,7 @@
 	</div>
 </div>
 <jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 <script>
 	$(function(){
 		const swiper = new Swiper('.animal_info .swiper-container', {
@@ -88,9 +86,7 @@
 		console.log(status)
 		if(status >0 ){
 			$("#btn_adopt").text("입양 완료").bind('click', false);
-
 		}
-		
 	})
 </script>
 </body>

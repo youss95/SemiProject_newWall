@@ -31,7 +31,7 @@
 												<option value="고양이">고양이</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_category" name="h_category" value="${h_category}">
+ 										<input type="hidden" class="loadchk" name="loadchk" value="on">
 									</dd>
 								</dl>
 								<dl>
@@ -46,8 +46,6 @@
 												<option value="수컷">수컷</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_gender" name="h_gender"
-											value="${h_gender}">
 									</dd>
 								</dl>
 								<dl>
@@ -63,8 +61,6 @@
 												<option value="small">소(8kg 미만)</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_weight" name="h_weight"
-											value="${h_weight}">
 									</dd>
 								</dl>
 								<dl>
@@ -81,8 +77,6 @@
 												<option value="senior">senior(9살 ~)</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_age" name="h_age"
-											value="${h_age}">
 									</dd>
 								</dl>
 								<dl>
@@ -99,8 +93,6 @@
 												<option value="매우활발">매우활발</option>
 											</select>
 										</div>
-										<input type="hidden" class="h_character" name="h_character"
-											value="${h_character}">
 									</dd>
 								</dl>
 							</div>
@@ -147,15 +139,15 @@
 							<c:choose>
 								<c:when test="${i == '>'}">
 									<a
-										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${navi[s.index-1]+1}&category=${h_category}&gender=${h_gender}&weight=${h_weight}&age=${h_age}&character=${h_character}&an_name=${an_name}">${i}</a>
+										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${navi[s.index-1]+1}&category=${category}&gender=${gender}&weight=${weight}&age=${age}&character=${character}&an_name=${an_name}">${i}</a>
 								</c:when>
 								<c:when test="${i == '<'}">
 									<a
-										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${navi[s.index+1]-1}&category=${h_category}&gender=${h_gender}&weight=${h_weight}&age=${h_age}&character=${h_character}&an_name=${an_name}">${i}</a>
+										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${navi[s.index+1]-1}&category=${category}&gender=${gender}&weight=${weight}&age=${age}&character=${character}&an_name=${an_name}">${i}</a>
 								</c:when>
 								<c:otherwise>
 									<a
-										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${i}&category=${h_category}&gender=${h_gender}&weight=${h_weight}&age=${h_age}&character=${h_character}&an_name=${an_name}">${i}</a>
+										href="${pageContext.request.contextPath}/adoptList.apt?cpage=${i}&category=${category}&gender=${gender}&weight=${weight}&age=${age}&character=${character}&an_name=${an_name}">${i}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -165,26 +157,14 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-	 <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
-	<script>
-		$(function() {
-
-			let category = $(".h_category").val();
-			let gender = $(".h_gender").val();
-			let weight = $(".h_weight").val();
-			let age = $(".h_age").val();
-			let character = $(".h_character").val();
-			let an_name = $(".an_name").val();
-		
-			if(!(category=="" && gender=="" && weight=="" && age=="" && character=="" && an_name=="")){
-				$('.category option[value=' + category + ']').prop('selected','selected').change();
-				$('.gender option[value=' + gender + ']').prop('selected','selected').change();
-				$('.weight option[value=' + weight + ']').prop('selected','selected').change();
-				$('.age option[value=' + age + ']').prop('selected', 'selected').change();
-				$('.character option[value=' + character + ']').prop('selected','selected').change();
-			}
-
-		});
-	</script>
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
+<!-- 	<script>
+		$(function(){
+			$(".btn_white").on("click", function(){
+				$(".an_name").text("");
+			})
+		})
+	</script> -->
+	
 </body>
 </html>

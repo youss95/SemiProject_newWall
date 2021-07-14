@@ -29,7 +29,8 @@
 
 #sp_com_input .fa-edit,
 #sp_com_input .fa-times,
-#sp_com_input .fa-check-circle{
+#sp_com_input .fa-check-circle,
+#sp_com_input .fa-exchange-alt{
 	cursor:pointer;
 	margin-left:3px;
 	margin-right:3px;

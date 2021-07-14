@@ -162,19 +162,17 @@ dd div.inpform {
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="user-id" class="col-form-label">Old password</label> <input
+						<label for="user-id" class="col-form-label">이전 패스워드</label> <input
 							type="password" class="form-control" id="oldpw" name="oldpw">
 					</div>
 					<div id="oldResult" style="color: crimson"></div>
 					<div class="form-group">
-						<label for="user-password" class="col-form-label">New
-							password</label> <input type="password" class="form-control" id="newpw"
+						<label for="user-password" class="col-form-label">새 패스워드 입력</label> <input type="password" class="form-control" id="newpw"
 							name="user_password">
 					</div>
 					<div id="newResult" style="color: crimson"></div>
 					<div class="form-group">
-						<label for="user-password" class="col-form-label">New
-							password again</label> <input type="password" class="form-control"
+						<label for="user-password" class="col-form-label">새 패스워드 다시 입력</label> <input type="password" class="form-control"
 							id="renewpw" name="user_password">
 					</div>
 					<div id="reNewResult" style="color: crimson"></div>
@@ -267,10 +265,9 @@ dd div.inpform {
 								<dl>
 									<dt class="su_ti">이메일주소</dt>
 									<dd>
-										<div class="inpform su_m_ip" itemid="email">${loginInfo.email }</div>
+										<div class="inpform su_m_ip" itemid="email" id="email">${loginInfo.email }</div>
 										<div class="control">
-											<i class="far fa-edit"></i> <i class="far fa-check-circle"></i>
-											<i class="fas fa-times"></i>
+											<i class="fas fa-exchange-alt"></i><i class="fas fa-times"></i>
 										</div>
 									</dd>
 								</dl>
@@ -445,6 +442,13 @@ dd div.inpform {
 					return
 				}
 				
+				let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+				let newpw = $("#newpw").val();
+				if (!pwReg.test(newpw)) {
+					alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+					return false;
+				}
+				
 				let result;
 				$.ajax({
 					url : "${pageContext.request.contextPath}/checkPw.mem",
@@ -477,7 +481,7 @@ dd div.inpform {
 					data:{newpw: $("#newpw").val()},
 				}).done(function(resp){
 					alert("변경이 완료되었습니다.")
-					$("#passwordModal1").modal("toggle");
+					$("#passwordModal").modal("toggle");
 				});
 			})
 
@@ -501,7 +505,7 @@ dd div.inpform {
 				target.removeClass("border-primary");
 				$(this).hide();
 				$(this).siblings().hide();
-				$(this).siblings(".fa-edit").show();
+				$(this).siblings(".fa-edit,.fa-exchange-alt").show();
 			})
 			$(".su_birthday_con .fa-times").on("click",function(){
 				$("#year option[value="+birth_yyyy+"]").prop("selected","true");
@@ -515,9 +519,28 @@ dd div.inpform {
 			
 			$(".fa-check-circle:not(.su_birthday_con .fa-check-circle)").on("click", function() {
 				let target = $(this).parent().prev();
+				
 				$(this).hide();
 				$(this).siblings().hide();
 				$(this).siblings(".fa-edit").show();
+				
+				let item = target.attr("itemid");
+				console.log(item);
+				if(item == "name"){
+					let nameReg = /^[가-힣]{2,4}$/;
+					let name = $("#name").val();
+					if (!nameReg.test(name)) {
+						alert("이름은 한글 2 글자 이상 4글자 미만으로 입력해야 합니다.");
+						return false;
+					}
+				}else if(item == "contact"){
+					let phoneReg = /^\d{3}\d{3,4}\d{4}$/;
+					let phone = $("#contact").text();
+					if (!phoneReg.test(phone)) {
+						alert("핸드폰 번호를 다시 확인해주세요.");
+						return false;
+					}
+				}
 				
 				$.ajax({
 					url : "${pageContext.request.contextPath}/modifyProc.mem",
@@ -557,6 +580,105 @@ dd div.inpform {
 				});
 			})
 			
+			$(".fa-exchange-alt").on("click",function(){
+				let target = $(this).parent().prev();
+				$(this).hide();
+				$(this).siblings().show();
+				
+				target.attr("contenteditable","true");
+				
+				let divReAuth = $("<div>");
+				
+				let btnMailReAuth = $("<button>");
+				btnMailReAuth.text("인증 메일 보내기")
+				btnMailReAuth.attr("id","btnMailReAuth");
+				btnMailReAuth.addClass("btn_m btn_light su_btn_detail");
+				
+				divReAuth.append(btnMailReAuth);
+				target.parent().after(divReAuth);
+				
+				$("#btnMailReAuth").on("click",function(){
+					let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					let email = $("#email").text();
+					
+					if (!emailReg.test(email)) {
+						alert("이메일 형식을 다시 확인해주세요.");
+						return false;
+					}
+					$("#btnMailReAuth").attr("disabled","disabled");
+					
+					$.ajax({
+						url:"${pageContext.request.contextPath}/mailAuthReq.mem",
+						data:{email:email}
+					}).done(function(resp){
+						let authDiv = $("<div>");
+						authDiv.attr("style","display:block;");
+						let authInput = $("<input>");
+						authInput.attr("id","inputAuth");
+						authInput.attr("type","text");
+						authInput.addClass("inpform su_s_ip");
+						authInput.attr("placeholder","Authentication Code");
+						
+						let authBtn = $("<button>");
+						authBtn.attr("type","button");
+						authBtn.addClass("btn_m btn_light su_btn_detail");
+						authBtn.text("인증");
+						
+						authBtn.on("click",function(){
+							$.ajax({
+								url:"${pageContext.request.contextPath}/mailReAuthProc.mem",
+								data:{code:$("#inputAuth").val(),email:email}
+							}).done(function(resp){
+								if(resp == "authorized"){
+									alert("이메일 변경이 완료되었습니다.");
+									$("#email").attr("disabled","disabled");
+									clearInterval(timerId);
+									authTimer.remove();
+									authBtn.remove();
+									authInput.remove();
+									divReAuth.remove();
+									
+									let success = $("<i class='far fa-check-circle fa-2x' style='margin-left:10px;display:block;'></i>");
+									$("#email").siblings(".control").empty();
+									$("#email").siblings(".control").append(success);
+									
+								}else if(resp == "incorrect"){
+									alert("잘못된 인증번호 입니다.")
+								}else{
+									alert("인증번호가 만료되었습니다. 다시 요청하세요.");
+									$("#mailAuth").removeAttr("disabled");
+								}
+							})
+						})
+						
+						let authTimer = $("<span>");
+						authTimer.attr("id","timer");
+						authTimer.addClass("su_s_ip");
+						
+						authDiv.append(authInput);
+						authDiv.append(authBtn);
+						authDiv.append(authTimer);
+						$("#btnMailReAuth").parent().after(authDiv);
+				
+						let distance = 299000;
+						let timerId = setInterval(function(){
+							if(distance < 0){
+								clearInterval(timerId);
+								authTimer.remove();
+								authBtn.remove();
+								authInput.remove();
+							}
+							let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+							let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+							$("#timer").text(minutes + ":"+seconds);
+							distance-=1000;
+						}, 1000);
+					});
+				})
+				
+				
+			})
+			
 			$("#sp_search").on("click",function(){
 				new daum.Postcode({
 					oncomplete : function(data) {
@@ -564,24 +686,14 @@ dd div.inpform {
 						document.getElementById('sp_postcode').innerHTML = data.zonecode;
 						document.getElementById("sp_address1").innerHTML = roadAddr;
 						
-						$.ajax({
-							url : "${pageContext.request.contextPath}/modifyProc.mem",
-							data : {
-								target:"postcode",
-								value:data.zonecode
-							},
-						})
-						
-						$.ajax({
-							url : "${pageContext.request.contextPath}/modifyProc.mem",
-							data : {
-								target:"address1",
-								value:roadAddr
-							},
-						})
+						$.ajax({url : "${pageContext.request.contextPath}/modifyProc.mem",data : {target:"postcode",value:data.zonecode},})				
+						$.ajax({url : "${pageContext.request.contextPath}/modifyProc.mem",data : {target:"address1",value:roadAddr},})
 					},
 				}).open();
 			})
+			
+			
+			
 			
 		})
 	</script>
