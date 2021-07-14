@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
+
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
 <link rel="stylesheet"
@@ -81,7 +81,8 @@
 							<%--</c:if> --%>
 						</div>
 					</div>
-					<form action="${pageContext.request.contextPath}/newsWrite.necmt" method="post">
+					<c:if test="${loginInfo.user_id != null}">
+					<form action="${pageContext.request.contextPath}/newsWrite.necmt" method="post" class="news_contents"> 
 					<input type="hidden" value="${loginInfo.user_id}" name="user_id">
 						<div id="nrp-comments" class="nrp-comments">
 							<div class="comments-row">
@@ -94,6 +95,7 @@
 							</div>
 						</div>
 					</form>
+					</c:if>
 					<form id="replyFrm" class="replyFrm">
 						<div class="reply-container">
 							<c:forEach var="i" items="${necmtlist}">
@@ -116,5 +118,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
+	<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 </body>
 </html>

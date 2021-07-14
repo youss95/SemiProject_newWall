@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월</title>
 
-<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
 
 <link rel="stylesheet"
@@ -95,6 +94,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 </body>
 </html>
