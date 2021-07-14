@@ -98,7 +98,7 @@ input:disabled{height: 40px;padding: 0 10px;}
 /* common layout */
 /* title common */
 section>.title{text-align: center;margin:40px auto 60px}
-section>.title>h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin:0 auto 15px;}
+section>.title>h2{position:relative;display:inline-block;font-size:36px;font-weight: 600;margin:0 auto 15px;line-height:1;}
 section>.title>h2:after{display:block;width:100%;height:8px;background-color:#5C969E;position: relative;top: -6px;z-index: -1;opacity: .8;content:'';}
 section>.title>p{font-size:13px;font-weight:300;}
 section>.title>p em{font-weight:600;}

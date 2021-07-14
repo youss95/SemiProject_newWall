@@ -27,7 +27,10 @@ margin-top:100px;
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-				<div id="countTitle">NewWal's 유기동물 통계</div>
+				<div class="title">
+					<h2>NewWal's 유기동물 통계</h2>
+					<p>실종된 동물들을 지도를 통해 확인해 보세요.</p>
+				</div>
 				
 
 				<div id="lost">
