@@ -7,25 +7,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월</title>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- 
+>>>>>>> f1823577e212ced54f9ef7d6bacaea0d862d0c00
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
-<script
+<!-- <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
@@ -319,7 +321,6 @@ dl.member_chk dd {
 					</div>
 					<div class="spp_con">
 						<div class="spp_body">
-
 							<form
 								action="${pageContext.request.contextPath}/PaymentCheck.sp?sp_category=${p_name}"
 								method="post" id="joinForm">
@@ -737,7 +738,7 @@ dl.member_chk dd {
 												</div>
 											</div>
 		                                  <div class="sp_id_ck" id="sp_id_ck">
-												<h3>ID</h3>
+												<h3>ID 입력</h3>
 												<input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
 											</div>
 										</dd>
@@ -790,7 +791,7 @@ dl.member_chk dd {
 			</div>
 		</div>
 	</div>
-
+ <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 	
 	<script>
 	 $(function () {
          //14세 미만 이상여부
@@ -997,7 +998,7 @@ dl.member_chk dd {
 		   $("#sp_ybi_y").focusout(function(){
 			    let val= $(this).val();
 
-			    if(val < 1900 || val > 2021) {
+			    if(val < 2007 || val > 2021) {
 			    	//$("#sp_ybi_reg").css('display', 'inline-block');
 			        $(this).val('');
 			    }

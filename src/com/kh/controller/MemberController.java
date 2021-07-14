@@ -27,7 +27,7 @@ public class MemberController extends HttpServlet {
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
 		HttpSession session = request.getSession();
-
+		
 		MemberDAO dao = MemberDAO.getInstance();
 		try {
 			if(url.contentEquals("/terms.mem")) { 
@@ -100,9 +100,10 @@ public class MemberController extends HttpServlet {
 				if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
-					System.out.println(dto);
+					response.getWriter().append("correct");
+				}else {
+					response.getWriter().append("incorrect");
 				}
-				response.sendRedirect("index.jsp");
 			}else if(url.contentEquals("/logoutProc.mem")){
 				//----------------------------------------------------------------------------------------- 로그아웃 요청 처리
 				request.getSession().invalidate();
@@ -152,13 +153,14 @@ public class MemberController extends HttpServlet {
 				String code = request.getParameter("code");
 				String email = request.getParameter("email");
 				String authCode = (String)request.getSession().getAttribute("mailAuthCode");
-				if(authCode.contentEquals(code)) {
+				
+				if(authCode == null) {
+					response.getWriter().append("expired");
+				}else if(authCode.contentEquals(code)) {
 					response.getWriter().append("authorized");
 					dao.changeEmail(id,email);
 				}else if(!authCode.contentEquals(code)) {
 					response.getWriter().append("incorrect");
-				}else {
-					response.getWriter().append("expired");
 				}
 			}else if(url.contentEquals("/findID.mem")) {
 				String name = request.getParameter("name");

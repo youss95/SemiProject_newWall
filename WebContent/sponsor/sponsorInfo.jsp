@@ -7,22 +7,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2조 세미 프로젝트</title>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
@@ -35,22 +27,18 @@ section>.title>h2:after {
 * {
 	box-sizing: border-box;
 }
-
 .sp_if .sp_title {
 	font-size: 30px;
 	font-weight: bold;
 	/* margin-top: 60px; */
 }
-
 .sp_if .sp_body {
 	overflow: hidden;
 }
-
 .sp_if .sp_company_title {
 	font-size: 23px;
 	font-weight: 600;
 }
-
 .sp_if .sp_company_bg {
 	background-color: #D6E6F2;
 	line-height: 50px;
@@ -65,47 +53,38 @@ section>.title>h2:after {
 .sp_if .sp_company .img_wrap>img{
 	position:absolute;top:0;left:0;
 }
-
 .sp_if .sp_company .com_img2 {
 	
 	opacity:0;
 	transition-duration: 1s;
 }
-
 .sp_if .sp_company:hover .com_img2 {
 	opacity:1;
 }
-
 .sp_if .sp_company:hover .com_img1 {
 	opacity:0;
 	transition-duration: 1s;
 	/* 바꾸긴했는데 천천히는 안먹음 */
 }
-
 .sp_if .sp_company:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_company img {
 	opacity: 0.9;
 }
-
 .sp_if .sp_company {
 	cursor: pointer;
 }
-
 .sp_if .sp_info02_con {
 	overflow:hidden;
 	text-align: center;
 	width:900px;
 	margin:100px auto 0;
 }
-
 .sp_if .sp_info02_pic img {
 	width: 100px;
 	align-content: center;
 }
-
 .sp_if .sp_info02_pic h4 {
 	width: 300px;
     font-size: 16px;
@@ -114,28 +93,23 @@ section>.title>h2:after {
     line-height: 1.6;
     word-break: keep-all;
 }
-
 .sp_if .sp_info02_pic {
 	float: left;
 	margin: auto;
 }
-
 .sp_if .sp_info02_pic * {
 	text-align: center;
 }
-
 .sp_info02_pic h3 {
 	font-weight: bold;
 	margin: 20px 0 10px;
 	font-size:18px;
 }
-
 .sp_if .sp_info00_pic {
 	float:left;
 	width:50%;
 	padding:100px 50px;
 }
-
 .sp_if .sp_info00_pic h3 {
 	margin-top: 40px;
 	font-size:24px;
@@ -143,28 +117,23 @@ section>.title>h2:after {
 	line-height:1.5;
 	word-break:keep-all;
 }
-
 .sp_if .sp_info00_con {
 	width: 100%;
 	text-align: center;
 	overflow:hidden
 }
-
 .sp_if .sp_info01_con {
 	width: 100%;
 	text-align:center;
 }
-
 .sp_if .sp_info00_pic2 {
 	margin-top: 25px;
 }
-
 .sp_if .sp_info01 {
 	line-height: 25px;
 	text-align:left;
 	display:inline-block;
 }
-
 .sp_if .sp_one_one {
 	width: 50%;
 	padding-right: 0.5%;
@@ -172,11 +141,9 @@ section>.title>h2:after {
 	float: left;
 	cursor: pointer;
 }
-
 .sp_if .sp_one_one .sp_img_con {
 	overflow: hidden;
 }
-
 .sp_if .sp_guardi {
 	width: 50%;
 	padding-left: 0.5%;
@@ -184,30 +151,24 @@ section>.title>h2:after {
 	float: left;
 	cursor: pointer;
 }
-
 .sp_if .sp_guardi .sp_img_con {
 	overflow: hidden;
 }
-
 .sp_if .sp_one_one:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_one_one:hover .com_img1 {
 	transform: scale(1.1);
 	transition-duration: 1s;
 }
-
 .sp_if .sp_guardi:hover .sp_company_bg {
 	background-color: #B9D7EA;
 }
-
 .sp_if .sp_guardi:hover .com_img1 {
 	transform: scale(1.1);
 	transition-duration: 1s;
 }
 </style>
-
 </head>
 <body>
 	<div class="wrap">

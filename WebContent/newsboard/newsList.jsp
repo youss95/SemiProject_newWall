@@ -10,11 +10,7 @@
 <title>뉴월</title>
 
 <jsp:include page="../layout/jsp/commonModal.jsp"></jsp:include>
-<jsp:include page="../layout/jsp/modal.jsp"></jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 <link rel="stylesheet"
@@ -98,6 +94,6 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
 </body>
 </html>

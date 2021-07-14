@@ -7,7 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월</title>
-
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"> 
 <link rel="stylesheet"
@@ -25,7 +24,6 @@
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-
     <style>
 	    section>.title>h2:after{background-color:#254E7C;opacity:.4;}
         * {
@@ -234,38 +232,27 @@
         	margin-top:80px;
         	text-align:center;
         }
-        
-        /* reg */
-        /*.sp_com_input .spp_category2 .sp_name_01_reg {
-            font-size: 14px;
-    		color: #FFA5A5;
-            margin-left: 10px;
-            display: none;  
-             
-        } */
-        .sp_com_input .sp_reg {
-            font-size: 13px;
-    		color: #FFA5A5;
-            margin-left: 10px;
-            display: none;   
-            
-        }
-        
-        .terms .box{padding:20px;background-color:#F7FBFC;border:1px solid #D6E6F2}
-		.terms .box+p{margin:5px 0 10px;font-weight:300;font-size:13px;}
-		.terms h3{margin-bottom: 10px;font-weight: 600;}
-		.terms ul{margin-left:20px;}
-		.terms ul li{font-size:14px;line-height:1.6;}
-		.terms .box+.rd_group{margin-top:10px;}
-		dl.member_chk dt{margin-bottom:10px;font-weight:600;}
-		dl.member_chk dd{margin-bottom:30px;}
-
-
+  .sp_com_input .sp_reg {
+      font-size: 13px;
+color: #FFA5A5;
+      margin-left: 10px;
+      display: none;   
+      
+  }
+      
+ .terms .box{padding:20px;background-color:#F7FBFC;border:1px solid #D6E6F2}
+.terms .box+p{margin:5px 0 10px;font-weight:300;font-size:13px;}
+.terms h3{margin-bottom: 10px;font-weight: 600;}
+.terms ul{margin-left:20px;}
+.terms ul li{font-size:14px;line-height:1.6;}
+.terms .box+.rd_group{margin-top:10px;}
+dl.member_chk dt{margin-bottom:10px;font-weight:600;}
+dl.member_chk dd{margin-bottom:30px;}
     </style>
 </head>
 <body>
-   <div class="wrap">
-		<%@ include file="../../layout/jsp/header.jsp" %>
+	<div class="wrap">
+		<%@ include file="../../layout/jsp/header.jsp"%>
 		<div class="container">
 			<div class="contents">
                 <section class="sp_com_input">
@@ -687,40 +674,7 @@
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<%-- <div class="modal fade" id="loginModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
-						id="popup-img">
-				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				 <div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
-				</div> 
-			</div>
-		</div> 
-	</div>--%>
-	 <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 
+	<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>
 	<script>
 	 $(function () {
          //14세 미만 이상여부
@@ -922,18 +876,15 @@
 					}
 				  $("#sp_yname_reg").css('display', 'none');
 			  });
-			  
-		   
 		   $("#sp_ybi_y").focusout(function(){
 			    let val= $(this).val();
 
-			    if(val < 1900 || val > 2021) {
+			    if(val < 2007 || val > 2021) {
 			    	//$("#sp_ybi_reg").css('display', 'inline-block');
 			        $(this).val('');
 			    }
 			   // $("#sp_ybi_reg").css('display', 'none');
 			}); 
-      
 		  //공통
 		  $("#sp_email").focusout(function(){
 			  if (!(emailReg.test($(this).val()))) {
