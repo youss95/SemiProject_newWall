@@ -290,19 +290,24 @@
 			})
 			
 			$(".btn_status").on('click', function(){
+				
+				let result = confirm("정말 수정 하시겠습니까?");
+				
+				if (result) {
+					$.ajax({
+						url: "${pageContext.request.contextPath}/adoptionUpdate.adm",
+						type: "get",
+						dataType: "json",
+						data : {
+							"p_ad_status" : $("#p_ad_status").val(),
+							"p_seq" : $("#p_seq").val(),
+						}
+					}).done(function(resp){
+	//					console.log(resp[1]);
+					})
+				}
+				
 			
-				console.log($(this).siblings(".adopt_seq").val());
-				$.ajax({
-					url: "${pageContext.request.contextPath}/adoptionUpdate.adm",
-					type: "get",
-					dataType: "json",
-					data : {
-						"p_ad_status" : $("#p_ad_status").val(),
-						"p_seq" : $("#p_seq").val(),
-					}
-				}).done(function(resp){
-//					console.log(resp[1]);
-				})
 			})
 			
 		})

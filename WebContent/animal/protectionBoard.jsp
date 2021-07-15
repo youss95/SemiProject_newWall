@@ -22,9 +22,10 @@
 .img {	margin-top:60px;
         position: relative;
         background-image: url(${pageContext.request.contextPath}/resources/images/img07.jpeg);
-        height: 250px;
+        height: 350px;
         background-size: cover;
         width:100%;
+         background-position: 0;
       }
 
       .img-cover {

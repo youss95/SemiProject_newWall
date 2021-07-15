@@ -23,7 +23,7 @@
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
-				<input type="text" name="protectName" class="inpform" >
+				<input type="text" name="protectName" class="inpform" required >
 				
 				</div>
 				<div id="animalDetail">
@@ -31,7 +31,7 @@
 				<span class="kindAndDate">품종:</span><input type="text" name="protectKind" class="inpform toMargin">
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct" style="width:100px;">
-										<select name="protectGender" id="lostGender">
+										<select name="protectGender" id="lostGender" required>
 											<option value="">선택</option>
 											<option value="F">암컷</option>
 											<option value="M">숫컷</option>
@@ -42,10 +42,10 @@
 				
 				<div class="animalInfo">기본 정보</div>
 				<div id="lostDateId">
-				<span id="lostDates">발견 날짜:</span><input type="date" id="lostDate" name="protectFindDate" class="inpform toMargin" min="2021-01-01"></div>
+				<span id="lostDates">발견 날짜:</span><input type="date" id="lostDate" name="protectFindDate" class="inpform toMargin" min="2021-01-01" required></div>
 				<div id="contentArea">	
 				<div id="content">내용</div>
-				<textarea class="txtareaform" name="protectContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)"></textarea>
+				<textarea class="txtareaform" name="protectContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)" required></textarea>
 				</div>
 				
 				
@@ -58,7 +58,7 @@
 					<div id="title" style="display:inline">주소정보 
 					</div><div style="display:flex;justify-content:space-between;display:inline-block;">
 					
-					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
+					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd" >
 					<button type="button" id="searchBtn" style="padding:7px;">
 					<i class="fas fa-search"></i>
 				</button>
@@ -75,17 +75,17 @@
 			<div class="uploadImage"  style="margin:0 auto;">
 			
 			<div class="box">     
-		 <input type="file" name="protectImage1" id="protectImage1" onChange="imageChoose(this)" style="display:none">	
+		 <input type="file" name="protectImage1" id="protectImage1" onChange="imageChoose(this)" style="display:none" required>	
                         <img src="${pageContext.request.contextPath}/resources/images/uploadimg.png" alt="" id="imageUploadPreview"  style="width:300px;height:300px;"/>               
                    </div>			
 				 <div class="box"> 
-				 <input type="file" name="protectImage2" id="protectImage2" onChange="imageChoose2(this)" style="display:none">	           
+				 <input type="file" name="protectImage2" id="protectImage2" onChange="imageChoose2(this)" style="display:none" required>	           
                         <img src="${pageContext.request.contextPath}/resources/images/uploadimg.png" alt="" id="imageUploadPreview2" style="width:300px;height:300px;" />          
                    </div>             	
                    </div>
                 
                    
-			<input type="hidden" name="addResult" id="hiddenInput">	
+			<input type="hidden" name="addResult" id="hiddenInput" >	
 			<input type="hidden" name="protectWriter" value="${sessionScope.loginInfo.user_id}"> 
 			<button id="btn" type="submit" class="btn_m btn_primary">등록</button>	
 			

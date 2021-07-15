@@ -48,7 +48,7 @@
 							&nbsp;&nbsp; 조회수:${protectDetail.protectViewCount}</div>
 							<!--동물이름과 후원버튼   -->
 						<div id="animalName">${protectDetail.protectName}
-						<c:if test="${sessionScope.loginInfo != null}">
+						<c:if test="${sessionScope.loginInfo.user_id != null}">
 						<span><a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-cog"></i></a></span>
 						</c:if>
 						 <span style="color: violet; margin-left:55px; font-size:20px;"><a href="${pageContext.request.contextPath}/protectInput.sp?protect_no=${protectDetail.protectNo}&protect_name=${protectDetail.protectName}">후원&nbsp;<i class="fas fa-hand-holding-heart"></i></a></span>    </div>
