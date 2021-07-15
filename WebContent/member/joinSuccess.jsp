@@ -14,14 +14,18 @@
 * {
 	box-sizing: border-box;
 }
+
 #mem_join_success_con .pay_top {
 	width: 100%;
 	height: 50px;
 	/* background-color: rgb(96, 124, 69); */
 }
+
 #mem_join_success_con {
 	overflow: hidden;
+	height: 800px;
 }
+
 #mem_join_success_con .mem_join_con {
 	width: 500px;
 	padding: 3%;
@@ -32,12 +36,14 @@
 	/* 눈대중 가운데 .. */
 	margin-top: 150px;
 }
+
 #mem_join_success_con .mem_img_con {
 	float: left;
 	margin-left: 35%;
 	/* 눈대중 가운데 .. */
 	margin-top: -530px;
 }
+
 #mem_join_success_con .mem_join_con .mem_cal {
 	width: 30%;
 	float: left;
@@ -45,16 +51,19 @@
 	margin-top: 5px;
 	padding-left: 20px;
 }
+
 #mem_join_success_con .mem_join_con .mem_inp_ck {
 	width: 60%;
 	float: left;
 	/* display: none; */
 }
+
 #mem_join_success_con .mem_join_con .mem_join_incon {
 	width: 100%;
 	padding: 3%;
 	float: left;
 }
+
 #mem_join_success_con .mem_join_con .sp_pay_btncon {
 	width: 100%;
 	padding: 3%;
@@ -62,6 +71,7 @@
 	float: left;
 	text-align: center;
 }
+
 #mem_join_success_con .mem_join_con .sp_pay_btncon button {
 	width: 60%;
 	height: 50px;
@@ -71,6 +81,7 @@
 	font-weight: 600;
 	border: 1px solid #FCDADA;
 }
+
 #mem_join_success_con .mem_join_con .mem_join_title {
 	width: 100%;
 	font-size: 30px;
@@ -79,19 +90,36 @@
 	padding-bottom: 20px;
 	margin-top: 10px;
 }
+
 #mem_join_success_con .mem_top {
 	float: left;
 	width: 100%;
 }
+
 #mem_join_success_con .mem_top h3 {
 	float: left;
-	width: 100%;
+	/* width: 100%; */
 	font-size: 30px;
 	font-weight: 600;
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	margin-left: 35%;
+
 }
+
+#mem_join_success_con .mem_top h3:after {
+	background-color: #254E7C;
+	opacity: .4;
+	display: block;
+	width: 100%;
+	height: 8px;
+	z-index: -1;
+	margin-top: -10px;
+	content: '';
+}
+
+
 #mem_join_success_con .mem_top p {
 	float: left;
 	width: 100%;
@@ -118,26 +146,31 @@
 					<div class="mem_join_con">
 						<div class="mem_join_incon">
 							<h2 class="mem_join_title">
-								<img src="${pageContext.request.contextPath}/resources/images/login_logo8.png" alt="">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/login_logo8.png"
+									alt="">
 							</h2>
 						</div>
 						<div class="mem_join_incon">
 							<h3 class="mem_cal">ID</h3>
-							<input type="text" class="inpform mem_inp_ck"
-								value="${user_id}" disabled>
+							<input type="text" class="inpform mem_inp_ck" value="${user_id}"
+								disabled>
 						</div>
 						<div class="mem_join_incon">
 							<h3 class="mem_cal">이름</h3>
-							<input type="text" class="inpform mem_inp_ck"
-								value="${name}" disabled>
+							<input type="text" class="inpform mem_inp_ck" value="${name}"
+								disabled>
 						</div>
 
 						<div class="mem_join_incon sp_pay_btncon">
-							<a href="${pageContext.request.contextPath}/index.jsp"><button class="btn_m btn_primary btn_home">첫페이지로 가기</button></a>
+							<a href="${pageContext.request.contextPath}/index.jsp"><button
+									class="btn_m btn_primary btn_home">첫페이지로 가기</button></a>
 						</div>
 					</div>
 					<div class="mem_img_con">
-						<img src="${pageContext.request.contextPath}/resources/images/login_image4.png" alt="">
+						<img
+							src="${pageContext.request.contextPath}/resources/images/login_image4.png"
+							alt="">
 					</div>
 					<!-- 끝 -->
 				</section>
@@ -146,8 +179,8 @@
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
 	<script>
-
-</script>
+		
+	</script>
 </body>
 </html>
 
