@@ -46,6 +46,17 @@ public class AdoptController extends HttpServlet {
 		return result;
 	}
 	
+	private String XSSFilter(String target) {
+
+		if(target != null) {
+			target = target.replaceAll("<", "&lt;");
+			target = target.replaceAll(">", "&gt;");
+			target = target.replaceAll("&", "&amp;");
+		}
+		return target;
+
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
@@ -138,29 +149,29 @@ public class AdoptController extends HttpServlet {
 				}else {
 					user_id = (session_chk).getUser_id();
 				}
-				System.out.println("user_id : " + user_id);
+
 				String code_seq = request.getParameter("code_seq");
-				String p_name = request.getParameter("p_name");
-				String p_phone01 = request.getParameter("p_phone01");
-				String p_phone02 = request.getParameter("p_phone02");
-				String p_email = request.getParameter("p_email");
+				String p_name = XSSFilter(request.getParameter("p_name"));
+				String p_phone01 = XSSFilter(request.getParameter("p_phone01"));
+				String p_phone02 = XSSFilter(request.getParameter("p_phone02"));
+				String p_email = XSSFilter(request.getParameter("p_email"));
 				String p_gender = request.getParameter("p_gender");
-				String p_age = request.getParameter("p_age");
-				String p_address = request.getParameter("p_address");
+				String p_age = XSSFilter(request.getParameter("p_age"));
+				String p_address = XSSFilter(request.getParameter("p_address"));
 				String p_mstatus = request.getParameter("p_mstatus");
 				String p_arg = request.getParameter("p_arg");
-				String q01_aname = request.getParameter("pet_name");
-				String q02_alternative = request.getParameter("alternative");
-				String q03_time_to_worry = request.getParameter("time_to_worry");
-				String q04_reason = request.getParameter("reason");
-				String q05_family_member = request.getParameter("family_member");
+				String q01_aname = XSSFilter(request.getParameter("pet_name"));
+				String q02_alternative = XSSFilter(request.getParameter("alternative"));
+				String q03_time_to_worry = XSSFilter(request.getParameter("time_to_worry"));
+				String q04_reason = XSSFilter(request.getParameter("reason"));
+				String q05_family_member = XSSFilter(request.getParameter("family_member"));
 				String q06_family_arg = request.getParameter("family_arg");
-				String q07_pet = request.getParameter("pet");
-				String q08_experience = request.getParameter("experience");
+				String q07_pet = XSSFilter(request.getParameter("pet"));
+				String q08_experience = XSSFilter(request.getParameter("experience"));
 				String q09_housing_type = request.getParameter("housing_type");
-				String q10_host_consent = request.getParameter("host_consent");
-				String q11_impossible_situation = request.getParameter("impossible_situation");
-				String q12_lodging_problem = request.getParameter("lodging_problem");
+				String q10_host_consent = XSSFilter(request.getParameter("host_consent"));
+				String q11_impossible_situation = XSSFilter(request.getParameter("impossible_situation"));
+				String q12_lodging_problem = XSSFilter(request.getParameter("lodging_problem"));
 				String q13_payment_arg = request.getParameter("payment_arg");
 				String q14_neutered_arg = request.getParameter("neutered_arg");
 				String q15_visit_agr = request.getParameter("visit_agr");

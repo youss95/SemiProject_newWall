@@ -178,7 +178,7 @@ section .contents{padding: 30px 30px 60px 30px;}
 .photo_thumb>input{margin-top:10px;}
 .photo_detail strong{line-height:40px;font-weight:600;float:left;margin-right:20px;}
 .photo_detail .btn_plus{margin:10px 0;width:20px;height:20px;border-radius:50%;background-color:#769FCD;color:#fff;}
-.photo_detail input[type=file]{margin-bottom:10px;}
+.photo_detail input[type=file]{margin-bottom:10px;display:inline-block;}
 .photo_detail .delFile{width:20px;height:20px;border-radius:50%;border:1px solid #ddd;vertical-align:top;}
 .photo_detail .oriFile span{display:inline-block;line-height:20px!important;margin-bottom:10px;vertical-align:top;margin-right:5px;}
 
