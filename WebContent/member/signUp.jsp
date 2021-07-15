@@ -148,10 +148,89 @@
 	margin-right: 30px;
 	margin-top:22px;
 }
+
+#loadingModal div{border:none;color:white;}
+
+.loader {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.circular {
+	animation: rotate 2s linear infinite;
+	height: 200px;
+	position: relative;
+	width: 200px;
+}
+
+.path {
+	stroke-dasharray: 1, 400;
+	stroke-dashoffset: 0;
+	stroke: #b6463a;
+	animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+	stroke-linecap: round;
+}
+@keyframes rotate {
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+ @keyframes dash {
+   0% {
+     stroke-dasharray: 2, 400;
+     stroke-dashoffset: 0;
+   }
+   50% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -70;
+   }
+   100% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -248;
+   }
+ }
+ @keyframes color {
+   100%,
+   0% {
+     stroke: red;
+   }
+   40% {
+     stroke: violet;
+   }
+   66% {
+     stroke: green;
+   }
+   80%,
+   90% {
+     stroke: yellow;
+   }
+ }
+
+
 </style>
 </head>
 <body>
 	<jsp:include page="/layout/jsp/modal.jsp" />
+	
+	<div class="modal fade" id="loadingModal" tabindex="-1"
+		aria-labelledby="loadingModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content" style="background-color:#00000000;">
+				<div class="modal-body" style="height:200px;">
+					<div class="loader">
+						<svg class="circular">
+	            <circle class="path" cx="100" cy="100" r="40" fill="none"
+								stroke-width="10" stroke-miterlimit="10"></circle></svg>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">요청을 처리 중 입니다. 잠시만 기다려주세요.</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="wrap">
 		<jsp:include page="../layout/jsp/header.jsp"></jsp:include>
@@ -387,11 +466,18 @@
 				return false;
 			}
 			$("#mailAuth").attr("disabled","disabled");
+			$('#loadingModal').modal('show');
+			$("#loadingModal").modal({backdrop: 'static', keyboard: false});
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/mailAuthReq.mem",
 				data:{email:email}
 			}).done(function(resp){
+				
+				alert("입력한 이메일로 인증번호를 발송했습니다.\n메일을 확인 후 입력해주세요.");
+				$("#loadingModal").modal("hide");
+				$('body').removeClass('modal-open');
+				$('.modal-backdrop').remove();
 				
 				let authDiv = $("<div>");
 				authDiv.attr("style","display:block;");
