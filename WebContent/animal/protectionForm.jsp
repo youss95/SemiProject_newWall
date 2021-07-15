@@ -15,8 +15,11 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
+					<div class="title">
+						<h2>임시보호</h2>
+						<p>임시 보호자분들이 보호중인 동물들의 위치정보를 알 수 있습니다.</p>
+					</div>
 					<form action="${pageContext.request.contextPath}/protectBoard.lost?page=1" method="post" enctype="multipart/form-data">
-				<div id="mainTitle">임시보호</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
