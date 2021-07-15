@@ -8,23 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- 
->>>>>>> f1823577e212ced54f9ef7d6bacaea0d862d0c00
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous"> -->
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
-<!-- <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script> -->
+
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -66,6 +57,9 @@ section>.title>h2:after {
 
 .sp_com_input {
 	overflow: hidden;
+}
+.sp_com_input .directname{
+	width: 30%;
 }
 
 /* 각 항목 사이 공간 띄우기 */
@@ -378,7 +372,7 @@ dl.member_chk dd {
 										<div class="name">
 											<h3>이름</h3>
 											<input type="text" class="inpform na" id="sp_name_01"
-												name="sp_name_01" required> <span
+												name="sp_name_01"  maxlength=5 required> <span
 												class="sp_name_01_reg sp_reg" id="sp_name_01_reg">2 ~
 												5 글자의 한글로 작성해주세요</span>
 										</div>
@@ -472,7 +466,7 @@ dl.member_chk dd {
 												이름<span>(법정대리인)</span>
 											</h3>
 											<input type="text" class="inpform na" id="sp_name_02"
-												name="sp_name_02"> <span
+												name="sp_name_02  maxlength=5"> <span
 												class="sp_name_02_reg sp_reg" id="sp_name_02_reg">2 ~
 												5 글자의 한글로 작성해주세요</span>
 										</div>
@@ -565,7 +559,7 @@ dl.member_chk dd {
 												기부자명<span>(본인)</span>
 											</h3>
 											<input type="text" class="inpform na" id="sp_yname"
-												name="sp_yname"> <span class="sp_yname_reg sp_reg"
+												name="sp_yname"  maxlength=5> <span class="sp_yname_reg sp_reg"
 												id="sp_yname_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
 										</div>
 										<div class="birth">
@@ -574,7 +568,7 @@ dl.member_chk dd {
 											</h3>
 											<div class="birth_wrap">
 												<div class="">
-													<input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y" placeholder="1999">
+													<input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y" placeholder="2008">
 													<span>년</span>
 												</div>
 												<div>
@@ -647,7 +641,7 @@ dl.member_chk dd {
 										<h3>이메일</h3>
 										<input type="text" class="inpform sp_email_inp"
 											placeholder="example123@email.com" name="sp_email"
-											id="sp_email" required> <span
+											id="sp_email"  maxlength=30 required> <span
 											class="sp_email_reg sp_reg" id="sp_email_reg">올바른 이메일을
 											작성해주세요</span>
 									</div>
@@ -656,7 +650,7 @@ dl.member_chk dd {
 										<div>
 											<h3 class="ad_h3">우편번호</h3>
 											<input type="text" id="sp_postcode" name="sp_postcode"
-												class="inpform sp_address_inp sp_address_inp1" required>
+												class="inpform sp_address_inp sp_address_inp1"  maxlength=5 required>
 											<button class="btn_m btn_default" id="sp_search"
 												class="inpform sp_address_inp" type="button">우편번호
 												찾기</button>
@@ -664,12 +658,12 @@ dl.member_chk dd {
 										<div>
 											<h3 class="ad_h3">도로명 주소</h3>
 											<input type="text" id="sp_address1" name="sp_address1"
-												class="inpform sp_address_inp sp_address_inp2" required>
+												class="inpform sp_address_inp sp_address_inp2"  maxlength=100 required>
 										</div>
 										<div>
 											<h3>상세 주소</h3>
 											<input type="text" id="sp_address2" name="sp_address2"
-												class="inpform sp_address_inp sp_address_inp2" required>
+												class="inpform sp_address_inp sp_address_inp2"  maxlength=100 required>
 										</div>
 									</div>
 								</div>
@@ -739,7 +733,7 @@ dl.member_chk dd {
 											</div>
 		                                  <div class="sp_id_ck" id="sp_id_ck">
 												<h3>ID 입력</h3>
-												<input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
+												<input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id" maxlength=20>
 											</div>
 										</dd>
 									</dl>
@@ -758,39 +752,7 @@ dl.member_chk dd {
 			<p>Copyright &copy; Kh semi project by group 2</p>
 		</footer>
 	</div>
-	<div class="modal fade" id="loginModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/login_image4.png"
-						id="popup-img">
-				</div>
-				<div class="modal-header login-title"></div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="user-id" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_id"
-								placeholder="Your ID">
-						</div>
-						<div class="form-group">
-							<label for="user-password" class="col-form-label"></label> <input
-								type="text" class="form-control" id="user_pw"
-								placeholder="Password">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_m btn_default"
-						data-dismiss="modal" style="width: 125%">로그인</button>
-					<button type="button" class="btn_m btn_white" data-dismiss="modal"
-						style="width: 125%">회원가입</button>
-				</div>
-			</div>
-		</div>
-	</div>
+<jsp:include page="/layout/jsp/modal.jsp"></jsp:include>	
  <jsp:include page="/layout/jsp/modal.jsp"></jsp:include> 	
 	<script>
 	 $(function () {

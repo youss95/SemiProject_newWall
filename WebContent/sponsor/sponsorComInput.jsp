@@ -7,23 +7,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>뉴월</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"> 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/loginPopUp.css">
 
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/all.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
     <style>
 	    section>.title>h2:after{background-color:#254E7C;opacity:.4;}
         * {
@@ -322,7 +315,7 @@ dl.member_chk dd{margin-bottom:30px;}
                                     <div class="a14up" id="a14up">
                                         <div class="name">
                                             <h3>이름</h3>
-                                            <input type="text" class="inpform na" id="sp_name_01" name="sp_name_01" required>
+                                            <input type="text" class="inpform na" id="sp_name_01" name="sp_name_01" maxlength=5 required>
                                             <span class="sp_name_01_reg sp_reg" id="sp_name_01_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="phone">
@@ -407,7 +400,7 @@ dl.member_chk dd{margin-bottom:30px;}
                                     <div class="a14down" id="a14down">
                                         <div class="name">
                                             <h3>이름<span>(법정대리인)</span></h3>
-                                            <input type="text" class="inpform na" id="sp_name_02" name="sp_name_02">
+                                            <input type="text" class="inpform na" id="sp_name_02" name="sp_name_02"  maxlength=5>
                                             <span class="sp_name_02_reg sp_reg" id="sp_name_02_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="phone">
@@ -489,14 +482,14 @@ dl.member_chk dd{margin-bottom:30px;}
                                         </div>
                                         <div class="name">
                                             <h3>기부자명<span>(본인)</span></h3>
-                                            <input type="text" class="inpform na" id="sp_yname" name="sp_yname">
+                                            <input type="text" class="inpform na" id="sp_yname" name="sp_yname"  maxlength=5>
                                             <span class="sp_yname_reg sp_reg" id="sp_yname_reg">2 ~ 5 글자의 한글로 작성해주세요</span>
                                         </div>
                                         <div class="birth">
 	                                         <h3>생년월일<span>(본인)</span></h3>
 	                                         <div class="birth_wrap">
 	                                         	<div class="">
-	                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y"  placeholder="1999">
+	                                                <input type="number" class="inpform bi_y" id="sp_ybi_y" name="sp_ybi_y"  placeholder="2008">
 	                                                <span>년</span>
 	                                            </div>
 		                                         <div>
@@ -569,25 +562,25 @@ dl.member_chk dd{margin-bottom:30px;}
                                     <div class="sp_email">
                                         <h3>이메일</h3>
                                         <input type="text" class="inpform sp_email_inp"
-                                            placeholder="example123@email.com" name="sp_email" id="sp_email" required>
+                                            placeholder="example123@email.com" name="sp_email" id="sp_email"   maxlength=30 required>
                                             <span class="sp_email_reg sp_reg" id="sp_email_reg">올바른 이메일을 작성해주세요</span>
                                     </div>
 
                                     <div class="sp_address">
                                         <div>
                                             <h3 class="ad_h3">우편번호</h3>
-                                            <input type="text" id="sp_postcode" name="sp_postcode" class="inpform sp_address_inp sp_address_inp1"
+                                            <input type="text" id="sp_postcode" name="sp_postcode" class="inpform sp_address_inp sp_address_inp1" maxlength=5
                                                 required>
                                             <button class="btn_m btn_default" id="sp_search"
                                                 class="inpform sp_address_inp" type="button">우편번호 찾기</button>
                                         </div>
                                         <div>
                                             <h3 class="ad_h3">도로명 주소</h3>
-                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2" required>
+                                            <input type="text" id="sp_address1" name="sp_address1" class="inpform sp_address_inp sp_address_inp2" maxlength=100 required>
                                         </div>
                                         <div>
                                             <h3>상세 주소</h3>
-                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2" required>
+                                            <input type="text" id="sp_address2" name="sp_address2" class="inpform sp_address_inp sp_address_inp2" maxlength=100 required>
                                         </div>
                                     </div>
                                 </div>
@@ -655,7 +648,7 @@ dl.member_chk dd{margin-bottom:30px;}
 		                                    </div>
 		                                    <div class="sp_id_ck" id="sp_id_ck">
 		                                        <h3>ID 입력</h3>
-		                                        <input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id">
+		                                        <input type="text" id="sp_id_ck_inp" class="inpform sp_id_ck_inp" name="sp_mb_id" maxlength=20>
 		                                    </div>
 										</dd>
 									</dl>

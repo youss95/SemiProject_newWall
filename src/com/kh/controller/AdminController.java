@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.config.PageConfig;
 import com.kh.config.SponsorConfig;
@@ -30,16 +29,15 @@ import com.kh.dao.AdminDAO;
 import com.kh.dao.AdoptionDAO;
 import com.kh.dao.AnimalDAO;
 import com.kh.dao.FileDAO;
-import com.kh.dao.NoticeDAO;
-import com.kh.dao.NoticeFileDAO;
+import com.kh.dao.MemberDAO;
 import com.kh.dto.AdoptionDTO;
 import com.kh.dto.AnimalDTO;
 import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.LostAnimalDTO;
-import com.kh.dto.NoticeDTO;
-import com.kh.dto.NoticeFileDTO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.ProtectBoardDTO;
 import com.kh.dto.SponsorDTO;
+import com.kh.utils.EncryptUtils;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -102,8 +100,17 @@ public class AdminController extends HttpServlet {
 		AdminDAO admindao = AdminDAO.getInstance();
 		AdoptionDAO adoptdao = AdoptionDAO.getInstance();
 		FileDAO fdao = FileDAO.getInstance();
+		MemberDAO dao = MemberDAO.getInstance();
+
+
 
 		try {
+			if(!url.contentEquals("/login.adm")) {
+				if(request.getSession().getAttribute("admLoginInfo") == null) {
+					throw new Exception("잘 못된 접근");
+				}
+			}
+
 			if(url.contentEquals("/adoptRegList.adm")) {
 				System.out.println("입양신청리스트");
 
@@ -111,7 +118,7 @@ public class AdminController extends HttpServlet {
 				int endNum = cpage * PageConfig.ADOPTION_RECORD_COUNT_PER_PAGE;
 				int startNum = endNum - (PageConfig.ADOPTION_RECORD_COUNT_PER_PAGE - 1);
 				String filter = request.getParameter("ad_status");
-				
+
 				List<AdoptionDTO> list;
 				List<String> pageNavi = admindao.getAdoptionPageNavi(cpage, filter);
 
@@ -135,7 +142,7 @@ public class AdminController extends HttpServlet {
 				String result = g.toJson(info);
 				response.getWriter().append(result);
 			}else if(url.contentEquals("/adoptionUpdate.adm")) { 
-				
+
 				response.setContentType("text/html;charset=utf-8");
 				int adopt_seq = Integer.parseInt(request.getParameter("p_seq"));
 				String ad_status = request.getParameter("p_ad_status");
@@ -252,10 +259,10 @@ public class AdminController extends HttpServlet {
 				Date anDate = transformDate(multi.getParameter("anDate"));
 				String anStatus = multi.getParameter("anStatus");
 				String thumbImg = multi.getFilesystemName("thumbnail");
-				
+
 				String deleteImg = multi.getParameter("deleteImg"); // 수정 이전의 원래 썸네일 
-				
-				
+
+
 				if(thumbImg != null) {thumbImg = Normalizer.normalize(thumbImg, Form.NFC);}
 				String anContnets = multi.getParameter("anContnets");
 				String anNeutering = multi.getParameter("anNeutering");
@@ -290,7 +297,7 @@ public class AdminController extends HttpServlet {
 						fdao.animalImgUpload(new AnimalFilesDTO(0, oriName, sysName, null, code_seq));
 					}
 				}
-				
+
 				File targetFile = new File(filesPath + "/"+ deleteImg); // 썸네일 이미지 삭제
 				targetFile.delete();
 
@@ -374,12 +381,12 @@ public class AdminController extends HttpServlet {
 					System.out.println("검색 : "+ sp_search);
 					slist = admindao.adSponsorGetPageList(startNum, endNum, sp_search);
 				}
-					request.setAttribute("slist", slist);
-					request.setAttribute("cpage", cpage);
-					request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
-					request.setAttribute("sp_cho", sp_search);
-					System.out.println(sp_search);
-					request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
+				request.setAttribute("slist", slist);
+				request.setAttribute("cpage", cpage);
+				request.setAttribute("navi", navi);//아래1~10 버튼 중 필요만큼
+				request.setAttribute("sp_cho", sp_search);
+				System.out.println(sp_search);
+				request.getRequestDispatcher("admin/adSponsorList.jsp").forward(request, response);
 
 			}else if(url.equals("/protectAnimal.adm")) {
 				int page = Integer.parseInt(request.getParameter("page"));
@@ -389,14 +396,14 @@ public class AdminController extends HttpServlet {
 				//게시글 리스트
 				List<ProtectBoardDTO> list = AnimalDAO.getList(page, count);
 				System.out.println("게시글 리스트"+list);
-			
+
 				int lastPage = (int)Math.ceil(boardCount/10.0); //임시적인 마지막 페이지
-				 //보여질 페이지 네비 연산
+				//보여질 페이지 네비 연산
 				int nowGrp = (int)(Math.ceil((double)page/10)); 
 				int startNum = ((nowGrp-1) * 10) +1 ;
 				int lastNum = (nowGrp * 10);
 				request.setAttribute("adProtect", list);
-				
+
 				int endPage = lastNum > lastPage ? lastPage : lastNum; //실제 보여질 페이지
 				request.setAttribute("lastPage", lastPage);
 				request.setAttribute("lastNum", endPage);
@@ -404,7 +411,7 @@ public class AdminController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("admin/userArticles.jsp");
 				dis.forward(request, response);
 			}else if(url.equals("/paDelete.adm")) {
-				
+
 				int protectNo = Integer.parseInt(request.getParameter("protectNo"));
 				int result = AnimalDAO.protectDelete(protectNo);
 				if(result>0) {
@@ -419,7 +426,7 @@ public class AdminController extends HttpServlet {
 					out.flush();
 				}
 			}else if(url.equals("/lostAnimal.adm")) {
-				
+
 				int page = Integer.parseInt(request.getParameter("page"));
 				int count = PageConfig.ADMIN_PROTECT_RECORD_COUNT_PER_PAGE;
 				List<LostAnimalDTO> list = AnimalDAO.mapList(page,count);
@@ -427,19 +434,19 @@ public class AdminController extends HttpServlet {
 				int boardCount = AnimalDAO.getAllCount();
 				System.out.println(boardCount);
 				int lastPage = (int)Math.ceil(boardCount/10.0); //임시적인 마지막 페이지
-				 //보여질 페이지 네비 연산
+				//보여질 페이지 네비 연산
 				int nowGrp = (int)(Math.ceil((double)page/10)); 
 				int startNum = ((nowGrp-1) * 10) +1 ;
 				int lastNum = (nowGrp * 10);
 				request.setAttribute("adProtect", list);
-				
+
 				int endPage = lastNum > lastPage ? lastPage : lastNum; //실제 보여질 페이지
 				request.setAttribute("lastPage", lastPage);
 				request.setAttribute("lastNum", endPage);
 				request.setAttribute("startNum", startNum);
-				
+
 				request.setAttribute("mapList", list);
-				
+
 				RequestDispatcher dis = request.getRequestDispatcher("admin/userLostArticles.jsp");
 				dis.forward(request, response);
 			}else if(url.equals("/laDelete.adm")) {
@@ -456,9 +463,43 @@ public class AdminController extends HttpServlet {
 					out.print("</script>");
 					out.flush();
 				}
-			}
-					
+			}else if(url.contentEquals("/login.adm")) {
+				String user_id = request.getParameter("user_id");
+				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
 
+				if(!user_id.contentEquals("admin")) {
+					response.sendRedirect("admin/adminLogin.jsp");
+				}else if(dao.isLoginOk(user_id, user_password)) {
+					MemberDTO dto = dao.selectMemberById(user_id);
+					request.getSession().setAttribute("admLoginInfo", dto);
+					response.sendRedirect("admin/adoptRegList.jsp");
+				}else {
+					response.sendRedirect("admin/adminLogin.jsp");
+				}
+			}else if(url.contentEquals("/memberManage.adm")) {
+				List<MemberDTO> list = dao.selectAll();
+				
+				for(MemberDTO dto : list) {
+					boolean result = dao.isBlackList(dto.getUser_id());
+					dto.setBlack(result);
+				}
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("admin/managerMember.jsp").forward(request, response);
+			}else if(url.contentEquals("/addBlack.adm")) {
+				String user_id = request.getParameter("user_id");
+				String reason = request.getParameter("reason");
+				int result = dao.addBlack(user_id, reason);
+				response.sendRedirect("memberManage.adm");
+			}else if(url.contentEquals("/kickout.adm")) {
+				String id = request.getParameter("user_id");
+				int result = dao.delete(id);
+				response.sendRedirect("memberManage.adm");
+			}else if(url.contentEquals("/restoreBlack.adm")) {
+				String user_id = request.getParameter("user_id");
+				int result = dao.removeBlackList(user_id);
+				response.sendRedirect("memberManage.adm");
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");
