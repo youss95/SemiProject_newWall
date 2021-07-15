@@ -51,10 +51,11 @@
 		<div class="container">
 			<div class="contents">
 				<section class="notice_list">
+					<div class="title">
+						<h2>뉴스</h2>
+						<p>다양한 활동과 소식을 담은 뉴스레터를 보내드립니다.</p>
+					</div>
 					<div class="news_wrap">
-						<div class="board_title">
-							<strong>뉴스</strong>
-						</div>
 						<div class="news_view_wrap">
 							<div class="title">${newsView.news_title}</div>
 							<div class="info">

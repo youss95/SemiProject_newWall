@@ -53,10 +53,11 @@
 		<div class="container">
 			<div class="contents">
 				<section class="notice_list">
+					<div class="title">
+						<h2>공지사항</h2>
+						<p>새로운 소식과 이야기를 전합니다</p>
+					</div>
 					<div class="board_wrap">
-						<div class="board_title">
-							<strong>공지사항</strong>
-						</div>
 						<div class="board_view_wrap">
 							<div class="board_view">
 								<div class="title">${noticeView.notice_title}</div>

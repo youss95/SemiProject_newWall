@@ -77,10 +77,11 @@
 		<div class="container">
 			<div class="contents">
 				<section class="notice_list">
+					<div class="title">
+						<h2>뉴스</h2>
+						<p>다양한 활동과 소식을 담은 뉴스레터를 보내드립니다.</p>
+					</div>
 					<div class="board_wrap">
-						<div class="board_title">
-							<strong>뉴스</strong>
-						</div>
 						<form action="${pageContext.request.contextPath}/write.news" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
 								<div class="newsboard_write">
