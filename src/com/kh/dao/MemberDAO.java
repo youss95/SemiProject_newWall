@@ -29,6 +29,18 @@ public class MemberDAO {
 	}
 	private MemberDAO() {}
 	
+	public String getBlackReason(String user_id) throws Exception{
+		String sql = "select reason from blacklist where id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, user_id);
+			try(ResultSet rs = pstat.executeQuery()){
+				rs.next();
+				return rs.getNString(1);
+			}
+		}
+	}
+	
 	public boolean isBlackList(String user_id) throws Exception{
 		String sql = "select * from blacklist where id=?";
 		try(Connection con = this.getConnection();

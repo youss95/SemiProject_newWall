@@ -106,7 +106,7 @@ public class AdminController extends HttpServlet {
 
 		try {
 			if(!url.contentEquals("/login.adm")) {
-				if(request.getSession().getAttribute("loginInfo") == null) {
+				if(request.getSession().getAttribute("admLoginInfo") == null) {
 					throw new Exception("잘 못된 접근");
 				}
 			}
@@ -471,7 +471,7 @@ public class AdminController extends HttpServlet {
 					response.sendRedirect("admin/adminLogin.jsp");
 				}else if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
-					request.getSession().setAttribute("loginInfo", dto);
+					request.getSession().setAttribute("admLoginInfo", dto);
 					response.sendRedirect("admin/adoptRegList.jsp");
 				}else {
 					response.sendRedirect("admin/adminLogin.jsp");

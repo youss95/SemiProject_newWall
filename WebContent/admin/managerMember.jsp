@@ -148,7 +148,7 @@ tbody svg {
 			}
 	    })
 	    
-	    $(".fa-user-nurse").on("click",function(){
+	    $("tbody").on("click",".fa-user-nurse",function(){
 	    	let target = $(this).attr("itemref");
 			let check = confirm(target + " 멤버를 블랙리스트에서 제거하시겠습니까?");
 			if(check){
@@ -156,7 +156,7 @@ tbody svg {
 			}
 	    })
 		
-		$(".fa-ban").on("click",function(){
+		$("tbody").on("click",".fa-ban",function(){
 			let target = $(this).attr("itemref");
 			let check = confirm(target + " 멤버를 정말 탈퇴시키시겠습니까?");
 			if(check){

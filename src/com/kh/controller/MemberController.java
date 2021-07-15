@@ -96,8 +96,11 @@ public class MemberController extends HttpServlet {
 				//----------------------------------------------------------------------------------------- 로그인 요청 처리
 				String user_id = request.getParameter("user_id");
 				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
-
-				if(dao.isLoginOk(user_id, user_password)) {
+				
+				boolean result = dao.isBlackList(user_id);
+				if(result) {
+					response.getWriter().append("blacklist");
+				}else if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("loginInfo", dto);
 					response.getWriter().append("correct");
@@ -182,10 +185,12 @@ public class MemberController extends HttpServlet {
 				}else {
 					response.getWriter().append("incorrect");
 				}
+			}else if(url.contentEquals("/requestBlackReason.mem")) {
+				String user_id = request.getParameter("user_id");
+				String reason = dao.getBlackReason(user_id);
+				response.setCharacterEncoding("utf8");
+				response.getWriter().append(reason);
 			}
-			
-			
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.jsp");
