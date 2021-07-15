@@ -3,18 +3,18 @@
 *{box-sizing: border-box;}
 .news_wrap{margin: 50px auto;}
 .news_wrap .news_view_wrap{padding: 10px;}
-.news_view_wrap .title {padding: 10px 10px; font-size: 2rem;}
+.news_view_wrap .title {padding: 10px 10px; font-size: 1.5rem;}
 .news_view_wrap .file {text-align: right; padding: 0 20px;}
 .news_view_wrap .info{text-align: right; padding: 15px;}
 /* .news_view_wrap .info dl:first-child{padding: 0;} */
 .news_view_wrap .info dl:first-child::before {display: none;}
 .news_view_wrap .info dl::before {content: ""; position: absolute; top: 1px; left: 0; display: block; width: 1px; height: 13px;}
 .news_view_wrap .info dl{position: relative; display: inline-block; padding: 0 20px;}
-.news_view_wrap .info dl dt,.news_view_wrap .info dl dd {display: inline-block; font-size: 1.4rem;}
+.news_view_wrap .info dl dt,.news_view_wrap .info dl dd {display: inline-block; font-size: 1rem;}
 .news_view_wrap .info dl dd {margin-left: 10px; color: #777;}
 .news_view_wrap .cont{padding: 15px; border-bottom: 1ps solid; line-height: 160%; font-size: 1.4rem;}
 .news_bt_wrap {text-align: center; margin: 20px 0 20px;}
-.news_bt_wrap a {display: inline-block; min-width: 80px; margin-left: 3px; padding: 10px; font-size: 1.4rem;}
+.news_bt_wrap a {display: inline-block; min-width: 80px; margin-left: 3px; padding: 10px;}
  a{text-decoration: none;}
 .newsboard_write {border-top: 2px solid #000;}
 .newsboard_write .modiFile{float: left; width: 265px; height: 33px; line-height:33px;}

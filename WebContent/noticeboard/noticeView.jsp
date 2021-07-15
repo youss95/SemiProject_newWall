@@ -68,10 +68,6 @@
 								</c:forEach>
 								<div class="info">
 									<dl>
-										<dt>번호</dt>
-										<dd>${noticeView.notice_seq}</dd>
-									</dl>
-									<dl>
 										<dt>글쓴이</dt>
 										<dd>${noticeView.notice_writer}</dd>
 									</dl>
