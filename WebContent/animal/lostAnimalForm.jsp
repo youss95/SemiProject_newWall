@@ -61,16 +61,19 @@
 					style="width: 60%; height: 60%; position: relative; overflow: hidden;"></div>
 
 				<div class="hAddr">
-					<span id="title">주소정보</span>
-					<!-- <span id="centerAddr"></span> -->
-
-
+					<div id="title" style="display:inline">주소정보 
+					</div><div style="display:flex;justify-content:space-between;display:inline-block;">
+					
 					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
-				</div>
-
-				<button type="button" id="searchBtn">
+					<button type="button" id="searchBtn" style="padding:7px;">
 					<i class="fas fa-search"></i>
 				</button>
+				</div>
+					선택주소: <div id="centerAddr" style="margin:0px;display:inline;"></div> 
+						
+				</div>
+
+				
 			</div>
 			
 			<div id="animalImage">

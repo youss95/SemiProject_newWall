@@ -14,6 +14,7 @@ public class MemberDTO {
 	private String postcode;
 	private String address1;
 	private String address2;
+	private boolean isBlack;
 	
 	public MemberDTO() {}
 	public MemberDTO(String user_id, String user_password, String email, String name, Date birthday, String contact,
@@ -93,5 +94,11 @@ public class MemberDTO {
 	public String getFormedDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 		return sdf.format(this.birthday);
+	}
+	public boolean isBlack() {
+		return isBlack;
+	}
+	public void setBlack(boolean isBlack) {
+		this.isBlack = isBlack;
 	}
 }

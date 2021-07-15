@@ -15,6 +15,7 @@ import com.kh.dao.AdoptionDAO;
 import com.kh.dao.FileDAO;
 import com.kh.dao.MainDAO;
 import com.kh.dto.AnimalDTO;
+import com.kh.dto.ReviewDTO;
 
 @WebServlet("*.main")
 public class MainController extends HttpServlet {
@@ -28,10 +29,6 @@ public class MainController extends HttpServlet {
 		String ctxPath = request.getContextPath();
 		String url = requestURI.substring(ctxPath.length());
 
-		System.out.println("requestURI : " + requestURI);
-		System.out.println("ctxPath : " + ctxPath);
-		System.out.println("url : " + url);
-
 		MainDAO dao = MainDAO.getInstance();
 
 		try {
@@ -40,10 +37,18 @@ public class MainController extends HttpServlet {
 				
 				Gson g = new Gson();
 				List<AnimalDTO> list = dao.getMainAnimalsImg();
-				System.out.println(list);
+				String result = g.toJson(list);
+				response.getWriter().append(result);
+			}else if(url.contentEquals("/mainReviews.main")) {
+
+				response.setContentType("text/html;charset=utf-8");
+				
+				Gson g = new Gson();
+				List<ReviewDTO> list = dao.getMainReviews();
 				String result = g.toJson(list);
 				response.getWriter().append(result);
 			}
+		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -19,7 +19,7 @@
 /* 카카오 주소 검색 창 */
 #resultAdd{position:relative;z-index:0;width:300px;}
 #resultAdd:focus{outline:none;}
-#searchBtn{position:absolute;left:293px;top:81px;z-index:1;height:35px;background-color:white;padding-right:5px;padding-left:5px;border:1px solid white;}
+
 #searchBtn:hover{cursor:pointer;}
 
 /* kakao map */
@@ -27,7 +27,7 @@
     #title {font-weight:bold;display:block;font-size:20px;margin-bottom:10px;}
       .title {font-weight:bold;display:block;}
    .bAddr{padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;margin:5px;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;z-index:1;padding:0px;margin:0px;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;margin-left:200px;margin-bottom:10px;}
     .bAddr {padding:10px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;margin:0px;text-align:center;margin-right:35px;margin-bottom:10px;}
    #map{

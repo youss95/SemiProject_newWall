@@ -27,7 +27,12 @@ margin-top:100px;
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-				<div id="countTitle">NewWal's 유기동물 통계</div>
+				<div class="title">
+					<h2>NewWal's 유기동물 통계</h2>
+					<p>실종된 동물들을 지도를 통해 확인해 보세요.</p>
+				</div>
+				
+
 				<div id="lost">
 				<div class="counts" style="display:inline-block;">Today</div>
 				<div class="counts" style="display:inline-block;margin-left:170px;"><i class="fas fa-dog"></i></div>
@@ -73,8 +78,11 @@ margin-top:100px;
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+
 	
 	<script>
+	
+	
 	 let numAni = document.querySelectorAll(".mari");
 
      function changeNum(index) {
@@ -121,11 +129,20 @@ console.log(listData)
 var mapContainer = document.getElementById('map'); var mapOption = { center: new daum.maps.LatLng(37.566826, 126.9786567), level: 8 }; 
 // 맵 표시 
 var map = new daum.maps.Map(mapContainer, mapOption); 
+
+var imageSrc = '${pageContext.request.contextPath}/resources/images/icons/dogImo.gif', // 마커이미지의 주소입니다    
+imageSize = new kakao.maps.Size(34, 39), // 마커이미지의 크기입니다
+imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+//마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다 
 var mapTypeControl = new kakao.maps.MapTypeControl();
  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
  // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다 
  var zoomControl = new kakao.maps.ZoomControl(); map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT); 
+ 
  // 주소 -> 좌표 변환 라이브러리 
  var geocoder = new daum.maps.services.Geocoder(); 
  // foreach loop
@@ -135,6 +152,7 @@ var mapTypeControl = new kakao.maps.MapTypeControl();
                var coords = new daum.maps.LatLng(result[0].y, result[0].x); 
                var marker = new daum.maps.Marker({ 
                    position: coords,
+                   image: markerImage,
                     clickable: true 
                 }); 
  // 마커를 지도에 표시합니다. 
