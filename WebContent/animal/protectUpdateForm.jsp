@@ -28,7 +28,7 @@
 				<span class="kindAndDate">품종:</span><input type="text" value=${protectDetail.protectKind} name="protectKind" class="inpform toMargin" required>
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct" style="inline-block; width:100px;">
-										<select name="lostGender" id="lostGender" required>
+										<select name="protectGender" id="protectGender" required>
 											<option value="">선택</option>
 											<c:choose>
 											<c:when test="${protectDetail.protectGender == 'F' }">
