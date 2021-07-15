@@ -20,12 +20,15 @@
    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
    <script>
     $(function(){
+    	
+	
       $("#modiReply").on("click",function(){
          if($(this).text()=="수정") {
             $(this).text("확인");
             $(this).siblings(".ntrp_contents").attr("contenteditable","true");
             $(this).siblings(".ntrp_contents").focus();
          }
+        
          $("#modiReply").on("click",function(){
              $("#hiddenCon").val($(this).siblings(".ntrp_contents").text());
              $("#replyFrm").attr("action", "${pageContext.request.contextPath}/modifyadminReply.nocmt");
@@ -41,6 +44,8 @@
            }
       })
     })
+    
+   
 </script>
 </head>
 <body>
@@ -95,13 +100,15 @@
                   method="post">
                   <div id="ntrp-comments" class="ntrp-comments" style="margin-left:100px; margin-top:50px;">
                      <div class="comments-row">
-                        <textarea id="ntrp_contents" name="ntrp_contents"
+                        <textarea id="ntrp_contents" name="ntrp_contents" class="txtareaform"
                            placeholder="댓글을 입력해주세요" rows="3"></textarea>
                         <input type="hidden" value="${noticeView.notice_seq}" name=parent>
                         <input type="hidden" value="${admLoginInfo.name}" name="name">
                         <button class="writeBtn">
                            <i class="far fa-edit"></i>등록
                         </button>
+                        </div>
+                        </div>
                   </form>
                   <form id="replyFrm" class="replyFrm" style="margin-left:50px;" >
                      <div class="reply-container">

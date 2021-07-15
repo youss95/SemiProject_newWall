@@ -54,11 +54,20 @@
 	        $('#subcontents').on('keyup', function() {
 	            $('#subcontents_cnt').html("("+$(this).val().length+" / 150)");
 	 
-	            if($(this).val().length > 100) {
+	            if($(this).val().length > 150) {
 	                $(this).val($(this).val().substring(0, 150));
 	                $('#subcontents_cnt').html("(150 / 150)");
 	            }
 	        });
+	        
+	        $("#noticeWriter").on("click",function(){
+	    		let name = $("#name").val();
+	    		console.log(name);
+	    		if(name == null){
+	    		alert("다시 로그인 해주세요");
+	    		return false;
+	    		}
+	    	})
 	       		
 	})
 
@@ -103,7 +112,7 @@
 									</div>
 								</div>
 								<div class="bt_wrap">
-									<button class="btn_m btn_primary" type="submit">등록</button> <button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
+									<button class="btn_m btn_primary" id="noticeWriter" type="submit">등록</button> <button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
 								</div>
 							</div>
 						</form>
