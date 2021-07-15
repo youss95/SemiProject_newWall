@@ -106,10 +106,10 @@
 									<div class="nrp_writer">${i.nrp_writer}</div>
 									<div class="nrp_contents">${i.nrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.nrp_contents}"></div>
 									<div class="nrp_reg_date">${i.nrp_reg_date}</div>
-									<%-- <c:if test="${i.writer == login.id }"> --%>
+<%-- 									 <c:if test="${i.writer == login.id }">  --%>
 									<button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
 									<button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>
-									<%-- </c:if> --%>
+<%-- 									</c:if>  --%>
 									<input type="hidden" name="nrp_seq" value="${i.nrp_seq}"> 
 									<input type="hidden" name="nrp_parent" value="${i.nrp_parent}">
 								</div>

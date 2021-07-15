@@ -69,7 +69,7 @@
      </c:otherwise>
     </c:choose>
     <c:forEach var="i" begin="${startNum}" end="${lastNum}" step="1">
-    <li class="page-item"><a class="page-link" href="protectDetail.lost?protectNo=${param.protectNo}&page=1">${i}</a></li>
+    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/protectAnimal.adm?page=${i}">${i}</a></li>
    </c:forEach>
    
    <c:choose>

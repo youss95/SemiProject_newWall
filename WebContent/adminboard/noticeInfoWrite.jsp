@@ -56,6 +56,15 @@ $(function() {
 		}
 	});
 	
+	$("#noticeWriter").on("click",function(){
+		let name = $("#name").val();
+		console.log(name);
+		if(name == null){
+		alert("다시 로그인 해주세요");
+		return false;
+		}
+	})
+	
 	
 	$("#file-box").on("click",".delFile",function(){
 		$(this).parent().remove();
@@ -118,7 +127,7 @@ $(function() {
 									</div>
 								</div>
 								<div class="bt_wrap">
-									<button class="btn_m btn_primary id="noticeWriter">등록</button>
+									<button class="btn_m btn_primary" id="noticeWriter">등록</button>
 									<button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
 								</div>
 							</div>
