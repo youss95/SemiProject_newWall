@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴월</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
@@ -15,8 +16,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 <style>
 * {
@@ -201,44 +201,46 @@
 	stroke-linecap: round;
 }
  @keyframes rotate {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes dash {
-        0% {
-          stroke-dasharray: 2, 400;
-          stroke-dashoffset: 0;
-        }
-        50% {
-          stroke-dasharray: 178, 400;
-          stroke-dashoffset: -70;
-        }
-        100% {
-          stroke-dasharray: 178, 400;
-          stroke-dashoffset: -248;
-        }
-      }
-      @keyframes color {
-        100%,
-        0% {
-          stroke: red;
-        }
-        40% {
-          stroke: violet;
-        }
-        66% {
-          stroke: green;
-        }
-        80%,
-        90% {
-          stroke: yellow;
-        }
-      }
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+ @keyframes dash {
+   0% {
+     stroke-dasharray: 2, 400;
+     stroke-dashoffset: 0;
+   }
+   50% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -70;
+   }
+   100% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -248;
+   }
+ }
+ @keyframes color {
+   100%,
+   0% {
+     stroke: red;
+   }
+   40% {
+     stroke: violet;
+   }
+   66% {
+     stroke: green;
+   }
+   80%,
+   90% {
+     stroke: yellow;
+   }
+ }
 
 </style>
 </head>
 <body>
+	<jsp:include page="/layout/jsp/modal.jsp"/>
+
 	<div class="wrap">
 		<jsp:include page="../layout/jsp/header.jsp"></jsp:include>
 		<div class="container">
@@ -335,78 +337,84 @@
 		</div>
 	</div>
 	<jsp:include page="../layout/jsp/footer.jsp"></jsp:include>
-
 	<div class="modal fade" id="loadingModal" tabindex="-1"
-		aria-labelledby="loadingModalLabel" aria-hidden="true"
-		data-bs-backdrop="static" data-bs-keyboard="false">
-		<div class="modal-dialog modal-lg modal-dialog-centered">
-			<div class="modal-content" style="background-color:#00000000;">
-				<div class="modal-body" style="height:200px;">
-					<div class="loader">
-						<svg class="circular">
-	            <circle class="path" cx="100" cy="100" r="40" fill="none"
-								stroke-width="10" stroke-miterlimit="10"></circle></svg>
+			aria-labelledby="loadingModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content" style="background-color:#00000000;">
+					<div class="modal-body" style="height:200px;">
+						<div class="loader">
+							<svg class="circular">
+		            <circle class="path" cx="100" cy="100" r="40" fill="none"
+									stroke-width="10" stroke-miterlimit="10"></circle></svg>
+						</div>
 					</div>
+					<div class="modal-footer justify-content-center">요청을 처리 중 입니다. 잠시만 기다려주세요.</div>
 				</div>
-				<div class="modal-footer justify-content-center">요청을 처리 중 입니다. 잠시만 기다려주세요.</div>
 			</div>
 		</div>
-	</div>
+	
 
 	<script>
-		$("#btnFindID").on("click",function() {
-			let name = $("#nameForID").val();
-			let email = $("#emailForID").val();
+	
+		$(function(){
+			$("#btnFindID").on("click",function() {
+				let name = $("#nameForID").val();
+				let email = $("#emailForID").val();
 
-			if (name == "" || email == "") {
-				alert("이름 또는 이메일 주소를 확인하세요.")
-				return false;
-			}
-
-			$.ajax({
-				url : "${pageContext.request.contextPath}/findID.mem",
-				data : {
-					name : name,
-					email : email
+				if (name == "" || email == "") {
+					alert("이름 또는 이메일 주소를 확인하세요.")
+					return false;
 				}
-			}).done(function(resp) {
-				$("#divIdResultBox").css("display", "block");
-				if (resp != "none") {
-					$("#divFindIDResult").text(
-							"사용자님의 ID는 \"" + resp + "\" 입니다.")
-				} else {
-					$("#divFindIDResult").text(
-							"일치하는 회원 정보가 없습니다.");
-				}
-			})
-		})
 
-		$("#btnFindPW").on("click", function() {
-			let id = $("#idForPW").val();
-			let email = $("#emailForPW").val();
-
-			if (id == "" || email == "") {
-				alert("ID 또는 이메일 주소를 확인하세요.")
-				return false;
-			}
-
-			$("#loadingModal").modal({backdrop:'static', keyboard:false});
-			$.ajax({
-				url:"${pageContext.request.contextPath}/findPW.mem",
-				data:{id:id,email:email}
-			}).done(function(resp){
-				if(resp=="confirm"){
-					alert("이메일 주소로 임시 패스워드가 전송되었습니다.\n로그인 후 꼭 패스워드를 변경해주세요.");
-				}else{
-					alert("아이디 또는 이메일주소가 일치하지 않습니다.");
-				}
-			}).always(function(){
-				$("#loadingModal").modal("hide");
-				$('body').removeClass('modal-open');
-				$('.modal-backdrop').remove();
+				$.ajax({
+					url : "${pageContext.request.contextPath}/findID.mem",
+					data : {
+						name : name,
+						email : email
+					}
+				}).done(function(resp) {
+					$("#divIdResultBox").css("display", "block");
+					if (resp != "none") {
+						$("#divFindIDResult").text(
+								"사용자님의 ID는 \"" + resp + "\" 입니다.")
+					} else {
+						$("#divFindIDResult").text(
+								"일치하는 회원 정보가 없습니다.");
+					}
+				})
 			})
 
+			$("#btnFindPW").on("click", function() {
+				let id = $("#idForPW").val();
+				let email = $("#emailForPW").val();
+
+				if (id == "" || email == "") {
+					alert("ID 또는 이메일 주소를 확인하세요.")
+					return false;
+				}
+				$('#loadingModal').modal('show');
+				$("#loadingModal").modal({backdrop: 'static', keyboard: false});
+				
+				$.ajax({
+					url:"${pageContext.request.contextPath}/findPW.mem",
+					data:{id:id,email:email}
+				}).done(function(resp){
+					$("#loadingModal").modal("hide");
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
+					if(resp=="confirm"){
+						alert("이메일 주소로 임시 패스워드가 전송되었습니다.\n로그인 후 꼭 패스워드를 변경해주세요.");
+					}else{
+						alert("아이디 또는 이메일주소가 일치하지 않습니다.");
+					}
+					
+				}).always(function(){
+					
+				})
+
+			})
 		})
+		
 	</script>
 </body>
 </html>
