@@ -57,7 +57,7 @@ public class NoCommentsController extends HttpServlet {
 				response.sendRedirect("noticeView.notice?notice_seq="+parent);
 				
 			}else if (url.contentEquals("/noadminwrite.nocmt")) {
-				String writer = request.getParameter("writer");
+				String writer = request.getParameter("name");
 
 				String comments = request.getParameter("ntrp_contents");
 				comments = XSSFilter(comments);				

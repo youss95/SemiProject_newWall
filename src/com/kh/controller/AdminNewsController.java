@@ -101,8 +101,11 @@ public class AdminNewsController extends HttpServlet {
 //				}
 //			}
 			
-//			String writer = ((AdminDTO)(request.getSession().getAttribute("login"))).getAdmin_id();//운영자 아이디 로그인완료시 주석취소
-			String writer = "admin";
+			String writer = multi.getParameter("name");//관리자
+			 System.out.println(writer);
+			 if(writer == null) {
+				 response.sendRedirect("${pageContext.request.contextPath}/adminLogin.jsp");
+			 }
 			String title = multi.getParameter("news_title");//뉴스 제목
 			title = XSSFilter(title);
 			

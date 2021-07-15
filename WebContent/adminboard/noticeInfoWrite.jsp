@@ -54,7 +54,8 @@ $(function() {
 				})
 			}
 		}
-	});	
+	});
+	
 	
 	$("#file-box").on("click",".delFile",function(){
 		$(this).parent().remove();
@@ -88,12 +89,11 @@ $(function() {
 		<div class="main">
 			<div class="container">
 				<section class="shadow-sm rounded">
-					<div class="board_wrap" style="width:95%;">
-						<div class="board_title">
-							<strong>공지사항</strong>
+				<div class="title_area">
+						<h2>공지사항</h2>
 						</div>
-						<form action="${pageContext.request.contextPath}/noticeWrite.sumAdm"
-							method="post" enctype="multipart/form-data">
+					<div class="board_wrap" style="width:95%;">
+						<form action="${pageContext.request.contextPath}/noticeWrite.sumAdm" method="post" enctype="multipart/form-data" >
 							<div class="board_write_wrap">
 								<div class="board_write">
 									<div class="title">
@@ -105,6 +105,7 @@ $(function() {
 											</dd>
 										</dl>
 									</div>
+									<input type="hidden" value="${admLoginInfo.name}" name="name">
 									<div class="info">
 										<dl id="file-box">
 											<dt>파일 첨부</dt>
@@ -117,7 +118,7 @@ $(function() {
 									</div>
 								</div>
 								<div class="bt_wrap">
-									<button class="btn_m btn_primary" type="submit">등록</button>
+									<button class="btn_m btn_primary id="noticeWriter">등록</button>
 									<button class="btn_m btn_white" type="button" onClick="history.back();">취소</button>
 								</div>
 							</div>
