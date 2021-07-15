@@ -30,7 +30,7 @@
 				
 				<span class="kindAndDate">품종:</span><input type="text" name="protectKind" class="inpform toMargin">
 				<span class="kindAndDate">성별:</span>
-				<div class="inp_slct">
+				<div class="inp_slct" style="width:100px;">
 										<select name="protectGender" id="lostGender">
 											<option value="">선택</option>
 											<option value="F">암컷</option>
@@ -55,33 +55,35 @@
 					style="width: 60%; height: 60%; position: relative; overflow: hidden;"></div>
 
 				<div class="hAddr">
-					<span id="title">발견 주소</span>
-					<!-- <span id="centerAddr"></span> -->
-
-
-					<input type="text" class="inpform" placeholder="주소로 검색후 지도에 장소 클릭" id="resultAdd">
-				</div>
-
-				<button type="button" id="searchBtn">
+					<div id="title" style="display:inline">주소정보 
+					</div><div style="display:flex;justify-content:space-between;display:inline-block;">
+					
+					<input type="text" class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
+					<button type="button" id="searchBtn" style="padding:7px;">
 					<i class="fas fa-search"></i>
 				</button>
+				</div>
+					선택주소: <div id="centerAddr" style="margin:0px;display:inline;"></div> 
+						
+				</div>
+
+				
 			</div>
-			  
                   
                
-				 
-			<div class="uploadImage">
+			
+			<div class="uploadImage"  style="margin:0 auto;">
 			
 			<div class="box">     
-			이미지: <input type="file" name="protectImage1" onChange="imageChoose(this)">	
-                        <img src="${pageContext.request.contextPath}/resources/images/img02.jpeg" alt="" id="imageUploadPreview" />               
+		 <input type="file" name="protectImage1" id="protectImage1" onChange="imageChoose(this)" style="display:none">	
+                        <img src="${pageContext.request.contextPath}/resources/images/uploadimg.png" alt="" id="imageUploadPreview"  style="width:300px;height:300px;"/>               
                    </div>			
 				 <div class="box"> 
-				 이미지: <input type="file" name="protectImage2" onChange="imageChoose2(this)">	           
-                        <img src="${pageContext.request.contextPath}/resources/images/img01.jpeg" alt="" id="imageUploadPreview2" />          
+				 <input type="file" name="protectImage2" id="protectImage2" onChange="imageChoose2(this)" style="display:none">	           
+                        <img src="${pageContext.request.contextPath}/resources/images/uploadimg.png" alt="" id="imageUploadPreview2" style="width:300px;height:300px;" />          
                    </div>             	
                    </div>
-                  
+                
                    
 			<input type="hidden" name="addResult" id="hiddenInput">	
 			<input type="hidden" name="protectWriter" value="${sessionScope.loginInfo.user_id}"> 
@@ -98,5 +100,30 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+	<script>
+	//날짜 max 오늘까지
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	 if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("lostDate").setAttribute("max", today);
+	
+	//이미지 누르면 업로드
+	$('#imageUploadPreview').on('click',function(){
+		$('#protectImage1').click();
+	})
+	$('#imageUploadPreview2').on('click',function(){
+		$('#protectImage2').click();
+	})
+	
+	</script>
 </body>
 </html>
