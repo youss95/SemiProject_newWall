@@ -19,7 +19,6 @@ import com.kh.config.FileConfig;
 import com.kh.dao.NoCommentsDAO;
 import com.kh.dao.NoticeDAO;
 import com.kh.dao.NoticeFileDAO;
-import com.kh.dto.AnimalFilesDTO;
 import com.kh.dto.NoCommentsDTO;
 import com.kh.dto.NoticeDTO;
 import com.kh.dto.NoticeFileDTO;
@@ -83,7 +82,6 @@ public class AdminNoticeController extends HttpServlet {
 			
 			}else if (url.contentEquals("/noticeWrite.sumAdm")) {
 				//관리자페이지 공지사항 글쓰기값 받아오기
-
 				String seq = dao.getSeq(); // 공지사항 넘버
 
 				String filesPath = request.getServletContext().getRealPath("files");// 파일
@@ -113,9 +111,9 @@ public class AdminNoticeController extends HttpServlet {
 						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
+				String writer = multi.getParameter("name");//관리자
+				 System.out.println(writer);
 
-//			String writer = ((AdminDTO)(request.getSession().getAttribute("login"))).getAdmin_id();//운영자 아이디 로그인완료시 주석취소
-				String writer = "admin";
 				String title = multi.getParameter("notice_title");// 공지사항 타이틀
 				title = XSSFilter(title);
 

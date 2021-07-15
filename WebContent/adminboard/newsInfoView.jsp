@@ -20,6 +20,9 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 	<script>
 	 $(function(){
+		 	if($(this).text()=="admin") {
+				$(this).text("관리자");
+			}
 			$("#modiReply").on("click",function(){
 				if($(this).text()=="수정") {
 					$(this).text("확인");
@@ -32,6 +35,8 @@
 			         $("#replyFrm").submit();
 				})
 			}) 
+			
+			
 			
 			
 			
@@ -53,10 +58,10 @@
 		<div class="main">
 			<div class="container">
 				<section class="shadow-sm rounded">
-					<div class="news_wrap">
-						<div class="board_title">
-							<strong>뉴스</strong>
+				<div class="title_area">
+						<h2>뉴스</h2>
 						</div>
+					<div class="news_wrap">
 						<div class="news_view_wrap">
 							<div class="title">${newsView.news_title}</div>
 							<div class="info">
@@ -87,7 +92,7 @@
 								<textarea id="nrp_contents" name="nrp_contents" class="txtareaform"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
 								<input type="hidden" value="${newsView.news_seq}" name=parent>
-								<input type="hidden" value="${admLoginInfo.user_id}" name="writer">
+								<input type="hidden" value="${admLoginInfo.name}" name="name">
 								<button class="writeBtn" type="submit">
 									<i class="far fa-edit"></i>등록
 								</button>

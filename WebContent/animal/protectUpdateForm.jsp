@@ -15,7 +15,7 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/protectUpdate.lost" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/protectUpdate.lost" method="post" enctype="multipart/form-data" onsubmit="return false">
 				<div id="mainTitle">수정</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
@@ -128,6 +128,13 @@
 
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("lostDate").setAttribute("max", today);
+	
+	//엔터 막기
+	$('input[type="text"]').keydown(function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
 	</script>
 </body>
 </html>

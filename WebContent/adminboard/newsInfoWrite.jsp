@@ -71,10 +71,10 @@
 		<div class="main">
 			<div class="container">
 				<section class="shadow-sm rounded">
+					<div class="title_area">
+						<h2>뉴스</h2>
+					</div>
 					<div class="board_wrap" style="width:95%;">
-						<div class="board_title">
-							<strong>뉴스</strong>
-						</div>
 						<form action="${pageContext.request.contextPath}/write.newsAdm" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
 								<div class="newsboard_write">
@@ -85,6 +85,7 @@
 												<input type="text" id="title" name="news_title" placeholder="제목 입력">
 											</dd>
 										</dl>
+										<input type="hidden" value="${admLoginInfo.name}" name="name">
 									</div>
 									<div class="info">
 										<dl id="file-box">

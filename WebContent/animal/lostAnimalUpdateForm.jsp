@@ -14,7 +14,7 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostSection">
-					<form action="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${lostDetail.lostNo}" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/lostUpdate.lost?lostNo=${lostDetail.lostNo}" method="post" enctype="multipart/form-data" onsubmit="return false">
 				<div id="mainTitle">실종 신고</div>
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
@@ -144,7 +144,12 @@
 
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
 	<script>
-	
+	//엔터막기
+	$('input[type="text"]').keydown(function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
 
 	
 	/* let add =document.getElementById('centerAddr');

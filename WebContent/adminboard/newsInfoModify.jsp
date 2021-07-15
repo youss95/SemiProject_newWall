@@ -105,10 +105,10 @@
 		<div class="main">
 			<div class="container">
 				<section class="shadow-sm rounded">
-					<div class="board_wrap">
-						<div class="board_title">
-							<strong>뉴스</strong>
+				<div class="title_area">
+						<h2>뉴스</h2>
 						</div>
+					<div class="board_wrap">
 						<form action="${pageContext.request.contextPath}/newsModifyView.newsAdm" method="post" enctype="multipart/form-data">
 							<div class="board_write_wrap">
 								<div class="newsboard_write">
