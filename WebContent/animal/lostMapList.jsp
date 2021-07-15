@@ -21,21 +21,18 @@
         padding: 0;
       
       }
-      .ucontainer {
-    
-        display: flex;
-        gap: 1em;
-        min-height: 100vh;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
+  
       .wrapper {
-    
-        overflow: hidden;
-        width: 300px;
-        height:500px;
-        margin-left:25px;
+    width: 30%;
+    height: 450px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 4%;
+    padding: 20px 20px 40px 20px !important;
+    background-color: #fff;
+    margin-bottom: 20px;
       }
+      .wrapper:nth-of-type(3n){margin-right:0;}
       .lostList{
       margin:0 auto;
       }
@@ -45,10 +42,11 @@
         margin: 0 auto;
       }
       .ucontainer li{
-      color:#0075d8;
-     font-weight: 600;
-     font-size:20px;
+      color:#254E7C;
+/*      font-weight: 600; */
+     font-size:18px;
       }
+      .ucontainer li>*{margin-bottom:10px;}
   .progress{height:40px; border-radius:30px;}
   </style>
 </head>
@@ -57,9 +55,16 @@
 <div class="container">
 			<div class="contents">
 				<section class="lostList">
+				<div class="title">
+					<h2>실종 동물</h2>
+				</div>
 				<div id="body">
+					<!-- 진행바 -->
+<%-- <div class="progress col-md-12 m-2">
+
+	<div class="progress-bar" style="width: ${currentPercent}%; font-size:20px;" >${currentPercent}%</div>
+</div> --%>
 				<div class="wrap">
-				<h2 style="font-size:29px;color:#9d9d9d">실종 동물</h2><br><br>
 				 <ul class="ucontainer">
 				 <c:forEach var="maplist" items="${mapList}">
 				   <li class="wrapper"><img style="width:100%;height:200px;" src="${pageContext.request.contextPath}/upload/lostAnimal/${maplist.fileRealName}" /><p>
@@ -93,7 +98,6 @@
 
 </div>
 
-
 <!-- 페이지 네비 -->
 <ul class="pagination justify-content-center">
 	<c:choose>
@@ -117,7 +121,11 @@
 
 
 
+<<<<<<< HEAD
 	<!-- 진행바 -->
+=======
+
+>>>>>>> bd9e25338f7431eccf71a3ba79cb15dc6a616749
 
 				</section>
 				</div>
