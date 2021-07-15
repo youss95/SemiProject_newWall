@@ -150,10 +150,88 @@ dd div:not(.sp_address div) {
 dd div.inpform {
 	border: 1px solid #FCDADA !important;
 }
+#loadingModal div{border:none;color:white;}
+
+.loader {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.circular {
+	animation: rotate 2s linear infinite;
+	height: 200px;
+	position: relative;
+	width: 200px;
+}
+
+.path {
+	stroke-dasharray: 1, 400;
+	stroke-dashoffset: 0;
+	stroke: #b6463a;
+	animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+	stroke-linecap: round;
+}
+@keyframes rotate {
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+ @keyframes dash {
+   0% {
+     stroke-dasharray: 2, 400;
+     stroke-dashoffset: 0;
+   }
+   50% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -70;
+   }
+   100% {
+     stroke-dasharray: 178, 400;
+     stroke-dashoffset: -248;
+   }
+ }
+ @keyframes color {
+   100%,
+   0% {
+     stroke: red;
+   }
+   40% {
+     stroke: violet;
+   }
+   66% {
+     stroke: green;
+   }
+   80%,
+   90% {
+     stroke: yellow;
+   }
+ }
+
 </style>
 
 </head>
 <body>
+
+	<div class="modal fade" id="loadingModal" tabindex="-1"
+		aria-labelledby="loadingModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content" style="background-color:#00000000;">
+				<div class="modal-body" style="height:200px;">
+					<div class="loader">
+						<svg class="circular">
+	            <circle class="path" cx="100" cy="100" r="40" fill="none"
+								stroke-width="10" stroke-miterlimit="10"></circle></svg>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-center">요청을 처리 중 입니다. 잠시만 기다려주세요.</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal fade" id="passwordModal" tabindex="-1"
 		aria-labelledby="passwordModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -262,10 +340,13 @@ dd div.inpform {
 								</dl>
 								<dl>
 									<dt class="su_ti">이메일주소</dt>
-									<dd>
+									<dd class="su_email_con">
 										<div class="inpform su_m_ip" itemid="email" id="email">${loginInfo.email }</div>
 										<div class="control">
 											<i class="fas fa-exchange-alt"></i><i class="fas fa-times"></i>
+										</div>
+										<div id="divMailReAuth" style="display:none">
+											<button id="btnMailReAuth" class="btn_m btn_light su_btn_detail">인증 메일 보내기</button>
 										</div>
 									</dd>
 								</dl>
@@ -496,7 +577,7 @@ dd div.inpform {
 				$(this).hide();
 				$(this).siblings().show();
 			});
-			$(".fa-times:not(.su_birthday_con .fa-times)").on("click", function() {
+			$(".fa-times:not(.su_birthday_con .fa-times,.su_email_con .fa-times)").on("click", function() {
 				let target = $(this).parent().prev();
 				target.attr("contenteditable", "false");
 				target.removeClass("border");
@@ -578,24 +659,26 @@ dd div.inpform {
 				});
 			})
 			
+			$(".su_email_con .fa-times").on("click",function(){
+				let target = $(this).parent().prev();
+				target.attr("contenteditable", "false");
+				target.removeClass("border");
+				target.removeClass("border-primary");
+				$(this).hide();
+				$(this).siblings().hide();
+				$(this).siblings(".fa-edit,.fa-exchange-alt").show();
+				$("#divMailReAuth").css("display","none");
+			})
+			
 			$(".fa-exchange-alt").on("click",function(){
 				let target = $(this).parent().prev();
 				$(this).hide();
-				$(this).siblings().show();
-				
+				$(this).siblings().show()
 				target.attr("contenteditable","true");
-				
-				let divReAuth = $("<div>");
-				
-				let btnMailReAuth = $("<button>");
-				btnMailReAuth.text("인증 메일 보내기")
-				btnMailReAuth.attr("id","btnMailReAuth");
-				btnMailReAuth.addClass("btn_m btn_light su_btn_detail");
-				
-				divReAuth.append(btnMailReAuth);
-				target.parent().after(divReAuth);
-				
-				$("#btnMailReAuth").on("click",function(){
+				$("#divMailReAuth").css("display","block");
+			})
+			
+			$("#btnMailReAuth").on("click",function(){
 					let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 					let email = $("#email").text();
 					
@@ -605,10 +688,18 @@ dd div.inpform {
 					}
 					$("#btnMailReAuth").attr("disabled","disabled");
 					
+					$('#loadingModal').modal('show');
+					$("#loadingModal").modal({backdrop: 'static', keyboard: false});
+					
 					$.ajax({
 						url:"${pageContext.request.contextPath}/mailAuthReq.mem",
 						data:{email:email}
 					}).done(function(resp){
+						alert("입력한 이메일로 인증번호를 발송했습니다.\n메일을 확인 후 입력해주세요.");
+						$("#loadingModal").modal("hide");
+						$('body').removeClass('modal-open');
+						$('.modal-backdrop').remove();
+						
 						let authDiv = $("<div>");
 						authDiv.attr("style","display:block;");
 						let authInput = $("<input>");
@@ -665,6 +756,7 @@ dd div.inpform {
 								authTimer.remove();
 								authBtn.remove();
 								authInput.remove();
+								$("#btnMailReAuth").removeAttr("disabled");
 							}
 							let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 							let seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -673,9 +765,6 @@ dd div.inpform {
 						}, 1000);
 					});
 				})
-				
-				
-			})
 			
 			$("#sp_search").on("click",function(){
 				new daum.Postcode({
