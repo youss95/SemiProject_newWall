@@ -17,6 +17,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <style>
@@ -71,7 +73,7 @@
 							href="${pageContext.request.contextPath}/protectList.lost?page=1"
 							class="btn_m btn_light">임시보호</a> <a
 							href="${pageContext.request.contextPath}/animal/lostAnimalForm.jsp"
-							class="btn_m btn_light">글쓰기</a> <input type="text"
+							class="btn_m btn_light" id="writeMap">글쓰기</a> <input type="text"
 							class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
 						<button type="button" id="searchBtn">
 							<i class="fas fa-search"></i>
@@ -97,6 +99,25 @@
 		src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>
 
 	<script>
+	let loginBtn = document.querySelector('#loginLogin')
+	
+	$('#writeMap').click(function(e){
+	
+		 <c:if test="${sessionScope.loginInfo.user_id == null }">
+		 e.preventDefault();
+		 Swal.fire({
+			  icon: 'error',
+			  title: '로그인이 필요합니다.',
+			  text: '로그인 페이지로 이동합니다.',
+			 
+			}).then((result)=>{
+				loginBtn.click();
+				
+			})
+			  </c:if>
+	})
+	
+	
 		let numAni = document.querySelectorAll(".mari");
 		function changeNum(index) {
 			let num = 0;
@@ -143,6 +164,19 @@
 		};
 		// 맵 표시 
 		var map = new daum.maps.Map(mapContainer, mapOption);
+		//마커 이미지
+		var imageSrc =
+	          "${pageContext.request.contextPath}/resources/images/dogImo.gif", // 마커이미지의 주소입니다
+	        imageSize = new kakao.maps.Size(44, 49), // 마커이미지의 크기입니다
+	        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+	      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+	      var markerImage = new kakao.maps.MarkerImage(
+	          imageSrc,
+	          imageSize,
+	          imageOption
+	        )
+		
 		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다 
 		var mapTypeControl = new kakao.maps.MapTypeControl();
 		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
@@ -163,6 +197,7 @@
 													result[0].y, result[0].x);
 											var marker = new daum.maps.Marker({
 												position : coords,
+												image:markerImage,
 												clickable : true
 											});
 											// 마커를 지도에 표시합니다. 
