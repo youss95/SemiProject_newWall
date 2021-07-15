@@ -31,18 +31,21 @@
 		<div class="container">
 			<div class="contents">
 				<section class="news_list">
-					<div class="board_title">
-						<strong>뉴스</strong>
-						<form action="${pageContext.request.contextPath}/newsBoard.news" method="get" class="news_search">
-							<div class="search">
-								<input type="hidden" name="cpage" value=1> <select
-									name="category">
-									<option value="news_title">제목</option>
-									<option value="news_writer">작성자</option>
-								</select> <input type="text" name="keyword" placeholder="검색을 입력하세요.">
-								<button class="btn_s btn_line" id="search">검색</button>
-							</div>
-						</form>
+					<div class="title">
+						<h2>뉴스</h2>
+						<p>다양한 활동과 소식을 담은 뉴스레터를 보내드립니다.</p>
+						<div class="board_title">
+							<form action="${pageContext.request.contextPath}/newsBoard.news" method="get" class="news_search">
+								<div class="search">
+									<input type="hidden" name="cpage" value=1> <select
+										name="category">
+										<option value="news_title">제목</option>
+										<option value="news_writer">작성자</option>
+									</select> <input type="text" name="keyword" placeholder="검색을 입력하세요.">
+									<button class="btn_s btn_line" id="search">검색</button>
+								</div>
+							</form>
+						</div>
 					</div>
 					<div class="list_wrap">
 								<c:forEach var="newsAll" items="${newsAll}">
