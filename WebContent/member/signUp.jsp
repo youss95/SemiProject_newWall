@@ -193,7 +193,7 @@
 										<input type="password" class="inpform su_m_ip"
 											name="user_password" id="user_password" placeholder="비밀번호"
 											maxlength=16 required> <span class="su_pw_sub">-영문대문자,
-											영문소문자, 숫자 포함하여 8-12 글자 ***이거는우리정규식에맞게<br>
+											영문소문자, 숫자 포함하여 8-12 글자 <br>
 										</span>
 									</dd>
 									<dd>
@@ -468,10 +468,13 @@
 
 			let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 			let pw = $("#user_password").val();
-			if (!pwReg.test(pwReg)) {
+			let pwCk = $("pwdCheck").vla();
+			if (!pwReg.test(pw)) {
 				alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
 				return false;
 			}
+			
+				
 
 			let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 			let email = $("#email").val() + "@" + $("#email2").val();
