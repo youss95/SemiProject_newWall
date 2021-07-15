@@ -34,18 +34,21 @@
 					<div class="title">
 						<h2>뉴스</h2>
 						<p>다양한 활동과 소식을 담은 뉴스레터를 보내드립니다.</p>
-						<div class="board_title">
-							<form action="${pageContext.request.contextPath}/newsBoard.news" method="get" class="news_search">
-								<div class="search">
-									<input type="hidden" name="cpage" value=1> <select
-										name="category">
+					</div>
+					<div class="board_title">
+						<form action="${pageContext.request.contextPath}/newsBoard.news" method="get" class="news_search">
+							<div class="search">
+								<input type="hidden" name="cpage" value=1> 
+								<div class="inp_slct">
+									<select name="category">
 										<option value="news_title">제목</option>
 										<option value="news_writer">작성자</option>
-									</select> <input type="text" name="keyword" placeholder="검색을 입력하세요.">
-									<button class="btn_s btn_line" id="search">검색</button>
+									</select>
 								</div>
-							</form>
-						</div>
+								 <input type="text" class="inpform" name="keyword" placeholder="검색을 입력하세요.">
+								<button class="btn_m btn_default" id="search">검색</button>
+							</div>
+						</form>
 					</div>
 					<div class="list_wrap">
 								<c:forEach var="newsAll" items="${newsAll}">

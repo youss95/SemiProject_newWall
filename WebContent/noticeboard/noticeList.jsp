@@ -38,12 +38,16 @@
 								action="${pageContext.request.contextPath}/noticeBoard.notice"
 								method="get">
 								<div class="search">
-									<input type="hidden" name="cpage" value=1> <select
-										name="category">
-										<option value="notice_title">제목</option>
-										<option value="notice_writer">작성자</option>
-									</select> <input type="text" name="keyword" placeholder="검색을 입력하세요.">
-									<button class="btn_s btn_line" id="search">검색</button>
+									<input type="hidden" name="cpage" value=1> 
+									<div class="inp_slct">
+										<select
+											name="category">
+											<option value="notice_title">제목</option>
+											<option value="notice_writer">작성자</option>
+										</select>
+									</div>
+									 <input type="text" name="keyword" class="inpform" placeholder="검색을 입력하세요.">
+									<button class="btn_m btn_default" id="search">검색</button>
 								</div>
 							</form>
 						</div>

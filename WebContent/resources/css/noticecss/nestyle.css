@@ -36,10 +36,12 @@
 .reply-container .nrp_contents {float: left; width: 60%; line-height: 35px;}
 .nrp_contents .hiddenCon {width: 100%; height: 100%;}
 .reply-container .nrp_reg_date {float: left; width: 15%; line-height: 35px;}
-.board_title .news_search {float: right; position : relative; top : 26px; width: 350px; height: 35px;}
 .news_contents .nrp-comments{margin-left:100px;}
 
-.news_list .search {text-align:right; margin-right:5px; margin-bottom:5px;}
+.news_list .search {text-align:right;}
+
+.inp_slct{display:inline-block;width:130px;vertical-align:top;}
+.inp_slct+input{width:260px;vertical-align:top;}
 .news_list .list_wrap .item{overflow:hidden;padding:40px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 .news_list .list_wrap .item+.item{border-top:none;}
 .list_wrap .item .img_wrap{width:30%;float:left;height:180px;overflow: hidden;}
