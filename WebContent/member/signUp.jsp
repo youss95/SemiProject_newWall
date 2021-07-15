@@ -542,21 +542,6 @@
 
 			})
 		})
-
-		$("#searchAddr").on("click",function() {new daum.Postcode(
-									{
-										oncomplete : function(data) {
-											var roadAddr = data.roadAddress; // 도로명 주소 변수
-											document
-													.getElementById('postcode').value = data.zonecode;
-											document
-													.getElementById("address1").value = roadAddr;
-											document
-													.getElementById("address2").value = data.jibunAddress;
-										}
-									}).open();
-						})
-
 	})
 	
 </script>

@@ -20,7 +20,7 @@
 						id="popup-logo">
 				</div>
 
-				<form action="${pageContext.request.contextPath}/loginProc.mem">
+				<form action="${pageContext.request.contextPath}/login.adm">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="user-id" class="col-form-label"></label> <input
