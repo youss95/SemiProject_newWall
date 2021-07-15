@@ -19,7 +19,7 @@
 						<h2>임시보호</h2>
 						<p>임시 보호자분들이 보호중인 동물들의 위치정보를 알 수 있습니다.</p>
 					</div>
-					<form action="${pageContext.request.contextPath}/protectBoard.lost?page=1" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/protectBoard.lost?page=1" method="post" enctype="multipart/form-data"  >
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
@@ -87,7 +87,7 @@
                    
 			<input type="hidden" name="addResult" id="hiddenInput" >	
 			<input type="hidden" name="protectWriter" value="${sessionScope.loginInfo.user_id}"> 
-			<button id="btn" type="submit" class="btn_m btn_primary">등록</button>	
+			<button id="btn" type="submit" class="btn_m btn_primary" id="subBtn">등록</button>	
 			
 			</form>
 				</section>
@@ -101,6 +101,11 @@
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
 	<script>
+	//submit
+	
+
+	
+	
 	//날짜 max 오늘까지
 	var today = new Date();
 	var dd = today.getDate();
@@ -116,6 +121,8 @@
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("lostDate").setAttribute("max", today);
 	
+	
+	
 	//이미지 누르면 업로드
 	$('#imageUploadPreview').on('click',function(){
 		$('#protectImage1').click();
@@ -123,6 +130,12 @@
 	$('#imageUploadPreview2').on('click',function(){
 		$('#protectImage2').click();
 	})
+	
+	$('input[type="text"]').keydown(function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
 	
 	</script>
 </body>
