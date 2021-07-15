@@ -137,8 +137,11 @@
 #sp_com_input .su_persnal_info .su_birthday_con .su_birthday_text {
 	margin-left: 10px;
 	margin-right: 30px;
+	margin-top: 22px;
 }
-
+#sp_com_input .su_persnal_info .su_birthday_con .su_birthday_text+.control{
+margin-top:10px;
+}
 dd div:not(.sp_address div) {
 	display: inline-block;
 	line-height: 40px;
@@ -222,19 +225,14 @@ dd div.inpform {
 		<div class="container">
 			<div class="contents">
 				<section id="sp_com_input">
-					<!-- 하이 여기는 서브입니다 -->
+					<div class="su_banner">
+						<img src="..\resources\images\signupmain_1100_400.jpg" alt="">
+					</div>
+					<div class="title">
+						<h2>MY PAGE</h2>
+						<p>동물권행동 NEW-WAL의 회원님 환영합니다.<br> 유기동물 뿐 아닌 모든 생명이 조화로운 세상을 위해 쉼없이 노력하겠습니다.</p>
+					</div>
 					<div class="signup_con">
-						<div class="su_banner">
-							<img src="..\resources\images\signupmain_1100_400.jpg" alt="">
-						</div>
-						<div class="su_title">
-							<h2>My Page</h2>
-							<p>
-								동물권행동 NEW-WAL의 회원님 환영합니다.<br> 유기동물 뿐 아닌 모든 생명이 조화로운 세상을 위해
-								쉼없이 노력하겠습니다.
-							</p>
-						</div>
-
 						<form action="" method="post" id="">
 							<!-- <h3>개인 정보</h3> -->
 							<div class="su_persnal_info">
