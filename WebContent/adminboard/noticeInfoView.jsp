@@ -97,8 +97,8 @@
 							<div class="comments-row">
 								<textarea id="ntrp_contents" name="ntrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
-								<input type="hidden" value="${noticeView.notice_seq}"
-									name=parent>
+								<input type="hidden" value="${noticeView.notice_seq}" name=parent>
+								<input type="hidden" value="${admLoginInfo.user_id}" name="writer">
 								<button class="writeBtn">
 									<i class="far fa-edit"></i>등록
 								</button>
