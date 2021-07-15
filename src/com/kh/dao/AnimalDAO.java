@@ -200,10 +200,11 @@ public class AnimalDAO {
 	//상세글 보기
 	public ProtectDetailDTO getDetail(int protectNo) throws Exception{
 		String sql = "select protect_no,protect_name,protect_kind,protect_content,protect_gender,protect_fileRealName1,protect_fileRealName2,protect_viewCount,protect_createDate,protect_writer,\r\n"
-				+ "(select trunc(sysdate-to_date((select protect_findDate from protect_animal where protect_no=5 ),'yyyy/mm/dd'))from dual) protectDate\r\n"
+				+ "(select trunc(sysdate-to_date((select protect_findDate from protect_animal where protect_no=? ),'yyyy/mm/dd'))from dual) protectDate\r\n"
 				+ "from protect_animal where protect_no=?";
 		try(Connection con = Db.getCon();PreparedStatement pstmt = con.prepareStatement(sql);){
 			pstmt.setInt(1, protectNo);
+			pstmt.setInt(2, protectNo);
 			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
 					ProtectDetailDTO dto;
