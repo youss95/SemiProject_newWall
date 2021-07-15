@@ -19,7 +19,7 @@
 		<jsp:include page="../layout/jsp/adminHeader.jsp"></jsp:include>
 		<div class="main">
 			<div class="container">
-			<jsp:include page="../layout/jsp/adminBoardNav.jsp"></jsp:include>
+<%-- 			<jsp:include page="../layout/jsp/adminBoardNav.jsp"></jsp:include> --%>
 				<section class="shadow-sm rounded">
 					<div class="title_area">
 						<h2>실종동물 게시판</h2>
