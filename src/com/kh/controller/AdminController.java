@@ -472,7 +472,7 @@ public class AdminController extends HttpServlet {
 				}else if(dao.isLoginOk(user_id, user_password)) {
 					MemberDTO dto = dao.selectMemberById(user_id);
 					request.getSession().setAttribute("admLoginInfo", dto);
-					response.sendRedirect("admin/adoptRegList.jsp");
+					response.sendRedirect("memberManage.adm");
 				}else {
 					response.sendRedirect("admin/adminLogin.jsp");
 				}

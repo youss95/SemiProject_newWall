@@ -444,6 +444,7 @@ public class AnimalsController extends HttpServlet {
 					
 				}catch(Exception e) {
 					e.printStackTrace();
+					response.sendRedirect("error.jsp");
 				}
 			}
 		}catch(Exception e) {

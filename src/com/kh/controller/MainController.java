@@ -51,6 +51,7 @@ public class MainController extends HttpServlet {
 		
 		}catch(Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("error.jsp");
 		}
 
 	}

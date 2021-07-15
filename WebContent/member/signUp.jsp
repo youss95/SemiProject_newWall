@@ -32,7 +32,6 @@
 	width: 100%;
 	height: 8px;
 	background-color: #FFA5A5;
-	/* 안되네 나중에 다시 */
 }
 
 #mem_signup_con .su_title {
@@ -158,18 +157,15 @@
 		<div class="container">
 			<div class="contents">
 				<section id="mem_signup_con">
-					<!-- 하이 여기는 서브입니다 -->
+					<div class="su_banner">
+						<img src="..\resources\images\signupmain_1100_400.jpg" alt="">
+					</div>
+					<div class="title">
+						<h2>회원 가입</h2>
+						<p>동물권행동 NEW-WAL의 회원 가입을 환영합니다.<br> 유기동물 뿐 아닌 모든 생명이 조화로운 세상을
+								위해 쉼없이 노력하겠습니다.</p>
+					</div>
 					<div class="signup_con">
-						<div class="su_banner">
-							<img src="..\resources\images\signupmain_1100_400.jpg" alt="">
-						</div>
-						<div class="su_title">
-							<h2>회원 가입</h2>
-							<p>
-								동물권행동 NEW-WAL의 회원 가입을 환영합니다.<br> 유기동물 뿐 아닌 모든 생명이 조화로운 세상을
-								위해 쉼없이 노력하겠습니다.
-							</p>
-						</div>
 
 						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="">
 							<!-- <h3>개인 정보</h3> -->
