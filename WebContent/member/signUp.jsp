@@ -247,7 +247,7 @@
 					</div>
 					<div class="signup_con">
 
-						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="">
+						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="signupForm">
 							<!-- <h3>개인 정보</h3> -->
 							<div class="su_persnal_info">
 								<dl>
@@ -269,13 +269,13 @@
 										<input type="password" class="inpform su_m_ip"
 											name="user_password" id="user_password" placeholder="비밀번호"
 											maxlength=16 required> <span class="su_pw_sub">-영문대문자,
-											영문소문자, 숫자 포함하여 8-12 글자 ***이거는우리정규식에맞게<br>
+											영문소문자, 숫자 포함하여 8-12 글자 <br>
 										</span>
 									</dd>
 									<dd>
 										<input type="password" class="inpform su_m_ip" name="pwdCheck"
 											id="pwdCheck" placeholder="비밀번호 확인" maxlength=16 required>
-										<span class="su_pw_ck"> 일치여부 확인 메세지 </span>
+										<span class="su_pw_ck" id="pwCheckResult"> 일치여부 확인 메세지 </span>
 									</dd>
 								</dl>
 								<dl>
@@ -551,10 +551,13 @@
 
 			let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 			let pw = $("#user_password").val();
-			if (!pwReg.test(pwReg)) {
+			let pwCk = $("#pwdCheck").vla();
+			if (!pwReg.test(pw)) {
 				alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
 				return false;
 			}
+			
+				
 
 			let emailReg = /^[0-9a-zA-Z_-]*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 			let email = $("#email").val() + "@" + $("#email2").val();
@@ -601,6 +604,7 @@
 			}
 			
 		})
+		
 
 		$("#idCheck").on("click", function() {
 			if ($("#signup_user_id").val() == "") {
