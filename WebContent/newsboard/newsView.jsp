@@ -87,7 +87,7 @@
 					<input type="hidden" value="${loginInfo.user_id}" name="user_id">
 						<div id="nrp-comments" class="nrp-comments">
 							<div class="comments-row">
-								<textarea id="nrp_contents" name="nrp_contents"
+								<textarea id="nrp_contents" class="textareaform" name="nrp_contents"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
 								<input type="hidden" value="${newsView.news_seq}" name=parent>
 								<button class="writeBtn" type="submit">

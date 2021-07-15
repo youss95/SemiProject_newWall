@@ -96,7 +96,7 @@
 							method="post">
 							<div id="ntrp-comments" class="ntrp-comments" style="margin-left:100px; margin-top:50px;">
 								<div class="comments-row">
-									<textarea id="ntrp_contents" name="ntrp_contents"
+									<textarea id="ntrp_contents" name="ntrp_contents" class="txtareaform"
 										placeholder="댓글을 입력해주세요" rows="3"></textarea>
 									<input type="hidden" value="${noticeView.notice_seq}" name=parent>
 									<input type="hidden" value="${admLoginInfo.user_id}" name="writer">
