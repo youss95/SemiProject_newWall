@@ -20,15 +20,21 @@
    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
    <script>
     $(function(){
-    	
+    	 $('#ntrp_contents').on('keyup', function() {	 
+	            if($(this).val().length > 100) {
+	                $(this).val($(this).val().substring(0, 150));
+	            }//이게 댓글처음쓸때 그후에 이것저것해봤느데;;;]
+	        });    	
 	
       $("#modiReply").on("click",function(){
          if($(this).text()=="수정") {
             $(this).text("확인");
             $(this).siblings(".ntrp_contents").attr("contenteditable","true");
             $(this).siblings(".ntrp_contents").focus();
-         }
-        
+
+           }
+
+             
          $("#modiReply").on("click",function(){
              $("#hiddenCon").val($(this).siblings(".ntrp_contents").text());
              $("#replyFrm").attr("action", "${pageContext.request.contextPath}/modifyadminReply.nocmt");
@@ -115,8 +121,8 @@
                         <c:forEach var="i" items="${nocmtlist}">
                            <div class="reply">
                               <div class="ntrp_writer">${i.ntrp_writer}</div>
-                              <div class="ntrp_contents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.ntrp_contents}"></div>
-                              <div class="ntrp_reg_date">${i.ntrp_reg_date}</div>
+                              <div class="ntrp_contents" id="recontents">${i.ntrp_contents}<input type="hidden" id="hiddenCon" class="hiddenCon" name="hiddenCon" value="${i.ntrp_contents}"></div>
+                              <div class="ntrp_reg_date">${i.ntrp_reg_date}</div> 
                               <%-- <c:if test="${i.writer == login.id }"> --%>
                               <button class="btn_s btn_default delReply" id="delReply" type="button">삭제</button>
                               <button class="btn_s btn_primary modiReply" id="modiReply" type="button">수정</button>

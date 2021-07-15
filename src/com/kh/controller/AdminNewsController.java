@@ -12,12 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.dao.NewsCommentsDAO;
 import com.kh.dao.NewsDAO;
 import com.kh.dao.NoticeFileDAO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.NewsCommentsDTO;
 import com.kh.dto.NewsDTO;
 import com.kh.dto.NoticeFileDTO;
@@ -54,6 +56,8 @@ public class AdminNewsController extends HttpServlet {
 			NewsCommentsDAO necdao = NewsCommentsDAO.getInstance();
 			List<NewsCommentsDTO> necdto = new ArrayList<>();
 			NoticeFileDAO fdao = NoticeFileDAO.getInstance();
+			HttpSession session = request.getSession();
+			
 			if(url.contentEquals("/newsInfo.newsAdm")) {
 				//관리자 뉴스 리스트
 				int cpage = Integer.parseInt(request.getParameter("cpage"));
@@ -79,6 +83,13 @@ public class AdminNewsController extends HttpServlet {
 			}else if(url.contentEquals("/write.newsAdm")) {
 			//관리자 뉴스 글쓰기
 			String seq = nedao.getSeq();
+			String writer = null;
+			MemberDTO session_chk = (MemberDTO)session.getAttribute("admLoginInfo"); 
+			if(session_chk != null) { 
+				writer = (session_chk).getName();
+			}else {
+				response.sendRedirect("adminLogin.jsp");
+			}
 			
 			String filesPath = request.getServletContext().getRealPath("/upload/news");//파일
 			
@@ -101,11 +112,7 @@ public class AdminNewsController extends HttpServlet {
 //				}
 //			}
 			
-			String writer = multi.getParameter("name");//관리자
-			 System.out.println(writer);
-			 if(writer == null) {
-				 response.sendRedirect("${pageContext.request.contextPath}/adminLogin.jsp");
-			 }
+			
 			String title = multi.getParameter("news_title");//뉴스 제목
 			title = XSSFilter(title);
 			
