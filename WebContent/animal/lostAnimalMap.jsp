@@ -17,6 +17,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <style>
@@ -71,7 +73,7 @@
 							href="${pageContext.request.contextPath}/protectList.lost?page=1"
 							class="btn_m btn_light">임시보호</a> <a
 							href="${pageContext.request.contextPath}/animal/lostAnimalForm.jsp"
-							class="btn_m btn_light">글쓰기</a> <input type="text"
+							class="btn_m btn_light" id="writeMap">글쓰기</a> <input type="text"
 							class="inpform" placeholder="지도에 주소로 검색..." id="resultAdd">
 						<button type="button" id="searchBtn">
 							<i class="fas fa-search"></i>
@@ -97,6 +99,25 @@
 		src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>
 
 	<script>
+	let loginBtn = document.querySelector('#loginLogin')
+	
+	$('#writeMap').click(function(e){
+	
+		 <c:if test="${sessionScope.loginInfo.user_id == null }">
+		 e.preventDefault();
+		 Swal.fire({
+			  icon: 'error',
+			  title: '로그인이 필요합니다.',
+			  text: '로그인 페이지로 이동합니다.',
+			 
+			}).then((result)=>{
+				loginBtn.click();
+				
+			})
+			  </c:if>
+	})
+	
+	
 		let numAni = document.querySelectorAll(".mari");
 		function changeNum(index) {
 			let num = 0;
