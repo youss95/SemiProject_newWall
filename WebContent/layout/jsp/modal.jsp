@@ -44,6 +44,13 @@
 					}).done(function(resp){
 						if(resp=="correct"){
 							location.reload();
+						}else if(resp=="blacklist"){
+							$.ajax({
+								url:"${pageContext.request.contextPath}/requestBlackReason.mem",
+								data:{user_id:$("#user_id").val()}
+							}).done(function(resp){
+								alert("현재 차단된 계정입니다.\n사유 : "+resp);
+							});
 						}else{
 							alert("ID 또는 패스워드가 일치하지 않습니다.");
 							$("#user_id").val("");
