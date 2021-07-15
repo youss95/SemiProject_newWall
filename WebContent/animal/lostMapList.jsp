@@ -68,7 +68,7 @@
 				 <ul class="ucontainer">
 				 <c:forEach var="maplist" items="${mapList}">
 				   <li class="wrapper"><img style="width:100%;height:200px;" src="${pageContext.request.contextPath}/upload/lostAnimal/${maplist.fileRealName}" /><p>
-				   <c:if test="${sessionScope.loginInfo != null}">
+				   <c:if test="${sessionScope.loginInfo.user_id eq maplist.lostWriter}">
   	<a href="${pageContext.request.contextPath}/lostDelete.lost?lostNo=${maplist.lostNo}"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;&nbsp;
   	<a href="${pageContext.request.contextPath}/lostUpdateForm.lost?lostNo=${maplist.lostNo}"><i class="fas fa-edit"></i></a>
   	</c:if>

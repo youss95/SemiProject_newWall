@@ -17,9 +17,12 @@
 .rd_group{display:inline; margin-left:10px;}
 #btn{margin-left:950px; margin-top:100px;}
 
+img:hover{cursor:pointer;}
+
 /* 카카오 주소 검색 창 */
 #resultAdd{position:relative;z-index:0;width:300px;}
-#searchBtn{position:absolute;left:300px;top:78px;z-index:1;height:45px;}
+#resultAdd:focus{outline:none;}
+
 #searchBtn:hover{cursor:pointer;}
 
 /* kakao map */

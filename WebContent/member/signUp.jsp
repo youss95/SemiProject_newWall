@@ -146,6 +146,7 @@
 #mem_signup_con .su_persnal_info .su_birthday_con .su_birthday_text {
 	margin-left: 10px;
 	margin-right: 30px;
+	margin-top:22px;
 }
 </style>
 </head>

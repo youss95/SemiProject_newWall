@@ -20,8 +20,10 @@
 				<div id="lostName">
 				<span>동물 이름:</span>
 				<input type="text" name="lostName" class="inpform" >
-				<span id="cate">구분: </span>
-				<div class="rd_group">
+		<span id="cate">구분: </span>
+			
+				<div class="rd_group" style="width:200px;inline-block;">
+				
 										<div class="inp_rd">
 											<input type="radio" id="rd1" name="lostCategory" value="dog" >
 											<label for="rd1">개</label>
@@ -36,7 +38,7 @@
 				<span>나이:</span><input type="text" name="lostAge" class="inpform toMargin" >
 				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin">
 				<span class="kindAndDate">성별:</span>
-				<div class="inp_slct">
+				<div class="inp_slct" style="inline-block; width:100px;">
 										<select name="lostGender" id="lostGender">
 											<option value="">선택</option>
 											<option value="F">암컷</option>
@@ -75,16 +77,18 @@
 
 				
 			</div>
-			
-			<div id="animalImage">
-				이미지: <input type="file" name="animalImage" onChange="imageChoose(this)">
-				</div> 
+			<div style="text-align:center;">
 				   <div class="upload-img">
-                        <img src="${pageContext.request.contextPath}/project/layout/resources/images/img01.jpeg" alt="" id="imageUploadPreview" />
+                        <img src="${pageContext.request.contextPath}/resources/images/uploadimg.png" alt="" id="imageUploadPreview" />
                    </div>
+                   
+			<div id="animalImage">
+				이미지를 클릭하여 업로드 해주세요! <input type="file" name="animalImage"  id="imageclick" onChange="imageChoose(this)" style="display:none">
+				</div> 
+				</div>
 			<input type="hidden" name="addResult" id="hiddenInput">	
 			<input type="hidden" name="lostWriter" value="${sessionScope.loginInfo.user_id}"> 
-			<button type="submit" class="btn_m btn_primary">등록</button>	
+			<button type="submit" class="btn_m btn_primary" style="float:right;">등록</button>	
 			</form>
 				</section>
 			</div>
@@ -96,5 +100,10 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a0476da8a7dcd0ed6d9041728ce41a41&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
+	<script>
+	$('#imageUploadPreview').on('click',function(){
+		$('#imageclick').click();
+	})
+	</script>
 </body>
 </html>
