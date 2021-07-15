@@ -3,6 +3,6 @@
 <navi class="nav">
   <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/protectAnimal.adm?page=1">임시보호</a>
   <a class="nav-link" href="${pageContext.request.contextPath}/lostAnimal.adm?page=1">실종동물</a>
-  <a class="nav-link" href="#">Link</a>
+  
  
 </navi>

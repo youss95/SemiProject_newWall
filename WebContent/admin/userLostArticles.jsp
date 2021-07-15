@@ -47,7 +47,7 @@
 							<tbody>
 								<c:forEach var="al" items="${mapList}">
 								<tr>
-										<td><a href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${ap.protectNo}&page=1">${al.lostNo}</a></td>
+										<td><a href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${al.protectNo}&page=1">${al.lostNo}</a></td>
 										<td>${al.lostWriter}</td>
 										<td>${al.lostName}/${al.lostGender}/${al.lostCategory}/${al.lostAge}</td>
 										<td>${al.createDate}<span style="float:right;padding-right:10px;"><a href="${pageContext.request.contextPath}/laDelete.adm?lostNo=${al.lostNo}"><i class="fas fa-backspace"></i></a></span> </td>
