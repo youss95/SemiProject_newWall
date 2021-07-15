@@ -61,7 +61,7 @@ public class NewsCommenstController extends HttpServlet {
 				response.sendRedirect("newsView.news?news_seq="+parent);
 				
 			}else if (url.contentEquals("/newsAdminWrite.necmt")) {
-				String writer = request.getParameter("writer");
+				String writer = request.getParameter("name");
 				System.out.println(writer);
 
 				String comments = request.getParameter("nrp_contents");
