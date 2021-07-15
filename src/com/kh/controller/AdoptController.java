@@ -347,12 +347,18 @@ public class AdoptController extends HttpServlet {
 
 			}else if(url.contentEquals("/reviewModify.apt")) {
 				
+				String user_id = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("loginInfo");
+				if(session_chk != null) { 
+					user_id = (session_chk).getUser_id();
+				}
+				
 				System.out.println("리뷰수정 ");
 				String filesPath = request.getServletContext().getRealPath("/upload/review");
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8", new DefaultFileRenamePolicy());				
 				int review_seq = Integer.parseInt(multi.getParameter("review_seq"));
 				String review_title = multi.getParameter("title");
-				String review_writer = "test";
+				String review_writer = user_id;
 				String review_introduce = multi.getParameter("introduce");
 				String review_thumbnail = multi.getFilesystemName("thumbnail");
 				if (review_thumbnail != null) {review_thumbnail = Normalizer.normalize(review_thumbnail, Form.NFC);}
@@ -365,8 +371,29 @@ public class AdoptController extends HttpServlet {
 				ReviewDTO dto = new ReviewDTO(review_seq, review_title, review_writer, review_introduce,review_thumbnail, review_contents, null, 0, 0);
 				int result = adoptdao.modifyReview(dto);
 				
-				response.sendRedirect(ctxPath+"/reviewList.apt");
+				response.sendRedirect(ctxPath+"/reviewList.apt?cpage=1");
 				
+			}else if(url.contentEquals("/uploadImg.apt")) {
+
+				response.setCharacterEncoding("utf8");
+				response.setContentType("text/html;charset=utf8");
+
+				String realPath = request.getServletContext().getRealPath("upload/editor");
+				File filesPath = new File(realPath);
+				System.out.println(realPath);
+
+				if(!filesPath.exists()) {filesPath.mkdir();}
+				MultipartRequest multi = new MultipartRequest(request, realPath, FileConfig.uploadmaxSize, "utf-8", new DefaultFileRenamePolicy());
+
+				String sysName = multi.getFilesystemName("file");
+				System.out.println("sysName : "+ sysName);
+				sysName = Normalizer.normalize(sysName, Form.NFC);
+
+				String returnPath = "/upload/editor/" + sysName;
+
+				System.out.println("returnPath : " + returnPath);
+				response.getWriter().append(returnPath);
+
 			}
 			
 			
