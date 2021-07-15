@@ -13,6 +13,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <style>
 .container{padding-top:60px;}
@@ -60,7 +62,9 @@
        
        <div class="gosp">
        <span ><b>New-Wal</b>에서는 개인이 보호 중인 동물의 복지와 입양을<br> 활성화 하기 위해 노력합니다.</span><br><br>
-       <a href="${pageContext.request.contextPath}/animal/protectionForm.jsp">글쓰기&nbsp;&nbsp;&nbsp;<i class="fas fa-pen"></i></a>
+      
+       <a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" id="detailWrite">글쓰기&nbsp;&nbsp;&nbsp;<i class="fas fa-pen"></i></a>
+     
        </div>
       </div>
       <div class="img-cover"></div>
@@ -119,6 +123,27 @@
 	<script src="${pageContext.request.contextPath}/resources/js/animal/animalLostForm.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/animal/imagePreview.js"></script>	
 	<script src="${pageContext.request.contextPath}/resources/js/animal/pageLoading.js"></script>  
+	<script>
+	let loginBtn = document.querySelector('#loginLogin')
 	
+	
+	$('#detailWrite').click(function(e){
+		
+		 <c:if test="${sessionScope.loginInfo.user_id == null }">
+		 e.preventDefault();
+		 Swal.fire({
+			  icon: 'error',
+			  title: '로그인이 필요합니다.',
+			  text: '로그인 페이지로 이동합니다.',
+			 
+			}).then((result)=>{
+				loginBtn.click();
+				
+			})
+	
+	
+		  </c:if>
+	})
+	</script>
 </body>
 </html>
