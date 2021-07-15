@@ -167,7 +167,7 @@
 					</div>
 					<div class="signup_con">
 
-						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="">
+						<form action="${pageContext.request.contextPath}/signupProc.mem" method="post" id="signupForm">
 							<!-- <h3>개인 정보</h3> -->
 							<div class="su_persnal_info">
 								<dl>
@@ -195,7 +195,7 @@
 									<dd>
 										<input type="password" class="inpform su_m_ip" name="pwdCheck"
 											id="pwdCheck" placeholder="비밀번호 확인" maxlength=16 required>
-										<span class="su_pw_ck"> 일치여부 확인 메세지 </span>
+										<span class="su_pw_ck" id="pwCheckResult"> 일치여부 확인 메세지 </span>
 									</dd>
 								</dl>
 								<dl>
@@ -464,7 +464,7 @@
 
 			let pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 			let pw = $("#user_password").val();
-			let pwCk = $("pwdCheck").vla();
+			let pwCk = $("#pwdCheck").vla();
 			if (!pwReg.test(pw)) {
 				alert('비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
 				return false;
@@ -517,6 +517,7 @@
 			}
 			
 		})
+		
 
 		$("#idCheck").on("click", function() {
 			if ($("#signup_user_id").val() == "") {
