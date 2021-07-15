@@ -28,6 +28,38 @@ public class MemberDAO {
 		return ds.getConnection();
 	}
 	private MemberDAO() {}
+	
+	public boolean isBlackList(String user_id) throws Exception{
+		String sql = "select * from blacklist where id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, user_id);
+			try(ResultSet rs = pstat.executeQuery()){
+				return rs.next();
+			}
+		}
+	}
+	
+	public int removeBlackList(String user_id) throws Exception{
+		String sql = "delete from blacklist where id=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setNString(1, user_id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+	
+	public int addBlack(String user_id, String reason) throws Exception{
+		String sql = "insert into blacklist values(?,?,sysdate)";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql)){
+			pstat.setNString(1, user_id);
+			pstat.setNString(2, reason);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
 
 	public List<MemberDTO> selectAll() throws Exception{
 		String sql = "select * from member where user_id != 'admin'";

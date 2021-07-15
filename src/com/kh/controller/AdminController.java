@@ -478,13 +478,25 @@ public class AdminController extends HttpServlet {
 				}
 			}else if(url.contentEquals("/memberManage.adm")) {
 				List<MemberDTO> list = dao.selectAll();
+				
+				for(MemberDTO dto : list) {
+					boolean result = dao.isBlackList(dto.getUser_id());
+					dto.setBlack(result);
+				}
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("admin/managerMember.jsp").forward(request, response);
 			}else if(url.contentEquals("/addBlack.adm")) {
-				// blacklist 용 테이블이 있는가?
+				String user_id = request.getParameter("user_id");
+				String reason = request.getParameter("reason");
+				int result = dao.addBlack(user_id, reason);
+				response.sendRedirect("memberManage.adm");
 			}else if(url.contentEquals("/kickout.adm")) {
 				String id = request.getParameter("user_id");
 				int result = dao.delete(id);
+				response.sendRedirect("memberManage.adm");
+			}else if(url.contentEquals("/restoreBlack.adm")) {
+				String user_id = request.getParameter("user_id");
+				int result = dao.removeBlackList(user_id);
 				response.sendRedirect("memberManage.adm");
 			}
 			
