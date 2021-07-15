@@ -101,9 +101,10 @@
          <div class="contents">
             <section class="">
                <div class="board_wrap">
-						<div class="board_title">
-							<strong>공지사항</strong>
-						</div>
+					<div class="title">
+						<h2>공지사항</h2>
+						<p>새로운 소식과 이야기를 전합니다</p>
+					</div>
 						<form
 							action="${pageContext.request.contextPath}/noticeModifyView.notice"
 							method="post" enctype="multipart/form-data">
