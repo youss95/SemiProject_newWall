@@ -110,6 +110,8 @@ a {
 	float: left;
 	width: 50%;
 	line-height: 35px;
+	height:auto;
+	word-break:break-all;
 }
 
 .ntrp_contents .hiddenCon {

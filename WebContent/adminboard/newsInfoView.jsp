@@ -20,9 +20,11 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticecss/css.css">
 	<script>
 	 $(function(){
-		 	if($(this).text()=="admin") {
-				$(this).text("관리자");
-			}
+		 $('#nrp_contents').on('keyup', function() {	 
+	            if($(this).val().length > 100) {
+	                $(this).val($(this).val().substring(0, 150));
+	            }
+	        });  
 			$("#modiReply").on("click",function(){
 				if($(this).text()=="수정") {
 					$(this).text("확인");
