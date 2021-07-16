@@ -23,7 +23,7 @@
     	 $('#ntrp_contents').on('keyup', function() {	 
 	            if($(this).val().length > 100) {
 	                $(this).val($(this).val().substring(0, 150));
-	            }//이게 댓글처음쓸때 그후에 이것저것해봤느데;;;]
+	            }
 	        });    	
 	
       $("#modiReply").on("click",function(){
