@@ -107,7 +107,7 @@ public class AdminController extends HttpServlet {
 		try {
 			if(!url.contentEquals("/login.adm")) {
 				if(request.getSession().getAttribute("admLoginInfo") == null) {
-					response.sendRedirect("error.jsp");
+					response.sendRedirect("admin_error.jsp");
 					throw new Exception("잘 못된 접근");
 				}
 			}
@@ -503,7 +503,7 @@ public class AdminController extends HttpServlet {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("admin_error.jsp");
 		}
 	}
 
