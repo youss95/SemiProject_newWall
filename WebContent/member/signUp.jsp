@@ -259,7 +259,7 @@
 											placeholder="이름을 입력해주세요.">
 										<button type="button" id="idCheck"
 											class="btn_m btn_light su_btn_detail">중복확인</button>
-										<span class="su_pw_ck" id="duplCheckResult">일치여부 확인 메세지
+										<span class="su_pw_ck" id="duplCheckResult">
 										</span>
 									</dd>
 								</dl>
@@ -268,14 +268,13 @@
 									<dd>
 										<input type="password" class="inpform su_m_ip"
 											name="user_password" id="user_password" placeholder="비밀번호"
-											maxlength=16 required> <span class="su_pw_sub">-영문대문자,
-											영문소문자, 숫자 포함하여 8-12 글자 <br>
+											maxlength=16 required> <span class="su_pw_sub"><br>
 										</span>
 									</dd>
 									<dd>
 										<input type="password" class="inpform su_m_ip" name="pwdCheck"
 											id="pwdCheck" placeholder="비밀번호 확인" maxlength=16 required>
-										<span class="su_pw_ck" id="pwCheckResult"> 일치여부 확인 메세지 </span>
+										<span class="su_pw_ck" id="pwCheckResult">  </span>
 									</dd>
 								</dl>
 								<dl>
@@ -297,7 +296,7 @@
 											<option value="naver.com">naver.com</option>
 											<option value="daum.net">daum.net</option>
 											<option value="nate.com">nate.com</option>
-											<option value="">직접입력</option>
+											<option value="" selected="selected">직접입력</option>
 										</select>
 										<button type="button" id="mailAuth"
 											class="btn_m btn_light su_btn_detail">인증번호 전송</button>
