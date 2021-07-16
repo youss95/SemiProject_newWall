@@ -40,7 +40,7 @@ public class MemberController extends HttpServlet {
 				//----------------------------------------------------------------------------------------- 회원가입 요청 처리
 				String user_id = request.getParameter("user_id");
 				String user_password = EncryptUtils.getSHA512(request.getParameter("user_password"));
-				String email = request.getParameter("email") + request.getParameter("email2");
+				String email = request.getParameter("email")+"@"+request.getParameter("email2");
 
 				String name = request.getParameter("name");
 
