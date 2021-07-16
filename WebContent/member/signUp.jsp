@@ -292,7 +292,7 @@
 										<input type="text" class="inpform su_s_ip" name="email"
 											id="email" placeholder="email ID" maxlength=16>@ <input
 											type=text id="email2" class="inpform su_s_ip" name="email2">
-										<select name="email2" id="emailSuffix" class="inpform su_s_ip">
+										<select id="emailSuffix" class="inpform su_s_ip">
 											<option value="gmail.com">gmail.com</option>
 											<option value="naver.com">naver.com</option>
 											<option value="daum.net">daum.net</option>
@@ -499,8 +499,8 @@
 					}).done(function(resp){
 						if(resp == "authorized"){
 							alert("인증되었습니다.");
-							$("#email").attr("disabled","disabled");
-							$("#email2").attr("disabled","disabled");
+							$("#email").attr("readonly","readonly");
+							$("#email2").attr("readonly","readonly");
 							$("#emailSuffix").attr("disabled","disabled");
 							emailFlag = true;
 							clearInterval(timerId);
