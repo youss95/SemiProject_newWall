@@ -301,6 +301,11 @@
 				$("#msp_mb_id").html($(this).find(".sp_mb_id").html());
 				$("#msp_date").html($(this).find(".sp_date").html());
 			})
+			$(".close").on('click', function() {
+				//alert();
+				$("#sponsorModal").modal("hide");
+
+			})
 		})
 	</script>
 </body>

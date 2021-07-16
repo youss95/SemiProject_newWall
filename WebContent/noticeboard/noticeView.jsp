@@ -101,7 +101,7 @@
 					<input type="hidden" name="writer" value="${loginInfo.user_id}">
 						<div id="ntrp-comments" class="ntrp-comments">
 							<div class="comments-row">
-								<textarea id="ntrp_contents" name="ntrp_contents" class="textareaform"
+								<textarea id="ntrp_contents" name="ntrp_contents" class="txtareaform"
 									placeholder="댓글을 입력해주세요" rows="3"></textarea>
 								<input type="hidden" value="${noticeView.notice_seq}"
 									name=parent>
