@@ -63,7 +63,7 @@
        
        <div class="gosp">
        <span ><b>New-Wal</b>에서는 개인이 보호 중인 동물의 복지와 입양을<br> 활성화 하기 위해 노력합니다.</span><br><br>
-      
+      <c:if test="${sessionScope.loginInfo != null }"></c:if>
        <a href="${pageContext.request.contextPath}/animal/protectionForm.jsp" id="detailWrite">글쓰기&nbsp;&nbsp;&nbsp;<i class="fas fa-pen"></i></a>
      
        </div>
