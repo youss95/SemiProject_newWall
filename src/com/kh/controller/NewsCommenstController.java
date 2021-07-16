@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.dao.NewsCommentsDAO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.NewsCommentsDTO;
 
 
@@ -41,6 +43,7 @@ public class NewsCommenstController extends HttpServlet {
 		try {
 			NewsCommentsDTO dto = new NewsCommentsDTO();
 			NewsCommentsDAO dao = NewsCommentsDAO.getInstance();
+			HttpSession session = request.getSession();
 			
 			if (url.contentEquals("/newsWrite.necmt")) {
 				System.out.println(request.getParameter("user_id"));
@@ -61,8 +64,15 @@ public class NewsCommenstController extends HttpServlet {
 				response.sendRedirect("newsView.news?news_seq="+parent);
 				
 			}else if (url.contentEquals("/newsAdminWrite.necmt")) {
-				String writer = request.getParameter("name");
-				System.out.println(writer);
+				
+				String writer = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("admLoginInfo");
+				if(session_chk != null) { 
+					writer = (session_chk).getName();
+				}else{
+					response.sendRedirect("admin/adminLogin.jsp");
+					return;
+				}
 
 				String comments = request.getParameter("nrp_contents");
 				comments = XSSFilter(comments);		

@@ -13,12 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.config.BoardConfig;
 import com.kh.config.FileConfig;
 import com.kh.dao.NoCommentsDAO;
 import com.kh.dao.NoticeDAO;
 import com.kh.dao.NoticeFileDAO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.NoCommentsDTO;
 import com.kh.dto.NoticeDTO;
 import com.kh.dto.NoticeFileDTO;
@@ -55,7 +57,7 @@ public class AdminNoticeController extends HttpServlet {
 			NoticeDTO dto = new NoticeDTO();
 			NoCommentsDAO ncdao = NoCommentsDAO.getInstance();
 			List<NoCommentsDTO> ncdto = new ArrayList<>();
-			
+			HttpSession session = request.getSession();
 			
 
 			if(url.contentEquals("/noticeInfo.sumAdm")) {
@@ -83,6 +85,14 @@ public class AdminNoticeController extends HttpServlet {
 			}else if (url.contentEquals("/noticeWrite.sumAdm")) {
 				//관리자페이지 공지사항 글쓰기값 받아오기
 				String seq = dao.getSeq(); // 공지사항 넘버
+				String writer = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("admLoginInfo");
+				if(session_chk != null) { 
+					writer = (session_chk).getName();
+				}else{
+					response.sendRedirect("admin/adminLogin.jsp");
+					return;
+				}
 
 				String filesPath = request.getServletContext().getRealPath("files");// 파일
 
@@ -111,8 +121,8 @@ public class AdminNoticeController extends HttpServlet {
 						fdao.insert(new NoticeFileDTO(0, oriName, sysName, null, seq));
 					}
 				}
-				String writer = multi.getParameter("name");//관리자
-				 System.out.println(writer);
+//				String writer = multi.getParameter("name");//관리자
+//				 System.out.println(writer);
 
 				String title = multi.getParameter("notice_title");// 공지사항 타이틀
 				title = XSSFilter(title);

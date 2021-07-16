@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.dao.NoCommentsDAO;
+import com.kh.dto.MemberDTO;
 import com.kh.dto.NoCommentsDTO;
 
 @WebServlet("*.nocmt")
@@ -39,6 +41,7 @@ public class NoCommentsController extends HttpServlet {
 		try {
 			NoCommentsDTO dto = new NoCommentsDTO();
 			NoCommentsDAO dao = NoCommentsDAO.getInstance();
+			HttpSession session = request.getSession();
 			
 			if (url.contentEquals("/nowrite.nocmt")) {
 				String writer = request.getParameter("writer");
@@ -57,7 +60,15 @@ public class NoCommentsController extends HttpServlet {
 				response.sendRedirect("noticeView.notice?notice_seq="+parent);
 				
 			}else if (url.contentEquals("/noadminwrite.nocmt")) {
-				String writer = request.getParameter("name");
+				String writer = null;
+				MemberDTO session_chk = (MemberDTO)session.getAttribute("admLoginInfo");
+				if(session_chk != null) { 
+					writer = (session_chk).getName();
+				}else{
+					response.sendRedirect("admin/adminLogin.jsp");
+					return;
+				}
+				
 
 				String comments = request.getParameter("ntrp_contents");
 				comments = XSSFilter(comments);				

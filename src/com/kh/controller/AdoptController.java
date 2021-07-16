@@ -201,9 +201,9 @@ public class AdoptController extends HttpServlet {
 
 				MultipartRequest multi = new MultipartRequest(request, filesPath, FileConfig.uploadmaxSize, "utf8", new DefaultFileRenamePolicy());
 
-				String review_title = multi.getParameter("title");
+				String review_title = XSSFilter(multi.getParameter("title"));
 				String review_writer = user_id;
-				String review_introduce = multi.getParameter("introduce");
+				String review_introduce = XSSFilter(multi.getParameter("introduce"));
 				String review_thumbnail = multi.getFilesystemName("thumbnail");
 				review_thumbnail = Normalizer.normalize(review_thumbnail, Form.NFC);
 				String review_contents = multi.getParameter("contents");

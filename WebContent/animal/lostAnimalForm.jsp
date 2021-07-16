@@ -19,7 +19,7 @@
 				<div class="animalInfo">동물 정보</div>
 				<div id="lostName">
 				<span>동물 이름:</span>
-				<input type="text" name="lostName" class="inpform" >
+				<input type="text" name="lostName" class="inpform"  required>
 		<span id="cate">구분: </span>
 			
 				<div class="rd_group" style="width:200px;inline-block;">
@@ -39,7 +39,7 @@
 				<span class="kindAndDate">품종:</span><input type="text" name="lostKind" class="inpform toMargin">
 				<span class="kindAndDate">성별:</span>
 				<div class="inp_slct" style="inline-block; width:100px;">
-										<select name="lostGender" id="lostGender">
+										<select name="lostGender" id="lostGender" required>
 											<option value="">선택</option>
 											<option value="F">암컷</option>
 											<option value="M">숫컷</option>
@@ -50,10 +50,10 @@
 				
 				<div class="animalInfo">기본 정보</div>
 				<div id="lostDateId">
-				<span id="lostDates">실종 날짜:</span><input type="date" id="lostDate" name="lostDate" class="inpform toMargin" min="2021-01-01"></div>
+				<span id="lostDates">실종 날짜:</span><input type="date" id="lostDate" name="lostDate" class="inpform toMargin" min="2021-01-01" required></div>
 				<div id="contentArea">	
 				<div id="content">내용</div>
-				<textarea class="txtareaform" name="lostContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)"></textarea>
+				<textarea class="txtareaform" name="lostContent" id="" cols="30" rows="4" placeholder="내용을 입력해 주세요 (특징, 자세한 외형 등등)" required></textarea>
 				</div>
 				
 				
@@ -83,7 +83,7 @@
                    </div>
                    
 			<div id="animalImage">
-				이미지를 클릭하여 업로드 해주세요! <input type="file" name="animalImage"  id="imageclick" onChange="imageChoose(this)" style="display:none">
+				이미지를 클릭하여 업로드 해주세요! <input type="file" name="animalImage"  id="imageclick" onChange="imageChoose(this)" style="display:none" required>
 				</div> 
 				</div>
 			<input type="hidden" name="addResult" id="hiddenInput">	

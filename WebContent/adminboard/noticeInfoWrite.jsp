@@ -56,14 +56,7 @@ $(function() {
 		}
 	});
 	
-	$("#noticeWriter").on("click",function(){
-		let name = $("#name").val();
-		console.log(name);
-		if(name == null){
-		alert("다시 로그인 해주세요");
-		return false;
-		}
-	})
+	
 	
 	
 	$("#file-box").on("click",".delFile",function(){
