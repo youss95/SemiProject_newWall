@@ -194,7 +194,7 @@
 		<br>
 		<div class="pt_list">
 			<div class="item">
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/protectDetail.lost?protectNo=${p.protectNo}&page=1">
 					<div class="img_wrap">
 						<img src="${pageContext.request.contextPath}/resources/images/main/img00.jpeg" class="pimg"></div>
 					<div class="txt">
@@ -314,7 +314,7 @@
 		</div>
 		<div class="rv_list">
 			<div class="item">
-				<a href="#">
+				<a href="#" class="linkToPro">
 					<div class="img_wrap"><img src=""></div>
 					<div class="txt">
 						<p class="name"></p>
@@ -326,7 +326,7 @@
 				</a>
 			</div>
 			<div class="item">
-				<a href="#">
+				<a href="#" class="linkToPro">
 					<div class="img_wrap"><img src=""></div>
 					<div class="txt">
 						<p class="name"></p>
@@ -338,7 +338,7 @@
 				</a>
 			</div>
 			<div class="item">
-				<a href="#">
+				<a href="#" class="linkToPro">
 					<div class="img_wrap"><img src=""></div>
 					<div class="txt">
 						<p class="name"></p>
@@ -350,7 +350,7 @@
 				</a>
 			</div>
 			<div class="item">
-				<a href="#">
+				<a href="#" class="linkToPro">
 					<div class="img_wrap"><img src=""></div>
 					<div class="txt">
 						<p class="name"></p>
@@ -449,7 +449,11 @@
 				let aniKind = document.querySelectorAll(".pkind");
 				let aniAddr = document.querySelectorAll(".paddr");
 				let aniImg = document.querySelectorAll(".pimg");
+				let linkToPro = document.querySelectorAll(".linkToPro");
+				let link = $(".pt_list .item>a");
 				 for(let i=0; i<aniName.length; i++){
+						link.eq(i).attr("href","${pageContext.request.contextPath}/protectDetail.lost?protectNo="+resp[i].protectNo +"&page=1");
+				
 					aniName[i].append(resp[i].protectName)
 					aniGender[i].append(resp[i].protectGender)
 					aniKind[i].append(resp[i].protectKind)

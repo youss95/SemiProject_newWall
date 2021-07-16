@@ -110,7 +110,7 @@
 	</c:choose>
 	
 	<c:choose>
-	<c:when test="${lastPage <param.page}">
+	<c:when test="${lastPage <=param.page}">
 		<li class="page-item  "><a class="page-link"     onclick="alert('다음 페이지가 없습니다.');">&gt</a></li>
 	</c:when>
 	<c:otherwise>
